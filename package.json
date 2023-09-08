@@ -1,0 +1,12 @@
+{
+  "name": "2dekans-veilingen",
+  "version": "0.0.1",
+  "scripts": {
+    "prettier": "prettier src/**/* --write"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.20.1",
+    "lint-staged": "^14.0.1",
+    "prettier": "3.0.3"
+  }
+}
