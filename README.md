@@ -40,7 +40,8 @@ Deze structuur zal doorheen het project veranderen, hou dit zeker in de gaten!
 ├── .gitignore  # Git ignore file
 └── README.md   # Deze README
 ```
-
+## Kleuren
+* https://coolors.co/ba9593-1d3557-f1faee-ffc100-515b3a
 ## Groep
 
 * **Nils**
