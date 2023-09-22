@@ -40,6 +40,11 @@ Deze structuur zal doorheen het project veranderen, hou dit zeker in de gaten!
 ├── .gitignore  # Git ignore file
 └── README.md   # Deze README
 ```
+
+## Code Tailwindcss en DaisyUI
+* [TailwindCSS](https://tailwindcss.com/): ```<script src="https://cdn.tailwindcss.com"></script>```
+* [DaisyUI](https://daisyui.com/): ```<link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />```  
+
 ## Kleuren
 * https://coolors.co/ba9593-1d3557-f1faee-ffc100-515b3a
 ## Groep
