@@ -6,11 +6,7 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <?php
-            include "functions/adminFunctions.php";
-
-
-            echo convertPasswordToHash("String");
-        ?>
+        <a href="registreren.php">registreren</a>
+        <a href="aanpassenGebruikers.php">aanpassen</a>
     </body>
 </html>
