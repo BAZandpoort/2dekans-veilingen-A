@@ -19,6 +19,19 @@ function registerUser($connection, $fname, $lname, $email, $password, $profile_p
     return $resultaat;
 }
 
+function updateUser($connection, $userid, $fname, $lname, $email, $password, $profile_picture, $desc, $status) {
+    if(empty($profile_picture)) {
+        $profile_picture = "profile.png";
+    }
+
+    $password = convertPasswordToHash($password);
+
+    $resultaat = $connection->query("UPDATE tblgebruikers set email = '" . $email . "', voornaam = '" . $fname . "', naam = '" . $lname . "',
+    wachtwoord = '" . $password . "', status = '" . $status . "', profielfoto = '" . $profile_picture . "', bechrijving = '" . $bechrijving . "Where gebruikersid = " . $userid . ";");
+
+    return $resultaat;
+}
+
 function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
