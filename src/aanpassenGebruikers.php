@@ -30,7 +30,7 @@ if (isset($_POST["wijzigen"])) {
     if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving, $status)){
         header('location: index.php');
     }else{
-
+        $mysqli->connect_error;
     }
 
 
@@ -41,7 +41,7 @@ if (isset($_POST["wijzigen"])) {
     $row = $resultaat->fetch_assoc();
     echo '
     <div class=" flex flex-col min-h-screen justify-center items-center">
-    <form method="post" action="boek_aanpassen.php">
+    <form method="post" action="aanpassenGebruikers.php">
     <div class= "flex flex-col gap-2">
         <tr><td><input type="hidden" name="gebruikerid" value="' . $row["gebruikerid"] . '"></td></tr>
 
@@ -98,7 +98,7 @@ if (isset($_POST["wijzigen"])) {
         </div>
 
 
-        <tr><td colspan=2> <input type="submit" value="wijzigen" name="wijzigen"  class="text-white"></td></tr>    
+         <input type="submit" value="wijzigen" name="wijzigen"  class="text-white">  
 
     </div>
     </form>
