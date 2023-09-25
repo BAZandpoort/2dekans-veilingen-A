@@ -35,36 +35,67 @@ if (isset($_POST["wijzigen"])) {
     $resultaat = $mysqli->query($sql);
     $row = $resultaat->fetch_assoc();
     echo '
-    <div class="form-control flex flex-col min-h-screen justify-center items-center">
+    <div class=" flex flex-col min-h-screen justify-center items-center">
     <table>
     <form method="post" action="boek_aanpassen.php">
     <div class= "flex flex-col gap-2">
         <tr><td><input type="hidden" name="gebruikerid" value="' . $row["gebruikerid"] . '"></td></tr>
-        <label class="label">
-        <span class="label-text text-white">E-mail</span>
-        </label>
-        <tr><td><input type="text" name="email" value="' . $row["email"] . '" class="input input-bordered w-full max-w-md"></td></tr><br>
 
+        <div class="form-control w-full max-w-xs">
         <label class="label">
-        <span class="label-text text-white">Voornaam</span>
+         <span class="label-text text-white">E-mail</span>
         </label>
-        <tr><td><input type="text" name="voornaam" value="' . $row["voornaam"] . '" class="input input-bordered w-full max-w-md"></td></tr>
+        <input type="text" name="email" value="' . $row["email"] . '" class="input input-bordered w-full max-w-md">
+        </div>
 
+
+        <div class="form-control w-full max-w-xs">
         <label class="label">
-        <span class="label-text text-white">Naam</span>
+         <span class="label-text text-white">Voornaam</span>
         </label>
-        <tr><td><input type="text" name="naam" value="' . $row["naam"] . '" class="input input-bordered w-full max-w-md"></td></tr>
-        <span class="label-text text-white">Wachtwoord</span>
-        <tr><td><input type="text" name="wachtwoord" value=" '. $row["wachtwoord"] .' " class="input input-bordered w-full max-w-md"></td></tr>
-        <span class="label-text text-white">Status</span>
-        <tr><td><input type="text" name="status" value=" '. $row["status"] .' " class="input input-bordered w-full max-w-md"></td></tr>
-        <span class="label-text text-white">Profielfoto</span>
-        <tr><td><input type="file" name="profielfoto" class="file-input file-input-ghost w-full max-w-md bg-white"></td></tr>
+       <input type="text" name="voornaam" value="' . $row["voornaam"] . '" class="input input-bordered w-full max-w-md">
+        </div>
+
+        <div class="form-control w-full max-w-xs">
+        <label class="label">
+         <span class="label-text text-white">Naam</span>
+        </label>
+       <input type="text" name="naam" value="' . $row["naam"] . '" class="input input-bordered w-full max-w-md">
+        </div>
+
+        <div class="form-control w-full max-w-xs">
+        <label class="label">
+         <span class="label-text text-white">Wachtwoord</span>
+        </label>
+       <input type="text" name="wachtwoord" value=" '. $row["wachtwoord"] .' " class="input input-bordered w-full max-w-md">
+       </div>
+
+       <div class="form-control w-full max-w-xs">
+        <label class="label">
+         <span class="label-text text-white">Status</span>
+        </label>
+        <input type="text" name="status" value=" '. $row["status"] .' " class="input input-bordered w-full max-w-md">
+        </div>
+
+        <div class="form-control w-full max-w-xs">
+        <label class="label">
+         <span class="label-text text-white">Profielfoto</span>
+        </label>
+        <input type="file" name="profielfoto" class="file-input file-input-ghost w-full max-w-md bg-white">
+        </div>
         
         <img src="' . $row["profielfoto"] . ' " width="300" height="300" alt="" >
-        <span class="label-text text-white">Beschrijving</span>
-        <tr><td><textarea class="textarea textarea-bordered h-24 w-full max-w-md" id="beschrijving" name="beschrijving" value="'. $row["beschrijving"] . '"></textarea></td></tr>
-        <tr><td colspan=2> <input type="submit" value="wijzigen" name="wijzigen"  class="">></td></tr>    
+
+        <div class="form-control w-full max-w-xs">
+        <label class="label">
+         <span class="label-text text-white">Beschrijving</span>
+        </label>
+        <textarea class="textarea textarea-bordered h-24 w-full max-w-md" id="beschrijving" name="beschrijving" value="'. $row["beschrijving"] . '"></textarea>
+        </div>
+
+
+        <tr><td colspan=2> <input type="submit" value="wijzigen" name="wijzigen"  class="text-white"></td></tr>    
+
     </div>
     </form>
 </table>
