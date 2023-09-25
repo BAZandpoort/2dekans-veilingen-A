@@ -12,10 +12,6 @@ function isPasswordCorrect($connection,$password,$email){
 function getAllCategories($connection){
     return($connection->query("SELECT * FROM tblcategorieen"));
 }
-function addProduct($connection, $naam, $beschrijving, $prijs, $categorie, $foto){
-    return($connection ->query("INSERT INTO tblproducten (verkoperid,naam, beschrijving, prijs, categorie, foto ) VALUES (0,'".$naam."'
-        , '".$beschrijving."','" .$prijs."','" .$categorie."','" .$foto."')"));
-}
 
 function registerUser($connection, $fname, $lname, $email, $password, $profile_picture, $desc) {
     if(empty($profile_picture)) {
