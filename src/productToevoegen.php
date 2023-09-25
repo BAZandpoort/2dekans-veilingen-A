@@ -10,6 +10,7 @@
 <body>
   <?php
 include "connect.php";
+include "functions/sellerFunctions.php";
 include "functions/userFunctions.php";
 session_start();
 
