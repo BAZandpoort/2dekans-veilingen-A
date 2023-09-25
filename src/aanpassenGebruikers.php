@@ -12,6 +12,7 @@
 
 <?php
 include "connect.php";
+include "functions/userFunctions.php";
 
 session_start();
 
@@ -25,13 +26,8 @@ if (isset($_POST["wijzigen"])) {
     $status = $_POST["status"];
     $profielfoto = $_POST["profielfoto"];
     $bechrijving = $_POST["beschrijving"];
-    $sql = "update tblgebruikers set gebruikerid ='" . $gebruikerid . "', email = '" . $email . "', voornaam = '" . $voornaam . "', naam = '" . $naam . "',
-    wachtwoord = '" . $wachtwoord . "', status = '" . $status . "', profielfoto = '" . $profielfoto . "', bechrijving = '" . $bechrijving . "Where boeknummer = " . $boeknummer . ";";
-    if ($mysqli->query($sql)) {
-        print "Record succesvol bijgewerkt";
-    } else {
-        print "Error record wijzingen: " . $mysqli->error;
-    }
+    // gebruik mijn updateUser functie :) -groetjes Nils
+    updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving, $status);
     header('location: index.php');
 } else {
     $sql = "select * from tblgebruikers where gebruikerid = 1";
@@ -53,7 +49,7 @@ if (isset($_POST["wijzigen"])) {
     <span class="label-text text-white">Status</span>
     <tr><td>Prijs</td><td><input type="text" name="status" value=" '. $row["status"] .' "></td></tr>
     <span class="label-text text-white">Profielfoto</span>
-    <tr><td>url</td><td><input type="text" name="profielfoto" value=" '. $row["profielfoto"] .' "></td></tr>
+    <tr><td>profielfoto</td><td><input type="text" name="profielfoto" value=" '. $row["profielfoto"] .' "></td></tr>
     <img src="' . $row["profielfoto"] . ' " width="300" height="300" alt="">
     <span class="label-text text-white">Beschrijving</span>
     <tr><td>url</td><td><input type="text" name="bechrijving" value="' . $row["beschrijving"] .' " class="input input-bordered input-lg w-full max-w-xs"></td></tr>
