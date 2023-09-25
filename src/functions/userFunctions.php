@@ -19,8 +19,8 @@ function registerUser($connection, $fname, $lname, $email, $password, $profile_p
     return $resultaat;
 }
 
-function convertPasswordToHash($wachtwoord) {
-    $hashedpassword = password_hash($wachtwoord, PASSWORD_DEFAULT);
+function convertPasswordToHash($password) {
+    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
 };
 ?>
