@@ -13,9 +13,10 @@
 <?php
 include "connect.php";
 include "functions/userFunctions.php";
-
 session_start();
-
+if(!isset($_SESSION["login"])){
+    header('location: index.php');
+}
 
 if (isset($_POST["wijzigen"])) {
     $gebruikerid = $_POST["gebruikerID"];
@@ -26,17 +27,20 @@ if (isset($_POST["wijzigen"])) {
     $status = $_POST["status"];
     $profielfoto = $_POST["profielfoto"];
     $bechrijving = $_POST["beschrijving"];
-    updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving, $status);
-    $wachtwoord = convertPasswordToHash($wachtwoord);
-    header('location: index.php');
+    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving, $status)){
+        header('location: index.php');
+    }else{
+
+    }
+
+
 }
 
-    $sql = "select * from tblgebruikers where gebruikerid = 1";
+    $sql = "select * from tblgebruikers where email = '" . $_SESSION["login"]. "'";
     $resultaat = $mysqli->query($sql);
     $row = $resultaat->fetch_assoc();
     echo '
     <div class=" flex flex-col min-h-screen justify-center items-center">
-    <table>
     <form method="post" action="boek_aanpassen.php">
     <div class= "flex flex-col gap-2">
         <tr><td><input type="hidden" name="gebruikerid" value="' . $row["gebruikerid"] . '"></td></tr>
@@ -98,7 +102,7 @@ if (isset($_POST["wijzigen"])) {
 
     </div>
     </form>
-</table>
+
 </div>
 ';
 
