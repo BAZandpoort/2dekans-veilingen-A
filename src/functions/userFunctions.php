@@ -17,4 +17,19 @@ function addProduct($connection, $naam, $beschrijving, $prijs, $categorie, $foto
         , '".$beschrijving."','" .$prijs."','" .$categorie."','" .$foto."')"));
 }
 
+function registerUser($connection, $fname, $lname, $email, $password, $profile_picture, $desc) {
+    if(empty($profile_picture)) {
+        $profile_picture = "profile.png";
+    }
+
+    $password = convertPasswordToHash($password);
+
+    $resultaat = $connection->query("INSERT INTO tblgebruikers (email, voornaam, naam, wachtwoord, profielfoto, beschrijving) VALUES ('".$email."','".$fname."','".$lname."','".$password."','".$profile_picture."','".$desc."')");
+    return $resultaat;
+}
+
+function convertPasswordToHash($password) {
+    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+    return $hashedpassword;
+};
 ?>
