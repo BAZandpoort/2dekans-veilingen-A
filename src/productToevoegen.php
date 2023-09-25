@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="bg-[#1D3557]">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,12 @@
   <?php
 include "connect.php";
 include "functions/userFunctions.php";
+session_start();
+
+if(!isset($_SESSION['login'])){
+  header('location: index.php');
+  return;
+};
 
 if (isset($_POST['submit'])) {
   $naam= $_POST['naam'];
@@ -34,28 +40,28 @@ if (isset($_POST['submit'])) {
     <div class="form-control w-full max-w-md mx-auto p-3">
   
     <label class="label">
-    <span class="label-text" >Foto</span>
+    <span class="label-text text-[#F1FAEE]" >Foto</span>
     </label>
   <input type="file" name = "file" class="file-input w-full max-w-md" />
   </label>
     <label class="label">
-    <span class="label-text" >Naam</span>
+    <span class="label-text text-[#F1FAEE]" >Naam</span>
     </label>
   <input type="text" name = "naam" placeholder="Type here" class="input input-bordered w-full max-w-md" />
   </label>
     <label class="label">
-    <span class="label-text" >Prijs</span>
+    <span class="label-text text-[#F1FAEE]" >Prijs</span>
     </label>
   <input type="text" name = "prijs" placeholder="Type here" class="input input-bordered w-full max-w-md" />
   </label>
     <label class="label">
-    <span class="label-text" >Beschrijving</span>
+    <span class="label-text text-[#F1FAEE]" >Beschrijving</span>
     </label>
   <input type="text" name = "beschrijving" placeholder="Type here" class="input input-bordered w-full max-w-md" />
   </label>
 <div class="form-control w-full max-w-md">
   <label class="label">
-    <span class="label-text" >Categorie</span>
+    <span class="label-text text-[#F1FAEE]" >Categorie</span>
   </label>
  <?php 
   if(getAllCategories($mysqli)){
@@ -77,7 +83,7 @@ echo " <option value= ".$row["categorienaam"]. " >".$row["categorienaam"]." </op
   <label class="label">
    
   </label>
-  <input type="submit" name="submit" class="input input-bordered w-full max-w-md" />
+  <input type="submit" name="submit " class="input input-bordered w-full max-w-md text-[#F1FAEE]" />
   
 </div>
 
