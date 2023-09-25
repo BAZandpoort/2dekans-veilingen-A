@@ -20,6 +20,12 @@ include "connect.php";
     </div>
   <div class="flex-none">
     <div>
+  <div class="form-control">
+      <?php
+        echo '<input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />'; 
+      ?>
+    </div>
+  <div class="flex-none">
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle">
         <div class="indicator">
@@ -36,6 +42,7 @@ include "connect.php";
           </div>
         </div>
       </div>
+
       </div>
     </div>
 </div>
@@ -44,6 +51,13 @@ include "connect.php";
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           <img src="../public/img/profile.png" />
+
+    </div>
+    <div class="dropdown dropdown-end">
+      <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+          <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+
         </div>
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
@@ -55,10 +69,13 @@ include "connect.php";
         </li>
         <li><a>Settings</a></li>
         <li><a href="tijdelijk">Logout</a></li>
+
         <li><a href="tijdelijk">Login</a></li>
       </ul>
     </div>
 </div>
+      </ul>
+    </div>
   </div>
 </div>
 </body>
