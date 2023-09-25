@@ -1,7 +1,7 @@
 <?php 
 
-    function insertHashedPasswordIntoDatabase($connection, $wachtwoord) {
-        $sql = "INSERT INTO tblgebruikers(wachtwoord) VALUES ('".convertPasswordToHash($wachtwoord)."')";
+    function insertHashedPasswordIntoDatabase($connection, $id, $wachtwoord) {
+        $sql = "UPDATE tblgebruikers SET wachtwoord = '".convertPasswordToHash($wachtwoord)."' WHERE gebruikersid = '".$id."'";
         return($connection->query($sql));
     };
 
