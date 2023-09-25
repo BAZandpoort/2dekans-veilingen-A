@@ -12,11 +12,11 @@ include "connect.php";
 <body>
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+    <a class="btn btn-ghost normal-case text-xl">2dekansveilingen</a>
   </div>
   <div class="flex">
   <div class="form-control">
-      <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+        <input type="text" placeholder="Search" class="input input-bordered input-info w-full max-w-xs"/>
     </div>
   <div class="flex-none">
     <div class="dropdown dropdown-end">
@@ -63,6 +63,12 @@ include "connect.php";
       </ul>
     </div>
   </div>
+</div>
+<br>
+<div class="box-border w-30 h-85 hmd:container md:mx-auto md:float-left">
+    <?php
+        
+    ?>
 </div>
 </body>
 </html>
