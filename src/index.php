@@ -65,9 +65,15 @@ include "connect.php";
   </div>
 </div>
 <br>
-<div class="box-border w-30 h-85 hmd:container md:mx-auto md:float-left">
+<div class="box-border w-25 h-85 hmd:container md:mx-auto md:float-left">
     <?php
-        
+        $sql = "SELECT * FROM tblcategorieen";
+        $result = $mysqli->query($sql);
+        while($row = $result->fetch_assoc()) {
+          echo "
+            <button class='btn btn-active btn-xs sm:btn-sm md:btn-md lg:btn-lg'><a href='index.php?categorie=".$row['categorienaam']."'>".$row['categorienaam']."</a></button><br>
+          ";
+        };
     ?>
 </div>
 </body>
