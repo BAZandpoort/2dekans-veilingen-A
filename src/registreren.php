@@ -17,19 +17,19 @@
         <label class="label">
             <span class="label-text text-white">Voornaam</span>
         </label>
-        <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" class="input input-bordered w-full max-w-md" />
+        <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" class="input input-bordered w-full max-w-md" required/>
         <label class="label">
             <span class="label-text text-white">Achternaam</span>
         </label>
-        <input type="text"  id="achternaam" name="achternaam" placeholder="Achternaam" class="input input-bordered w-full max-w-md" />
+        <input type="text"  id="achternaam" name="achternaam" placeholder="Achternaam" class="input input-bordered w-full max-w-md" required/>
         <label class="label">
             <span class="label-text text-white">E-mailadres</span>
         </label>
-        <input type="email" id="email" name="email" placeholder="E-mailadres" class="input input-bordered w-full max-w-md" />
+        <input type="email" id="email" name="email" placeholder="E-mailadres" class="input input-bordered w-full max-w-md" required/>
         <label class="label">
             <span class="label-text text-white">Wachtwoord</span>
         </label>
-        <input type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md" />
+        <input type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md" required/>
         <label class="label">
         <span class="label-text text-white">Beschrijving</span>
         </label>
