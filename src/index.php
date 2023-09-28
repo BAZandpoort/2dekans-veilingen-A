@@ -66,15 +66,44 @@ include "connect.php";
 </div>
 <br>
 <div class="box-border w-25 h-85 hmd:container md:mx-auto md:float-left">
+  <form action="index.php" method="POST">
+  <table>
     <?php
         $sql = "SELECT * FROM tblcategorieen";
         $result = $mysqli->query($sql);
         while($row = $result->fetch_assoc()) {
           echo "
-            <button class='btn btn-active btn-xs sm:btn-sm md:btn-md lg:btn-lg'><a href='index.php?categorie=".$row['categorienaam']."'>".$row['categorienaam']."</a></button><br>
+            <tr><td><input type='submit' class='link link-neutral' name='categorieID' value='".$row['categorienaam']."'></></td></tr>
           ";
         };
     ?>
+  </table>
+  <form>
+</div>
+<div>
+  <?php
+    if (isset($_POST['categorieID'])) {
+      $categorie = $_POST['categorieID'];
+      $sql = "SELECT * FROM tblproducten WHERE categorie LIKE '".$categorie."'";
+      $result = $mysqli->query($sql);
+      while($row = $result->fetch_assoc()) {
+        echo '
+        <div class="card card-compact w-96 bg-base-100 shadow-xl">
+          <figure><img id="productFoto" src="'.$row['foto'].'" alt="'.$row['foto'].'"/></figure>
+            <div class="card-body">
+              <h2 id="productNaam" class="card-title">'.$row['naam'].'</h2>
+              <p id="productPrijs"></p>
+              <p id="productBeschrijving">'.$row['beschrijving'].'</p>
+              <div id="aankoop" class="card-actions justify-end">
+                <button id="aankoopKnop" class="btn btn-primary">Buy Now</button>
+              </div>
+            </div>
+        </div>
+        ';
+      };
+    };
+  ?>
+</div>
 </div>
 </body>
 </html>
