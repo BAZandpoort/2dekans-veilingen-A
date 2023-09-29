@@ -9,9 +9,9 @@
         
         $factuurId = rand(1000, 9999);
         
-        $products2 = 16; 
+     
         $products = explode(",", $_POST["products"]); 
-        $products_count = array_count_values($products2);
+        $products_count = array_count_values($products);
         $products_info = array();
         
         foreach ($products_count as $product => $quantity) {
@@ -29,7 +29,7 @@
         };
 
         $sql = "SELECT * FROM tblgebruikers WHERE gebruikersnaam = '" . $_SESSION["1"] . "'";
-        $resultaat = $mysqli->querry($sql); 
+        $resultaat = $mysqli->query($sql); 
         $row = $resultaat->fetch_assoc(); 
         $email = $row["email"]; 
         $koperId = $row["koperid"];
@@ -47,7 +47,7 @@
         $pdf->Cell(40, 10, 'Invoice Number:', 0, 0); 
         $pdf->Cell(100, 10, $factuurId, 0, 1); 
 
-        $invoiceDate = data('d-m-Y'); 
+        $invoiceDate = date('d-m-Y'); 
         $pdf->Cell(40,  10, 'Invoice Date:', 0, 0);
         $pdf->Cell(100, 10, $invoiceDate, 0, 1); 
 
@@ -64,16 +64,16 @@
                         $productIds[] = $item['id']; 
                 }
                 $pdf->Cell(90, 10, $item['naam'],1 , 0);
-                $pdf->Cell(30,10, EURO . ' '. $item['prijs'], 1, 0);
+                $pdf->Cell(30,10, 'EURO' . ' '. $item['prijs'], 1, 0);
                 $pdf->Cell(30,10, $item['quantity'], 1,0);
-                $pdf->Cell(40, 10, EURO. ' '. $item['prijs']*$item['quantity'], 1,1);
+                $pdf->Cell(40, 10, 'EURO'. ' '. $item['prijs']*$item['quantity'], 1,1);
                 $total += $item['prijs']*$item['quantity'];  
         }
 
         $pdf->SetFont('Helvetica', 'B', 12); 
         $pdf ->Cell(120, 10, '', 0,0); 
         $pdf ->Cell(30, 10, 'Total', 0,0);
-        $pdf -> Cell(40, 10, EURO. '' . number_format($total, 2, ',', '.'), 0, 1, 'R');
+        $pdf -> Cell(40, 10, 'EURO'. '' . number_format($total, 2, ',', '.'), 0, 1, 'R');
 
         $pdf_file = 'order_'. $factuurId . '.pdf'; 
         $pdf ->Output('F', './orders/' . $pdf_file); 
