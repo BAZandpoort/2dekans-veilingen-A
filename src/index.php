@@ -10,11 +10,31 @@ include "connect.php";
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-<div class="navbar bg-base-100">
+<div class="navbar bg-base-50">
+  <div class="navbar-start">
   <div class="flex-1">
     <a class="btn btn-ghost normal-case text-xl">2dekansveilingen</a>
   </div>
-  <div class="flex">
+  <?php
+  
+    echo '
+        <details class="dropdown mb-0">
+        <summary class="m-1 btn">Categorieën</summary>
+        <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">';
+            $sql = "SELECT * FROM tblcategorieen";
+            $result = $mysqli->query($sql);
+            while($row = $result->fetch_assoc()) {
+              echo '
+                <li><a href="producten.php?gekozenCategorie='.$row['categorienaam'].'" class="link link-neutral" name="categorieID">'.$row['categorienaam'].'</a></li>
+              ';
+            };
+        echo '
+        </ul>
+        </details>
+    ';
+  ?>
+  </div>
+  <div class="flex w-75">
   <div class="form-control">
         <input type="text" placeholder="Search" class="input input-bordered input-info w-full max-w-xs"/>
     </div>
@@ -59,50 +79,9 @@ include "connect.php";
         <li><a href="tijdelijk">Login</a></li>
       </ul>
     </div>
-</div>
-      </ul>
-    </div>
+      </div>
   </div>
-</div>
-<br>
-<div class="box-border w-25 h-85 hmd:container md:mx-auto md:float-left">
-  <form action="index.php" method="POST">
-  <table>
-    <?php
-        $sql = "SELECT * FROM tblcategorieen";
-        $result = $mysqli->query($sql);
-        while($row = $result->fetch_assoc()) {
-          echo "
-            <tr><td><input type='submit' class='link link-neutral' name='categorieID' value='".$row['categorienaam']."'></></td></tr>
-          ";
-        };
-    ?>
-  </table>
-  <form>
-</div>
-<div>
-  <?php
-    if (isset($_POST['categorieID'])) {
-      $categorie = $_POST['categorieID'];
-      $sql = "SELECT * FROM tblproducten WHERE categorie LIKE '".$categorie."'";
-      $result = $mysqli->query($sql);
-      while($row = $result->fetch_assoc()) {
-        echo '
-        <div class="card card-compact w-96 bg-base-100 shadow-xl">
-          <figure><img id="productFoto" src="'.$row['foto'].'" alt="'.$row['foto'].'"/></figure>
-            <div class="card-body">
-              <h2 id="productNaam" class="card-title">'.$row['naam'].'</h2>
-              <p id="productPrijs"></p>
-              <p id="productBeschrijving">'.$row['beschrijving'].'</p>
-              <div id="aankoop" class="card-actions justify-end">
-                <button id="aankoopKnop" class="btn btn-primary">Buy Now</button>
-              </div>
-            </div>
-        </div>
-        ';
-      };
-    };
-  ?>
+          </div>
 </div>
 </div>
 </body>
