@@ -28,4 +28,5 @@ function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
 };
+
 ?>

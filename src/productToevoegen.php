@@ -28,9 +28,16 @@ if (isset($_POST['submit'])) {
   $upload_dir= $_SERVER['DOCUMENT_ROOT']."/2dekans-veilingen-A/public/img/";
   $file_name= $_FILES['file']['name'];
   $file_tmp= $_FILES['file']['tmp_name'];
-  if((empty($_POST['file']))){
-    move_uploaded_file($file_tmp,$upload_dir.$file_name);
+  if (filesize( $file_name ) < 0){
+  echo "Error";
   }
+  if((empty($_POST['file']))){
+    if (!(move_uploaded_file($file_tmp,$upload_dir.$file_name))) {
+      echo "Error, kon de foto niet verplaatsen.";
+    };
+  }
+
+
   if(addProduct($mysqli, $naam, $beschrijving, $prijs, $categorie, $file_name)){
     header('location: index.php');
 }
@@ -41,34 +48,35 @@ if (isset($_POST['submit'])) {
     <div class="form-control w-full max-w-md mx-auto p-3">
   
     <label class="label">
-    <span class="label-text text-[#F1FAEE]" >Foto</span>
+    <span class="label-text text-[#F1FAEE]" >Productfoto</span>
     </label>
-  <input type="file" name = "file" class="file-input w-full max-w-md" />
+  <input type="file" name="file" class="file-input file-input-ghost w-full max-w-md bg-white" required />
   </label>
     <label class="label">
-    <span class="label-text text-[#F1FAEE]" >Naam</span>
+    <span class="label-text text-[#F1FAEE]" >Product</span>
     </label>
-  <input type="text" name = "naam" placeholder="Type here" class="input input-bordered w-full max-w-md" />
+  <input type="text" name = "naam" placeholder="Product" class="input input-bordered w-full max-w-md" required />
   </label>
     <label class="label">
-    <span class="label-text text-[#F1FAEE]" >Prijs</span>
+    <span class="label-text text-[#F1FAEE]" >Minimale prijs</span>
     </label>
-  <input type="text" name = "prijs" placeholder="Type here" class="input input-bordered w-full max-w-md" />
+  <input type="text" name = "prijs" placeholder="Minimale prijs" class="input input-bordered w-full max-w-md" required />
   </label>
-    <label class="label">
-    <span class="label-text text-[#F1FAEE]" >Beschrijving</span>
-    </label>
-  <input type="text" name = "beschrijving" placeholder="Type here" class="input input-bordered w-full max-w-md" />
-  </label>
-<div class="form-control w-full max-w-md">
+  <div class="form-control">
   <label class="label">
-    <span class="label-text text-[#F1FAEE]" >Categorie</span>
+    <span class="label-text text-[#F1FAEE]">Beschrijving</span>
+  </label>
+  <textarea class="textarea textarea-bordered h-24" name="beschrijving" placeholder="Beschrijving" required></textarea>
+  </div>
+<div class="form-control w-full max-w-md " required>
+  <label class="label">
+    <span class="label-text text-[#F1FAEE]">Categorie</span>
   </label>
  <?php 
   if(getAllCategories($mysqli)){
     echo "
-  <select class='select select-bordered' name='categorie'>
-   <option disabled selected>kies een categorie</option>";
+  <select class='select select-bordered' name='categorie' required >
+   <option disabled selected>Kies een categorie</option>";
  
       foreach(getAllCategories($mysqli) as $row) {
 
@@ -84,7 +92,7 @@ echo " <option value= ".$row["categorienaam"]. " >".$row["categorienaam"]." </op
   <label class="label">
    
   </label>
-  <input type="submit" name="submit " class="input input-bordered w-full max-w-md text-[#F1FAEE]" />
+  <button type="submit" name="submit" class="btn bg-white">PRODUCT TOEVOEGEN</button>
   
 </div>
 
