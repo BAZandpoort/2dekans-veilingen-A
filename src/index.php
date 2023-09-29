@@ -6,6 +6,10 @@
         <meta charset="utf-8">
     </head>
     <body>
+
+    <?php
+$_SESSION["login"] = 1
+    ?>
         <a href="registreren.php">registreren</a>
         <a href="aanpassenGebruikers.php">aanpassen</a>
     </body>

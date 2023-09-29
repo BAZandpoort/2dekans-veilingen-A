@@ -14,31 +14,29 @@
 include "connect.php";
 include "functions/userFunctions.php";
 session_start();
-if(!isset($_SESSION["login"])){
+
+
+if(isset($_SESSION["login"])){
     header('location: index.php');
 }
 
 if (isset($_POST["wijzigen"])) {
-    $gebruikerid = $_POST["gebruikerID"];
+    $gebruikerid = $_POST["gebruikerid"];
     $email = $_POST["email"];
     $voornaam = $_POST["voornaam"];
     $naam = $_POST["naam"];
     $wachtwoord = $_POST["wachtwoord"];
-    $status = $_POST["status"];
     $profielfoto = $_POST["profielfoto"];
-    $bechrijving = $_POST["beschrijving"];
-    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving, $status)){
+    $beschrijving = $_POST["beschrijving"];
+    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving)){
         header('location: index.php');
     }else{
-        $mysqli->connect_error;
+        print $mysqli->error;
     }
 
 
 }
-
-    $sql = "select * from tblgebruikers where email = '" . $_SESSION["login"]. "'";
-    $resultaat = $mysqli->query($sql);
-    $row = $resultaat->fetch_assoc();
+    foreach(getUser($mysqli,1) as $row){
     echo '
     <div class=" flex flex-col min-h-screen justify-center items-center">
     <form method="post" action="aanpassenGebruikers.php">
@@ -71,15 +69,8 @@ if (isset($_POST["wijzigen"])) {
         <label class="label">
          <span class="label-text text-white">Wachtwoord</span>
         </label>
-       <input type="text" name="wachtwoord" value=" '. $row["wachtwoord"] .' " class="input input-bordered w-full max-w-md">
+       <input type="password" name="wachtwoord" class="input input-bordered w-full max-w-md">
        </div>
-
-       <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Status</span>
-        </label>
-        <input type="text" name="status" value=" '. $row["status"] .' " class="input input-bordered w-full max-w-md">
-        </div>
 
         <div class="form-control w-full max-w-xs">
         <label class="label">
@@ -87,25 +78,26 @@ if (isset($_POST["wijzigen"])) {
         </label>
         <input type="file" name="profielfoto" class="file-input file-input-ghost w-full max-w-md bg-white">
         </div>
-        
-        <img src="' . $row["profielfoto"] . ' " width="300" height="300" alt="" >
 
         <div class="form-control w-full max-w-xs">
         <label class="label">
          <span class="label-text text-white">Beschrijving</span>
         </label>
-        <textarea class="textarea textarea-bordered h-24 w-full max-w-md" id="beschrijving" name="beschrijving" value="'. $row["beschrijving"] . '"></textarea>
+        <textarea class="textarea textarea-bordered h-24 w-full max-w-md" name="beschrijving" value="">'.$row["beschrijving"].'</textarea>
         </div>
 
 
-         <input type="submit" value="wijzigen" name="wijzigen"  class="text-white">  
+         <input type="submit" value="wijzigen" name="wijzigen"  class="btn text-white">  
 
     </div>
     </form>
 
+    <div class="flex-col min-h-screen justify-center items-center ">
+    <a href="index.php" class="text-white">Annuleren</a>
+    </div>
 </div>
 ';
-
+}
 ?>
 
 </body>
