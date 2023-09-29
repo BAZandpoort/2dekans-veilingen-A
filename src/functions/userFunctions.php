@@ -56,4 +56,12 @@ function getProfilePicture($connection,$userid){
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['profielfoto'];
 }
 
+function getGebruikersid($connection,$email){
+    $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '".$email."'");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['gebruikerid'];
+}
+function checkIfAdmin($connection,$email){
+    $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '".$email."'");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['"admin"'];
+}
 ?>
