@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
   $prijs= $_POST['prijs'];
   $beschrijving= $_POST['beschrijving'];
   $categorie= $_POST['categorie'];
-  $entime = date('Y-m-d H:i:s', strtotime('+12 hours'));
+  $entime = date('Y-m-d H:i:s', strtotime('+ 12 hours'));
   $upload_dir= $_SERVER['DOCUMENT_ROOT']."/2dekans-veilingen-A/public/img/";
   $file_name= $_FILES['file']['name'];
   $file_tmp= $_FILES['file']['tmp_name'];
@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
   }
 
 
-  if(addProduct($mysqli, $naam, $beschrijving, $prijs, $categorie, $file_name)){
+  if(addProduct($mysqli, $naam, $beschrijving, $prijs, $categorie, $file_name,$entime)){
     header('location: index.php');
 }
 }
