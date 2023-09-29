@@ -12,7 +12,7 @@ include "connect.php";
 <body>
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+    <a class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
   </div>
   <div class="flex">
   <div class="form-control">
@@ -50,7 +50,6 @@ include "connect.php";
         <li>
           <a href="" class="justify-between">
             Profile
-            <span class="badge">New</span>
           </a>
         </li>
         <li><a>Settings</a></li>
