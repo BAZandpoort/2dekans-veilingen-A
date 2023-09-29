@@ -7,19 +7,20 @@ if (isset($_POST["knop"])) {
  $email = $_POST["email"];
  $password = $_POST["password"];
  if(isEmailCorrect($mysqli,$email)){
-     if(isPasswordCorrect($mysqli,$password,$email)){
-            $gebruikersid = getGebruikersid($mysqli,$email);
+     if(isPasswordCorrect($mysqli,$password,$email)){  
+        $gebruikersid = getGebruikersid($mysqli,$email);
              $_SESSION["login"]= $gebruikersid;
              if (checkIfAdmin($mysqli,$email)){
                  $_SESSION['admin']="true";
-
+                
              }
              header("Location:index.php");
          } else {
-             $_SESSION["login"] = "false";
+            
             
          }
      }
+     
 }
 
 ?>
