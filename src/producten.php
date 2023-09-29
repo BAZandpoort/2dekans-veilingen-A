@@ -97,7 +97,7 @@ include "connect.php";
       while($row = $result->fetch_assoc()) {
         echo '
         <div class="card card-compact w-96 bg-base-100 shadow-xl float-right">
-          <figure><img id="productFoto" src="'.$row['foto'].'" alt="'.$row['foto'].'"/></figure>
+          <figure><img id="productFoto" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'"/></figure>
             <div class="card-body">
               <h2 id="productNaam" class="card-title">'.$row['naam'].'</h2>
               <p id="productPrijs"></p>
