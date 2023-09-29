@@ -1,16 +1,17 @@
 <?php 
-        if (!(isset($_POST["afrekenen"]))) {
+        /*if (!(isset($_POST["afrekenen"]))) {
                 header("Location: index.php");
-            }
+            }*/
 
         require('./fpdf186/fpdf.php');
-        include "connect.php"
+        include "connect.php";
         session_start();
         
-        $factuurId = rand(1000, 9999)
+        $factuurId = rand(1000, 9999);
         
+        $products2 = 16; 
         $products = explode(",", $_POST["products"]); 
-        $products_count = array_count_values($products);
+        $products_count = array_count_values($products2);
         $products_info = array();
         
         foreach ($products_count as $product => $quantity) {
@@ -25,7 +26,7 @@
                 );
 
                 array_push($products_info, $product_info);
-        } 
+        };
 
         $sql = "SELECT * FROM tblgebruikers WHERE gebruikersnaam = '" . $_SESSION["1"] . "'";
         $resultaat = $mysqli->querry($sql); 
@@ -82,7 +83,7 @@
 
         $datum = date("l, j F Y");
 
-        $sql = "INSERT INTO tblfacturen (factuurid, koperid, productid, datum, factuurpdf) VALUES (".$factuurId",".$koperId."," .$product."," .$datum. "," .$pdf_data.")";
+        $sql = "INSERT INTO tblfacturen (factuurid, koperid, productid, datum, factuurpdf) VALUES (".$factuurId.",".$koperId."," .$product."," .$datum. "," .$pdf_data.")";
         if ($mysqli->query($sql)) {
          echo "PDF file saved to database.";
         } else {
