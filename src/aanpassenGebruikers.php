@@ -36,7 +36,7 @@ if (isset($_POST["wijzigen"])) {
 
 
 }
-    foreach(getUser($mysqli,$_SESSION["login"]) as $row){
+    foreach(getUser($mysqli,1) as $row){
     echo '
     <div class=" flex flex-col min-h-screen justify-center items-center">
     <form method="post" action="aanpassenGebruikers.php">
