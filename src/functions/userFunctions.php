@@ -27,6 +27,14 @@ function registerUser($connection, $fname, $lname, $email, $password, $profile_p
 function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
-};
+}
 
+function getAllFavourites($connection, $userid) {
+    $resultaat = $connection->query("SELECT tblfavorieten.productid, tblproducten.foto, tblproducten.naam, tblgebruikers.voornaam, tblgebruikers.naam AS achternaam
+                               FROM tblfavorieten 
+                               INNER JOIN tblproducten ON (tblproducten.productid = tblfavorieten.productid)
+                               INNER JOIN tblgebruikers ON (tblgebruikers.gebruikerid = tblfavorieten.gebruikerid)
+                               WHERE tblgebruikers.gebruikerid = ".$userid."");
+    return $resultaat;
+}
 ?>

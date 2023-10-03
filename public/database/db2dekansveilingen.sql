@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Gegenereerd op: 22 sep 2023 om 10:39
--- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.2.4
+-- Host: 127.0.0.1:3306
+-- Gegenereerd op: 03 okt 2023 om 09:27
+-- Serverversie: 8.0.27
+-- PHP-versie: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,11 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `tblboden`
+--
+
+DROP TABLE IF EXISTS `tblboden`;
+CREATE TABLE IF NOT EXISTS `tblboden` (
+  `productid` int NOT NULL,
+  `bod` decimal(10,2) NOT NULL,
+  `gebruikersid` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `tblcategorieen`
 --
 
-CREATE TABLE `tblcategorieen` (
-  `categorienaam` text NOT NULL
+DROP TABLE IF EXISTS `tblcategorieen`;
+CREATE TABLE IF NOT EXISTS `tblcategorieen` (
+  `categorienaam` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -37,12 +51,14 @@ CREATE TABLE `tblcategorieen` (
 -- Tabelstructuur voor tabel `tblfacturen`
 --
 
-CREATE TABLE `tblfacturen` (
-  `factuurid` int(11) NOT NULL,
-  `productid` int(11) NOT NULL,
-  `koperid` int(11) NOT NULL,
-  `datum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `factuurpdf` blob NOT NULL
+DROP TABLE IF EXISTS `tblfacturen`;
+CREATE TABLE IF NOT EXISTS `tblfacturen` (
+  `factuurid` int NOT NULL AUTO_INCREMENT,
+  `productid` int NOT NULL,
+  `koperid` int NOT NULL,
+  `datum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `factuurpdf` blob NOT NULL,
+  PRIMARY KEY (`factuurid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -51,9 +67,10 @@ CREATE TABLE `tblfacturen` (
 -- Tabelstructuur voor tabel `tblfavorieten`
 --
 
-CREATE TABLE `tblfavorieten` (
-  `productid` int(11) NOT NULL,
-  `gebruikerid` int(11) NOT NULL
+DROP TABLE IF EXISTS `tblfavorieten`;
+CREATE TABLE IF NOT EXISTS `tblfavorieten` (
+  `productid` int NOT NULL,
+  `gebruikerid` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -62,17 +79,19 @@ CREATE TABLE `tblfavorieten` (
 -- Tabelstructuur voor tabel `tblgebruikers`
 --
 
-CREATE TABLE `tblgebruikers` (
-  `gebruikerid` int(11) NOT NULL,
-  `email` text NOT NULL,
-  `voornaam` text NOT NULL,
-  `naam` text NOT NULL,
-  `wachtwoord` text NOT NULL,
+DROP TABLE IF EXISTS `tblgebruikers`;
+CREATE TABLE IF NOT EXISTS `tblgebruikers` (
+  `gebruikerid` int NOT NULL AUTO_INCREMENT,
+  `email` text COLLATE utf8mb4_general_ci NOT NULL,
+  `voornaam` text COLLATE utf8mb4_general_ci NOT NULL,
+  `naam` text COLLATE utf8mb4_general_ci NOT NULL,
+  `wachtwoord` text COLLATE utf8mb4_general_ci NOT NULL,
   `admin` tinyint(1) NOT NULL,
-  `status` text NOT NULL,
-  `profielfoto` text NOT NULL,
-  `beschrijving` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `status` text COLLATE utf8mb4_general_ci NOT NULL,
+  `profielfoto` text COLLATE utf8mb4_general_ci NOT NULL,
+  `beschrijving` text COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`gebruikerid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -80,17 +99,19 @@ CREATE TABLE `tblgebruikers` (
 -- Tabelstructuur voor tabel `tblproducten`
 --
 
-CREATE TABLE `tblproducten` (
-  `productid` int(11) NOT NULL,
-  `verkoperid` int(11) NOT NULL,
-  `foto` text NOT NULL,
-  `naam` text NOT NULL,
+DROP TABLE IF EXISTS `tblproducten`;
+CREATE TABLE IF NOT EXISTS `tblproducten` (
+  `productid` int NOT NULL AUTO_INCREMENT,
+  `verkoperid` int NOT NULL,
+  `foto` text COLLATE utf8mb4_general_ci NOT NULL,
+  `naam` text COLLATE utf8mb4_general_ci NOT NULL,
   `prijs` decimal(10,0) NOT NULL,
-  `beschrijving` text NOT NULL,
-  `categorie` text NOT NULL,
-  `startdatum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `eindtijd` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `beschrijving` text COLLATE utf8mb4_general_ci NOT NULL,
+  `categorie` text COLLATE utf8mb4_general_ci NOT NULL,
+  `startdatum` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `eindtijd` timestamp NOT NULL,
+  PRIMARY KEY (`productid`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -98,69 +119,15 @@ CREATE TABLE `tblproducten` (
 -- Tabelstructuur voor tabel `tblrapporten`
 --
 
-CREATE TABLE `tblrapporten` (
-  `rapportid` int(11) NOT NULL,
-  `gebruikerid` int(11) NOT NULL,
-  `melderid` int(11) NOT NULL,
-  `reden` text NOT NULL,
-  `behandeld` tinyint(1) NOT NULL
+DROP TABLE IF EXISTS `tblrapporten`;
+CREATE TABLE IF NOT EXISTS `tblrapporten` (
+  `rapportid` int NOT NULL AUTO_INCREMENT,
+  `gebruikerid` int NOT NULL,
+  `melderid` int NOT NULL,
+  `reden` text COLLATE utf8mb4_general_ci NOT NULL,
+  `behandeld` tinyint(1) NOT NULL,
+  PRIMARY KEY (`rapportid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Indexen voor geëxporteerde tabellen
---
-
---
--- Indexen voor tabel `tblfacturen`
---
-ALTER TABLE `tblfacturen`
-  ADD PRIMARY KEY (`factuurid`);
-
---
--- Indexen voor tabel `tblgebruikers`
---
-ALTER TABLE `tblgebruikers`
-  ADD PRIMARY KEY (`gebruikerid`);
-
---
--- Indexen voor tabel `tblproducten`
---
-ALTER TABLE `tblproducten`
-  ADD PRIMARY KEY (`productid`);
-
---
--- Indexen voor tabel `tblrapporten`
---
-ALTER TABLE `tblrapporten`
-  ADD PRIMARY KEY (`rapportid`);
-
---
--- AUTO_INCREMENT voor geëxporteerde tabellen
---
-
---
--- AUTO_INCREMENT voor een tabel `tblfacturen`
---
-ALTER TABLE `tblfacturen`
-  MODIFY `factuurid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT voor een tabel `tblgebruikers`
---
-ALTER TABLE `tblgebruikers`
-  MODIFY `gebruikerid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT voor een tabel `tblproducten`
---
-ALTER TABLE `tblproducten`
-  MODIFY `productid` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT voor een tabel `tblrapporten`
---
-ALTER TABLE `tblrapporten`
-  MODIFY `rapportid` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
