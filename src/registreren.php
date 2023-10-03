@@ -1,6 +1,7 @@
 <?php
     include "connect.php";
     include "functions/userFunctions.php";
+    include "components/navbar.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
