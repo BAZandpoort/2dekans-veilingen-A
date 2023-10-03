@@ -82,73 +82,7 @@ if (isset($_POST["wijzigen"])) {
             </div>
         </div>
     </form>
-</body';
-
-
-
-
-
-    /*<div class=" flex flex-col min-h-screen justify-center items-center">
-    <form method="post" action="aanpassenGebruikers.php">
-    <div class= "flex flex-col gap-2">
-        <tr><td><input type="hidden" name="gebruikerid" value="' . $row["gebruikerid"] . '"></td></tr>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">E-mail</span>
-        </label>
-        <input type="text" name="email" value="' . $row["email"] . '" class="input input-bordered w-full max-w-md">
-        </div>
-
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Voornaam</span>
-        </label>
-       <input type="text" name="voornaam" value="' . $row["voornaam"] . '" class="input input-bordered w-full max-w-md">
-        </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Naam</span>
-        </label>
-       <input type="text" name="naam" value="' . $row["naam"] . '" class="input input-bordered w-full max-w-md">
-        </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Wachtwoord</span>
-        </label>
-       <input type="password" name="wachtwoord" class="input input-bordered w-full max-w-md">
-       </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Profielfoto</span>
-        </label>
-        <input type="file" name="profielfoto" class="file-input file-input-ghost w-full max-w-md bg-white">
-        </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Beschrijving</span>
-        </label>
-        <textarea class="textarea textarea-bordered h-24 w-full max-w-md" name="beschrijving" value="">'.$row["beschrijving"].'</textarea>
-        </div>
-
-
-         <input type="submit" value="wijzigen" name="wijzigen"  class="btn text-white">  
-
-    </div>
-    </form>
-
-    <div class="flex-col min-h-screen justify-center items-center ">
-    <a href="index.php" class="text-white">Annuleren</a>
-    </div>
-</div>
-';*/
+</body>';
 }
 ?>
-
-</body>
 </html>
