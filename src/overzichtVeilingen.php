@@ -16,7 +16,7 @@
     $resultaat = $mysqli ->query($sql); 
     
     while ($data = $resultaat -> fetch_assoc()) {
-        $tijd = krijgResterendeTijd($data["eindtijd"]);
+        $tijd = getTimeDifference($data["eindtijd"]);
         echo '<br><table>
         <tr><td><img src="'.$data["foto"].'" alt="product heeft geen foto"></td></tr>
        <tr> <td>naam: '.$data["naam"].'</td>
