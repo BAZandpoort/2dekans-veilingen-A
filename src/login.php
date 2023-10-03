@@ -46,9 +46,9 @@ if(isset($_GET["error"])){
 ?>
 <body class="min-h-screen bg-[#F1FAEE]">
 <div class="flex justify-start items-start">
-        <a href="index.php" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
-        <div class="card w-full max-w-lg h-screen shadow-2xl bg-white ml-auto ">
-        <form class="card-body"  method="post" action="login.php">
+        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a>
+        <div class="card w-full max-w-lg h-screen shadow-2xl bg-white ml-auto">
+        <form class="card-body" method="post" action="login.php">
             <div class="form-control gap-2">
             <h2 class="text-black text-2xl ">Login</h2>
             <label class="label">

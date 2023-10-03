@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-[#1D3557]" lang="en">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 </head>
-<body>
-
 
 <?php
 include "connect.php";
 include "functions/userFunctions.php";
 session_start();
-include "components/navbar.php";
 
 
 if(!isset($_SESSION["login"])){
@@ -38,7 +35,7 @@ if (isset($_POST["wijzigen"])) {
 
 }
     foreach(getUser($mysqli,1) as $row){
-    echo '
+    print '<body class="bg-[#F1FAEE]">
     <div class=" flex flex-col min-h-screen justify-center items-center">
     <form method="post" action="aanpassenGebruikers.php">
     <div class= "flex flex-col gap-2">

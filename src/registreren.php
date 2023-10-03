@@ -11,9 +11,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
-<body class="min-h-screen bg-[#F1FAEE]">
-    <div class="flex justify-start items-start">
-        <a href="index.php" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
+<body class="h-screen bg-[#F1FAEE]">
+<div class="flex justify-start items-start">
+    <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
     <div class="card w-full max-w-xl h-screen shadow-2xl bg-white ml-auto">
     <form class="card-body" method="post" action="registreren.php" enctype="multipart/form-data">
         <div class="form-control">
@@ -47,6 +47,7 @@
         <div class="flex justify-center mt-2">
             <a href="login.php" class="link text-black">I have an account</a>
         </div>
+    </div>
     </div>
 </div>
     <?php
