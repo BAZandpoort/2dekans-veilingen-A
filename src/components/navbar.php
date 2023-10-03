@@ -48,6 +48,7 @@ session_start();
                 <li><a>Settings</a></li>
                 <?php
                 if (isset($_SESSION["login"])) {
+                    echo '<li><a href="productToevoegen.php">Add Product</a></li>';
                     echo '<li><a href="loguit.php">Logout</a></li>';
                 } else {
                     echo '<li><a href="login.php">Login</a></li>';
