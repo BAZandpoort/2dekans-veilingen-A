@@ -48,20 +48,29 @@ if(isset($_GET["error"])){
   </div>';
 }
 ?>
-    <div class="flex min-h-screen items-center text-black">.
-        <div class="flex flex-col gap-2 p-20 max-w-20 mx-auto bg-white rounded-xl shadow-lg flex items-center justify-center ">
-
-
-
-
-        <h3 class="">Hier inloggen</h3>
-    <input type="email" name="email" placeholder="email" class="input input-bordered  input-md w-full max-w-xs" />
-    <input type="password" name="password" placeholder="password" class="input input-bordered input-md w-full max-w-xs" />
-
-    <input class="btn bg-[#1D3557] text-white" type="submit" id="knop" name="knop" value="Login" $GET>
+<body class="min-h-screen bg-[#F1FAEE]">
+    <div class="card w-full max-w-xl h-screen shadow-2xl bg-white ml-auto">
+      <form class="card-body">
+        <div class="form-control">
+        <h2 class="text-black text-2xl">Login</h2>
+        <input type="email"  name="email" placeholder="Email" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+        <input type="password" name="password" placeholder="password" class="input input-bordered input-md w-full max-w-xs bg-white"/>
+        <input class="btn btn-wide bg-[#1D3557] text-white" type="submit" id="knop" name="knop" value="Login">
+        </form>
+        <div class="flex justify-center mt-2">
+            <a href="registreren.php" class="link">I don't have an account</a>
+        </div>
     </div>
+
+<!--<div class="flex min-h-screen items-center text-black">.
+    <div class="flex flex-col gap-2 p-16 max-w-16 mx-auto bg-white rounded-md shadow-lg flex items-center justify-center ">
+        <h3 class="">Login</h3>
+        <input type="email" name="email" placeholder="email" class="input input-bordered  input-md w-full max-w-xs bg-white"/>
+        <input type="password" name="password" placeholder="password" class="input input-bordered input-md w-full max-w-xs bg-white"/>
+        <input class="btn btn-wide bg-[#1D3557] text-white" type="submit" id="knop" name="knop" value="Login">
+        <a href="registreren.php" class="link">I don't have an account</a>
     </div>
-</form>
-</form>
+</div>
+</form>-->
 </body>
 </html>

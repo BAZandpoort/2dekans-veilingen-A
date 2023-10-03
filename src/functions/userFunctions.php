@@ -29,7 +29,7 @@ function updateUser($connection, $userid, $fname, $lname, $email, $password, $pr
         if(getProfilePicture($connection,$userid)){
             $profile_picture = getProfilePicture($connection,$userid);
         }else{
-            print $mysqli->error;
+            print $connection->error;
         }
     }
     if(empty($password)){
