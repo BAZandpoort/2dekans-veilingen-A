@@ -14,6 +14,7 @@
 include "connect.php";
 include "functions/userFunctions.php";
 session_start();
+include "components/navbar.php";
 
 
 if(!isset($_SESSION["login"])){
