@@ -5,7 +5,7 @@ session_start();
 
 <div class="navbar bg-base-100">
     <div class="navbar-start">
-        <a class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
+        <a href="index.php" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
     </div>
     <div class="navbar-center">
         <details class="dropdown mb-0">

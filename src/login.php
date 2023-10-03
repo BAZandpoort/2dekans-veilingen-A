@@ -2,7 +2,6 @@
 session_start();
 include "connect.php";
 include "./functions/userFunctions.php";
-include "components/navbar.php";
 if (isset($_SESSION["login"])) {
     header("location:index.php");
 }
@@ -46,22 +45,25 @@ if(isset($_GET["error"])){
 }
 ?>
 <body class="min-h-screen bg-[#F1FAEE]">
-    <div class="card w-full max-w-lg h-screen shadow-2xl bg-white ml-auto ">
-      <form class="card-body"  method="post" action="login.php">
-        <div class="form-control gap-2">
-        <h2 class="text-black text-2xl ">Login</h2>
-        <label class="label">
-            <span class="label-text text-black">Email</span>
-        </label>
-        <input type="email"  name="email" placeholder="Email" class="input input-bordered w-full max-w-md bg-white text-black" required/>
-        <label class="label">
-            <span class="label-text text-black">Password</span>
-        </label>
-        <input type="password"  name="password" placeholder="Password" class="input input-bordered w-full max-w-md bg-white text-black" required/>
-        <input type="submit" name="submit" value="Login" class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
-    </form>
-    <div class="flex justify-center mt-2">
-        <a href="registreren.php" class="link text-black">I don't have an account</a>
+<div class="flex justify-start items-start">
+        <a href="index.php" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
+        <div class="card w-full max-w-lg h-screen shadow-2xl bg-white ml-auto ">
+        <form class="card-body"  method="post" action="login.php">
+            <div class="form-control gap-2">
+            <h2 class="text-black text-2xl ">Login</h2>
+            <label class="label">
+                <span class="label-text text-black">Email</span>
+            </label>
+            <input type="email"  name="email" placeholder="Email" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+            <label class="label">
+                <span class="label-text text-black">Password</span>
+            </label>
+            <input type="password"  name="password" placeholder="Password" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+            <input type="submit" name="submit" value="Login" class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
+        </form>
+        <div class="flex justify-center mt-2">
+            <a href="registreren.php" class="link text-black">I don't have an account</a>
+        </div>
     </div>
 </div>
 </body>
