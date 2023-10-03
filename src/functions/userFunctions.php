@@ -47,6 +47,15 @@ function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
 }
+
+function getAllFavourites($connection, $userid) {
+    $resultaat = $connection->query("SELECT tblfavorieten.productid, tblproducten.foto, tblproducten.naam, tblgebruikers.voornaam, tblgebruikers.naam AS achternaam
+                               FROM tblfavorieten 
+                               INNER JOIN tblproducten ON (tblproducten.productid = tblfavorieten.productid)
+                               INNER JOIN tblgebruikers ON (tblgebruikers.gebruikerid = tblfavorieten.gebruikerid)
+                               WHERE tblgebruikers.gebruikerid = ".$userid."");
+    return $resultaat;
+}
 function getUser($connection,$gebruikerid){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where gebruikerid= '".$gebruikerid."'");
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
