@@ -19,13 +19,13 @@ if(!isset($_SESSION["login"])){
 }
 
 if (isset($_POST["wijzigen"])) {
-    $gebruikerid = $_POST["gebruikerid"];
+    $gebruikerid = $_SESSION["login"];
     $email = $_POST["email"];
     $voornaam = $_POST["voornaam"];
     $naam = $_POST["naam"];
     $wachtwoord = $_POST["wachtwoord"];
     $profielfoto = $_POST["profielfoto"];
-    $beschrijving = $_POST["beschrijving"];
+    $beschrijving = $_POST["beschrijving"]; 
     if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving)){
         header('location: index.php');
     }else{
@@ -35,8 +35,60 @@ if (isset($_POST["wijzigen"])) {
 
 }
     foreach(getUser($mysqli,1) as $row){
-    print '<body class="bg-[#F1FAEE]">
-    <div class=" flex flex-col min-h-screen justify-center items-center">
+        print'<body class="h-screen bg-[#F1FAEE]">
+        <div>
+          <div class="flex justify-start items-start">
+            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
+          </div>
+          <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php">
+            <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
+              <h2 class="text-black text-2xl mb-4">Update information</h2>
+              <div class="flex flex-col gap-2">  
+              <div class="flex flex-row gap-2"> 
+                  <div class="flex flex-col w-full"> 
+                  <label class="label text-black">Email</label>
+                  <input type="email" name="email" value="' . $row["email"] . '"  class="input input-bordered w-full max-w-md text-black bg-white" />   
+                  </div>
+                </div>
+              <div class="flex flex-row gap-2"> 
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Voornaam</label>
+                    <input type="text" name="voornaam" value="' . $row["voornaam"] . '" class="input input-bordered w-full max-w-md text-black bg-white" />
+                  </div>
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Naam</label>
+                    <input type="text" name="naam" value="' . $row["naam"] . '" class="input input-bordered w-full max-w-md text-black bg-white" />
+                  </div>
+                </div>
+                <div class="flex flex-row gap-2"> 
+                    <div class="flex flex-col w-full"> 
+                        <label class="label text-black">Wachtwoord</label>
+                        <input type="password" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md text-black bg-white" />
+                    </div>
+                </div>
+                <div class="flex flex-row gap-2">
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Beschrijving</label>
+                    <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving">'.$row["beschrijving"].'</textarea>
+                  </div>
+                </div>
+                <div class="flex flex-row gap-2">
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Profielfoto</label>
+                    <input type="file" name="profielfoto" class="file-input file-input-bordered bg-white text-black" />
+                  </div>
+                </div>
+                <input type="submit" value="wijzigen" name="wijzigen"  class="btn btn-ghost text-black hover:text-white hover:bg-black">  
+            </div>
+        </div>
+    </form>
+</body';
+
+
+
+
+
+    /*<div class=" flex flex-col min-h-screen justify-center items-center">
     <form method="post" action="aanpassenGebruikers.php">
     <div class= "flex flex-col gap-2">
         <tr><td><input type="hidden" name="gebruikerid" value="' . $row["gebruikerid"] . '"></td></tr>
@@ -94,7 +146,7 @@ if (isset($_POST["wijzigen"])) {
     <a href="index.php" class="text-white">Annuleren</a>
     </div>
 </div>
-';
+';*/
 }
 ?>
 
