@@ -9,25 +9,21 @@
 <body>
     <?php
     include "connect.php";
+    include "functions/adminFunctions.php";
     session_start();
 
     $sql = "SELECT* FROM tblproducten"; 
     $resultaat = $mysqli ->query($sql); 
     
     while ($data = $resultaat -> fetch_assoc()) {
-        $huidigeTijd = date("Y-m-d H:i:s");
-        $eindtijd = strtotime($data["eindtijd"]);
-        $huidigeTijd = strtotime($huidigeTijd);
-        $tijdsverschil = $eindtijd - $huidigeTijd;
-        $tijd = date("Y-m-d H:i:s", $tijdsverschil);
-   echo '<br><table>
-        <tr><td>foto: '.$data["foto"].' </td></tr>
+        $tijd = krijgResterendeTijd($data["eindtijd"]);
+        echo '<br><table>
+        <tr><td><img src="'.$data["foto"].'" alt="product heeft geen foto"></td></tr>
        <tr> <td>naam: '.$data["naam"].'</td>
         <td>prijs: '.$data["prijs"].'</td> </tr>
        <tr> <td>beschrijving: '.$data["beschrijving"].'</td> </tr>
         <tr> <td>categorie: '.$data["categorie"].'</td> </tr>
-       <tr> <td>startdatum: '.$data["eindtijd"].'</td>
-        <td>eindtijd: '.$data["eindtijd"].' </td></tr>
+       <tr> <td>resterende tijd: '.$tijd.'</td></tr>
         <tr><td><button class="btn">Bid</button></td></tr>
     </table><br>'; 
         }
