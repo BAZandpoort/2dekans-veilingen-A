@@ -23,4 +23,13 @@ function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
 };
+
+function getAllCategories($connection) {
+    return $connection->query("SELECT * FROM tblcategorieen");
+};
+
+function getGekozenCategorie($connection, $categorie) {
+    return $connection->query("SELECT * FROM tblproducten WHERE categorie LIKE '".$categorie."'");
+}
+
 ?>

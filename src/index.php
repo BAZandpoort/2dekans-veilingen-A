@@ -1,5 +1,6 @@
 <?php
 include "connect.php"; 
+include "functions/userFunctions.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,9 +22,7 @@ include "connect.php";
         <details class="dropdown mb-0">
         <summary class="m-1 btn">Categorieën</summary>
         <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">';
-            $sql = "SELECT * FROM tblcategorieen";
-            $result = $mysqli->query($sql);
-            while($row = $result->fetch_assoc()) {
+            foreach(getAllCategories($mysqli) as $row) {
               echo '
                 <li><a href="producten.php?gekozenCategorie='.$row['categorienaam'].'" class="link link-neutral" name="categorieID">'.$row['categorienaam'].'</a></li>
               ';
