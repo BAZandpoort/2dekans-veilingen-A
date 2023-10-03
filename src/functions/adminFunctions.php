@@ -1,10 +1,9 @@
 <?php 
-function krijgResterendeTijd($eindtijd) {
-    $huidigeTijd = date("Y-m-d H:i:s");
-    $eindtijd = strtotime($eindtijd);
-    $huidigeTijd = strtotime($huidigeTijd);
-    $tijdsverschil = $eindtijd - $huidigeTijd;
-    $tijd = date("H:i:s", $tijdsverschil);
-    return $tijd;
+function getTimeDifference($endTime) {
+    $currentDate = date("Y-m-d H:i:s");
+    $endDate = strtotime($endTime);
+    $currentDate = strtotime($currentDate);
+    $timeDifference = $endDate - $currentDate;
+    $timeDifference = date("H:i:s", $timeDifference);
 }
 ?>

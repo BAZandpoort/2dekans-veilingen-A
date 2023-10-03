@@ -1,9 +1,10 @@
 <?php
     include "connect.php";
     include "functions/userFunctions.php";
+    include "functions/buyerFunctions.php";
 ?>
 <!DOCTYPE html>
-<html lang="en" class="bg-[#1D3557]">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,37 +12,44 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
-<body>
-    <div class="form-control w-full max-w-md mx-auto p-3">
-        <form method="post" action="registreren.php" enctype="multipart/form-data">
+<body class="min-h-screen bg-[#F1FAEE]">
+    <div class="flex justify-start items-start">
+        <a href="index.php" class="btn btn-ghost normal-case text-xl">2dekans veilingen</a>
+    <div class="card w-full max-w-xl h-screen shadow-2xl bg-white ml-auto">
+    <form class="card-body" method="post" action="registreren.php" enctype="multipart/form-data">
+        <div class="form-control">
+        <h2 class="text-black text-2xl">Registreer</h2>
         <label class="label">
-            <span class="label-text text-white">Voornaam</span>
+            <span class="label-text text-black">Voornaam</span>
         </label>
-        <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" class="input input-bordered w-full max-w-md" required/>
+        <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" class="input input-bordered w-full max-w-md bg-white text-black" required/>
         <label class="label">
-            <span class="label-text text-white">Achternaam</span>
-        </label>
-        <input type="text"  id="achternaam" name="achternaam" placeholder="Achternaam" class="input input-bordered w-full max-w-md" required/>
-        <label class="label">
-            <span class="label-text text-white">E-mailadres</span>
-        </label>
-        <input type="email" id="email" name="email" placeholder="E-mailadres" class="input input-bordered w-full max-w-md" required/>
-        <label class="label">
-            <span class="label-text text-white">Wachtwoord</span>
-        </label>
-        <input type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md" required/>
-        <label class="label">
-        <span class="label-text text-white">Beschrijving</span>
-        </label>
-        <textarea class="textarea textarea-bordered h-24 w-full max-w-md" id="beschrijving" name="beschrijving" placeholder="Beschrijving"></textarea>
-        <label class="label">
-            <span class="label-text text-white">Profielfoto</span>
-        </label>
-        <input type="file" name="file" class="file-input file-input-ghost w-full max-w-md bg-white" />
-        <br>
-        <input type="submit" id="submitknop" name="submitknop" value="Registreer" class="btn bg-white mt-3 w-full max-w-md" />
+                <span class="label-text text-black">Achternaam</span>
+            </label>
+            <input type="text"  id="achternaam" name="achternaam" placeholder="Achternaam" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+            <label class="label">
+                <span class="label-text text-black">E-mailadres</span>
+            </label>
+            <input type="email" id="email" name="email" placeholder="E-mailadres" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+            <label class="label">
+                <span class="label-text text-black">Wachtwoord</span>
+            </label>
+            <input type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+            <label class="label">
+            <span class="label-text text-black">Beschrijving</span>
+            </label>
+            <textarea class="textarea textarea-bordered h-24 w-full max-w-md bg-white text-black" id="beschrijving" name="beschrijving" placeholder="Beschrijving"></textarea>
+            <label class="label">
+                <span class="label-text text-black">Profielfoto</span>
+            </label>
+            <input type="file" name="file" class="file-input file-input-bordered w-full max-w-md bg-white text-black" />
+            <input type="submit" id="submitknop" name="submitknop" value="Registreer" class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
         </form>
+        <div class="flex justify-center mt-2">
+            <a href="login.php" class="link text-black">I have an account</a>
+        </div>
     </div>
+</div>
     <?php
         if(isset($_POST['submitknop'])) {
             if(!(isEmailCorrect($mysqli, $_POST['email']))) {

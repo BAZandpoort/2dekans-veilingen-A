@@ -29,7 +29,7 @@ function updateUser($connection, $userid, $fname, $lname, $email, $password, $pr
         if(getProfilePicture($connection,$userid)){
             $profile_picture = getProfilePicture($connection,$userid);
         }else{
-            print $mysqli->error;
+            print $connection->error;
         }
     }
     if(empty($password)){
@@ -46,6 +46,15 @@ function updateUser($connection, $userid, $fname, $lname, $email, $password, $pr
 function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
+}
+
+function getAllFavourites($connection, $userid) {
+    $resultaat = $connection->query("SELECT tblfavorieten.productid, tblproducten.foto, tblproducten.naam, tblgebruikers.voornaam, tblgebruikers.naam AS achternaam
+                               FROM tblfavorieten 
+                               INNER JOIN tblproducten ON (tblproducten.productid = tblfavorieten.productid)
+                               INNER JOIN tblgebruikers ON (tblgebruikers.gebruikerid = tblfavorieten.gebruikerid)
+                               WHERE tblgebruikers.gebruikerid = ".$userid."");
+    return $resultaat;
 }
 function getUser($connection,$gebruikerid){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where gebruikerid= '".$gebruikerid."'");
