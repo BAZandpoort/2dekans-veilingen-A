@@ -17,15 +17,21 @@
     
     while ($data = $resultaat -> fetch_assoc()) {
         $tijd = getTimeDifference($data["eindtijd"]);
-        echo '<br><table>
-        <tr><td><img src="'.$data["foto"].'" alt="product heeft geen foto"></td></tr>
-       <tr> <td>naam: '.$data["naam"].'</td>
-        <td>prijs: '.$data["prijs"].'</td> </tr>
-       <tr> <td>beschrijving: '.$data["beschrijving"].'</td> </tr>
-        <tr> <td>categorie: '.$data["categorie"].'</td> </tr>
-       <tr> <td>resterende tijd: '.$tijd.'</td></tr>
-        <tr><td><button class="btn">Bid</button></td></tr>
-    </table><br>'; 
+        echo'<div class="card w-96 bg-base-100 shadow-xl">
+        <figure><img src="'.$data["foto"].'" alt="product heeft geen foto" width="240" hight="320" /></figure>
+        <div class="card-body">
+          <h2 class="card-title">
+            '.$data["naam"].'
+          </h2>
+          <p>'.$data["beschrijving"].'</p>
+          <div class="card-actions justify-end">
+            <div class="badge badge-outline">'.$data["categorie"].'</div> 
+            <div class="badge badge-outline"> € '.$data["prijs"].'</div>
+            <div class="badge badge-outline">'.$tijd.'</div>
+            <button class="btn btn-primary">Bid</button>
+          </div>
+        </div>
+      </div>';
         }
         ?>
 
