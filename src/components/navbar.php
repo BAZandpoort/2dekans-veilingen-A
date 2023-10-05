@@ -61,9 +61,7 @@ include "./functions/userFunctions.php";
         </div>
         <?php
         }else{
-            print'<div class="ml-3">
-            <a href="login.php" class="btn btn-ghost text-black">Login</a>
-            </div>';
+            print'<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
         }
         ?>
     </div>
