@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-[#F1FAEE]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,7 +45,7 @@ if (isset($_POST["wijzigen"])) {
 
 }
     foreach(getUser($mysqli,1) as $row){
-        print'<body class="h-screen bg-[#F1FAEE]">
+        print'<body>
         <div>
           <div class="flex justify-start items-start">
             <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
