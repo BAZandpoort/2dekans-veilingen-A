@@ -1,7 +1,6 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
-
 ?>
 
 <div class="navbar bg-[#F1FAEE]">
@@ -34,6 +33,9 @@ include "./functions/userFunctions.php";
                 </div>
             </div>
         </div>
+        <?php
+        if(isset($_SESSION["login"])){
+        ?>
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle avatar">
                 <div class="w-10 rounded-full">
@@ -53,15 +55,16 @@ include "./functions/userFunctions.php";
                     </a>
                 </li>
                 <li><a>Settings</a></li>
-                <?php
-                if (isset($_SESSION["login"])) {
-                    echo '<li><a href="productToevoegen.php">Add Product</a></li>';
-                    echo '<li><a href="loguit.php">Logout</a></li>';
-                } else {
-                    echo '<li><a href="login.php">Login</a></li>';
-                }
-                ?>
+                    <li><a href="productToevoegen.php">Add Product</a></li>
+                    <li><a href="loguit.php">Logout</a></li>
             </ul>
         </div>
+        <?php
+        }else{
+            print'<div class="ml-3">
+            <a href="login.php" class="btn btn-ghost text-black">Login</a>
+            </div>';
+        }
+        ?>
     </div>
 </div>
