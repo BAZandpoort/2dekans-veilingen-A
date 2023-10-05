@@ -3,6 +3,18 @@ include "./connect.php";
 include "./functions/userFunctions.php";
 ?>
 
+.dropdown-taal{
+    position: relative;
+}
+
+.dropdown-content-taal{
+    position: absolute;
+    margin-top: 10px;
+    background-color: white;
+    border: solid thin #aaa;
+    padding: 10px;
+}
+
 <div class="navbar bg-[#F1FAEE]">
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a>
@@ -14,6 +26,15 @@ include "./functions/userFunctions.php";
             </ul>
         </details>
         <input type="text" placeholder="Search" class="input input-bordered bg-transparent md:w-auto" />
+    </div>
+    //dit word de taal keuze
+    <div class="dropdown-taal">
+        <a href="#"> Language</a>
+        <div class="dropdown-content-taal hide">
+            <div><a href="#"> English</a></div>
+            <div><a href="#"> Nederlands</a></div>
+            <div><a href="#"> Français</a></div>
+        </div>
     </div>
     <div class="navbar-end">
         <div class="dropdown dropdown-end">
@@ -66,3 +87,17 @@ include "./functions/userFunctions.php";
         ?>
     </div>
 </div>
+
+<script>
+    var dropdowns = document.querySelectorAll(".dropdown-taal");
+
+    for(var i = 0; i < dropdowns.length; i++){
+        dropdowns[i].addEventListener('click',function(e){
+
+            for(var x = 0; x < dropdowns.length; x++){
+            dropdowns[x].querySelector(".dropdown-content-taal").classList.add("hide");
+            }
+            e.currentTarget.querySelector(".dropdown-content-taal").classList.toggle("hide");
+        });
+        }
+</script>
