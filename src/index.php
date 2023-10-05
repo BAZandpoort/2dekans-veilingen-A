@@ -12,7 +12,7 @@ session_start();
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
+<body class="h-screen bg-[#F1FAEE]">
 <?php
 include "components/navbar.php";
 ?>

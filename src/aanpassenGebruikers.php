@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="bg-[#1D3557]" lang="en">
+<html lang="en" class="bg-[#F1FAEE]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,11 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 </head>
-<body>
-
 
 <?php
 include "connect.php";
 include "functions/userFunctions.php";
 session_start();
-include "components/navbar.php";
 
 
 if(!isset($_SESSION["login"])){
@@ -22,14 +19,24 @@ if(!isset($_SESSION["login"])){
 }
 
 if (isset($_POST["wijzigen"])) {
-    $gebruikerid = $_POST["gebruikerid"];
+    $gebruikerid = $_SESSION["login"];
     $email = $_POST["email"];
     $voornaam = $_POST["voornaam"];
     $naam = $_POST["naam"];
     $wachtwoord = $_POST["wachtwoord"];
-    $profielfoto = $_POST["profielfoto"];
-    $beschrijving = $_POST["beschrijving"];
-    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving)){
+    $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/2dekans-veilingen-A/public/img/";
+    $file_name = $_FILES['file']['name'];
+    $file_tmp = $_FILES['file']['tmp_name'];
+    if (filesize($file_name) < 0) {
+      echo "Error";
+    }
+    if ((empty($_POST['file']))) {
+      if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
+        echo "Error, kon de foto niet verplaatsen.";
+      };
+    }
+    $beschrijving = $_POST["beschrijving"]; 
+    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving)){
         header('location: index.php');
     }else{
         print $mysqli->error;
@@ -38,68 +45,54 @@ if (isset($_POST["wijzigen"])) {
 
 }
     foreach(getUser($mysqli,1) as $row){
-    echo '
-    <div class=" flex flex-col min-h-screen justify-center items-center">
-    <form method="post" action="aanpassenGebruikers.php">
-    <div class= "flex flex-col gap-2">
-        <tr><td><input type="hidden" name="gebruikerid" value="' . $row["gebruikerid"] . '"></td></tr>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">E-mail</span>
-        </label>
-        <input type="text" name="email" value="' . $row["email"] . '" class="input input-bordered w-full max-w-md">
+        print'<body>
+        <div>
+          <div class="flex justify-start items-start">
+            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
+          </div>
+          <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php" enctype="multipart/form-data">
+            <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
+              <h2 class="text-black text-2xl mb-4">Update information</h2>
+              <div class="flex flex-col gap-2">  
+              <div class="flex flex-row gap-2"> 
+                  <div class="flex flex-col w-full"> 
+                  <label class="label text-black">Email</label>
+                  <input type="email" name="email" value="' . $row["email"] . '"  class="input input-bordered w-full max-w-md text-black bg-white" />   
+                  </div>
+                </div>
+              <div class="flex flex-row gap-2"> 
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Voornaam</label>
+                    <input type="text" name="voornaam" value="' . $row["voornaam"] . '" class="input input-bordered w-full max-w-md text-black bg-white" />
+                  </div>
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Naam</label>
+                    <input type="text" name="naam" value="' . $row["naam"] . '" class="input input-bordered w-full max-w-md text-black bg-white" />
+                  </div>
+                </div>
+                <div class="flex flex-row gap-2"> 
+                    <div class="flex flex-col w-full"> 
+                        <label class="label text-black">Wachtwoord</label>
+                        <input type="password" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md text-black bg-white" />
+                    </div>
+                </div>
+                <div class="flex flex-row gap-2">
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Beschrijving</label>
+                    <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving">'.$row["beschrijving"].'</textarea>
+                  </div>
+                </div>
+                <div class="flex flex-row gap-2">
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">Profielfoto</label>
+                    <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" />
+                  </div>
+                </div>
+                <input type="submit" value="wijzigen" name="wijzigen"  class="btn btn-ghost text-black hover:text-white hover:bg-black">  
+            </div>
         </div>
-
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Voornaam</span>
-        </label>
-       <input type="text" name="voornaam" value="' . $row["voornaam"] . '" class="input input-bordered w-full max-w-md">
-        </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Naam</span>
-        </label>
-       <input type="text" name="naam" value="' . $row["naam"] . '" class="input input-bordered w-full max-w-md">
-        </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Wachtwoord</span>
-        </label>
-       <input type="password" name="wachtwoord" class="input input-bordered w-full max-w-md">
-       </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Profielfoto</span>
-        </label>
-        <input type="file" name="profielfoto" class="file-input file-input-ghost w-full max-w-md bg-white">
-        </div>
-
-        <div class="form-control w-full max-w-xs">
-        <label class="label">
-         <span class="label-text text-white">Beschrijving</span>
-        </label>
-        <textarea class="textarea textarea-bordered h-24 w-full max-w-md" name="beschrijving" value="">'.$row["beschrijving"].'</textarea>
-        </div>
-
-
-         <input type="submit" value="wijzigen" name="wijzigen"  class="btn text-white">  
-
-    </div>
     </form>
-
-    <div class="flex-col min-h-screen justify-center items-center ">
-    <a href="index.php" class="text-white">Annuleren</a>
-    </div>
-</div>
-';
+</body>';
 }
 ?>
-
-</body>
 </html>
