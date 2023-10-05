@@ -24,9 +24,19 @@ if (isset($_POST["wijzigen"])) {
     $voornaam = $_POST["voornaam"];
     $naam = $_POST["naam"];
     $wachtwoord = $_POST["wachtwoord"];
-    $profielfoto = $_POST["profielfoto"];
+    $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/2dekans-veilingen-A/public/img/";
+    $file_name = $_FILES['file']['name'];
+    $file_tmp = $_FILES['file']['tmp_name'];
+    if (filesize($file_name) < 0) {
+      echo "Error";
+    }
+    if ((empty($_POST['file']))) {
+      if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
+        echo "Error, kon de foto niet verplaatsen.";
+      };
+    }
     $beschrijving = $_POST["beschrijving"]; 
-    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $profielfoto, $beschrijving)){
+    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving)){
         header('location: index.php');
     }else{
         print $mysqli->error;
@@ -40,7 +50,7 @@ if (isset($_POST["wijzigen"])) {
           <div class="flex justify-start items-start">
             <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
           </div>
-          <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php">
+          <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php" enctype="multipart/form-data">
             <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
               <h2 class="text-black text-2xl mb-4">Update information</h2>
               <div class="flex flex-col gap-2">  
@@ -75,7 +85,7 @@ if (isset($_POST["wijzigen"])) {
                 <div class="flex flex-row gap-2">
                   <div class="flex flex-col w-full"> 
                     <label class="label text-black">Profielfoto</label>
-                    <input type="file" name="profielfoto" class="file-input file-input-bordered bg-white text-black" />
+                    <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" />
                   </div>
                 </div>
                 <input type="submit" value="wijzigen" name="wijzigen"  class="btn btn-ghost text-black hover:text-white hover:bg-black">  
