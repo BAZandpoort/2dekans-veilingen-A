@@ -1,6 +1,7 @@
 <?php
 
-$taal = [
+$lang = [
+    //is hoofdletter gevoelig
     'Add Product'=>'Producten toevoegen',
     'Logout'=>'uitloggen',
     'Login'=>'inloggen',
@@ -11,6 +12,13 @@ $taal = [
     'Profile'=>'Profiel',
     'Password'=>'Wachtwoord',
     'Email'=>'Email',
-    "I don't have an account"=>"Ik heb geen account",
-    
+    "I don't have an account"=>'Ik heb nog geen account',
+    '2nd chance auctions'=>'2dekans veilingen',
+    'Add Products'=>'ProductenToevoegen',
+    'Product'=>'Product',
+    'Minimum price'=>'Minimale prijs',
+    'Description'=>'Beschrijving',
+    'Category'=>'Categorie'
 ];
+
+?>

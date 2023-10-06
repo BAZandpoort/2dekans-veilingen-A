@@ -1,42 +1,37 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
+require 'taal.php';
+
 ?>
+<style type=”text/css”>
 
-.dropdown-taal{
-    position: relative;
-}
+</style>
 
-.dropdown-content-taal{
-    position: absolute;
-    margin-top: 10px;
-    background-color: white;
-    border: solid thin #aaa;
-    padding: 10px;
-}
 
 <div class="navbar bg-[#F1FAEE]">
     <div class="navbar-start">
-        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a>
+        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2nd chance auctions</a>
     </div>
     <div class="navbar-center">
         <details class="dropdown mb-0">
-            <summary class="m-1 btn btn-ghost text-black">Categorieën</summary>
+            <summary class="m-1 btn btn-ghost text-black">Categories</summary>
             <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">
             </ul>
         </details>
         <input type="text" placeholder="Search" class="input input-bordered bg-transparent md:w-auto" />
-    </div>
-    //dit word de taal keuze
-    <div class="dropdown-taal">
-        <a href="#"> Language</a>
-        <div class="dropdown-content-taal hide">
-            <div><a href="#"> English</a></div>
-            <div><a href="#"> Nederlands</a></div>
-            <div><a href="#"> Français</a></div>
-        </div>
+        
     </div>
     <div class="navbar-end">
+        
+        <details class="dropdown">
+    <summary class="m-1 btn btn-ghost text-black">Language</summary>
+    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
+        <li><a href="index.php?lang=en">English</a></li>
+        <li><a href="index.php?lang=nl">Nederlands</a></li>
+        <li><a href="index.php?lang=fr">Français</a></li>
+    </ul>
+    </details>
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle">
                 <div class="indicator">
@@ -88,16 +83,3 @@ include "./functions/userFunctions.php";
     </div>
 </div>
 
-<script>
-    var dropdowns = document.querySelectorAll(".dropdown-taal");
-
-    for(var i = 0; i < dropdowns.length; i++){
-        dropdowns[i].addEventListener('click',function(e){
-
-            for(var x = 0; x < dropdowns.length; x++){
-            dropdowns[x].querySelector(".dropdown-content-taal").classList.add("hide");
-            }
-            e.currentTarget.querySelector(".dropdown-content-taal").classList.toggle("hide");
-        });
-        }
-</script>

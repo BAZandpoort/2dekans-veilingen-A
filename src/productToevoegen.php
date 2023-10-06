@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Producten toevoegen</title>
+  <title>Add Products</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -46,7 +46,7 @@
 <body class="h-screen bg-[#F1FAEE]">
   <div>
     <div class="flex justify-start items-start">
-      <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
+      <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2nd chance auctions</a> 
     </div>
     <form class="form-control h-full flex items-center justify-center" action="productToevoegen.php" method="post" enctype="multipart/form-data">
       <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
@@ -58,7 +58,7 @@
               <input type="text" name="naam" placeholder="Product" class="input input-bordered w-full max-w-md text-black bg-white" required />
             </div>
             <div class="flex flex-col w-full"> 
-              <label class="label text-black">Minimale prijs</label>
+              <label class="label text-black">Minimum price</label>
               <input type="text" name="prijs" placeholder="Minimale prijs" class="input input-bordered w-full max-w-md text-black bg-white" required />
             </div>
           </div>
