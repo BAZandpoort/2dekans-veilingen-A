@@ -1,6 +1,5 @@
 <?php
-include "connect.php";
-session_start();
+include "components/navbar.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,9 +11,6 @@ session_start();
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-<?php
-include "components/navbar.php";
-?>
+<body class="h-screen bg-[#F1FAEE]">
 </body>
 </html>

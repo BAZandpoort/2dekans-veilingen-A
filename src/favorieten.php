@@ -1,9 +1,6 @@
 <?php
-    include "connect.php";
-    include "functions/userFunctions.php";
     include "functions/buyerFunctions.php";
     include "components/navbar.php";
-    session_start();
 
     if(!(isset($_SESSION['login']))) {
         header("Location: index.php");
