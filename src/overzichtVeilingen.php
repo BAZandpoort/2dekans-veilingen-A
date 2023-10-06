@@ -29,10 +29,13 @@
           '.$data["naam"].'
         </h2>
        <p class="text-black">'.$data["beschrijving"].'</p>
-        <div class="card-actions justify-end">
-          <div class="badge badge-outline text-black">'.$data["categorie"].'</div> 
-          <div class="badge badge-outline text-black"> € '.$data["prijs"].'</div>
-          <span class="countdown font-mono text-2xl text-black">
+        <div class="card-actions justify-end">';
+        if (empty($data["categorie"])) {
+         echo ' <div class="badge badge-outline text-black">none</div> ';
+        } else {
+         echo '<div class="badge badge-outline text-black"> € '.$data["prijs"].'</div>';
+        }
+         echo ' <span class="countdown font-mono text-2xl text-black">
             <span id="hours" style="--value:00;"></span>:
             <span id="minutes" style="--value:00;"></span>:
             <span id="seconds" style="--value:00;"></span>
@@ -42,9 +45,8 @@
         </div>
       </div>
     </div>';
-    $tijd = getTimeDifference($data["eindtijd"]);
-      }
-    }
+    $tijd = $data["eindtijd"];
+  
       ?>
       <script defer>
           var countDownDate = <?php echo strtotime($tijd) ?> * 1000;
@@ -68,5 +70,9 @@
     
       }, 1000);
     </script>
+    <?php
+        }
+      }
+    ?>
 </body>
 </html>
