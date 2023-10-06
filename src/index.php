@@ -12,5 +12,6 @@ include "components/navbar.php";
 </head>
 
 <body class="h-screen bg-[#F1FAEE]">
+  
 </body>
 </html>
