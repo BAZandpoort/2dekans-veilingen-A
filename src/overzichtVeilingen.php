@@ -6,27 +6,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
     <title>title</title>
 </head>
-<script defer>
-  var countDownDate = <?php echo strtotime($endtime) ?> * 1000;
-  var now = <?php print time() ?> * 1000;
-
-  var x = setInterval(() => {
-
-    now = now + 1000;
-
-    var distance = countDownDate - now;
-
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("hours").style = "--value:" + hours + ";"
-    document.getElementById("minutes").style = "--value:" + minutes + ";"
-    document.getElementById("seconds").style = "--value:" + seconds + ";"
-
-  }, 1000);
-</script>
 <body>
     <?php
     include "components/navbar.php";
@@ -59,6 +38,7 @@
           <span id="minutes" style="--value:00;"></span>:
           <span id="seconds" style="--value:00;"></span>
           </span>
+          <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
           <button class="btn btn-primary">Bid</button>
         </div>
       </div>
