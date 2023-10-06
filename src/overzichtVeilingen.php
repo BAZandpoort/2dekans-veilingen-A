@@ -22,7 +22,7 @@
          echo' <figure><img src="brokenImageIcon.png" width="240" hight="320" /></figure>';  
         } else {
         echo'
-        <figure><img src="'.$data["foto"].'" width="240" hight="320" /></figure>';
+        <figure><img src="../public/img/'.$data["foto"].'" width="240" hight="320" /></figure>';
         }
         echo'
         <div class="card-body">
