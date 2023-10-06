@@ -14,9 +14,6 @@
   include "functions/userFunctions.php";
   session_start();
 
-  /* Dit weghalen! */
-  $_SESSION['login'] = 1;
-
   if (!isset($_SESSION['login'])) {
     header('location: index.php');
     return;
