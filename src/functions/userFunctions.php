@@ -75,6 +75,6 @@ function checkIfAdmin($connection,$email){
 }
 function getDataTblproducten($mysqli){
     $resultaat = $mysqli->query("SELECT * FROM tblproducten");
-    return ($resultaat); 
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }
 ?>

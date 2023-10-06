@@ -6,18 +6,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
     <title>title</title>
 </head>
-<body>
+<body class="min-h-screen bg-[#F1FAEE]">
     <?php
     include "components/navbar.php";
     include "functions/adminFunctions.php";
     include "connect.php"; 
     
 
-    $resultaat = getDataTblproducten($mysqli);
-    
-    while ($data = $resultaat -> fetch_assoc()) {     
+    if(getDataTblproducten($mysqli)){
+    foreach (getDataTblproducten($mysqli) as $data) {     
         
-      echo'<div class="card w-96 bg-base-100 shadow-xl">';
+      echo'<div class="card w-96  shadow-xl bg-white">';
       if (empty($data["foto"])) {
        echo' <figure><img src="../public/img/brokenImageIcon.png" width="240" hight="320" /></figure>';  
       } else {
@@ -26,26 +25,26 @@
       }
       echo'
       <div class="card-body">
-        <h2 class="card-title">
+        <h2 class="card-title text-black">
           '.$data["naam"].'
         </h2>
-        <p>'.$data["beschrijving"].'</p>
+       <p class="text-black">'.$data["beschrijving"].'</p>
         <div class="card-actions justify-end">
-          <div class="badge badge-outline">'.$data["categorie"].'</div> 
-          <div class="badge badge-outline"> € '.$data["prijs"].'</div>
-          <span class="countdown font-mono text-2xl">
-          <span id="hours" style="--value:00;"></span>:
-          <span id="minutes" style="--value:00;"></span>:
-          <span id="seconds" style="--value:00;"></span>
+          <div class="badge badge-outline text-black">'.$data["categorie"].'</div> 
+          <div class="badge badge-outline text-black"> € '.$data["prijs"].'</div>
+          <span class="countdown font-mono text-2xl text-black">
+            <span id="hours" style="--value:00;"></span>:
+            <span id="minutes" style="--value:00;"></span>:
+            <span id="seconds" style="--value:00;"></span>
           </span>
           <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
-          <button class="btn btn-primary">Bid</button>
+          <button class="btn btn-outline text-black bg-white border-white hover:text-white hover:bg-black ">Bid</button>
         </div>
       </div>
     </div>';
     $tijd = getTimeDifference($data["eindtijd"]);
       }
-
+    }
       ?>
       <script defer>
           var countDownDate = <?php echo strtotime($tijd) ?> * 1000;
@@ -69,7 +68,5 @@
     
       }, 1000);
     </script>
-
-
 </body>
 </html>
