@@ -15,10 +15,10 @@
   session_start();
 
 
-  if (!isset($_SESSION['login'])) {
+  /*if (!isset($_SESSION['login'])) {
     header('location: index.php');
     return;
-  };
+  };*/
 
   if (isset($_POST['submit'])) {
     $naam = $_POST['naam'];
