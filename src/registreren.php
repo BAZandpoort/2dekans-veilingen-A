@@ -15,7 +15,7 @@
 <body>
 <div class="flex justify-start items-start">
     <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
-    <div class="card w-full max-w-xl h-full shadow-2xl bg-white ml-auto">
+    <div class="card w-full max-w-xl h-screen shadow-2xl bg-white ml-auto">
     <form class="card-body" method="post" action="registreren.php" enctype="multipart/form-data">
         <div class="form-control">
             <h2 class="text-black text-2xl">Registreer</h2>
