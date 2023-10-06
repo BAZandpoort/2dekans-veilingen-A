@@ -73,4 +73,9 @@ function checkIfAdmin($connection,$email){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '".$email."'");
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['"admin"'];
 }
+
+function getGekozenCategorie($connection, $categorietype) {
+    return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
+}
+
 ?>

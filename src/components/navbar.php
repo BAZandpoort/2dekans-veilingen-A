@@ -12,6 +12,13 @@ session_start();
         <details class="dropdown mb-0">
             <summary class="m-1 btn btn-ghost text-black">Categorieën</summary>
             <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">
+                <?php
+                    foreach(getAllCategories($mysqli) as $row) {
+                        echo '
+                          <li><a href="producten.php?gekozenCategorie='.$row['categorienaam'].'" class="link link-neutral" name="categorieID">'.$row['categorienaam'].'</a></li>
+                        ';
+                    };
+                ?>
             </ul>
         </details>
         <input type="text" placeholder="Search" class="input input-bordered bg-transparent md:w-auto" />
