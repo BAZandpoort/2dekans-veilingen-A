@@ -24,10 +24,14 @@
     $prijs = $_POST['prijs'];
     $beschrijving = $_POST['beschrijving'];
     $categorie = $_POST['categorie'];
-    $entime = date('Y-m-d H:i:s', strtotime('+12 hours'));
     $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/2dekans-veilingen-A/public/img/";
     $file_name = $_FILES['file']['name'];
     $file_tmp = $_FILES['file']['tmp_name'];
+    $timer = $_POST['duur-timer'];
+    $timer += 2;
+    $current_timestamp = date("Y-m-d H:i:s");
+    $eindtijd = date('Y-m-d H:i:s',strtotime('+'.$timer.' hour',strtotime($current_timestamp)));
+
     if (filesize($file_name) < 0) {
       echo "Error";
     }
@@ -38,7 +42,7 @@
     }
 
 
-    if (addProduct($mysqli, $naam, $beschrijving, $prijs, $categorie, $file_name)) {
+    if (addProduct($mysqli, $naam, $beschrijving, $prijs, $categorie, $file_name, $eindtijd)) {
       header('location: index.php');
     }
   }
@@ -60,6 +64,21 @@
             <div class="flex flex-col w-full"> 
               <label class="label text-black">Minimale prijs</label>
               <input type="number" name="prijs" placeholder="Minimale prijs" class="input input-bordered w-full max-w-md text-black bg-white" required />
+            </div>
+          </div>
+          <div class="flex flex-row gap-2">
+            <div class="flex flex-col w-full"> 
+              <label class="label text-black">Hoelang moet je veiling duren?</label>
+              <select class='select select-bordered bg-white text-black' name='duur-timer' required >
+                  <option value="6">6 uur</option>
+                  <option value="12">12 uur</option>
+                  <option value="18">18 uur</option>
+                  <option value="24">24 uur</option>
+                  <option value="30">30 uur</option>
+                  <option value="36">36 uur</option>
+                  <option value="42">42 uur</option>
+                  <option value="48">48 uur</option>
+              </select>
             </div>
           </div>
           <div class="flex flex-row gap-2">
