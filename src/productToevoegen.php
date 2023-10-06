@@ -20,6 +20,7 @@
   };
 
   if (isset($_POST['submit'])) {
+    $userid = $_SESSION["login"];
     $naam = $_POST['naam'];
     $prijs = $_POST['prijs'];
     $beschrijving = $_POST['beschrijving'];
@@ -28,7 +29,6 @@
     $file_name = $_FILES['file']['name'];
     $file_tmp = $_FILES['file']['tmp_name'];
     $timer = $_POST['duur-timer'];
-    $timer += 2;
     $current_timestamp = date("Y-m-d H:i:s");
     $eindtijd = date('Y-m-d H:i:s',strtotime('+'.$timer.' hour',strtotime($current_timestamp)));
 
@@ -42,7 +42,7 @@
     }
 
 
-    if (addProduct($mysqli, $naam, $beschrijving, $prijs, $categorie, $file_name, $eindtijd)) {
+    if (addProduct($mysqli, $userid, $naam, $beschrijving, $prijs, $categorie, $file_name, $eindtijd)) {
       header('location: index.php');
     }
   }
