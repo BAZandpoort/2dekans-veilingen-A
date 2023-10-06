@@ -1,6 +1,7 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
+session_start();
 ?>
 
 <div class="navbar bg-[#F1FAEE]">
@@ -28,7 +29,9 @@ include "./functions/userFunctions.php";
                 <div class="card-body">
                     <span class="font-bold text-lg">8 Items</span>
                     <div class="card-actions">
+                        <a href="favorieten.php">
                         <button class="btn btn-primary btn-block">View Favorites</button>
+                        </a>
                     </div>
                 </div>
             </div>
