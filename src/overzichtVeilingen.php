@@ -17,8 +17,14 @@
     
     while ($data = $resultaat -> fetch_assoc()) {
         $tijd = getTimeDifference($data["eindtijd"]);
-        echo'<div class="card w-96 bg-base-100 shadow-xl">
-        <figure><img src="'.$data["foto"].'" alt="product heeft geen foto" width="240" hight="320" /></figure>
+        echo'<div class="card w-96 bg-base-100 shadow-xl">';
+        if ($data["foto"] == "") {
+         echo' <figure><img src="brokenImageIcon.png" width="240" hight="320" /></figure>';  
+        } else {
+        echo'
+        <figure><img src="'.$data["foto"].'" width="240" hight="320" /></figure>';
+        }
+        echo'
         <div class="card-body">
           <h2 class="card-title">
             '.$data["naam"].'
