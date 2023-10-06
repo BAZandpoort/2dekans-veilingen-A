@@ -77,6 +77,11 @@ session_start();
                         </a>
                     </li>
                     <li><a>Settings</a></li>
+                    <li>
+                        <a href="aankoopgeschiedenis.php" class="justify-between">
+                            Purchase History
+                        </a>
+                    </li>
                     <li><a href="productToevoegen.php">Add Product</a></li>
                     <li><a href="loguit.php">Logout</a></li>
                 </ul>

@@ -19,4 +19,14 @@ function deleteProductFromFavorites($connection, $productid, $gebruikerid) {
     $resultaat = $connection->query("DELETE FROM tblfavorieten WHERE productid = '".$productid."' AND gebruikerid = '".$gebruikerid."'");
     return $resultaat;
 }
-?>
+
+function getAllPurchases($connection, $userid) {
+    $resultaat = $connection->query("SELECT tblproducten.foto, tblproducten.naam, MAX(tblboden.bod) AS highest_bid, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum
+                                     FROM tblfacturen
+                                     INNER JOIN tblproducten ON (tblfacturen.productid = tblproducten.productid)
+                                     INNER JOIN tblboden ON (tblboden.productid = tblfacturen.productid)
+                                     INNER JOIN tblgebruikers ON (tblproducten.verkoperid = tblgebruikers.gebruikerid)
+                                     WHERE tblfacturen.koperid = ".$userid."");
+    return $resultaat;
+}
+?> 
