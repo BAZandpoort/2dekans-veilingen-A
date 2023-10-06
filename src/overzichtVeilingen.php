@@ -8,9 +8,9 @@
 </head>
 <body>
     <?php
-    include "connect.php";
+    include "components/navbar.php";
     include "functions/adminFunctions.php";
-    session_start();
+    
 
     $sql = "SELECT* FROM tblproducten"; 
     $resultaat = $mysqli ->query($sql); 
