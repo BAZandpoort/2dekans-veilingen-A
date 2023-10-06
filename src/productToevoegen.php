@@ -64,7 +64,7 @@
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black">Beschrijving</label>
+              <label class="label text-black">Description</label>
               <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving" placeholder="Beschrijving" required></textarea>
             </div>
           </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black">Categorie</label>
+              <label class="label text-black">Category</label>
               <?php
                 if (getAllCategories($mysqli)) {
                   print "<select class='select select-bordered bg-white text-black' name='categorie' required >

@@ -18,7 +18,16 @@ $lang = [
     'Product'=>'Product',
     'Minimum price'=>'Minimale prijs',
     'Description'=>'Beschrijving',
-    'Category'=>'Categorie'
+    'Category'=>'Categorie',
+    'First name'=>'Voornaam',
+    'Register'=>'Registreer',
+    'Last name'=>'Achternaam',
+    'Description'=>'Beschrijving',
+    'Profile picture'=>'Profielfoto',
+    'I have an account'=>'ik heb een account',
+    'Highest offer'=>'Hoogste bod',
+    'Time left'=>'Tijd over',
+    'Document'=>'Document',
 ];
 
 ?>

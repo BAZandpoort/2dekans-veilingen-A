@@ -24,8 +24,8 @@
             <thead>
                 <tr>
                     <th>Product</th>
-                    <th class="text-center">Hoogste bod</th>
-                    <th class="text-center">Tijd over</th>
+                    <th class="text-center">Highest offer</th>
+                    <th class="text-center">Time left</th>
                     <th></th>
                     <th></th>
                 </tr>
