@@ -10,7 +10,8 @@ function isPasswordCorrect($connection,$password,$email){
 }
 
 function getAllCategories($connection){
-    return($connection->query("SELECT * FROM tblcategorieen"));
+    $resultaat =$connection->query("SELECT * FROM tblcategorieen");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
 
 function registerUser($connection, $fname, $lname, $email, $password, $profile_picture, $desc) {

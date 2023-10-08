@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
 }else{
 
 
-  $productID = $_GET['gekozenProduct'];
+  $productID = 1; //$_GET['gekozenProduct'];
   foreach(getProduct($mysqli, $productID) as $row) {
 
 echo '<div>
@@ -84,15 +84,28 @@ echo '<div>
             <div class="flex flex-col w-full"> 
               <label class="label text-black" >Categorie</label>';
                 $productCategorie = getProductCategorie($mysqli,$productID);
-                if (getAllCategories($mysqli)) {
+                foreach(getAllCategories($mysqli) as $row1){
+                print'<select class="select select-bordered bg-white text-black" name="categorie" required >';
+                  if($row["categorie"] == false){
+                    print' <option selected disabled>Kies een categorie</option>
+                    <option></option>';
+                  }else if($row["categorie"] == $row1["categorienaam"]){
+                    print' <option disabled>Kies een categorie</option>
+                    <option selected value="'.$row1["categorienaam"].'">'.$row1["categorienaam"].'</option>';
+                  }
+                
+                }
+               
+               
+                /*if (getAllCategories($mysqli)) {
                   print "<select class='select select-bordered bg-white text-black' name='categorie' required >
-                  <option disabled selected>Kies een categorie</option>";
+                  <option disabled>Kies een categorie</option>";
 
                   foreach (getAllCategories($mysqli) as $row1) {
-                    print " <option "; echo ($row["categorie"] == $row1["categorienaam"]) ? "selected" : ""; 
+                    print " <option "; echo ($row["categorie"] == false) ? "selected" : ""; 
                     echo"value= " . $row1["categorienaam"] . " >" . $row1["categorienaam"] . " </option>";
                   }
-                }
+                }*/
              }
           }
               ?>
