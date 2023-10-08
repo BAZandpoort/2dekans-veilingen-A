@@ -43,7 +43,7 @@ session_start();
                         <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content bg-black w-52 shadow">
                             <div class="card-body text-white">
                                 <span class="font-bold text-lg">favorieten</span>
-                                <span class="text-md">Voeg favorieten toe tot je lijst</span>
+                                <span class="text-md">Voeg favorieten toe tot je lijst om deze te bekijken</span>
                             </div>
                         </div>
                     </div>
