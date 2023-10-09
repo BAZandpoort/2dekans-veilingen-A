@@ -26,7 +26,7 @@
        <tr> <td>beschrijving: ' . $data["beschrijving"] . '</td> </tr>
         <tr> <td>categorie: ' . $data["categorie"] . '</td> </tr>
        <tr> <td>resterende tijd: ' . $tijd . '</td></tr>
-        <tr><td><a href="bod.php?bieden=' . $data["productid"] . '" class="btn">Bid</a></td></tr>
+        <tr><td><a href="bod.php?product=' . $data["productid"] . '" class="btn">Bid</a></td></tr>
     </table><br>';
     }
     ?>
