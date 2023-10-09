@@ -78,4 +78,9 @@ function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
 
+function getPrice($connection,$prijs){
+    $resultaat = $connection->query("SELECT * FROM tblproducten where productid= '".$_SESSION["productid"]."'");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
+}
+
 ?>
