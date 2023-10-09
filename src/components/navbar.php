@@ -13,7 +13,7 @@ require 'lang.php';
             <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">
             </ul>
         </details>
-        <input type="text" placeholder="Search" class="input input-bordered bg-transparent md:w-auto" />
+        <input type="text" placeholder=<?= __('Search')?> class="input input-bordered bg-transparent md:w-auto" />
     </div>
     <div class="navbar-end">
     <div class="dropdown">
@@ -34,9 +34,9 @@ require 'lang.php';
             </label>
             <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                 <div class="card-body">
-                    <span class="font-bold text-lg"><?= __('8 Items') ?></span>
+                    <span class="font-bold text-lg">8<?= __('Items') ?></span>
                     <div class="card-actions">
-                        <button class="btn btn-primary btn-block">View Favorites</button>
+                        <button class="btn btn-primary btn-block"><?= __('View Favorites')?></button>
                     </div>
                 </div>
             </div>
@@ -59,17 +59,17 @@ require 'lang.php';
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
                 <li>
                     <a href="aanpassenGebruikers.php" class="justify-between">
-                        <?= ('Profile')?>
+                        <?= __('Profile')?>
                     </a>
                 </li>
-                <li><a>Settings</a></li>
-                    <li><a href="productToevoegen.php">Add Product</a></li>
-                    <li><a href="loguit.php">Logout</a></li>
+                <li><a><?= __('Settings')?></a></li>
+                    <li><a href="productToevoegen.php"><?= __('Add Product')?></a></li>
+                    <li><a href="loguit.php"><?= __('Logout')?></a></li>
             </ul>
         </div>
         <?php
         }else{
-            print'<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
+            print'<a href="login.php" class="btn btn-ghost text-black ml-2">'. __('Login').'</a>';
         }
         ?>
     </div>

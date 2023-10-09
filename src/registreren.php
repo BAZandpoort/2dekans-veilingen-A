@@ -27,7 +27,7 @@
             <label class="label">
                     <span class="label-text text-black"><?= __('Last name')?></span>
                 </label>
-                <input type="text"  id="achternaam" name="achternaam" placeholder=<?= __('First name')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
+                <input type="text"  id="achternaam" name="achternaam" placeholder=<?= __('Last name')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
                     <span class="label-text text-black"><?= __('Email')?></span>
                 </label>

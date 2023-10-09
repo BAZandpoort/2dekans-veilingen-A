@@ -1,3 +1,7 @@
+<?php
+session_start();
+require 'lang.php';
+?>
 <!DOCTYPE html>
 <html lang="en" class="bg-[#F1FAEE]">
 <head>
@@ -5,14 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
-    <title>Document</title>
+    <title><?= __('Change user')?></title>
 </head>
 
 <?php
 include "connect.php";
 include "functions/userFunctions.php";
-session_start();
-
 
 if(!isset($_SESSION["login"])){
     header('location: index.php');
@@ -48,7 +50,7 @@ if (isset($_POST["wijzigen"])) {
         print'<body>
         <div>
           <div class="flex justify-start items-start">
-            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
+            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"></a> 
           </div>
           <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php" enctype="multipart/form-data">
             <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
