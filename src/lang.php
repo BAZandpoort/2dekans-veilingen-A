@@ -4,8 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require get_talen_file();
-function get_talen_file()
+require get_languages_file();
+function get_languages_file()
 {
 	$_SESSION['lang'] = $_SESSION['lang'] ?? 'en';
 	$_SESSION['lang'] = $_GET['lang'] ?? $_SESSION['lang'];

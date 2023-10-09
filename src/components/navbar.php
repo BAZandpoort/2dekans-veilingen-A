@@ -1,37 +1,29 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
-require 'taal.php';
-
+require 'lang.php';
 ?>
-<style type=”text/css”>
-
-</style>
-
-
 <div class="navbar bg-[#F1FAEE]">
     <div class="navbar-start">
-        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2nd chance auctions</a>
+        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= __('2nd chance auctions')?></a>
     </div>
     <div class="navbar-center">
         <details class="dropdown mb-0">
-            <summary class="m-1 btn btn-ghost text-black">Categories</summary>
+            <summary class="m-1 btn btn-ghost text-black"><?= __('Categories')?></summary>
             <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">
             </ul>
         </details>
         <input type="text" placeholder="Search" class="input input-bordered bg-transparent md:w-auto" />
-        
     </div>
     <div class="navbar-end">
-        
-        <details class="dropdown">
-    <summary class="m-1 btn btn-ghost text-black">Language</summary>
-    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
-        <li><a href="index.php?lang=en">English</a></li>
-        <li><a href="index.php?lang=nl">Nederlands</a></li>
-        <li><a href="index.php?lang=fr">Français</a></li>
-    </ul>
-    </details>
+    <div class="dropdown">
+  <label tabindex="0" class="btn m-1"><?= __('Languages')?></label>
+  <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><a href="index.php?lang=nl">Nederlands</a></li>
+    <li><a href="index.php?lang=en">English</a></li>
+    <li><a href="index.php?lang=fr">Français</a></li>
+  </ul>
+</div>
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle">
                 <div class="indicator">
@@ -42,7 +34,7 @@ require 'taal.php';
             </label>
             <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
                 <div class="card-body">
-                    <span class="font-bold text-lg">8 Items</span>
+                    <span class="font-bold text-lg"><?= __('8 Items') ?></span>
                     <div class="card-actions">
                         <button class="btn btn-primary btn-block">View Favorites</button>
                     </div>
@@ -67,7 +59,7 @@ require 'taal.php';
             <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
                 <li>
                     <a href="aanpassenGebruikers.php" class="justify-between">
-                        Profile
+                        <?= ('Profile')?>
                     </a>
                 </li>
                 <li><a>Settings</a></li>

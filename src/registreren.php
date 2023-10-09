@@ -2,6 +2,7 @@
     include "connect.php";
     include "functions/userFunctions.php";
     include "functions/buyerFunctions.php";
+    require 'lang.php';
 ?>
 <!DOCTYPE html>
 <html lang="en" class="bg-[#F1FAEE]">
@@ -10,43 +11,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title><?= __('Register')?></title>
 </head>
 <body>
 <div class="flex justify-start items-start">
-    <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
+    <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= __('2nd chance auctions')?></a> 
     <div class="card w-full max-w-xl h-full shadow-2xl bg-white ml-auto">
     <form class="card-body" method="post" action="registreren.php" enctype="multipart/form-data">
         <div class="form-control">
-            <h2 class="text-black text-2xl">Register</h2>
+            <h2 class="text-black text-2xl"><?= __('Register')?></h2>
             <label class="label">
-                <span class="label-text text-black">First name</span>
+                <span class="label-text text-black"><?= __('First name')?></span>
             </label>
-            <input type="text" id="voornaam" name="voornaam" placeholder="Voornaam" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+            <input type="text" id="voornaam" name="voornaam" placeholder=<?= __('First name')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
             <label class="label">
-                    <span class="label-text text-black">Last name</span>
+                    <span class="label-text text-black"><?= __('Last name')?></span>
                 </label>
-                <input type="text"  id="achternaam" name="achternaam" placeholder="Achternaam" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+                <input type="text"  id="achternaam" name="achternaam" placeholder=<?= __('First name')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
-                    <span class="label-text text-black">Email</span>
+                    <span class="label-text text-black"><?= __('Email')?></span>
                 </label>
-                <input type="email" id="email" name="email" placeholder="E-mailadres" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+                <input type="email" id="email" name="email" placeholder=<?= __('Email')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
-                    <span class="label-text text-black">Password</span>
+                    <span class="label-text text-black"><?= __('Password')?></span>
                 </label>
-                <input type="password" id="wachtwoord" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+                <input type="password" id="wachtwoord" name="wachtwoord" placeholder=<?= __('Password')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
-                <span class="label-text text-black">Description</span>
+                <span class="label-text text-black"><?= __('Description')?></span>
                 </label>
-                <textarea class="textarea textarea-bordered h-24 w-full max-w-md bg-white text-black" id="beschrijving" name="beschrijving" placeholder="Beschrijving"></textarea>
+                <textarea class="textarea textarea-bordered h-24 w-full max-w-md bg-white text-black" id="beschrijving" name="beschrijving" placeholder=<?= __('Description')?>></textarea>
                 <label class="label">
-                    <span class="label-text text-black">Profile picture</span>
+                    <span class="label-text text-black"><?= __('Profile Picture')?></span>
                 </label>
                 <input type="file" name="file" class="file-input file-input-bordered w-full max-w-md bg-white text-black" />
-                <input type="submit" id="submitknop" name="submitknop" value="Registreer" class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
+                <input type="submit" id="submitknop" name="submitknop" value=<?= __('Register')?> class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
             </form>
             <div class="flex justify-center mt-2">
-                <a href="login.php" class="link text-black">I have an account</a>
+                <a href="login.php" class="link text-black"><?= __('I have an account')?></a>
             </div>
         </div>
     </div>
