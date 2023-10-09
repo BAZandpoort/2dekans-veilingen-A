@@ -84,18 +84,22 @@ echo '<div>
             <div class="flex flex-col w-full"> 
               <label class="label text-black" >Categorie</label>';
                 $productCategorie = getProductCategorie($mysqli,$productID);
-                foreach(getAllCategories($mysqli) as $row1){
                 print'<select class="select select-bordered bg-white text-black" name="categorie" required >';
-                  if($row["categorie"] == false){
-                    print' <option selected disabled>Kies een categorie</option>
-                    <option></option>';
-                  }else if($row["categorie"] == $row1["categorienaam"]){
+                if($row["categorie"] == false ){
+                  print' <option selected disabled>Kies een categorie</option>';
+
+                }
+
+                foreach(getAllCategories($mysqli) as $row1){
+                  if($row["categorie"] == $row1["categorienaam"]){
                     print' <option disabled>Kies een categorie</option>
                     <option selected value="'.$row1["categorienaam"].'">'.$row1["categorienaam"].'</option>';
+                  }else{
+                    print'<option value="'.$row1["categorienaam"].'">'.$row1["categorienaam"].'</option>';
                   }
                 
                 }
-               
+                print'</select>';
                
                 /*if (getAllCategories($mysqli)) {
                   print "<select class='select select-bordered bg-white text-black' name='categorie' required >
