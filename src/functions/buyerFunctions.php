@@ -26,7 +26,13 @@ function getAllPurchases($connection, $userid) {
                                      INNER JOIN tblproducten ON (tblfacturen.productid = tblproducten.productid)
                                      INNER JOIN tblboden ON (tblboden.productid = tblfacturen.productid)
                                      INNER JOIN tblgebruikers ON (tblproducten.verkoperid = tblgebruikers.gebruikerid)
-                                     WHERE tblfacturen.koperid = ".$userid."");
-    return $resultaat;
+                                     WHERE tblfacturen.koperid = ".$userid."
+                                     HAVING MAX(tblboden.bod) IS NOT null");
+
+    if(mysqli_num_rows($resultaat) == 0) {
+        return null;
+    } else {
+        return $resultaat;
+    }
 }
 ?> 
