@@ -35,9 +35,12 @@ $lang = [
     'Search'=>'Recherche',
     'How long should your auction last'=>'Combien de temps doit durer votre enchère',
     'Favorites'=>'Favoris',
-    'Add favorites to your list to view'=>'Voeg favorieten toe aan uw lijst om te bekijken',
+    'Add favorites to your list to view'=>'Ajoutez des favoris à votre liste pour afficher',
     'hours'=>'heures',
     'Update information'=>'Mettre à jour les informations',
+    'Document'=>'Document',
+    'Highest offer'=>'Offre la plus élevée',
+    'Time left'=>'Temps restant',
 ];
 
 ?>

@@ -13,16 +13,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Document</title>
+    <title><?= __('Document')?></title>
 </head>
 <body class="min-h-screen bg-[#F1FAEE]">
     <div class="overflow-x-auto max-w-4xl mx-auto p-3">
         <table class="table bg-white shadow-lg">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th class="text-center">Highest offer</th>
-                    <th class="text-center">Time left</th>
+                    <th><?= __('Product')?></th>
+                    <th class="text-center"><?= __('Highest offer')?></th>
+                    <th class="text-center"><?= __('Time left')?></th>
                     <th></th>
                     <th></th>
                 </tr>
