@@ -32,10 +32,13 @@ require 'lang.php';
     <li><a href="index.php?lang=fr">Français</a></li>
   </ul>
 </div>
-        <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost btn-circle">
-                <div class="indicator">
-                <?php
+        <?php
+        if (isset($_SESSION["login"])) {
+        ?>
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle">
+                    <div class="indicator">
+                        <?php
                         $userid = $_SESSION["login"];
                         $favorites = getAllFavourites($mysqli, $userid)->fetch_all(MYSQLI_ASSOC);
                         $count = isset($favorites["productId"]) ? 1 : count($favorites);
@@ -51,38 +54,48 @@ require 'lang.php';
                                 <span class="text-md">Voeg favorieten toe tot je lijst om deze te bekijken</span>
                             </div>
                         </div>
+                    </div>
+                        <?php
+                        }else{
+                            print' <span class="badge badge-sm indicator-item">' . $count . '</span>'
+                        ?>              
+                                    <a href="favorieten.php">
+                                        <img href="" src="../public/img/favourite.png" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    </a>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                </div>
+                            </label>
+                        </div>
+                        <?php
+                        }
+                        ?>
+<div class="dropdown dropdown-end">
+    <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+        <div class="w-10 rounded-full">
+            <?php
+            if ($_SESSION["login"]) {
+                $userid = $_SESSION["login"];
+                $image = getProfilePicture($mysqli, $userid);
+                print '<img src="../public/img/' . $image . '"/>';
+            }
+            ?>
         </div>
-        <?php
-        if(isset($_SESSION["login"])){
-        ?>
-        <div class="dropdown dropdown-end">
-            <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-                <div class="w-10 rounded-full">
-                <?php
-                if($_SESSION["login"]){
-                    $userid = $_SESSION["login"];
-                    $image = getProfilePicture($mysqli,$userid);
-                    print'<img src="../public/img/'.$image.'"/>';
-                }
-                ?>
-                </div>
-            </label>
-            <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
-                <li>
-                    <a href="aanpassenGebruikers.php" class="justify-between">
-                        Profile
-                    </a>
-                </li>
-                <li><a>Settings</a></li>
-                    <li><a href="productToevoegen.php">Add Product</a></li>
-                    <li><a href="loguit.php">Logout</a></li>
-            </ul>
-        </div>
-        <?php
-        }else{
-            print'<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
+    </label>
+    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
+        <li>
+            <a href="aanpassenGebruikers.php" class="justify-between">
+                Profile
+            </a>
+        </li>
+        <li><a>Settings</a></li>
+        <li><a href="productToevoegen.php">Add Product</a></li>
+        <li><a href="loguit.php">Logout</a></li>
+    </ul>
+</div>
+<?php
+        } else {
+            print '<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
         }
 ?>
 </div>
 </div>
-
