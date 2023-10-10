@@ -24,6 +24,14 @@ require 'lang.php';
         <input type="text" placeholder=<?= __('Search')?> class="input input-bordered bg-transparent md:w-auto" />
     </div>
     <div class="navbar-end">
+    <div class="dropdown">
+  <label tabindex="0" class="btn btn-ghost m-1"><?= __('Languages')?></label>
+  <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black text-white rounded-box w-52">
+    <li><a href="index.php?lang=nl">Nederlands</a></li>
+    <li><a href="index.php?lang=en">English</a></li>
+    <li><a href="index.php?lang=fr">Français</a></li>
+  </ul>
+</div>
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle">
                 <div class="indicator">

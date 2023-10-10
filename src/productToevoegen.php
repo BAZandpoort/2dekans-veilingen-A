@@ -69,7 +69,7 @@
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black">Hoelang moet je veiling duren?</label>
+              <label class="label text-black"><?= __('How long should your auction last')?>?</label>
               <select class='select select-bordered bg-white text-black' name='duur-timer' required >
                   <option value="6">6 uur</option>
                   <option value="12">12 uur</option>

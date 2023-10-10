@@ -33,6 +33,7 @@ $lang = [
     'Choose a category'=>'Choisir une catégorie',
     'ADD PRODUCT'=>'AJOUTER UN PRODUIT',
     'Search'=>'Recherche',
+    'How long should your auction last'=>'Combien de temps doit durer votre enchère',
 ];
 
 ?>
