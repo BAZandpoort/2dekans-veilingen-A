@@ -1,6 +1,5 @@
 <?php
-include "connect.php";
-session_start();
+include "components/navbar.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,8 +12,5 @@ session_start();
 </head>
 
 <body class="h-screen bg-[#F1FAEE]">
-<?php
-include "components/navbar.php";
-?>
 </body>
 </html>

@@ -1,16 +1,13 @@
 <?php
-    include "connect.php";
-    include "functions/userFunctions.php";
     include "functions/buyerFunctions.php";
     include "components/navbar.php";
-    session_start();
 
     if(!(isset($_SESSION['login']))) {
         header("Location: index.php");
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-[#F1FAEE]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,9 +15,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
-<body>
+<body class="min-h-screen bg-[#F1FAEE]">
     <div class="overflow-x-auto max-w-4xl mx-auto p-3">
-        <table class="table">
+        <table class="table bg-white shadow-lg">
             <thead>
                 <tr>
                     <th>Product</th>
