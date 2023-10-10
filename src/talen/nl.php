@@ -33,6 +33,11 @@ $lang = [
     'Choose a category'=>'Kies een categorie',
     'ADD PRODUCT'=>'PRODUCT TOEVOEGEN',
     'Search'=>'Zoeken',
+    'How long should your auction last'=>'Hoelang moet je veiling duren',
+    'Favorites'=>'Favorieten',
+    'Add favorites to your list to view'=>'Voeg favorieten toe aan uw lijst om te bekijken',
+    "hours"=>'uur',
+    'Update information'=>'Update informatie',
 ];
 
 ?>

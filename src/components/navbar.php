@@ -50,8 +50,8 @@ require 'lang.php';
                         </label>
                         <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content bg-black w-52 shadow">
                             <div class="card-body text-white">
-                                <span class="font-bold text-lg">favorieten</span>
-                                <span class="text-md">Voeg favorieten toe tot je lijst om deze te bekijken</span>
+                                <span class="font-bold text-lg"><?= __('Favorites')?></span>
+                                <span class="text-md"><?= __('Add favorites to your list to view')?></span>
                             </div>
                         </div>
                     </div>
@@ -84,12 +84,12 @@ require 'lang.php';
     <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
         <li>
             <a href="aanpassenGebruikers.php" class="justify-between">
-                Profile
+            <?= __('Profile')?>
             </a>
         </li>
-        <li><a>Settings</a></li>
-        <li><a href="productToevoegen.php">Add Product</a></li>
-        <li><a href="loguit.php">Logout</a></li>
+        <li><a><?= __('Settings')?></a></li>
+        <li><a href="productToevoegen.php"><?= __('Add Product')?></a></li>
+        <li><a href="loguit.php"><?= __('Logout')?></a></li>
     </ul>
 </div>
 <?php

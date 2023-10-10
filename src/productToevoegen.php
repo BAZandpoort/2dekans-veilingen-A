@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Add Products</title>
+  <title><?= __('Add Products')?></title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -71,14 +71,14 @@
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= __('How long should your auction last')?>?</label>
               <select class='select select-bordered bg-white text-black' name='duur-timer' required >
-                  <option value="6">6 uur</option>
-                  <option value="12">12 uur</option>
-                  <option value="18">18 uur</option>
-                  <option value="24">24 uur</option>
-                  <option value="30">30 uur</option>
-                  <option value="36">36 uur</option>
-                  <option value="42">42 uur</option>
-                  <option value="48">48 uur</option>
+                  <option value="6">6 <?= __("hours")?></option>
+                  <option value="12">12 <?= __("hours")?></option>
+                  <option value="18">18 <?= __("hours")?></option>
+                  <option value="24">24 <?= __("hours")?></option>
+                  <option value="30">30 <?= __("hours")?></option>
+                  <option value="36">36 <?= __("hours")?></option>
+                  <option value="42">42 <?= __("hours")?></option>
+                  <option value="48">48 <?= __("hours")?></option>
               </select>
             </div>
           </div>

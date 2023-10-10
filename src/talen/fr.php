@@ -34,6 +34,10 @@ $lang = [
     'ADD PRODUCT'=>'AJOUTER UN PRODUIT',
     'Search'=>'Recherche',
     'How long should your auction last'=>'Combien de temps doit durer votre enchère',
+    'Favorites'=>'Favoris',
+    'Add favorites to your list to view'=>'Voeg favorieten toe aan uw lijst om te bekijken',
+    'hours'=>'heures',
+    'Update information'=>'Mettre à jour les informations',
 ];
 
 ?>
