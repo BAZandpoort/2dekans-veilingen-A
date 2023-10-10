@@ -5,14 +5,6 @@
     if(!(isset($_SESSION['login']))) {
         header("Location: index.php");
     }
-
-    /*  SELECT tblproducten.foto, tblproducten.naam, MAX(tblboden.bod) AS highest_bid, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum
-        FROM tblfacturen
-        INNER JOIN tblproducten ON (tblfacturen.productid = tblproducten.productid)
-        INNER JOIN tblboden ON (tblboden.productid = tblfacturen.productid)
-        INNER JOIN tblgebruikers ON (tblproducten.verkoperid = tblgebruikers.gebruikerid)
-        WHERE tblfacturen.koperid = 38;
-    */
 ?>
 <!DOCTYPE html>
 <html lang="en" class="bg-[#F1FAEE]">
