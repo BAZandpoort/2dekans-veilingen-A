@@ -13,11 +13,11 @@ require 'lang.php';
             <summary class="m-1 btn btn-ghost text-black"><?= __('Categories')?></summary>
             <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">
                 <?php
-                    foreach(getAllCategories($mysqli) as $row) {
-                        echo '
-                          <li><a href="producten.php?gekozenCategorie='.$row['categorienaam'].'" class="link link-neutral" name="categorieID">'.$row['categorienaam'].'</a></li>
+                foreach (getAllCategories($mysqli) as $row) {
+                    echo '
+                          <li><a href="producten.php?gekozenCategorie=' . $row['categorienaam'] . '" class="link link-neutral" name="categorieID">' . $row['categorienaam'] . '</a></li>
                         ';
-                    };
+                };
                 ?>
             </ul>
         </details>
@@ -35,19 +35,22 @@ require 'lang.php';
         <div class="dropdown dropdown-end">
             <label tabindex="0" class="btn btn-ghost btn-circle">
                 <div class="indicator">
-                    <img src="../public/img/favourite.png" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                        <span class="badge badge-sm indicator-item">8</span>
-                </div>
-            </label>
-            <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-                <div class="card-body">
-                    <span class="font-bold text-lg">8 Items</span>
-                    <div class="card-actions">
-                        <button class="btn btn-primary btn-block">View Favorites</button>
-                    </div>
-                </div>
-            </div>
+                <?php
+                        $userid = $_SESSION["login"];
+                        $favorites = getAllFavourites($mysqli, $userid)->fetch_all(MYSQLI_ASSOC);
+                        $count = isset($favorites["productId"]) ? 1 : count($favorites);
+                        if ($count == 0) {
+                        ?>
+                            <img src="../public/img/favourite.png" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                        </div>
+                        </label>
+                        <div tabindex="0" class="mt-3 z-[1] card card-compact dropdown-content bg-black w-52 shadow">
+                            <div class="card-body text-white">
+                                <span class="font-bold text-lg">favorieten</span>
+                                <span class="text-md">Voeg favorieten toe tot je lijst om deze te bekijken</span>
+                            </div>
+                        </div>
         </div>
         <?php
         if(isset($_SESSION["login"])){
@@ -79,7 +82,7 @@ require 'lang.php';
         }else{
             print'<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
         }
-        ?>
-    </div>
+?>
+</div>
 </div>
 
