@@ -1,23 +1,29 @@
 <?php
- include "connect.php";
- include "functions/userFunctions.php";
- session_start();
+
+ include "components/navbar.php";
+
 
 if(!isset($_SESSION["login"])){
   header("location: index.php");
 }
 
+
+
+
 $gebruikerid = $_SESSION["login"];
 
 if(isset($_POST["bied"])) {
-    include "connect.php";
 $bod = $_POST["bod"];
+
+if ($_SESSION["productid"] == "empty") {
+  header("location: overzichtVeilingen.php?error3");
+
+}
 
 
 foreach(getPrice($mysqli,$_SESSION["productid"]) as $row){
 if($bod < $row["prijs"]) {
-    echo "Error bij het toevoegen van je bod: Je hebt waarschijnlijk onder het minimum geboden. Ga terug en probeer snel opnieuw<br> ";
-    print "<a href='overzichtVeilingen.php'>Ga terug</a>";
+    header("location: overzichtVeilingen.php?error2");
     return;
 
 } else {
@@ -26,10 +32,9 @@ if($bod < $row["prijs"]) {
 
 $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $_SESSION["productid"]."', '".$bod."', '".$gebruikerid."')";
          if ($mysqli->query($sql)) {
-            header("location: overzichtVeilingen.php");
+            header("location: overzichtVeilingen.php?succes");
         } else {
-            echo "Error bij het toevoegen van je bod toevoegen, ga terug naar de pagina en probeer opnieuw.<br> ";
-            print "<a href='overzichtVeilingen.php'>producten</a>";
+          header("location: overzichtVeilingen.php?error1");
         }
         $mysqli->close();
 
@@ -38,8 +43,8 @@ $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $_SESSIO
 }
 }
 if (isset($_GET["product"])) {
-$_SESSION["productid"] = $_GET["product"];
-}
+  $_SESSION["productid"] = $_GET["product"];
+  }
 
 ?>
 
@@ -51,12 +56,12 @@ $_SESSION["productid"] = $_GET["product"];
     <script src="https://cdn.tailwindcss.com"></script>
     <title>title</title></head>
 <body>
-<div class="form-control">
+<div class="form-control h-full flex items-center justify-center">
   <label class="label">
-    <span class="label-text">Geef uw bod in</span>
+    <span class="label-text text-2xl">Geef uw bod in</span>
   </label>
-  <form method="post" action="bod.php">
-  <label class="input-group">
+  <form method="post" action="bod.php" >
+  <label class="input-group text-2xl">
     <input type="number" placeholder="0.00" class="input input-bordered" name="bod"/>
     <button type="submit" class="btn btn-warning" name="bied" >Bid</button>
 </form>
