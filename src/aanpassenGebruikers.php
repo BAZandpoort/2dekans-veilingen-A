@@ -46,7 +46,7 @@ if (isset($_POST["wijzigen"])) {
 
 
 }
-    foreach(getUser($mysqli,1) as $row){
+    foreach(getUser($mysqli,$_SESSION["login"]) as $row){
         print'<body>
         <div>
           <div class="flex justify-start items-start">
