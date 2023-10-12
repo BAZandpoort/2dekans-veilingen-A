@@ -21,10 +21,10 @@ if (isset($_GET['gekozenProduct'])) {
             <img id="productFoto" src="'.$row['foto'].'" alt="'.$row['foto'].'"/>
         </figure>
         <div class="card-body float-right">
-            <p id="productNaam">Product naam: '.$row['naam'].'</p>
-            <p id="productPrijs">Product prijs: €'.$row['prijs'].'</p>
-            <p id="productBeschrijving">Product beschrijving: '.$row['beschrijving'].'</p>
-            <p id="productVerkoper">Verkoper van het product: '.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</p>
+            <p id="productNaam"> - Product naam: '.$row['naam'].'</p>
+            <p id="productPrijs"> - Product prijs: €'.$row['prijs'].'</p>
+            <p id="productBeschrijving"> - Product beschrijving: '.$row['beschrijving'].'</p>
+            <p id="productVerkoper"> - Verkoper van het product: '.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</p>
         </div>
       </div>
       ';
