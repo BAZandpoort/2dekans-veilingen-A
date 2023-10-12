@@ -11,11 +11,11 @@ require 'lang.php';
     <div class="navbar-center">
         <details class="dropdown mb-0">
             <summary class="m-1 btn btn-ghost text-black"><?= __('Categories')?></summary>
-            <ul name="categorieknop" tabindex="0" class="p-2 shadow menu dropdown-content z-[1] rounded-box w-25">
+            <ul name="categorieknop" tabindex="0" class="p-2 shadow text-white bg-black menu dropdown-content z-[1] rounded-box w-32">
                 <?php
                 foreach (getAllCategories($mysqli) as $row) {
                     echo '
-                          <li><a href="producten.php?gekozenCategorie=' . $row['categorienaam'] . '" class="link link-neutral" name="categorieID">' . $row['categorienaam'] . '</a></li>
+                          <li><a href="producten.php?gekozenCategorie=' . $row['categorienaam'] . '" name="categorieID">' . $row['categorienaam'] . '</a></li>
                         ';
                 };
                 ?>
