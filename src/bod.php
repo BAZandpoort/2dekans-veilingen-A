@@ -23,7 +23,7 @@ if ($_SESSION["productid"] == "empty") {
 
 foreach(getPrice($mysqli,$_SESSION["productid"]) as $row){
 if($bod < $row["prijs"]) {
-    header("location: overzichtVeilingen.php?error2");
+    header("location: bod.php?error2");
     return;
 
 } else {
@@ -32,8 +32,11 @@ if($bod < $row["prijs"]) {
 
 $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $_SESSION["productid"]."', '".$bod."', '".$gebruikerid."')";
          if ($mysqli->query($sql)) {
+          $sql2 = "UPDATE tblproducten  SET prijs =  '" . $bod . "' WHERE productid = '" . $_SESSION["productid"] . "'";
+          if($mysqli->query($sql2)) {
+
             header("location: overzichtVeilingen.php?succes");
-        } else {
+        }} else {
           header("location: overzichtVeilingen.php?error1");
         }
         $mysqli->close();
@@ -62,7 +65,7 @@ if (isset($_GET["product"])) {
   </label>
   <form method="post" action="bod.php" >
   <label class="input-group">
-    <input type="number" placeholder="0.00" class="input input-bordered" name="bod"/>
+    <input type="number" placeholder="0.00" class="input input-bordered" name="bod" step="0.01" min="0.00"/>
     <button type="submit" class="btn btn-warning" name="bied" >Bid</button>
 </form>
   </label>
@@ -80,3 +83,12 @@ if (isset($_GET["product"])) {
   </div>
 </div>
 </body>
+
+<?php
+    if(isset($_GET["error2"])){
+      print'<div class="alert alert-error">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <span>Error! Can not bid under minimal price.</span>
+  </div>';
+  }
+?>
