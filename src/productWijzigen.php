@@ -47,8 +47,9 @@ if (isset($_POST['submit'])) {
 }else{
 
 
-  $productID = 1; //$_GET['gekozenProduct'];
+  $productID = $_GET['gekozenProduct'];
   foreach(getProduct($mysqli, $productID) as $row) {
+
 
 echo '<div>
     <div class="flex justify-start items-start">
