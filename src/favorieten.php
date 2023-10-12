@@ -52,7 +52,7 @@
                             echo "</td>
                             <td class='text-center'>24u 14m</td>
                             <th class='text-center'>
-                            <a href='product.php?product=".$row['productid']."'><button class='btn btn-ghost btn-xs'>PLAATS BOD</button></a>
+                            <a href='bod.php?product=".$row['productid']."'><button class='btn btn-ghost btn-xs'>PLAATS BOD</button></a>
                             </th>
                             <td>
                             <a href='verwijderUitFavorieten.php?product=".$row['productid']."'><button class='btn btn-sm btn-circle btn-ghost'>✕</button>
