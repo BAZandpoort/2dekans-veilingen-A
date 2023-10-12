@@ -16,11 +16,11 @@ include "./functions/sellerFunctions.php";
 if (isset($_GET['gekozenProduct'])) {
     foreach(getProductInfo($mysqli, $_GET['gekozenProduct']) as $row) {
       echo '
-      <div class="flex items-center justify-center h-screen">
+      <div class="flex items-center justify-center w-4/5 h-screen">
         <figure>
-            <img id="productFoto" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'"/>
+            <img id="productFoto" class="float-right items-center w-2/3" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'"/>
         </figure>
-        <div class="card-body float-right">
+        <div class="card-body float-right items-center justify-center">
             <p id="productNaam"> - Product naam: '.$row['naam'].'</p>
             <p id="productPrijs"> - Product prijs: €'.$row['prijs'].'</p>
             <p id="productBeschrijving"> - Product beschrijving: '.$row['beschrijving'].'</p>
