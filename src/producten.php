@@ -23,7 +23,7 @@ include "components/navbar.php";
         echo '
         <div class="card card-compact w-96 bg-base-100 shadow-xl float-right">
             <figure>
-                <img id="productFoto" src="'.$row['foto'].'" alt="'.$row['foto'].'"/></figure>
+                <img id="productFoto" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'"/></figure>
                 <div class="card-body">
                     <a href="productDetails.php?gekozenProduct='.$row['productid'].'" id="productNaam" class="card-title">'.$row['naam'].'</a>
                     <p id="productPrijs">€'.$row['prijs'].'</p>

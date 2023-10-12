@@ -18,7 +18,7 @@ if (isset($_GET['gekozenProduct'])) {
       echo '
       <div class="flex items-center justify-center h-screen">
         <figure>
-            <img id="productFoto" src="'.$row['foto'].'" alt="'.$row['foto'].'"/>
+            <img id="productFoto" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'"/>
         </figure>
         <div class="card-body float-right">
             <p id="productNaam"> - Product naam: '.$row['naam'].'</p>
