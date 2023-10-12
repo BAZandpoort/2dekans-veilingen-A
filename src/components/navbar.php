@@ -90,7 +90,7 @@ require 'lang.php';
         <li><a><?= __('Settings')?></a></li>
         <li>
                         <a href="aankoopgeschiedenis.php" class="justify-between">
-                            Purchase History
+                            <?=__('Purchase History')?>
                         </a>
                     </li>
         <li><a href="productToevoegen.php"><?= __('Add Product')?></a></li>
