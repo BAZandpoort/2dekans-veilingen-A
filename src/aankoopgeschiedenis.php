@@ -45,7 +45,7 @@
                                     </div>
                                     </div>
                                     <div>
-                                    <div class='font-bold'>".$row['naam']."</div>
+                                    <div class='font-bold'>".$row['naam_product']."</div>
                                     <div class='text-sm opacity-50'>".$row['voornaam']." ".$row['naam']."</div>
                                     </div>
                                 </div>

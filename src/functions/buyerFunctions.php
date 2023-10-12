@@ -21,7 +21,7 @@ function deleteProductFromFavorites($connection, $productid, $gebruikerid) {
 }
 
 function getAllPurchases($connection, $userid) {
-    $resultaat = $connection->query("SELECT tblproducten.foto, tblproducten.naam, MAX(tblboden.bod) AS highest_bid, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum
+    $resultaat = $connection->query("SELECT tblproducten.foto, tblproducten.naam AS naam_product, MAX(tblboden.bod) AS highest_bid, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum
                                      FROM tblfacturen
                                      INNER JOIN tblproducten ON (tblfacturen.productid = tblproducten.productid)
                                      INNER JOIN tblboden ON (tblboden.productid = tblfacturen.productid)
