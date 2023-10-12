@@ -43,7 +43,7 @@ require 'lang.php';
 </head>
 <body class="min-h-screen bg-[#F1FAEE]">
 <div class="flex justify-start items-start">
-        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= ('2nd chance auctions')?></a>
+        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= __('2nd chance auctions')?></a>
         <div class="card w-full max-w-lg h-screen shadow-2xl bg-white ml-auto">
         <form class="card-body" method="post" action="login.php">
         <?php
@@ -55,7 +55,7 @@ require 'lang.php';
             }
         ?>    
         <div class="form-control gap-2">
-            <h2 class="text-black text-2xl "><?= __('Login')?></h2>
+            <h2 class="text-black text-2xl "><?= __('login')?></h2>
             <label class="label">
                 <span class="label-text text-black"><?= __('Email')?></span>
             </label>
@@ -63,8 +63,8 @@ require 'lang.php';
             <label class="label">
                 <span class="label-text text-black"><?= __("Password")?></span>
             </label>
-            <input type="password"  name="password" placeholder=<?= __('Password')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
-            <input type="submit" name="submit" value="Login" class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
+            <input type="password"  name="password" placeholder=<?= __('password')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
+            <input type="submit" name="submit" value=<?= __('login')?> class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
         </form>
         <div class="flex justify-center mt-2">
             <a href="registreren.php" class="link text-black"><?= __("I don't have an account")?></a>

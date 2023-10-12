@@ -17,6 +17,7 @@ $lang = [
     'Last name'=>'Nom de famille',
     'Email'=>'Courriel',
     'Password'=>'Mot de passe',
+    'password'=>'Mot-de-passe',
     'Description'=>'Description',
     'Profile Picture'=>"Profil de l'image",
     'Product'=>'Produit',

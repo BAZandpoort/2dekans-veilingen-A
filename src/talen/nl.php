@@ -17,6 +17,7 @@ $lang = [
     'Last name'=>'Achternaam',
     'Email'=>'E-mail',
     'Password'=>'Wachtwoord',
+    'password'=>'Wachtwoord',
     'Description'=>'Beschrijving',
     'Profile Picture'=>'Profielfoto',
     'Product'=>'Product',
