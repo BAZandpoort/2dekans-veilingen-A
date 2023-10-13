@@ -1,7 +1,7 @@
 <?php 
-        /*if (!(isset($_POST["afrekenen"]))) {
+        if (!(isset($_POST["afrekenen"]))) {
                 header("Location: index.php");
-            }*/
+            }
 
         require('./fpdf186/fpdf.php');
         include "connect.php";

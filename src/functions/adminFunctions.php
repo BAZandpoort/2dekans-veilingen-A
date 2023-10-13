@@ -5,5 +5,6 @@ function getTimeDifference($endTime) {
     $currentDate = strtotime($currentDate);
     $timeDifference = $endDate - $currentDate;
     $timeDifference = date("H:i:s", $timeDifference);
+    return $timeDifference;
 }
 ?>

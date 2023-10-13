@@ -1,7 +1,8 @@
 <?php  
-function addProduct($connection, $naam, $beschrijving, $prijs, $categorie, $foto,$tijd){
-    return($connection ->query("INSERT INTO tblproducten (verkoperid,naam, beschrijving, prijs, categorie, foto, eindtijd ) VALUES (0,'".$naam."'
-        , '".$beschrijving."','" .$prijs."','" .$categorie."','" .$foto."','".$tijd."')"));
+
+function addProduct($connection, $userid,$naam, $beschrijving, $prijs, $categorie, $foto, $eindtijd){
+    return($connection ->query("INSERT INTO tblproducten (verkoperid,naam, beschrijving, prijs, categorie, foto, eindtijd ) VALUES ($userid,'".$naam."'
+        , '".$beschrijving."','" .$prijs."','" .$categorie."','" .$foto."','".$eindtijd."')"));
 }
 
 function modifyProduct($connection,$naam ,$productID ,$beschrijving, $prijs, $categorie, $foto){
@@ -31,4 +32,21 @@ function getProductCategorie($connection, $productID){
 function getProductPicture($connection,$productID) {
     return getProduct($connection,$productID)->fetch_assoc()['foto'];
 }
+
+function getProductInfo($connection, $productID) {
+    return ($connection->query("SELECT * FROM tblproducten WHERE productid = '".$productID."'"));
+};
+
+function getSeller($connection, $sellerID) {
+    return ($connection->query("SELECT * FROM tblgebruikers WHERE gebruikerid = '".$sellerID."'")); 
+};
+
+function getSellerName($connection, $sellerID) {
+    return getSeller($connection, $sellerID)->fetch_assoc()['voornaam'];
+};
+
+function getSellerLastName($connection, $sellerID) {
+    return getSeller($connection, $sellerID)->fetch_assoc()['naam'];
+};
+
 ?>

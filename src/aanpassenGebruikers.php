@@ -1,3 +1,7 @@
+<?php
+session_start();
+require 'lang.php';
+?>
 <!DOCTYPE html>
 <html lang="en" class="bg-[#F1FAEE]">
 <head>
@@ -5,14 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
-    <title>Document</title>
+    <title><?= __('Change user')?></title>
 </head>
 
 <?php
 include "connect.php";
 include "functions/userFunctions.php";
-session_start();
-
 
 if(!isset($_SESSION["login"])){
     header('location: index.php');
@@ -44,51 +46,51 @@ if (isset($_POST["wijzigen"])) {
 
 
 }
-    foreach(getUser($mysqli,1) as $row){
+    foreach(getUser($mysqli,$_SESSION["login"]) as $row){
         print'<body>
         <div>
           <div class="flex justify-start items-start">
-            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
+            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"></a> 
           </div>
           <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php" enctype="multipart/form-data">
             <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
-              <h2 class="text-black text-2xl mb-4">Update information</h2>
+              <h2 class="text-black text-2xl mb-4"> '?> <?= __('Update information')?><?php echo'</h2>
               <div class="flex flex-col gap-2">  
               <div class="flex flex-row gap-2"> 
                   <div class="flex flex-col w-full"> 
-                  <label class="label text-black">Email</label>
+                  <label class="label text-black">'?> <?= __('Email')?><?php echo'</label>
                   <input type="email" name="email" value="' . $row["email"] . '"  class="input input-bordered w-full max-w-md text-black bg-white" />   
                   </div>
                 </div>
               <div class="flex flex-row gap-2"> 
                   <div class="flex flex-col w-full"> 
-                    <label class="label text-black">Voornaam</label>
+                    <label class="label text-black">'?> <?= __('First name')?><?php echo'</label>
                     <input type="text" name="voornaam" value="' . $row["voornaam"] . '" class="input input-bordered w-full max-w-md text-black bg-white" />
                   </div>
                   <div class="flex flex-col w-full"> 
-                    <label class="label text-black">Naam</label>
+                    <label class="label text-black">'?> <?= __('Last name')?><?php echo'</label>
                     <input type="text" name="naam" value="' . $row["naam"] . '" class="input input-bordered w-full max-w-md text-black bg-white" />
                   </div>
                 </div>
                 <div class="flex flex-row gap-2"> 
                     <div class="flex flex-col w-full"> 
-                        <label class="label text-black">Wachtwoord</label>
-                        <input type="password" name="wachtwoord" placeholder="Wachtwoord" class="input input-bordered w-full max-w-md text-black bg-white" />
+                        <label class="label text-black">'?> <?= __('Password')?><?php echo'</label>
+                        <input type="password" name="wachtwoord" placeholder='?> <?= __('Password')?><?php echo' class="input input-bordered w-full max-w-md text-black bg-white" />
                     </div>
                 </div>
                 <div class="flex flex-row gap-2">
                   <div class="flex flex-col w-full"> 
-                    <label class="label text-black">Beschrijving</label>
+                    <label class="label text-black">'?> <?= __('Description')?><?php echo'</label>
                     <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving">'.$row["beschrijving"].'</textarea>
                   </div>
                 </div>
                 <div class="flex flex-row gap-2">
                   <div class="flex flex-col w-full"> 
-                    <label class="label text-black">Profielfoto</label>
+                    <label class="label text-black">'?> <?= __('Profile Picture')?><?php echo'</label>
                     <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" />
                   </div>
                 </div>
-                <input type="submit" value="wijzigen" name="wijzigen"  class="btn btn-ghost text-black hover:text-white hover:bg-black">  
+                <input type="submit" value='?> <?= __('Change')?><?php echo' name="wijzigen"  class="btn btn-ghost text-black hover:text-white hover:bg-black">  
             </div>
         </div>
     </form>
