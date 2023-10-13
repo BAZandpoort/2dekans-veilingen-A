@@ -1,5 +1,5 @@
 <?php
-require 'lang.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,7 +8,7 @@ require 'lang.php';
     <meta charset="UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title><?= __('Overview of auctions')?></title>
+
 </head>
 
 <body>
@@ -62,6 +62,9 @@ require 'lang.php';
        <tr> <td>resterende tijd: ' . $tijd . '</td></tr>
         <tr><td><a href="bod.php?product=' . $data["productid"] . '" class="btn">Bid</a></td></tr>
     </table><br>';
+    if (isset($_SESSION["admin"])) {
+        echo ' <tr><td><a href="productVerwijderenAdmin.php?verwijder=' . $data["productid"] . '" class="btn bg-[#FF7F7F]">Verwijder</a></td></tr>';
+    }
     }
     ?>
 
