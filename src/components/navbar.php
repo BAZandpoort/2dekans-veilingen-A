@@ -88,6 +88,11 @@ require 'lang.php';
             </a>
         </li>
         <li><a><?= __('Settings')?></a></li>
+        <li>
+                        <a href="aankoopgeschiedenis.php" class="justify-between">
+                            <?=__('Purchase History')?>
+                        </a>
+                    </li>
         <li><a href="productToevoegen.php"><?= __('Add Product')?></a></li>
         <li><a href="loguit.php"><?= __('Logout')?></a></li>
     </ul>

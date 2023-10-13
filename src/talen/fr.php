@@ -42,6 +42,7 @@ $lang = [
     'Document'=>'Document',
     'Highest offer'=>'Offre la plus élevée',
     'Time left'=>'Temps restant',
+    'Purchase History'=>"Historique d'achat"
 ];
 
 ?>
