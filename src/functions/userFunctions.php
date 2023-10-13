@@ -74,6 +74,11 @@ function checkIfAdmin($connection,$email){
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
 
+function getDataTblproducten($mysqli){
+    $resultaat = $mysqli->query("SELECT * FROM tblproducten");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
+}
+
 function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
