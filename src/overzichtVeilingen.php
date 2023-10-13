@@ -7,6 +7,27 @@
     <title>title</title>
 </head>
 <body class="min-h-screen bg-[#F1FAEE]">
+<script defer>
+        function countDown(productcId, tijd) {
+          const wrapper = document.getElementById('product-' + productcId);
+          var countDownDate = tijd * 1000;  
+          var now = <?php print time() ?> * 1000;
+           var x = setInterval(function() {
+          now = now + 1000;
+   
+          var distance = countDownDate - now;
+   
+       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+   
+       wrapper.querySelector("#hours").style = "--value:" + hours + ";"
+       wrapper.querySelector("#minutes").style = "--value:" + minutes + ";"
+       wrapper.querySelector("#seconds").style = "--value:" + seconds + ";"    
+           }, 1000);
+        }
+    </script>
     <?php
     include "components/navbar.php";
     include "functions/adminFunctions.php";
@@ -36,7 +57,7 @@
          echo '<div class="badge badge-outline text-black">'.$data["categorie"].'</div>';
         }
          echo ' <div class="badge badge-outline text-black"> € '.$data["prijs"].'</div> 
-         <span class="countdown font-mono text-2xl text-black">
+         <span id="product-' . $data['productid'] .'" class="countdown font-mono text-2xl text-black">
             <span id="hours" style="--value:00;"></span>:
             <span id="minutes" style="--value:00;"></span>:
             <span id="seconds" style="--value:00;"></span>
@@ -47,29 +68,14 @@
       </div>
     </div>';
     $tijd = $data["eindtijd"];
+
+    echo '<script> countDown(' . $data['productid'] . ', '. strtotime($tijd) . '); </script>';
     }
   }
   echo '</div>';
       ?>
-      <script defer>
-          var countDownDate = <?php echo strtotime($tijd) ?> * 1000;
-          var now = <?php print time() ?> * 1000;
-           var x = setInterval(function() {
-          now = now + 1000;
-   
-          var distance = countDownDate - now;
-   
-       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-   
-       document.getElementById("hours").style = "--value:" + hours + ";"
-       document.getElementById("minutes").style = "--value:" + minutes + ";"
-       document.getElementById("seconds").style = "--value:" + seconds + ";"    
-           }, 1000);
-          <?php
-    ?>
-    </script>
+      
+
+      
 </body>
 </html>
