@@ -56,13 +56,23 @@
         } else {
          echo '<div class="badge badge-outline text-black">'.$data["categorie"].'</div>';
         }
-         echo ' <div class="badge badge-outline text-black"> € '.$data["prijs"].'</div> 
+         echo ' <div class="badge badge-outline text-black"> € '.$data["prijs"].'</div> ';
+         $dateNow = date("Y-m-d H:i:s");
+         $start = strtotime($dateNow);
+         $end = strtotime($data['eindtijd']);
+   
+         $hours = intval(($end - $start)/3600);
+         if (($hours) < 0) {
+            echo "tijd is afgelopen"; 
+         } else {
+         echo '
          <span id="product-' . $data['productid'] .'" class="countdown font-mono text-2xl text-black">
             <span id="hours" style="--value:00;"></span>:
             <span id="minutes" style="--value:00;"></span>:
             <span id="seconds" style="--value:00;"></span>
-          </span>
-          <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
+          </span>';
+         }
+          echo '<img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
           <button class="btn btn-outline text-black bg-white border-white hover:text-white hover:bg-black ">Bid</button>
         </div>
       </div>
