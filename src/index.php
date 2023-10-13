@@ -1,5 +1,6 @@
 <?php
 include "components/navbar.php";
+include "overzichtVeilingen.php";
 ?>
 <!DOCTYPE html>
 <html>

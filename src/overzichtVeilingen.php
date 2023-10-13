@@ -29,7 +29,6 @@
         }
     </script>
   <?php
-    include "components/navbar.php";
     include "functions/adminFunctions.php";
     include "connect.php"; 
     
