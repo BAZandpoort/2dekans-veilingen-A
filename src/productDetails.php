@@ -27,8 +27,11 @@ if (isset($_GET['gekozenProduct'])) {
             <div class="card-body">
               <h2 class="text-2xl font-bold" id="productNaam"> '.$row['naam'].'</h2>
               <p class="text-slate-400" id="productVerkoper">'.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</p>
-              <div id="productprijs" class="badge badge-outline text-black"> € '.$row["prijs"].'</div> 
-              <p id="productBeschrijving">'.$row['beschrijving'].'</p>
+              <div id="productprijs" class="badge badge-outline text-black"> € '.$row["prijs"].'</div>';
+              if($row['categorie']){
+                print'<div id="productprijs" class="badge badge-outline text-black">'.$row["categorie"].'</div> ';
+              }
+              print'<p id="productBeschrijving">'.$row['beschrijving'].'</p>
             </div>
           </div>
         </div>
