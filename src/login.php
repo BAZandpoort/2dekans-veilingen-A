@@ -16,9 +16,8 @@ if (isset($_POST["submit"])) {
      if(isPasswordCorrect($mysqli,$password,$email)){  
         $gebruikersid = getGebruikersid($mysqli,$email);
              $_SESSION["login"]= $gebruikersid;
-             if (checkIfAdmin($mysqli,$email)){
-                 $_SESSION['admin']="true";
-                
+             if(checkIfAdmin($mysqli,$email)){
+                $_SESSION["admin"] = "true";
              }
              header("Location:index.php");
          } else {
