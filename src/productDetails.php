@@ -29,6 +29,12 @@ if (isset($_GET['gekozenProduct'])) {
               <p class="text-slate-400" id="productVerkoper">'.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</p>
               <div id="productprijs" class="badge badge-outline text-black"> € '.$row["prijs"].'</div> 
               <p id="productBeschrijving">'.$row['beschrijving'].'</p>
+              <div class="flex">
+              <form method="post" action="favorietenToevoegen.php?product='.$row['productid'].'">
+                <button class="btn w-40 mr-3">TOEVOEGEN AAN FAVORIETEN</button>
+              </form>
+                <button class="btn w-40">DELEN</button>
+              </div>
             </div>
           </div>
         </div>
