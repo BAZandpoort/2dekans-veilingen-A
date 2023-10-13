@@ -22,6 +22,7 @@ session_start();
 
 
 if (isset($_POST['submit'])) {
+  $productID =$_POST['productID'];
 	$naam= $_POST['naam'];
   	$prijs= $_POST['prijs'];
   	$beschrijving= $_POST['beschrijving'];
@@ -30,24 +31,38 @@ if (isset($_POST['submit'])) {
   	$upload_dir= $_SERVER['DOCUMENT_ROOT']."/2dekans-veilingen-A/public/img/";
   	$file_name= $_FILES['file']['name'];
   	$file_tmp= $_FILES['file']['tmp_name'];
+
+
   if (filesize( $file_name ) < 0){
   echo "Error";
   }
   if((empty($_POST['file']))){
-    if (!(move_uploaded_file($file_tmp,$upload_dir.$file_name))) {
-      echo "Error, kon de foto niet verplaatsen.";
-    }
+    if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
+        echo "Error, kon de foto niet verplaatsen.";
+      };
+      modifyProduct2($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie);
   }
-    if(modifyProduct($mysqli, $naam, $beschrijving, $prijs, $categorie, $file_name)){
+  var_dump($file_name);
+    if(modifyProduct($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie, $file_name)){
     header('location: index.php');
     }else{
 	echo "Error product wijzigen.";
     }
 
+
 }else{
 
-
-  $productID = $_GET['gekozenProduct'];
+ //Als er geen gekozenproduct is dan moet het naar index.
+  if (!isset($_GET['gekozenProduct'])) {
+    header("Location: index.php");
+  } else {
+    $productID = $_GET['gekozenProduct'];
+    if(mysqli_num_rows(getProduct($mysqli, $productID)) == 0) {
+      header("Location: index.php");  
+      //Als productID niet bestaat dan moet het naar index.
+    }
+  }
+ 
   foreach(getProduct($mysqli, $productID) as $row) {
 
 
@@ -56,6 +71,7 @@ echo '<div>
       <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">2dekans veilingen</a> 
     </div>
     <form class="form-control h-full flex items-center justify-center" action="productWijzigen.php" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="productID" value="'.$productID.'"">
       <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
         <h2 class="text-black text-2xl mb-4">Modify Product</h2>
         <div class="flex flex-col gap-2">  
@@ -78,7 +94,7 @@ echo '<div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
               <label class="label text-black">Productfoto</label>
-              <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" value = "'.$row["foto"].'" required />
+              <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" value = "'.$row["foto"].'" />
             </div>
           </div>
           <div class="flex flex-row gap-2">
@@ -101,17 +117,8 @@ echo '<div>
                 
                 }
                 print'</select>';
-               
-                /*if (getAllCategories($mysqli)) {
-                  print "<select class='select select-bordered bg-white text-black' name='categorie' required >
-                  <option disabled>Kies een categorie</option>";
-
-                  foreach (getAllCategories($mysqli) as $row1) {
-                    print " <option "; echo ($row["categorie"] == false) ? "selected" : ""; 
-                    echo"value= " . $row1["categorienaam"] . " >" . $row1["categorienaam"] . " </option>";
-                  }
-                }*/
              }
+           
           }
               ?>
               </select>
