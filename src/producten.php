@@ -10,7 +10,7 @@ include "components/navbar.php";
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-[#F1FAEE]">
 <div class="flex flex-col w-full">
     <div class="divider"></div> 
 </div>
