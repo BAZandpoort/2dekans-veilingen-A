@@ -12,7 +12,7 @@
     include "functions/adminFunctions.php";
     include "connect.php"; 
     
-
+    echo '<div class="flex flex-wrap gap-4">';
     if(getDataTblproducten($mysqli)){
     foreach (getDataTblproducten($mysqli) as $data) {     
         
@@ -33,7 +33,7 @@
         if (empty($data["categorie"])) {
          echo ' <div class="badge badge-outline text-black">none</div> ';
         } else {
-         echo '<div class="badge badge-outline text-black"> € '.$data["categorie"].'</div>';
+         echo '<div class="badge badge-outline text-black">'.$data["categorie"].'</div>';
         }
          echo ' <div class="badge badge-outline text-black"> € '.$data["prijs"].'</div> 
          <span class="countdown font-mono text-2xl text-black">
@@ -47,9 +47,9 @@
       </div>
     </div>';
     $tijd = $data["eindtijd"];
-      }
     }
-    
+  }
+  echo '</div>';
       ?>
       <script defer>
           var countDownDate = <?php echo strtotime($tijd) ?> * 1000;
@@ -68,6 +68,8 @@
        document.getElementById("minutes").style = "--value:" + minutes + ";"
        document.getElementById("seconds").style = "--value:" + seconds + ";"    
            }, 1000);
+          <?php
+    ?>
     </script>
 </body>
 </html>
