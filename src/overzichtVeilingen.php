@@ -45,10 +45,12 @@
       <figure><img src="../public/img/'.$data["foto"].'" width="240" hight="320" /></figure>';
       }
       echo'
-      <div class="card-body">
+      <div class="card-body"> 
+      <a href="productDetails.php?gekozenProduct='.$data['productid'].'" id="productNaam" class="card-title">
         <h2 class="card-title text-black">
           '.$data["naam"].'
         </h2>
+      </a>
        <p class="text-black">'.$data["beschrijving"].'</p>
         <div class="card-actions justify-end">';
         if (empty($data["categorie"])) {
@@ -73,6 +75,7 @@
           </span>';
          }
           echo '<img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
+         
           <a href="bod.php?product=' . $data["productid"] . '"">
           <button class="btn btn-outline text-black bg-white border-white hover:text-white hover:bg-black ">Bid</button>
           </a>';
