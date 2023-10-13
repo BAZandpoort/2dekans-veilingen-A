@@ -15,10 +15,11 @@
   session_start();
   require 'lang.php';
 
-  if (!isset($_SESSION['login'])) {
+
+  /*if (!isset($_SESSION['login'])) {
     header('location: index.php');
     return;
-  };
+  };*/
 
   if (isset($_POST['submit'])) {
     $userid = $_SESSION["login"];
