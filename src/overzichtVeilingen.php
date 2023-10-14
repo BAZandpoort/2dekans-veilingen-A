@@ -7,37 +7,17 @@
     <title>title</title>
 </head>
 <body class="min-h-screen bg-[#F1FAEE]">
-<script defer>
-        function countDown(productcId, tijd) {
-          const wrapper = document.getElementById('product-' + productcId);
-          var countDownDate = tijd * 1000;  
-          var now = <?php print time() ?> * 1000;
-           var x = setInterval(function() {
-          now = now + 1000;
-   
-          var distance = countDownDate - now;
-   
-       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-       var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-   
-       wrapper.querySelector("#hours").style = "--value:" + hours + ";"
-       wrapper.querySelector("#minutes").style = "--value:" + minutes + ";"
-       wrapper.querySelector("#seconds").style = "--value:" + seconds + ";"    
-           }, 1000);
-        }
-    </script>
   <?php
     include "components/navbar.php";
     include "functions/adminFunctions.php";
     include "connect.php"; 
+    include "components/countdown.php";
     
     echo '<div class="flex flex-wrap gap-4">';
     if(getDataTblproducten($mysqli)){
     foreach (getDataTblproducten($mysqli) as $data) {     
         
-      echo'<div class="card w-96  shadow-xl bg-white">';
+      echo'<div class="card w-96 p-6 shadow-xl bg-white">';
       if (empty($data["foto"])) {
        echo' <figure><img src="../public/img/brokenImageIcon.png" width="240" hight="320" /></figure>';  
       } else {
@@ -64,7 +44,7 @@
          $end = strtotime($data['eindtijd']);
    
          $hours = intval(($end - $start)/3600);
-         if (($hours) < 0) {
+         if ($hours <= 0) {
             echo "tijd is afgelopen"; 
          } else {
          echo '
