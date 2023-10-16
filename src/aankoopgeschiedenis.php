@@ -2,6 +2,7 @@
     include "components/navbar.php";
     include "functions/buyerFunctions.php";
 
+
     if(!(isset($_SESSION['login']))) {
         header("Location: index.php");
     }
@@ -52,6 +53,9 @@
                             </td>
                             <td class='text-center'>€".$row['highest_bid']."</td>
                             <td class='text-center'>".$row['datum']."</td>
+                            <form method='post' action='generatePDF.php'>
+                            <td><input type='button' class='btn' value='factuur' id='factuur'></td>
+                            </form>
                         </tr>
                         ";
                     }

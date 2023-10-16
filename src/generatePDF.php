@@ -1,94 +1,81 @@
-<?php 
-        if (!(isset($_POST["afrekenen"]))) {
-                header("Location: index.php");
-            }
+<?php
+require './fpdf186/fpdf.php';
+include 'connect.php';
+session_start();
+// check if factuurid is in use
+do{
+    $factuurid = rand(1000,9999);
+    $resultaat = $mysqli->query("SELECT * from tblfacturen where factuurid = '" . $factuurid . "'");
+    $row = $resultaat->num_rows;
+}while ($row >= 1);
+// info voor de factuur
+$sql = "SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid";
+$resultaat = $mysqli->query($sql);
+var_dump($resultaat);
+var_dump($sql);
+while ($row = $resultaat->fetch_assoc()) {
+        $naam = ''.$row["voornaam"].' '.$row["achternaam"].'';
+}
+// generatePDF
+$pdf = new FPDF();
+$pdf->AddPage();
 
-        require('./fpdf186/fpdf.php');
-        include "connect.php";
-        session_start();
-        
-        $factuurId = rand(1000, 9999);
-        
-     
-        $products = explode(",", $_POST["products"]); 
-        $products_count = array_count_values($products);
-        $products_info = array();
-        
-        foreach ($products_count as $product => $quantity) {
-                $sql = "SELECT * FROM tblproducten WHERE productid = " . $product; 
-                $resultaat = $mysqli->query($sql); 
-                $row = $resultaat->fetch_assoc();
-                $product_info = array(
-                        "productid" => $product,
-                        "naam" =>$row["naam"],
-                        "prijs" => $row["prijs"],
-                        "quantity" => $quantity
-                );
+$pdf->SetFont('Arial', '', 16);
+$pdf->Cell(40, 10, 'Order ID:');
+$pdf->Cell(40, 10, $factuurid);
 
-                array_push($products_info, $product_info);
-        };
+$pdf_file = 'order_' . $factuurid . '.pdf';
+$pdf->Output('F', './orders/' . $pdf_file);
 
-        $sql = "SELECT * FROM tblgebruikers WHERE gebruikersnaam = '" . $_SESSION["1"] . "'";
-        $resultaat = $mysqli->query($sql); 
-        $row = $resultaat->fetch_assoc(); 
-        $email = $row["email"]; 
-        $koperId = $row["koperid"];
-        
-        $pdf=new FPDF(); 
-        $pdf->AddPage(); 
-        $pdf->SetFont('Arial','B',16);
-        $pdf->Cell(190,10, 'BETALING' ,'B' ,1, 'C');
-        $pdf->ln();
-        
-        $pdf->SetFont('Arial', '', 12); 
-        $pdf->Cell(40,10, 'Email', 0, 0); 
-        $pdf->Cell(100, 10, $email, 0, 1); 
+$pdf_data = file_get_contents('./orders/order_' . $factuurid . '.pdf');
+$pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
 
-        $pdf->Cell(40, 10, 'Invoice Number:', 0, 0); 
-        $pdf->Cell(100, 10, $factuurId, 0, 1); 
+$sql = "update tblfacturen SET pdf ='" . $pdf_data . "' where factuurid = '" . $factuurid . "'";
+if ($mysqli->query($sql)) {
+    echo "PDF file saved to database.";
+} else {
+    echo "Error: " . $sql . "<br>" . $mysqli->error;
+}
 
-        $invoiceDate = date('d-m-Y'); 
-        $pdf->Cell(40,  10, 'Invoice Date:', 0, 0);
-        $pdf->Cell(100, 10, $invoiceDate, 0, 1); 
+define('EURO', chr(128));
 
-        $pdf->SetFont('Helvetica', 'B', 12); 
-        $pdf->Cell(90, 10, 'Item', 1, 0, 'C');
-        $pdf->Cell(30, 10, 'Price', 1, 0, 'C');
-        $pdf->Cell(30, 10, 'Quantity', 1, 0, 'C');
-        $pdf->Cell(40, 10, 'Total', 1, 1, 'C');
+$pdf = new FPDF();
+$pdf->AddPage();
 
-        $total = 0; 
-        $pdf->SetFont('Helvetica', '', 12); 
-        foreach ($products_info as $item) {
-                for ($teller = 0; $teller < $item['quantity']; $teller++) {
-                        $productIds[] = $item['id']; 
-                }
-                $pdf->Cell(90, 10, $item['naam'],1 , 0);
-                $pdf->Cell(30,10, 'EURO' . ' '. $item['prijs'], 1, 0);
-                $pdf->Cell(30,10, $item['quantity'], 1,0);
-                $pdf->Cell(40, 10, 'EURO'. ' '. $item['prijs']*$item['quantity'], 1,1);
-                $total += $item['prijs']*$item['quantity'];  
-        }
+$pdf->SetFont('Helvetica', 'B', 16);
+$pdf->Cell(190, 10, 'Factuur 2dekansveilingen', 0, 1, 'C');
 
-        $pdf->SetFont('Helvetica', 'B', 12); 
-        $pdf ->Cell(120, 10, '', 0,0); 
-        $pdf ->Cell(30, 10, 'Total', 0,0);
-        $pdf -> Cell(40, 10, 'EURO'. '' . number_format($total, 2, ',', '.'), 0, 1, 'R');
+$pdf->SetFont('Helvetica', '', 12);
+$pdf->Cell(40, 10, 'Naam:', 0, 0);
+$pdf->Cell(100, 10, $naam, 0, 1);
 
-        $pdf_file = 'order_'. $factuurId . '.pdf'; 
-        $pdf ->Output('F', './orders/' . $pdf_file); 
+$pdf->Cell(40, 10, 'Factuurnummer:', 0, 0);
+$pdf->Cell(100, 10, $factuurid, 0, 1);
 
-        $pdf_data = file_get_contents('./orders/order_' . $factuurId  . '.pdf');
-        $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
+$invoiceDate = date('d-m-Y');
+$pdf->Cell(40, 10, 'Datum:', 0, 0);
+$pdf->Cell(100, 10, $invoiceDate, 0, 1);
 
-        $datum = date("l, j F Y");
+$pdf->SetFont('Helvetica', 'B', 12);
+$pdf->Cell(90, 10, 'Artikel', 1, 0, 'C');
+$pdf->Cell(30, 10, 'Prijs', 1, 0, 'C');
 
-        $sql = "INSERT INTO tblfacturen (factuurid, koperid, productid, datum, factuurpdf) VALUES (".$factuurId.",".$koperId."," .$product."," .$datum. "," .$pdf_data.")";
-        if ($mysqli->query($sql)) {
-         echo "PDF file saved to database.";
-        } else {
-         echo "Error: " . $sql . "<br>" . $mysqli->error;
-        }
+$totaal = 0;
+$resultaat = $mysqli->query("SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid");
+$pdf->SetFont('Helvetica', '', 12);
+while($row = $resultaat->fetch_assoc()){
+        $pdf->SetY(60);
+    $pdf->Cell(90, 10, $row['naam'], 1, 0);
+    $pdf->Cell(30, 10, EURO . ' ' . number_format($row['prijs'], 2), 1, 0);
+}
 
-        echo ' <a href="./orders/' . $pdf_file . '" target="_blank">Download PDF</a>';
-?>
+// output PDF to browser
+$pdf->Output('F', './orders/' . $pdf_file);
+print '<a href="index.php">terug</a>';
+
+
+
+echo '
+<div class="uitkomst">
+     <a href="./orders/' . $pdf_file . '" target="_blank">Download PDF</a>
+     </div>';
