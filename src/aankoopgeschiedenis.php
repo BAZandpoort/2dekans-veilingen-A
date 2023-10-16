@@ -53,9 +53,7 @@
                             </td>
                             <td class='text-center'>€".$row['highest_bid']."</td>
                             <td class='text-center'>".$row['datum']."</td>
-                            <form method='post' action='generatePDF.php'>
-                            <td><input type='button' class='btn' value='factuur' id='factuur'></td>
-                            </form>
+                            <td><a href='generatePDF.php'><button class='btn'>Factuur</button></a></td>
                         </tr>
                         ";
                     }

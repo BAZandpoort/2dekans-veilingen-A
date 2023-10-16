@@ -11,8 +11,6 @@ do{
 // info voor de factuur
 $sql = "SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid";
 $resultaat = $mysqli->query($sql);
-var_dump($resultaat);
-var_dump($sql);
 while ($row = $resultaat->fetch_assoc()) {
         $naam = ''.$row["voornaam"].' '.$row["achternaam"].'';
 }
@@ -25,7 +23,7 @@ $pdf->Cell(40, 10, 'Order ID:');
 $pdf->Cell(40, 10, $factuurid);
 
 $pdf_file = 'order_' . $factuurid . '.pdf';
-$pdf->Output('F', './orders/' . $pdf_file);
+$pdf->Output('F', '../public/orders/' . $pdf_file);
 
 $pdf_data = file_get_contents('./orders/order_' . $factuurid . '.pdf');
 $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
@@ -70,12 +68,5 @@ while($row = $resultaat->fetch_assoc()){
 }
 
 // output PDF to browser
-$pdf->Output('F', './orders/' . $pdf_file);
-print '<a href="index.php">terug</a>';
-
-
-
-echo '
-<div class="uitkomst">
-     <a href="./orders/' . $pdf_file . '" target="_blank">Download PDF</a>
-     </div>';
+$pdf->Output('F', '../public/orders/' . $pdf_file);
+header ("Location: ../public/orders/".$pdf_file);
