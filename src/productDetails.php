@@ -10,6 +10,17 @@ include "./functions/sellerFunctions.php";
     <title>title</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function copyURL() {
+            var textToCopy = window.location.href;
+            var tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+        }
+    </script>
 </head>
 <body class="bg-[#F1FAEE]">
 <?php
@@ -33,7 +44,7 @@ if (isset($_GET['gekozenProduct'])) {
               <form method="post" action="favorietenToevoegen.php?product='.$row['productid'].'">
                 <button class="btn w-40 mr-3">TOEVOEGEN AAN FAVORIETEN</button>
               </form>
-                <button class="btn w-40">DELEN</button>
+              <button class="btn w-40" onclick="copyURL()">DELEN</button>
               </div>
             </div>
           </div>
@@ -44,6 +55,5 @@ if (isset($_GET['gekozenProduct'])) {
 };
     
 ?>
-
 </body>
 </html>
