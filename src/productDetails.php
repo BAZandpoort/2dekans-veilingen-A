@@ -19,6 +19,7 @@ include "./functions/sellerFunctions.php";
             tempInput.select();
             document.execCommand("copy");
             document.body.removeChild(tempInput);
+            alert("Copied!")
         }
     </script>
 </head>
