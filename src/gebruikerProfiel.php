@@ -20,9 +20,13 @@ if (isset($_GET['user'])) {
       echo'
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2">
-        <figure class="flex w-2/5 object-scale-down">
-          <img id="gebruikerFoto" class="float-right items-center" src="../public/img/'.$row['profielfoto'].'" alt="'.$row['profielfoto'].'"/>
-        </figure>';
+       <div class="avatar">
+         <div class="w-50 rounded-full" heigth="300" width="300">
+        <figure object-scale-down">
+          <img id="gebruikerFoto" class="float-right items-center" src="../public/img/'.$row['profielfoto'].'" alt="'.$row['profielfoto'].' "/>
+        </figure>
+        </div>
+        </div>';
     }
 
     foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
@@ -30,10 +34,7 @@ if (isset($_GET['user'])) {
 
 
         echo'
-        <div class="divider divider-horizontal"></div>
-        <div class="card-body">
-          <div class="card bg-base-50 bg-[#FFFFFF]">
-            <div class="card-body">
+        <div class="flex flex-wrap gap-12">
               
              <div class="card w-96 p-6 shadow-xl bg-white">';
                 if (empty($row["foto"])) {
