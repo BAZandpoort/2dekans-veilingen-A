@@ -3,10 +3,13 @@ include "./connect.php";
 include "./functions/userFunctions.php";
 session_start();
 require 'lang.php';
+if (!isset($_SESSION["dark"])) {
+    $_SESSION["dark"] = "light";
+  }
 ?>
 <div class="navbar bg-[#F1FAEE]">
     <div class="navbar-start">
-        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= __('2nd chance auctions')?></a>
+        <a href="index.php" class="btn btn-ghost normal-case text-xl text-black bg-white dark:bg-black"><?= __('2nd chance auctions')?></a>
     </div>
     <div class="navbar-center">
         <details class="dropdown mb-0">
@@ -24,6 +27,13 @@ require 'lang.php';
         <input type="text" placeholder=<?= __('Search')?> class="input input-bordered bg-transparent md:w-auto" />
     </div>
     <div class="navbar-end">
+    <div class="dropdown">
+  <label tabindex="0" class="btn btn-ghost m-1"><?= __('Dark')?></label>
+  <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black text-white rounded-box w-52">
+    <li><a href="index.php?darkmode=light">white</a></li>
+    <li><a href="index.php?darkmode=dark">black</a></li>
+  </ul>
+</div>             
     <div class="dropdown">
   <label tabindex="0" class="btn btn-ghost m-1"><?= __('Languages')?></label>
   <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black text-white rounded-box w-52">
