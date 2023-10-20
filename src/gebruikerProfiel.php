@@ -96,7 +96,7 @@ if (isset($_GET['user'])) {
                                  </div>
                      </div>
                 </dialog>
-                   <a href="verwijderGebruiker?verwijder=' . $row["gebruikerid"] . '" class="btn bg-red">Verwijder</a>';
+                   <a href="verwijderGebruiker.php?verwijder=' . $row["gebruikerid"] . '" class="btn bg-red">Verwijder</a>';
                 } 
                 echo'
           </div>
