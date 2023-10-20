@@ -84,8 +84,18 @@ function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
 
-function getPrice($connection,$prijs){
-    $resultaat = $connection->query("SELECT * FROM tblproducten where productid= '".$_SESSION["productid"]."'");
-    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
+function getProductUser($connection,$productid){
+    return ($connection->query("SELECT * FROM tblproducten where productid = '".$productid."'"));
+}
+
+function getProductPrice($connection,$productid){
+    return getProductUser($connection, $productid)->fetch_assoc()['prijs'];
+}
+
+function getProductSellerid($connection,$productid){
+    return getProductUser($connection, $productid)->fetch_assoc()['verkoperid'];
+}
+function getProductTime($connection,$productid){
+    return getProductUser($connection,$productid)->fetch_assoc()['eindtijd'];
 }
 ?>

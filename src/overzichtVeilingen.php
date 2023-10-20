@@ -54,9 +54,10 @@
             <span id="seconds" style="--value:00;"></span>
           </span>';
          }
-          echo '<img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
-         
-          <a href="bod.php?product=' . $data["productid"] . '"">
+          echo '<a href="../src/favorietenToevoegen.php?product= '.$data['productid'].'">
+            <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
+          </a>
+          <a href="productDetails.php?gekozenProduct=' . $data["productid"] . '"">
           <button class="btn btn-outline text-black bg-white border-white hover:text-white hover:bg-black ">Bid</button>
           </a>';
           if (isset($_SESSION["admin"])) {
@@ -72,7 +73,7 @@
 
     }
   }
-  if(isset($_GET["error1"])){
+  if(isset($_GET["errorFailedToBid"])){
     $_SESSION["productid"] = "empty";
     print'<div class="alert alert-error">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -80,7 +81,7 @@
 </div>';
 }
 
-if(isset($_GET["error3"])){
+if(isset($_GET["errorNoProduct"])){
     $_SESSION["productid"] = "empty";
     print'<div class="alert alert-error">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -92,6 +93,13 @@ if(isset($_GET["error4"])){
     print'<div class="alert alert-error">
     <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
     <span>Error! Can not bid on your own product, you little cheater!</span>
+</div>';
+}
+
+if(isset($_GET["errorTimeDone"])){
+  print'<div class="alert alert-error">
+  <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+  <span>Error! Auction has ended</span>
 </div>';
 }
 
