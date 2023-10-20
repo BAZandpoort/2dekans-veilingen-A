@@ -78,6 +78,27 @@ if (isset($_GET['user'])) {
                                  </div>
                      </div>
                 </dialog>
+                </div>
+                </div>';
+                if (isset($_SESSION["admin"])) {
+                    echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+           <div class="card-body">
+           <h2 class="text-2xl font-bold">Check User Reports</h2>
+            <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_1.showModal()">User Reports</button>
+                <dialog id="my_modal_1" class="modal">
+                     <div class="modal-box">
+                         <h3 class="font-bold text-lg">Template reports</h3>
+                             <p class="py-4">Template reports</p>
+                                 <div class="modal-action">
+                                     <form method="dialog">
+                                         <button class="btn">Cancel</button>
+                                    </form>
+                                 </div>
+                     </div>
+                </dialog>
+                   <a href="verwijderGebruiker?verwijder=' . $row["gebruikerid"] . '" class="btn bg-red">Verwijder</a>';
+                } 
+                echo'
           </div>
           </div>
 
