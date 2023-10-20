@@ -65,7 +65,7 @@ if(getProductSellerid($mysqli,$_SESSION["productid"]) == $_SESSION["login"]) {
             tempInput.select();
             document.execCommand("copy");
             document.body.removeChild(tempInput);
-            alert("Copied!")
+            alert("Copied link!")
         }
     </script>
 </head>
@@ -97,12 +97,11 @@ if (isset($_GET['gekozenProduct'])) {
               }
               print'<p id="productBeschrijving">'.$row['beschrijving'].'</p>
               <div class="flex">
-              <form method="post" action="favorietenToevoegen.php?product='.$row['productid'].'">
+              <form method="post" action="favorietenToevoegen.php?product='.$row['productid'].'">'; ?>
                 <button class="btn w-40 mr-3">TOEVOEGEN AAN FAVORIETEN</button>
               </form>
               <button class="btn w-40" onclick="copyURL()">DELEN</button>
-              </div>';
-              ?>
+              </div>
               <label class="label">
                 <span class="label-text !text-2xl">Add your bid</span>
               </label>
