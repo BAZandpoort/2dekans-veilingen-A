@@ -13,7 +13,7 @@ function deleteUser($connection, $gebruikerid) {
     return $resultaat;
 }
 
-function deleteproducts($connection, $verkoperid) {
+function deleteProducts($connection, $verkoperid) {
     $resultaat = $connection->query("DELETE FROM tblproducten where verkoperid = '". $verkoperid."'");
     return $resultaat;
 }
