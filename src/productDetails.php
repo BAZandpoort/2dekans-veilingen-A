@@ -90,7 +90,7 @@ if (isset($_GET['gekozenProduct'])) {
               </div>';
             }
             print'<h2 class="text-2xl font-bold" id="productNaam"> '.$row['naam'].'</h2>
-              <p class="text-slate-400" id="productVerkoper">'.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</p>
+            <p class="text-slate-400 hover:text-blue-800"  id="productVerkoper"><a href="gebruikerProfiel.php?user=' . $row["verkoperid"] . '">'.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</a></p>
               <div id="productprijs" class="badge badge-outline text-black"> € '.$row["prijs"].'</div>';
               if($row['categorie']){
                 print'<div id="productprijs" class="badge badge-outline text-black">'.$row["categorie"].'</div> ';
