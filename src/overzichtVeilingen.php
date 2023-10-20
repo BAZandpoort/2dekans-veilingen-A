@@ -54,8 +54,9 @@
             <span id="seconds" style="--value:00;"></span>
           </span>';
          }
-          echo '<img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
-         
+          echo '<a href="../src/favorietenToevoegen.php?product= '.$data['productid'].'">
+            <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
+          </a>
           <a href="productDetails.php?gekozenProduct=' . $data["productid"] . '"">
           <button class="btn btn-outline text-black bg-white border-white hover:text-white hover:bg-black ">Bid</button>
           </a>';
