@@ -28,7 +28,7 @@ $pdf->Output('F', '../public/orders/' . $pdf_file);
 $pdf_data = file_get_contents('./orders/order_' . $factuurid . '.pdf');
 $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
 
-$sql = "update tblfacturen SET pdf ='" . $pdf_data . "' where factuurid = '" . $factuurid . "'";
+$sql = "update tblfacturen SET factuurpdf ='" . $pdf_data . "' where factuurid = '" . $factuurid . "'";
 if ($mysqli->query($sql)) {
     echo "PDF file saved to database.";
 } else {
