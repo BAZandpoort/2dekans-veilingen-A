@@ -49,7 +49,7 @@ if (isset($_GET['user'])) {
            <h2 class="text-2xl font-bold">Overall Review</h2>
                 <div class="rating rating-lg rating-half">
                     <input type="radio" name="rating-0" class="rating-hidden" />
-                     <input type="radio" name="rating-0" class="bg-green-500 mask mask-star-2 mask-half-1" />
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />
                      <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" />
                      <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />
                      <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" />
