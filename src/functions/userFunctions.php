@@ -98,4 +98,8 @@ function getProductSellerid($connection,$productid){
 function getProductTime($connection,$productid){
     return getProductUser($connection,$productid)->fetch_assoc()['eindtijd'];
 }
+function getChatData($mysqli){
+    $resultaat = $mysqli->query("SELECT * FROM tblchat"); 
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
+}
 ?>
