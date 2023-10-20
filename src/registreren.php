@@ -2,6 +2,7 @@
     include "connect.php";
     include "functions/userFunctions.php";
     include "functions/buyerFunctions.php";
+    include "functions/developerFunctions.php";
     require 'lang.php';
 ?>
 <!DOCTYPE html>
@@ -54,6 +55,7 @@
 </div>
     <?php
         if(isset($_POST['submitknop'])) {
+            $cachesysteem = cache_start();
             if(!(isEmailCorrect($mysqli, $_POST['email']))) {
                 $voornaam = $_POST['voornaam'];
                 $achternaam = $_POST['achternaam'];
@@ -64,10 +66,14 @@
                 $file_name = $_FILES['file']['name'];
                 $file_tmp = $_FILES['file']['tmp_name'];
 
+                cache_createKey($cachesysteem, $email, $wachtwoord);
+
                 registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
                 if((empty($_POST['file']))) {
                     move_uploaded_file($file_tmp, $upload_dir.$file_name);
                 }
+
+                cache_insertIntoDatabase($mysqli, $cachesysteem, $email, getGebruikersid($mysqli, $email));
 
                 /* Kan nog aangepast worden*/
                 header("Location: login.php");
