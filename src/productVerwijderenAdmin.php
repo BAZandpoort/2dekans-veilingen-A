@@ -5,7 +5,7 @@ echo "<h1>Record verwijderen</h1>";
     print $sql;
     if ($mysqli->query($sql)) {
         echo "Record succesvol verwijderd.";
-        header("location: overzichtVeilingen.php");
+        header("location: index.php");
     } else {
         echo "Record niet kunnen verwijderen: " . $mysqli->error;
     }

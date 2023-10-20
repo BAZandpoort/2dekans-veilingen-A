@@ -100,7 +100,7 @@ require 'lang.php';
 </div>
 <?php
         } else {
-            print '<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
+            print '<a href="login.php" class="btn btn-ghost text-black ml-2">';?><?=__('login')?> <?php echo '</a>';
         }
 ?>
 </div>

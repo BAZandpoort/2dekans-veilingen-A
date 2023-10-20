@@ -10,7 +10,8 @@ function isPasswordCorrect($connection,$password,$email){
 }
 
 function getAllCategories($connection){
-    return($connection->query("SELECT * FROM tblcategorieen"));
+    $resultaat =$connection->query("SELECT * FROM tblcategorieen");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
 
 function registerUser($connection, $fname, $lname, $email, $password, $profile_picture, $desc) {
@@ -74,12 +75,27 @@ function checkIfAdmin($connection,$email){
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
 
+function getDataTblproducten($mysqli){
+    $resultaat = $mysqli->query("SELECT * FROM tblproducten");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
+}
+
 function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
 
-function getPrice($connection,$prijs){
-    $resultaat = $connection->query("SELECT * FROM tblproducten where productid= '".$_SESSION["productid"]."'");
-    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
+function getProductUser($connection,$productid){
+    return ($connection->query("SELECT * FROM tblproducten where productid = '".$productid."'"));
+}
+
+function getProductPrice($connection,$productid){
+    return getProductUser($connection, $productid)->fetch_assoc()['prijs'];
+}
+
+function getProductSellerid($connection,$productid){
+    return getProductUser($connection, $productid)->fetch_assoc()['verkoperid'];
+}
+function getProductTime($connection,$productid){
+    return getProductUser($connection,$productid)->fetch_assoc()['eindtijd'];
 }
 ?>
