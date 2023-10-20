@@ -94,6 +94,7 @@ require 'lang.php';
                         </a>
                     </li>
         <li><a href="productToevoegen.php"><?= __('Add Product')?></a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
         <li><a href="loguit.php"><?= __('Logout')?></a></li>
     </ul>
 </div>

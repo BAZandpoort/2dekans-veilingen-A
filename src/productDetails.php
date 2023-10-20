@@ -56,6 +56,18 @@ if(getProductSellerid($mysqli,$_SESSION["productid"]) == $_SESSION["login"]) {
     <title>title</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function copyURL() {
+            var textToCopy = window.location.href;
+            var tempInput = document.createElement("input");
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Copied link!")
+        }
+    </script>
 </head>
 <body class="bg-[#F1FAEE]">
 <?php
@@ -83,8 +95,13 @@ if (isset($_GET['gekozenProduct'])) {
               if($row['categorie']){
                 print'<div id="productprijs" class="badge badge-outline text-black">'.$row["categorie"].'</div> ';
               }
-              print'<p id="productBeschrijving">'.$row['beschrijving'].'</p>';
-              ?>
+              print'<p id="productBeschrijving">'.$row['beschrijving'].'</p>
+              <div class="flex">
+              <form method="post" action="favorietenToevoegen.php?product='.$row['productid'].'">'; ?>
+                <button class="btn w-40 mr-3">TOEVOEGEN AAN FAVORIETEN</button>
+              </form>
+              <button class="btn w-40" onclick="copyURL()">DELEN</button>
+              </div>
               <label class="label">
                 <span class="label-text !text-2xl">Add your bid</span>
               </label>
@@ -113,6 +130,5 @@ if (isset($_GET['gekozenProduct'])) {
 };
     
 ?>
-
 </body>
 </html>
