@@ -14,6 +14,7 @@
     <?php
     
     echo '
+    <div class="flex flex-col">
 <div class="chat chat-start">
   <div class="chat-bubble">Welcome to our live chat.</div>
   <div class="chat-footer opacity-50">
@@ -24,7 +25,12 @@
   <div class="chat-footer opacity-50">
   </div>
 </div>
-<textarea class="textarea textarea-bordered" placeholder="write here your message"></textarea>'; 
+</div>
+<div class="flex flex-row">
+<textarea class="textarea textarea-bordered" placeholder="write here your message"></textarea>
+<button class="btn">send</button>
+</div>
+'; 
 ?>
 </body>
 </html>
