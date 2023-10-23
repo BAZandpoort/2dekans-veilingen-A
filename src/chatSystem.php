@@ -8,29 +8,34 @@
 </head>
 <body class="min-h-screen bg-[#F1FAEE]">
     <?php
-     include "connect.php"; 
      include "components/navbar.php";
+     include "functions/chatFunctions.php";  
     ?>
     <?php
-    
-    echo '
+    $data = getChatData($mysqli); 
+    foreach ($data as $value) {
+      $data2 = getZender($mysqli, $_SESSION["login"]); 
+      if (($value["zenderVoornaam"] == $data2["voornaam"])&&($value["zenderAchternaam"] == $data2["naam"])) {
+       
+      echo '
     <div class="flex flex-col">
 <div class="chat chat-start">
-  <div class="chat-bubble">Welcome to our live chat.</div>
+  <div class="chat-bubble">'.$value["bericht"].'</div>
   <div class="chat-footer opacity-50">
-  </div>
-</div>
-<div class="chat chat-end">
-  <div class="chat-bubble">Hi I have a question</div>
-  <div class="chat-footer opacity-50">
-  </div>
-</div>
+  </div>s
 </div>
 <div class="flex flex-row">
+    ';
+  } else {
+
+  }
+}
+  echo '
 <textarea class="textarea textarea-bordered" placeholder="write here your message"></textarea>
 <button class="btn">send</button>
 </div>
 '; 
+    
 ?>
 </body>
 </html>
