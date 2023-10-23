@@ -1,48 +1,45 @@
 <?php
-include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
+include "./components/navbar.php";
+include "./functions/adminFunctions.php";
+
 if(isset($_POST["bied"])) {
   $bod = $_POST["bod"];
+  $product = $_POST["product"];
 
-  if ($_SESSION["productid"] == "empty") {
+  if (empty($product)) {
     header("location: overzichtVeilingen.php?errorNoProduct");
     return;
   }
   
-  if(getProductSellerid($mysqli,$_SESSION["productid"]) == $_SESSION["login"]) {
-    header("location: productDetails.php?error4&gekozenProduct=" .$_SESSION["productid"]."");
+  if(getProductSellerid($mysqli,$product) == $_SESSION["login"]) {
+    header("location: productDetails.php?error4&gekozenProduct=" .$product."");
     return;
   }
 
-  if(getProductPrice($mysqli,$_SESSION["productid"]) > $bod) {
-      header("location: productDetails.php?errorUnderPrice&gekozenProduct=" .$_SESSION["productid"]."");
+  if(getProductPrice($mysqli,$product) > $bod) {
+      header("location: productDetails.php?errorUnderPrice&gekozenProduct=" .$product."");
       return;
 
   } else {
 
-  $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $_SESSION["productid"]."', '".$bod."', '".$gebruikerid."')";
+  $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $product."', '".$bod."', '".$_SESSION["login"]."')";
          if ($mysqli->query($sql)) {
-          $sql2 = "UPDATE tblproducten  SET prijs =  '" . $bod . "' WHERE productid = '" . $_SESSION["productid"] . "'";
+          $sql2 = "UPDATE tblproducten  SET prijs =  '" . $bod . "' WHERE productid = '" . $product . "'";
           if($mysqli->query($sql2)) {
 
             header("location: overzichtVeilingen.php?succes");
+            return;
           }
         } else {
           header("location: overzichtVeilingen.php?errorFailedToBid");
+          return;
         }
      
   }
 }
-if (!isset($_GET["gekozenProduct"])) {
-  header('location: overzichtVeilingen.php?errorNoProduct');
-}
-$_SESSION["productid"] = $_GET["gekozenProduct"];
 
-$dateNow = date("Y-m-d H:i:s");
-$start = strtotime($dateNow);
-$end = strtotime(getProductTime($mysqli,$_SESSION["productid"]));
-
-$hours = intval(($end - $start)/3600);
+$hours = getTimeDifference(getProductTime($mysqli,$_GET["gekozenProduct"]));
 if($hours <= 0){
   header('location: overzichtVeilingen.php?errorTimeDone');
 }
@@ -112,6 +109,9 @@ if (isset($_GET['gekozenProduct'])) {
               </label>
               <form method="post" action="productDetails.php" >
                 <label class="input-group">
+                  <?php
+                  echo '<input type="hidden" name="product" value="'.$_GET["gekozenProduct"].'"/>';
+                  ?>
                   <input type="number" placeholder="0.00" class="input input-bordered" name="bod" step="0.01" min="0.00"/>
                   <button type="submit" class="btn btn-warning" name="bied" >Bid</button>
               </form>
@@ -132,6 +132,8 @@ if (isset($_GET['gekozenProduct'])) {
       </div>
     <?php
     };
+} else {
+  header('location: overzichtVeilingen.php?errorNoProduct');
 };
     
 ?>

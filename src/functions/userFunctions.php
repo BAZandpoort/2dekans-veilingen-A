@@ -83,19 +83,4 @@ function getDataTblproducten($mysqli){
 function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
-
-function getProductUser($connection,$productid){
-    return ($connection->query("SELECT * FROM tblproducten where productid = '".$productid."'"));
-}
-
-function getProductPrice($connection,$productid){
-    return getProductUser($connection, $productid)->fetch_assoc()['prijs'];
-}
-
-function getProductSellerid($connection,$productid){
-    return getProductUser($connection, $productid)->fetch_assoc()['verkoperid'];
-}
-function getProductTime($connection,$productid){
-    return getProductUser($connection,$productid)->fetch_assoc()['eindtijd'];
-}
 ?>

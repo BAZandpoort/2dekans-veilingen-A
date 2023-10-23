@@ -53,4 +53,15 @@ function getSellerProductInfo($connection, $verkoperid,) {
     return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
 };
 
+function getProductPrice($connection,$productid){
+    return getProduct($connection, $productid)->fetch_assoc()['prijs'];
+}
+
+function getProductSellerid($connection,$productid){
+    return getProduct($connection, $productid)->fetch_assoc()['verkoperid'];
+}
+function getProductTime($connection,$productid){
+    return getProduct($connection,$productid)->fetch_assoc()['eindtijd'];
+}
+
 ?>
