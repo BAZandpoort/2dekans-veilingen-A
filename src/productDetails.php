@@ -6,7 +6,12 @@ if(isset($_POST["bied"])) {
 
   if ($_SESSION["productid"] == "empty") {
     header("location: overzichtVeilingen.php?errorNoProduct");
-
+    return;
+  }
+  
+  if(getProductSellerid($mysqli,$_SESSION["productid"]) == $_SESSION["login"]) {
+    header("location: productDetails.php?error4&gekozenProduct=" .$_SESSION["productid"]."");
+    return;
   }
 
   if(getProductPrice($mysqli,$_SESSION["productid"]) > $bod) {
@@ -14,8 +19,6 @@ if(isset($_POST["bied"])) {
       return;
 
   } else {
-
-
 
   $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $_SESSION["productid"]."', '".$bod."', '".$gebruikerid."')";
          if ($mysqli->query($sql)) {
@@ -42,10 +45,6 @@ $end = strtotime(getProductTime($mysqli,$_SESSION["productid"]));
 $hours = intval(($end - $start)/3600);
 if($hours <= 0){
   header('location: overzichtVeilingen.php?errorTimeDone');
-}
-
-if(getProductSellerid($mysqli,$_SESSION["productid"]) == $_SESSION["login"]) {
-      header("location: overzichtVeilingen.php?error4");
 }
 
 ?>
@@ -87,6 +86,12 @@ if (isset($_GET['gekozenProduct'])) {
               print'<div class="alert alert-error">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>Error! Can not bid under minimal price.</span>
+              </div>';
+            }
+            if(isset($_GET["error4"])){
+              print'<div class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Error! Can not bid on your own product, you little cheater!</span>
               </div>';
             }
             print'<h2 class="text-2xl font-bold" id="productNaam"> '.$row['naam'].'</h2>
