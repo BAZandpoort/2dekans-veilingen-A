@@ -23,9 +23,7 @@ if (isset($_GET['user'])) {
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2">
        <div class="avatar">
          <div class="w-50 rounded-full ">
-        <figure object-scale-right">
           <img id="gebruikerFoto" src="../public/img/'.$row['profielfoto'].'" alt="'.$row['profielfoto'].'"/>
-        </figure>
         </div>
         </div>
 
