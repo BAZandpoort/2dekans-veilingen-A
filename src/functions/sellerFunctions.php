@@ -33,10 +33,6 @@ function getProductPicture($connection,$productID) {
     return getProduct($connection,$productID)->fetch_assoc()['foto'];
 }
 
-function getProductInfo($connection, $productID) {
-    return ($connection->query("SELECT * FROM tblproducten WHERE productid = '".$productID."'"));
-};
-
 function getSeller($connection, $sellerID) {
     return ($connection->query("SELECT * FROM tblgebruikers WHERE gebruikerid = '".$sellerID."'")); 
 };

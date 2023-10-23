@@ -68,7 +68,7 @@ if($hours <= 0){
 <body class="bg-[#F1FAEE]">
 <?php
 if (isset($_GET['gekozenProduct'])) {
-    foreach(getProductInfo($mysqli, $_GET['gekozenProduct']) as $row) {
+    foreach(getProduct($mysqli, $_GET['gekozenProduct']) as $row) {
       echo '
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2 border-base-300 m-4">
