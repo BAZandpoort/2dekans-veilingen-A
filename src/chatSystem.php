@@ -14,20 +14,32 @@
     <?php
     $data = getChatData($mysqli); 
     foreach ($data as $value) {
-      $data2 = getZender($mysqli, $_SESSION["login"]); 
+      $data2 = getZender($mysqli, $_SESSION["login"])[0]  ; 
       if (($value["zenderVoornaam"] == $data2["voornaam"])&&($value["zenderAchternaam"] == $data2["naam"])) {
        
       echo '
-    <div class="flex flex-col">
 <div class="chat chat-start">
+<div class="chat-header">';
+    echo $value["zenderVoornaam"]; 
+  echo'
+  </div>
   <div class="chat-bubble">'.$value["bericht"].'</div>
   <div class="chat-footer opacity-50">
-  </div>s
+  </div>
 </div>
-<div class="flex flex-row">
     ';
   } else {
-
+    echo '
+<div class="chat chat-end">
+<div class="chat-header">';
+    echo $value["zenderVoornaam"]; 
+  echo'
+  </div>
+  <div class="chat-bubble">'.$value["bericht"].'</div>
+  <div class="chat-footer opacity-50">
+  </div>
+</div>
+    ';
   }
 }
   echo '
