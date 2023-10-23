@@ -65,7 +65,7 @@
             </div>
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= __('Minimum price')?></label>
-              <input type="number" name="prijs" placeholder=<?= __('Minimum price')?> class="input input-bordered w-full max-w-md text-black bg-white" required />
+              <input type="number" name="prijs" placeholder=<?= __('Minimum price')?> step="0.01" min="0.00" class="input input-bordered w-full max-w-md text-black bg-white" required />
             </div>
           </div>
           <div class="flex flex-row gap-2">
