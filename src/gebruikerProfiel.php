@@ -22,7 +22,7 @@ if (isset($_GET['user'])) {
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2">
        <div class="avatar">
-         <div class="w-50 rounded-full ">
+         <div class="h-60 w-60 rounded-full ">
           <img id="gebruikerFoto" src="../public/img/'.$row['profielfoto'].'" alt="'.$row['profielfoto'].'"/>
         </div>
         </div>
@@ -45,19 +45,8 @@ if (isset($_GET['user'])) {
          <div class="card flex-shrink-0 w-full max-w-sm bg-base-100">
          <div class="card-body">
            <h2 class="text-2xl font-bold">Overall Review</h2>
-                <div class="rating rating-lg rating-half">
-                    <input type="radio" name="rating-0" class="rating-hidden" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" />
-                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" />
-                </div>
+
+           <div class="radial-progress border-4 border-[#004D00]" style="--value:80;">80%</div>
            </div>
            </div>
 
@@ -67,17 +56,23 @@ if (isset($_GET['user'])) {
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_1.showModal()">Report</button>
                 <dialog id="my_modal_1" class="modal">
                      <div class="modal-box">
-                         <h3 class="font-bold text-lg">Template</h3>
-                             <p class="py-4">Template</p>
-                                 <div class="modal-action">
-                                     <form method="dialog">
-                                         <button class="btn">Cancel</button>
-                                    </form>
-                                 </div>
+                        <h3 class="font-bold text-lg">Geef score</h3>
+                        <input type="number" placeholder="0.0" class="input input-bordered" name="bod" step="1" min="0" max="10"/>               
+                        <p class="py-4">Geef reden voor je report</p>
+                        <textarea placeholder="Reden" class="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
+                        <div class="flex justify-between items-end">
+                            <button type="submit" class="btn btn-error" name="Report" >Report</button>
+                            <div class="modal-action">
+                                <form method="dialog" class="m-0">
+                                    <button class="btn btn-warning">Cancel</button>
+                                </form>
+                            </div>
+                        </div>    
                      </div>
                 </dialog>
                 </div>
-                </div>';
+                </div>
+            ';
                 if (isset($_SESSION["admin"])) {
                     echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
