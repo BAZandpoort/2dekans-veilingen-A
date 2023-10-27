@@ -1,51 +1,47 @@
 <?php
-include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
+include "./components/navbar.php";
+include "./functions/adminFunctions.php";
+
 if(isset($_POST["bied"])) {
   $bod = $_POST["bod"];
+  $product = $_POST["product"];
 
-  if ($_SESSION["productid"] == "empty") {
+  if (empty($product)) {
     header("location: overzichtVeilingen.php?errorNoProduct");
-
+    return;
+  }
+  
+  if(getProductSellerid($mysqli,$product) == $_SESSION["login"]) {
+    header("location: productDetails.php?error4&gekozenProduct=" .$product."");
+    return;
   }
 
-  if(getProductPrice($mysqli,$_SESSION["productid"]) > $bod) {
-      header("location: productDetails.php?errorUnderPrice&gekozenProduct=" .$_SESSION["productid"]."");
+  if(getProductPrice($mysqli,$product) > $bod) {
+      header("location: productDetails.php?errorUnderPrice&gekozenProduct=" .$product."");
       return;
 
   } else {
 
-
-
-  $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $_SESSION["productid"]."', '".$bod."', '".$gebruikerid."')";
+  $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('". $product."', '".$bod."', '".$_SESSION["login"]."')";
          if ($mysqli->query($sql)) {
-          $sql2 = "UPDATE tblproducten  SET prijs =  '" . $bod . "' WHERE productid = '" . $_SESSION["productid"] . "'";
+          $sql2 = "UPDATE tblproducten  SET prijs =  '" . $bod . "' WHERE productid = '" . $product . "'";
           if($mysqli->query($sql2)) {
 
             header("location: overzichtVeilingen.php?succes");
+            return;
           }
         } else {
           header("location: overzichtVeilingen.php?errorFailedToBid");
+          return;
         }
      
   }
 }
-if (!isset($_GET["gekozenProduct"])) {
-  header('location: overzichtVeilingen.php?errorNoProduct');
-}
-$_SESSION["productid"] = $_GET["gekozenProduct"];
 
-$dateNow = date("Y-m-d H:i:s");
-$start = strtotime($dateNow);
-$end = strtotime(getProductTime($mysqli,$_SESSION["productid"]));
-
-$hours = intval(($end - $start)/3600);
+$hours = getTimeDifference(getProductTime($mysqli,$_GET["gekozenProduct"]));
 if($hours <= 0){
   header('location: overzichtVeilingen.php?errorTimeDone');
-}
-
-if(getProductSellerid($mysqli,$_SESSION["productid"]) == $_SESSION["login"]) {
-      header("location: overzichtVeilingen.php?error4");
 }
 
 ?>
@@ -72,7 +68,7 @@ if(getProductSellerid($mysqli,$_SESSION["productid"]) == $_SESSION["login"]) {
 <body class="bg-[#F1FAEE]">
 <?php
 if (isset($_GET['gekozenProduct'])) {
-    foreach(getProductInfo($mysqli, $_GET['gekozenProduct']) as $row) {
+    foreach(getProduct($mysqli, $_GET['gekozenProduct']) as $row) {
       echo '
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2 border-base-300 m-4">
@@ -89,8 +85,14 @@ if (isset($_GET['gekozenProduct'])) {
                 <span>Error! Can not bid under minimal price.</span>
               </div>';
             }
+            if(isset($_GET["error4"])){
+              print'<div class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Error! Can not bid on your own product, you little cheater!</span>
+              </div>';
+            }
             print'<h2 class="text-2xl font-bold" id="productNaam"> '.$row['naam'].'</h2>
-              <p class="text-slate-400" id="productVerkoper">'.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</p>
+            <p class="text-slate-400 hover:text-blue-800"  id="productVerkoper"><a href="gebruikerProfiel.php?user=' . $row["verkoperid"] . '">'.getSellerName($mysqli, $row['verkoperid']).' '.getSellerLastName($mysqli, $row['verkoperid']).'</a></p>
               <div id="productprijs" class="badge badge-outline text-black"> € '.$row["prijs"].'</div>';
               if($row['categorie']){
                 print'<div id="productprijs" class="badge badge-outline text-black">'.$row["categorie"].'</div> ';
@@ -107,6 +109,9 @@ if (isset($_GET['gekozenProduct'])) {
               </label>
               <form method="post" action="productDetails.php" >
                 <label class="input-group">
+                  <?php
+                  echo '<input type="hidden" name="product" value="'.$_GET["gekozenProduct"].'"/>';
+                  ?>
                   <input type="number" placeholder="0.00" class="input input-bordered" name="bod" step="0.01" min="0.00"/>
                   <button type="submit" class="btn btn-warning" name="bied" >Bid</button>
               </form>
@@ -127,6 +132,8 @@ if (isset($_GET['gekozenProduct'])) {
       </div>
     <?php
     };
+} else {
+  header('location: overzichtVeilingen.php?errorNoProduct');
 };
     
 ?>

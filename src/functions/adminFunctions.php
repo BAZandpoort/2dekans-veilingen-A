@@ -7,4 +7,14 @@ function getTimeDifference($endTime) {
     $timeDifference = date("H:i:s", $timeDifference);
     return $timeDifference;
 }
+
+function deleteUser($connection, $gebruikerid) {
+    $resultaat = $connection->query("DELETE FROM tblgebruikers where gebruikerid = '". $gebruikerid."'");
+    return $resultaat;
+}
+
+function deleteProducts($connection, $verkoperid) {
+    $resultaat = $connection->query("DELETE FROM tblproducten where verkoperid = '". $verkoperid."'");
+    return $resultaat;
+}
 ?>
