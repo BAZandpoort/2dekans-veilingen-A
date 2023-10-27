@@ -35,4 +35,45 @@ function getAllPurchases($connection, $userid) {
         return $resultaat;
     }
 }
+
+function getLastPurchases($connection, $userid, $limit) {
+    $resultaat = $connection->query("SELECT tblproducten.foto, tblproducten.productid, tblproducten.naam AS naam_product, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum
+                                     FROM tblfacturen
+                                     INNER JOIN tblproducten ON (tblfacturen.productid = tblproducten.productid)
+                                     INNER JOIN tblgebruikers ON (tblproducten.verkoperid = tblgebruikers.gebruikerid)
+                                     WHERE tblfacturen.koperid = ".$userid."
+                                     LIMIT ".$limit."");
+    return $resultaat;
+}
+
+function getTotalBoughtProducts($connection, $userid) {
+    $resultaat = $connection->query("SELECT COUNT(tblfacturen.productid) AS count
+                                     FROM tblfacturen
+                                     WHERE tblfacturen.koperid = ".$userid."");
+    $row = $resultaat->fetch_assoc();
+
+    return $row['count'];
+}
+
+function getTotalExpenses($connection, $userid) {
+    $resultaat = $connection->query("
+    SELECT SUM(hoogste_bod) AS totale_omzet
+    FROM (
+        SELECT MAX(tblboden.bod) AS hoogste_bod
+        FROM tblboden
+        INNER JOIN tblproducten ON tblboden.productid = tblproducten.productid
+        INNER JOIN tblfacturen ON tblfacturen.koperid = tblboden.gebruikersid
+        WHERE tblfacturen.koperid = ".$userid."
+        AND CURRENT_TIMESTAMP > tblproducten.eindtijd
+        GROUP BY tblproducten.productid
+    ) AS subquery");
+
+    $row = $resultaat->fetch_assoc();
+
+    if($row['totale_omzet'] == null) {
+        return 0;
+    } else {
+        return $row['totale_omzet'];
+    }
+}
 ?> 
