@@ -1,6 +1,7 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
+include "./util.php";
 session_start();
 require 'lang.php';
 
