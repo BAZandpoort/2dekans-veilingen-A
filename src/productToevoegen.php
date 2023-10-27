@@ -37,11 +37,17 @@
     if (filesize($file_name) < 0) {
       echo "Error";
     }
-    if ((empty($_POST['file']))) {
-      if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
-        echo "Error, kon de foto niet verplaatsen.";
-      };
-    }
+    if(isset($file_name) && !empty($file_name)) {
+
+      $teller = 1;
+      while (file_exists($upload_dir . $file_name)) {
+          $file_info = pathinfo($file_name);
+          $new_file_name = $file_info['filename'] . $teller . "." . $file_info['extension'];
+          $file_name = $new_file_name;
+          $teller++;
+      }
+      move_uploaded_file($file_tmp, $upload_dir . $file_name);
+  }
 
 
     if (addProduct($mysqli, $userid, $naam, $beschrijving, $prijs, $categorie, $file_name, $eindtijd)) {

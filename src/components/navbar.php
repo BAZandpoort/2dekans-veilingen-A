@@ -88,6 +88,7 @@ require 'lang.php';
             </a>
         </li>
         <li><a><?= __('Settings')?></a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
         <li>
                         <a href="aankoopgeschiedenis.php" class="justify-between">
                             <?=__('Purchase History')?>
