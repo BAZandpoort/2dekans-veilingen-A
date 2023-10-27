@@ -39,6 +39,7 @@ if (isset($_GET['user'])) {
                          <p>' . $row['beschrijving'] .'</p>
                     </div>
             </details>
+            <button class="btn"><a href="chatSystem.php">live chat</a></button>
          </div>
          </div>
 

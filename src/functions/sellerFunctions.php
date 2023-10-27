@@ -45,7 +45,7 @@ function getSellerLastName($connection, $sellerID) {
     return getSeller($connection, $sellerID)->fetch_assoc()['naam'];
 };
 
-function getSellerProductInfo($connection, $verkoperid,) {
+function getSellerProductInfo($connection, $verkoperid) {
     return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
 };
 
