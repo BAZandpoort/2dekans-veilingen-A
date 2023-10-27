@@ -8,7 +8,7 @@ include "components/countdown.php";
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>title</title>
+    <title>Profiel gebruiker</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -65,7 +65,7 @@ if (isset($_GET['user'])) {
                         <p class="py-4">Geef reden voor je report</p>
                         <textarea placeholder="Reden" name="reden" class="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
                         <div class="flex justify-between items-end">
-                            <button type="submit" class="btn btn-error" name="Report" >Report</button>
+                            <button type="submit" class="btn btn-error" name="Report" action="gebruikerProfiel.php">Report</button>
                             <div class="modal-action">
                                 <form method="dialog" class="m-0">
                                     <button class="btn btn-warning">Cancel</button>
