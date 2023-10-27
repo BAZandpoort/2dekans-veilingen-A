@@ -22,7 +22,7 @@ if (isset($_GET['user'])) {
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2">
        <div class="avatar">
-         <div class="h-60 w-60 rounded-full ">
+         <div class="h-80 w-80 rounded-full ">
           <img id="gebruikerFoto" src="../public/img/'.$row['profielfoto'].'" alt="'.$row['profielfoto'].'"/>
         </div>
         </div>
@@ -31,8 +31,8 @@ if (isset($_GET['user'])) {
 
          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div class="card-body">
-            <h2 class="text-2xl font-bold"> ' .$row['voornaam'].' '.$row['naam'].'</h2>
-            <h2 class="text-2xl font-bold"> '.$row['email'].'</h2>
+            <h2 class="text-2xl font-bold">Naam:  ' .$row['voornaam'].' '.$row['naam'].'</h2>
+            <h2 class="text-2xl font-bold">Email:  '.$row['email'].'</h2>
             <details class="collapse bg-base-200">
                 <summary class="collapse-title text-xl font-medium">Description</summary>
                     <div class="collapse-content"> 
@@ -44,9 +44,15 @@ if (isset($_GET['user'])) {
 
          <div class="card flex-shrink-0 w-full max-w-sm bg-base-100">
          <div class="card-body">
-           <h2 class="text-2xl font-bold">Overall Review</h2>
+           <h2 class="text-2xl font-bold">Status</h2>
 
-           <div class="radial-progress border-4 border-[#004D00]" style="--value:80;">80%</div>
+           ';
+                if($row["admin"] == "1") {
+                echo'<h2 class="text-2xl font-bold text-lime-600">Admin</h2>';
+              } else {
+                echo'<h2 class="text-2xl font-bold text-lime-600">Gebruiker</h2>';
+              }
+             echo '
            </div>
            </div>
 
@@ -55,11 +61,9 @@ if (isset($_GET['user'])) {
            <h2 class="text-2xl font-bold">Report user</h2>
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_1.showModal()">Report</button>
                 <dialog id="my_modal_1" class="modal">
-                     <div class="modal-box">
-                        <h3 class="font-bold text-lg">Geef score</h3>
-                        <input type="number" placeholder="0.0" class="input input-bordered" name="bod" step="1" min="0" max="10"/>               
+                     <div class="modal-box">        
                         <p class="py-4">Geef reden voor je report</p>
-                        <textarea placeholder="Reden" class="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
+                        <textarea placeholder="Reden" name="reden" class="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
                         <div class="flex justify-between items-end">
                             <button type="submit" class="btn btn-error" name="Report" >Report</button>
                             <div class="modal-action">
@@ -77,16 +81,16 @@ if (isset($_GET['user'])) {
                     echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
            <h2 class="text-2xl font-bold">Check User Reports</h2>
-            <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_1.showModal()">User Reports</button>
-                <dialog id="my_modal_1" class="modal">
-                     <div class="modal-box">
-                         <h3 class="font-bold text-lg">Template reports</h3>
-                             <p class="py-4">Template reports</p>
-                                 <div class="modal-action">
-                                     <form method="dialog">
-                                         <button class="btn">Cancel</button>
-                                    </form>
-                                 </div>
+            <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_2.showModal()">User Reports</button>
+                <dialog id="my_modal_2" class="modal">
+                    <div class="modal-box">
+                      <h3 class="font-bold text-lg">Template reports</h3>
+                      <p class="py-4">Template reports</p>
+                             <div class="modal-action">
+                               <form method="dialog">
+                                 <button class="btn">Cancel</button>
+                               </form>
+                             </div>
                      </div>
                 </dialog>
                    <a href="verwijderGebruiker.php?verwijder=' . $row["gebruikerid"] . '" class="btn bg-red">Verwijder</a>';
