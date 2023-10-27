@@ -33,10 +33,6 @@ function getProductPicture($connection,$productID) {
     return getProduct($connection,$productID)->fetch_assoc()['foto'];
 }
 
-function getProductInfo($connection, $productID) {
-    return ($connection->query("SELECT * FROM tblproducten WHERE productid = '".$productID."'"));
-};
-
 function getSeller($connection, $sellerID) {
     return ($connection->query("SELECT * FROM tblgebruikers WHERE gebruikerid = '".$sellerID."'")); 
 };
@@ -123,4 +119,19 @@ function getAllSales ($connection, $sellerID) {
         return $resultaat;
     }
 }
+function getSellerProductInfo($connection, $verkoperid,) {
+    return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
+};
+
+function getProductPrice($connection,$productid){
+    return getProduct($connection, $productid)->fetch_assoc()['prijs'];
+}
+
+function getProductSellerid($connection,$productid){
+    return getProduct($connection, $productid)->fetch_assoc()['verkoperid'];
+}
+function getProductTime($connection,$productid){
+    return getProduct($connection,$productid)->fetch_assoc()['eindtijd'];
+}
+
 ?>
