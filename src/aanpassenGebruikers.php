@@ -3,7 +3,7 @@ session_start();
 require 'lang.php';
 ?>
 <!DOCTYPE html>
-<html lang="en" class="bg-[#F1FAEE]">
+<html lang="en" data-theme="<?php echo $_SESSION['theme'] ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

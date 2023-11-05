@@ -49,7 +49,7 @@
     }
   }
   ?>
-<body class="h-screen bg-[#F1FAEE]">
+<body class="h-screen" data-theme="<?php echo $_SESSION['theme'] ?>">
   <div>
     <div class="flex justify-start items-start">
       <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a> 

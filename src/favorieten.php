@@ -15,7 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title><?= Vertalen('Document')?></title>
 </head>
-<body class="min-h-screen bg-[#F1FAEE]">
+<body class="min-h-screen" data-theme="<?php echo $_SESSION['theme'] ?>">
     <div class="overflow-x-auto max-w-4xl mx-auto p-3">
         <table class="table bg-white shadow-lg">
             <thead>

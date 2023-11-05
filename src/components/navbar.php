@@ -1,7 +1,7 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
-include "./util.php";
+include "util.php";
 session_start();
 require 'lang.php';
 
@@ -9,15 +9,12 @@ require 'lang.php';
 $gebruiker = isset($_SESSION['login']) ? $_SESSION['login'] : null;
 
 if ($gebruiker) {
-  $change_theme = fetch("SELECT * from tblgebruiker_profile Where userid = ?",
+  $change_theme = fetch("SELECT * from tblgebruikers Where gebruikerid = ?",
   ['type' => 'i', 'value' => $_SESSION["login"]]);
-
-
   $theme = ($change_theme["theme"] === 'dark') ? 'light' : 'dark';
-  $themetest='dark';
 }
 ?>
-<div class="navbar bg-[#F1FAEE]">
+<div class="navbar" data-theme="<?php echo $_SESSion['theme'] ?>">
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>
     </div>
@@ -28,7 +25,8 @@ if ($gebruiker) {
                 <?php
                 foreach (getAllCategories($mysqli) as $row) {
                     echo '
-                          <li><a href="producten.php?gekozenCategorie=' . $row['categorienaam'] . '" name="categorieID">' . $row['categorienaam'] . '</a></li>
+                        
+                        <li><a href="producten.php?gekozenCategorie=' . $row['categorienaam'] . '" name="categorieID">' . $row['categorienaam'] . '</a></li>
                         ';
                 };
                 ?>
@@ -36,14 +34,8 @@ if ($gebruiker) {
         </details>
         <input type="text" placeholder=<?= Vertalen('Search')?> class="input input-bordered bg-transparent md:w-auto" />
     </div>
-    <div class="navbar-end">
-    <div class="dropdown">
-  <label tabindex="0" class="btn btn-ghost m-1"><?= Vertalen('Dark')?></label>
-  <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black text-white rounded-box w-52">
-    <li><a href="index.php?darkmode=light">white</a></li>
-    <li><a href="index.php?darkmode=dark">black</a></li>
-  </ul>
-</div>             
+    <div class="navbar-end"> 
+        <button class="btn btn-ghost" ><a href="change-theme.php"><?php echo $theme ?></a> </button>      
     <div class="dropdown">
   <label tabindex="0" class="btn btn-ghost m-1"><?= Vertalen('Languages')?></label>
   <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black text-white rounded-box w-52">

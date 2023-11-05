@@ -14,7 +14,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Dashboard</title>
 </head>
-<body class="bg-[#F1FAEE]">
+<body data-theme="<?php echo $_SESSION['theme'] ?>">
     
 </body>
 </html>

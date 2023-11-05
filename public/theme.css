@@ -38,10 +38,10 @@
     --nf: 219 14% 22%;
   
     /* Base */
-    --b1: 0 0% 100%;
-    --b2: 0 0% 95%;
-    --b3: 180 2% 90%;
-    --bc: 215 28% 17%;
+    --b1: #F1FAEE;
+    --b2: #F1FAEE;
+    --b3: #F1FAEE;
+    --bc: #F1FAEE;
     
     --rounded-box: 1rem;
     --rounded-btn: 0.5rem;
