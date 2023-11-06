@@ -16,6 +16,7 @@ include "components/countdown.php";
 <?php
 if (isset($_GET['user'])) {
     foreach(getSeller($mysqli, $_GET['user']) as $row) {
+      $_SESSION["reportUser"] = $_GET["user"];
 
       echo'
       <div class="divider lg:divider-horizontal bg-base-50"></div>
@@ -55,7 +56,7 @@ if (isset($_GET['user'])) {
              echo '
            </div>
            </div>
-
+           
            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
            <h2 class="text-2xl font-bold">Report user</h2>
@@ -66,6 +67,7 @@ if (isset($_GET['user'])) {
                         <textarea placeholder="Reden" name="reden" class="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
                         <div class="flex justify-between items-end">
                             <button type="submit" class="btn btn-error" name="Report" action="gebruikerProfiel.php">Report</button>
+
                             <div class="modal-action">
                                 <form method="dialog" class="m-0">
                                     <button class="btn btn-warning">Cancel</button>
