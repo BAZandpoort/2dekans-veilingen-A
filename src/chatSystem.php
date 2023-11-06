@@ -13,24 +13,23 @@
     ?>
     <?php
     if (isset($_POST["knop"])) {
-      $data3 = getChatData($mysqli); 
-      foreach ($data3 as $value2) { 
-        $zenderVoornaam = $value2["zenderVoornaam"]; 
-        $zenderAchternaam = $value2["zenderAchternaam"];
-        $ontvanger = $value2["ontvanger"];
-      }
+      $data3 = getZender($mysqli, $_SESSION["login"])[0]; 
+        $zenderVoornaam = $data3["voornaam"]; 
+        $zenderAchternaam = $data3["naam"];
+        $user = $_POST["user"];
+        $ontvanger = getOntvanger($mysqli, $user); 
+        var_dump(getOntvanger($mysqli, $_POST["user"])); 
       $bericht = $_POST["bericht"]; 
       InsertIntoChatTbl($mysqli, $ontvanger, $zenderVoornaam, $zenderAchternaam, $bericht); 
       
     }
+    $ontvanger = $_GET["user"];
     $data = getChatData($mysqli); 
     foreach ($data as $value) {
-      $data2 = getZender($mysqli, $_SESSION["login"])[0]  ; 
+      $data2 = getZender($mysqli, $_SESSION["login"])[0]; 
       $zenderVoornaam = $value["zenderVoornaam"]; 
       $zenderAchternaam = $value["zenderAchternaam"];
-      $ontvanger = $value["ontvanger"];
       if (($zenderVoornaam == $data2["voornaam"])&&($zenderAchternaam == $data2["naam"])) {
-       
       echo '
 <div class="chat chat-start">
 <div class="chat-header">';
@@ -58,6 +57,7 @@
 }
   echo '
   <form method="post" action="chatSystem.php">
+  <input type="hidden" value="'.$ontvanger.'" name="user">
 <textarea class="textarea textarea-bordered" placeholder="write your message here" name="bericht"></textarea>
 <button type="submit" class="btn" name="knop">send</button>
 </form>

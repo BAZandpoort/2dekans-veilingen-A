@@ -11,12 +11,17 @@ return $mysqli->query($sql);
  
 }
 
-function deleteChatTbl ($mysqli) {
-
-}
-
 function getZender ($mysqli, $gebruikersid) {
  $resultaat = $mysqli -> query ("SELECT * FROM tblgebruikers WHERE gebruikerid =".$gebruikersid); 
  return ($resultaat ->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
+}
+
+function getOntvanger ($mysqli, $user) {
+    $resultaat = $mysqli->query("SELECT * FROM tblgebruikers WHERE gebruikerid = ".$user);
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
+}
+
+function deleteChatTbl ($mysqli) {
+
 }
 ?>
