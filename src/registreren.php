@@ -13,7 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title><?= Vertalen('Register')?></title>
 </head>
-<body>
+<body data-theme="<?php echo $_SESSION['theme'] ?>">
 <div class="flex justify-start items-start">
     <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a> 
     <div class="card w-full max-w-xl h-screen shadow-2xl bg-white ml-auto">

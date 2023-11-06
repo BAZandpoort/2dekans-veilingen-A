@@ -3,7 +3,7 @@ session_start();
 require 'lang.php';
 ?>
 <!DOCTYPE html>
-<html lang="en" data-theme="<?php echo $_SESSION['theme'] ?>">
+<html lang="en" data-theme="<?php $_SESSION['theme'] ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,7 @@ require 'lang.php';
 </head>
 
 <?php
+
 include "connect.php";
 include "functions/userFunctions.php";
 
@@ -47,7 +48,7 @@ if (isset($_POST["wijzigen"])) {
 
 }
     foreach(getUser($mysqli,$_SESSION["login"]) as $row){
-        print'<body>
+        print'<body '?> data-theme="<?php echo $_SESSION["theme"] ?>" <?php echo' >
         <div>
           <div class="flex justify-start items-start">
             <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"></a> 

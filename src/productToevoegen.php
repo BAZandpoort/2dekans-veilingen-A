@@ -7,7 +7,7 @@
   <title>Add products</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
   <?php
   include "connect.php";
   include "functions/sellerFunctions.php";

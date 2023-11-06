@@ -11,10 +11,12 @@ $gebruiker = isset($_SESSION['login']) ? $_SESSION['login'] : null;
 if ($gebruiker) {
   $change_theme = fetch("SELECT * from tblgebruikers Where gebruikerid = ?",
   ['type' => 'i', 'value' => $_SESSION["login"]]);
-  $theme = ($change_theme["theme"] === 'dark') ? 'light' : 'dark';
+  $theme = ($change_theme['theme'] === 'dark') ? 'dark' : 'retro';
+  $_SESSION["theme"] = $theme;
 }
 ?>
-<div class="navbar" data-theme="<?php echo $_SESSion['theme'] ?>">
+
+<div class="navbar" data-theme="<?php $_SESSION["theme"] ?>">
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>
     </div>
@@ -35,7 +37,7 @@ if ($gebruiker) {
         <input type="text" placeholder=<?= Vertalen('Search')?> class="input input-bordered bg-transparent md:w-auto" />
     </div>
     <div class="navbar-end"> 
-        <button class="btn btn-ghost" ><a href="change-theme.php"><?php echo $theme ?></a> </button>      
+        <button class="btn btn-ghost" ><a href="change-theme.php">Theme</a> </button>      
     <div class="dropdown">
   <label tabindex="0" class="btn btn-ghost m-1"><?= Vertalen('Languages')?></label>
   <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black text-white rounded-box w-52">

@@ -24,6 +24,7 @@ function handleTheme($data) {
     ['type' => 's', 'value' => $theme],
     ['type' => 'i', 'value' => $gebruiker],
   );
+  
   var_dump($change_theme);
   $_SESSION['gebruiker']['theme'] = $theme;
   
