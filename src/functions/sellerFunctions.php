@@ -45,7 +45,7 @@ function getSellerLastName($connection, $sellerID) {
     return getSeller($connection, $sellerID)->fetch_assoc()['naam'];
 };
 
-function getSellerProductInfo($connection, $verkoperid,) {
+function getSellerProductInfo($connection, $verkoperid) {
     return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
 };
 
@@ -59,5 +59,12 @@ function getProductSellerid($connection,$productid){
 function getProductTime($connection,$productid){
     return getProduct($connection,$productid)->fetch_assoc()['eindtijd'];
 }
+
+function getSellerProducts($connection, $sellerID){
+    $resultaat = $connection->query("SELECT * FROM tblproducten WHERE verkoperid = '".$sellerID."'");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
+    
+};
+
 
 ?>

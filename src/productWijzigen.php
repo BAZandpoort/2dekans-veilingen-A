@@ -12,8 +12,9 @@
 include "connect.php";
 include "functions/sellerFunctions.php";
 include "functions/userFunctions.php";
-
 session_start();
+require 'lang.php';
+
 
 /*if(!isset($_SESSION['login'])){
   header('location: index.php');
@@ -22,8 +23,8 @@ session_start();
 
 
 if (isset($_POST['submit'])) {
-  $productID =$_POST['productID'];
-	$naam= $_POST['naam'];
+    $productID =$_POST['productID'];
+	  $naam= $_POST['naam'];
   	$prijs= $_POST['prijs'];
   	$beschrijving= $_POST['beschrijving'];
   	$categorie= $_POST['categorie'];
