@@ -17,7 +17,7 @@ function handleTheme($data) {
   $change_theme = fetch("SELECT * from tblgebruikers Where gebruikerid = ?",
   ['type' => 'i', 'value' => $_SESSION["login"]]);
   
-  $theme = $change_theme['theme'] === 'dark' ? 'light' : 'dark';
+  $theme = $change_theme['theme'] === 'dark' ? 'retro' : 'dark';
  
   $change_theme = insert(
     'UPDATE tblgebruikers SET theme = ? WHERE gebruikerid = ?',

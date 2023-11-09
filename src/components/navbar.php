@@ -15,8 +15,8 @@ if ($gebruiker) {
   $_SESSION["theme"] = $theme;
 }
 ?>
-
-<div class="navbar" data-theme="<?php $_SESSION["theme"] ?>">
+<div data-theme="<?php $_SESSION["theme"] ?>" >
+<div class="navbar">
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>
     </div>
@@ -37,7 +37,7 @@ if ($gebruiker) {
         <input type="text" placeholder=<?= Vertalen('Search')?> class="input input-bordered bg-transparent md:w-auto" />
     </div>
     <div class="navbar-end"> 
-        <button class="btn btn-ghost" ><a href="change-theme.php">Theme</a> </button>      
+    
     <div class="dropdown">
   <label tabindex="0" class="btn btn-ghost m-1"><?= Vertalen('Languages')?></label>
   <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-black text-white rounded-box w-52">
@@ -49,6 +49,9 @@ if ($gebruiker) {
         <?php
         if (isset($_SESSION["login"])) {
         ?>
+        <div>
+        <button class="btn btn-ghost" ><a href="change-theme.php">Theme</a> </button>
+        </div>
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle">
                     <div class="indicator">
@@ -79,7 +82,7 @@ if ($gebruiker) {
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                                 </div>
                             </label>
-                        </div>
+                        </div>  
                         <?php
                         }
                         ?>
@@ -116,6 +119,7 @@ if ($gebruiker) {
             print '<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
         }
 ?>
+</div>
 </div>
 </div>
 </html>
