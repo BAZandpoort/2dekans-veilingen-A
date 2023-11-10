@@ -12,7 +12,7 @@ include "components/countdown.php";
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#F1FAEE]">
+<body data-theme="<?php echo $_SESSION['theme'] ?>">
 <?php
 if (isset($_GET['user'])) {
     foreach(getSeller($mysqli, $_GET['user']) as $row) {

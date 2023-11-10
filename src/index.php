@@ -1,5 +1,16 @@
 <?php
 include "overzichtVeilingen.php";
+include "connect.php";
+
+$gebruikerid = isset($_SESSION["login"]) ?  $_SESSION["login"] : null;
+if ($gebruikerid) {
+$data = fetch('SELECT * FROM tblgebruikers WHERE gebruikerid = ?',[
+'type' => 'i',
+'value' => $gebruikerid,
+]);
+$theme = $data["theme"]=='retro' ? 'retro' : 'dark';
+$_SESSION['theme'] = $theme;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +22,7 @@ include "overzichtVeilingen.php";
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="h-screen bg-[#F1FAEE]">
+<body class="h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
   
 </body>
 </html>
