@@ -18,12 +18,13 @@
         $zenderAchternaam = $data3["naam"];
         $user = $_POST["user"];
         $ontvanger = getOntvanger($mysqli, $user); 
-        var_dump(getOntvanger($mysqli, $_POST["user"])); 
       $bericht = $_POST["bericht"]; 
       InsertIntoChatTbl($mysqli, $ontvanger, $zenderVoornaam, $zenderAchternaam, $bericht); 
       
     }
-    $ontvanger = $_GET["user"];
+    if (!empty($_GET["user"])) {
+      $ontvanger = $_GET["user"];
+    }
     $data = getChatData($mysqli); 
     foreach ($data as $value) {
       $data2 = getZender($mysqli, $_SESSION["login"])[0]; 
