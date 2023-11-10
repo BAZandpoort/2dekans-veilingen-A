@@ -51,7 +51,9 @@ if ($gebruiker) {
         if (isset($_SESSION["login"])) {
         ?>
         <div>
-        <button class="btn btn-ghost" ><a href="change-theme.php">Theme</a> </button>
+        <a href="change-theme.php">
+            <button class="btn btn-ghost" >Theme</button>
+        </a>
         </div>
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle">
@@ -60,9 +62,13 @@ if ($gebruiker) {
                         $userid = $_SESSION["login"];
                         $favorites = getAllFavourites($mysqli, $userid)->fetch_all(MYSQLI_ASSOC);
                         $count = isset($favorites["productId"]) ? 1 : count($favorites);
+                        ($_SESSION["theme"] == 'retro')
+                        ? $favoriteImage= "favourite.png"
+                        : $favoriteImage= "favourite-white.png"; 
+                        
                         if ($count == 0) {
-                        ?>
-                            <img src="../public/img/favourite.png" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            print'<img src="../public/img/' .$favoriteImage.'"  xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        ';?>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                         </div>
                         </label>
@@ -75,11 +81,11 @@ if ($gebruiker) {
                     </div>
                         <?php
                         }else{
-                            print' <span class="badge badge-sm indicator-item">' . $count . '</span>'
-                        ?>              
+                            print' <span class="badge badge-sm indicator-item">' . $count . '</span>
                                     <a href="favorieten.php">
-                                        <img href="" src="../public/img/favourite.png" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    </a>
+                                        <img src="../public/img/' .$favoriteImage.'" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    ';?>
+                                        </a>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                                 </div>
                             </label>

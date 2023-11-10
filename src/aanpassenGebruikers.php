@@ -56,7 +56,8 @@ if (isset($_POST["wijzigen"])) {
 
 }
     foreach(getUser($mysqli,$_SESSION["login"]) as $row){
-        print'<body '?> data-theme="<?php echo $_SESSION["theme"] ?>" <?php echo' >
+      ?>  
+      <body class= "h-screen" data-theme="<?php echo $_SESSION["theme"] ?>" <?php echo' >
         <div>
           <div class="flex justify-start items-start">
             <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"></a> 
