@@ -50,7 +50,7 @@ if (isset($_POST["wijzigen"])) {
         print'<body>
         <div>
           <div class="flex justify-start items-start">
-            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"></a> 
+          <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">'?><?= __('2nd chance auctions')?><?php echo'</a> 
           </div>
           <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php" enctype="multipart/form-data">
             <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">

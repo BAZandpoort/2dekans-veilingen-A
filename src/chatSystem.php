@@ -16,10 +16,10 @@
       $data3 = getZender($mysqli, $_SESSION["login"])[0]; 
         $zenderVoornaam = $data3["voornaam"]; 
         $zenderAchternaam = $data3["naam"];
-        $user = $_POST["user"];
-        $ontvanger = getOntvanger($mysqli, $user); 
+        $ontvanger = $_POST["user"];
+        $ontvangerNaam = getOntvanger($mysqli, $ontvanger); 
       $bericht = $_POST["bericht"]; 
-      InsertIntoChatTbl($mysqli, $ontvanger, $zenderVoornaam, $zenderAchternaam, $bericht); 
+      InsertIntoChatTbl($mysqli, $ontvangerNaam, $zenderVoornaam, $zenderAchternaam, $bericht);
       
     }
     if (!empty($_GET["user"])) {

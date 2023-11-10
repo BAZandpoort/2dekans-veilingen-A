@@ -22,6 +22,6 @@ function getOntvanger ($mysqli, $user) {
 }
 
 function deleteChatTbl ($mysqli) {
-
+    
 }
 ?>
