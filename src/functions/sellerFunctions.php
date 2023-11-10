@@ -45,7 +45,81 @@ function getSellerLastName($connection, $sellerID) {
     return getSeller($connection, $sellerID)->fetch_assoc()['naam'];
 };
 
-function getSellerProductInfo($connection, $verkoperid) {
+function getTotalSoldProducts($connection, $sellerID) {
+    $resultaat = $connection->query("SELECT COUNT(tblproducten.naam) AS total_sold FROM tblfacturen
+                                     INNER JOIN tblproducten ON (tblproducten.productid = tblfacturen.productid) 
+                                     WHERE tblproducten.verkoperid = ".$sellerID." AND CURRENT_TIMESTAMP > eindtijd");
+    
+    $row = $resultaat->fetch_assoc();
+    return $row['total_sold'];
+}
+
+function getTotalActiveProducts($connection, $sellerID) {
+    $resultaat = $connection->query("SELECT COUNT(naam) AS total_active_products FROM tblproducten WHERE verkoperid = ".$sellerID." AND CURRENT_TIMESTAMP < eindtijd");
+
+    $row = $resultaat->fetch_assoc();
+    return $row['total_active_products'];
+}
+
+function getActiveProducts ($connection, $sellerID) {
+    $resultaat = $connection->query("SELECT tblproducten.productid, tblproducten.naam AS naam_product, tblproducten.foto, tblproducten.startdatum AS datum, tblgebruikers.voornaam, tblgebruikers.naam FROM tblproducten INNER JOIN tblgebruikers ON (tblgebruikers.gebruikerid = tblproducten.verkoperid) WHERE verkoperid = ".$sellerID." AND CURRENT_TIMESTAMP < eindtijd");
+
+    if(mysqli_num_rows($resultaat) == 0) {
+        return null;
+    } else {
+        return $resultaat;
+    }
+}
+
+function getTotalRevenue($connection, $sellerID) {
+    $resultaat = $connection->query("
+    SELECT SUM(hoogste_bod) AS totale_omzet
+    FROM (
+        SELECT MAX(tblboden.bod) AS hoogste_bod
+        FROM tblboden
+        INNER JOIN tblproducten ON tblboden.productid = tblproducten.productid
+        WHERE tblproducten.verkoperid = ".$sellerID."
+        AND CURRENT_TIMESTAMP > tblproducten.eindtijd
+        GROUP BY tblproducten.productid
+    ) AS subquery");
+
+    $row = $resultaat->fetch_assoc();
+
+    if($row['totale_omzet'] == null) {
+        return 0;
+    } else {
+        return $row['totale_omzet'];
+    }
+}
+
+function getLastSales ($connection, $sellerID, $limit) {
+    $resultaat = $connection->query("
+    SELECT tblproducten.naam AS naam_product, tblproducten.productid, tblproducten.foto, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum 
+    FROM tblfacturen 
+    INNER JOIN tblproducten ON tblproducten.productid = tblfacturen.productid
+    INNER JOIN tblgebruikers ON tblgebruikers.gebruikerid = tblproducten.verkoperid
+    WHERE tblproducten.verkoperid = ".$sellerID."
+    LIMIT ".$limit."
+    ");
+
+    return $resultaat;
+}
+
+function getAllSales ($connection, $sellerID) {
+    $resultaat = $connection->query(" SELECT tblproducten.naam AS naam_product, tblproducten.productid, tblproducten.foto, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum 
+                                      FROM tblfacturen 
+                                      INNER JOIN tblproducten ON tblproducten.productid = tblfacturen.productid
+                                      INNER JOIN tblgebruikers ON tblgebruikers.gebruikerid = tblproducten.verkoperid
+                                      WHERE tblproducten.verkoperid = ".$sellerID."
+                                    ");
+
+    if(mysqli_num_rows($resultaat) == 0) {
+        return null;
+    } else {
+        return $resultaat;
+    }
+}
+function getSellerProductInfo($connection, $verkoperid,) {
     return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
 };
 
