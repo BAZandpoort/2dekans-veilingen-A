@@ -36,13 +36,20 @@ if (isset($_POST['submit'])) {
   if (filesize( $file_name ) < 0){
   echo "Error";
   }
-  if((empty($_POST['file']))){
+  if(isset($file_name) && !empty($file_name)) {
+
+    $teller = 1;
+    while (file_exists($upload_dir . $file_name)) {
+        $file_info = pathinfo($file_name);
+        $new_file_name = $file_info['filename'] . $teller . "." . $file_info['extension'];
+        $file_name = $new_file_name;
+        $teller++;
+    }
     if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
-        echo "Error, kon de foto niet verplaatsen.";
-      };
-      modifyProduct2($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie);
-  }
-  var_dump($file_name);
+      echo "Error, kon de foto niet verplaatsen.";
+    };
+    modifyProduct2($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie);
+}
     if(modifyProduct($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie, $file_name)){
     header('location: index.php');
     }else{

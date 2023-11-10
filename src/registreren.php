@@ -63,13 +63,22 @@
                 $upload_dir = $_SERVER["DOCUMENT_ROOT"]."/2dekans-veilingen-A/public/img/";
                 $file_name = $_FILES['file']['name'];
                 $file_tmp = $_FILES['file']['tmp_name'];
+                
+                if(isset($file_name) && !empty($file_name)) {
 
-                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
-                if((empty($_POST['file']))) {
-                    move_uploaded_file($file_tmp, $upload_dir.$file_name);
+                    $teller = 1;
+                    while (file_exists($upload_dir . $file_name)) {
+                        $file_info = pathinfo($file_name);
+                        $new_file_name = $file_info['filename'] . $teller . "." . $file_info['extension'];
+                        $file_name = $new_file_name;
+                        $teller++;
+                    }
+                    move_uploaded_file($file_tmp, $upload_dir . $file_name);
                 }
 
-                /* Kan nog aangepast worden*/
+                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
+
+                /* Kan nog aangepast worden */
                 header("Location: login.php");
             }
         }

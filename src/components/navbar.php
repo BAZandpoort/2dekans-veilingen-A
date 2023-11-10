@@ -106,6 +106,7 @@ if ($gebruiker) {
             </a>
         </li>
         <li><a><?= Vertalen('Settings')?></a></li>
+        <li><a href="dashboard.php">Dashboard</a></li>
         <li>
                         <a href="aankoopgeschiedenis.php" class="justify-between">
                             <?=Vertalen('Purchase History')?>
