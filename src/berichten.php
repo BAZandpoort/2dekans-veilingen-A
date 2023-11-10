@@ -1,5 +1,7 @@
 <?php
 include "components/navbar.php"; 
+include "functions/chatFunctions.php";  
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +15,9 @@ include "components/navbar.php";
     <?php
         $user = $_SESSION["login"];
         $data = getnotification($mysqli, $user);
-        echo $data; 
+        foreach ($data as $value) {
+            echo'<a href="'.$value["link"].'">'.$value["notificatie"].'</a>'; 
+        }
     ?>
 </body>
 </html>
