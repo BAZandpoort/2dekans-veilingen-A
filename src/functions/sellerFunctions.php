@@ -119,7 +119,7 @@ function getAllSales ($connection, $sellerID) {
         return $resultaat;
     }
 }
-function getSellerProductInfo($connection, $verkoperid,) {
+function getSellerProductInfo($connection, $verkoperid) {
     return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
 };
 

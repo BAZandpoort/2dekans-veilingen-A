@@ -21,7 +21,8 @@ function getOntvanger ($mysqli, $user) {
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['voornaam']; 
 }
 
-function deleteChatTbl ($mysqli) {
-    
+function getnotification ($mysqli, $user) {
+    $resultaat = $mysqli ->query("SELECT* FROM tblnotifications WHERE ontvangersid=".$user); 
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }
 ?>
