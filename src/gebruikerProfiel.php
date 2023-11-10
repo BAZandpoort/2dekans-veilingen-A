@@ -1,6 +1,7 @@
 <?php
 include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
+include "./functions/adminFunctions.php";
 include "components/countdown.php";
 ?>
 
@@ -14,6 +15,26 @@ include "components/countdown.php";
 </head>
 <body class="bg-[#F1FAEE]">
 <?php
+
+if (isset($_POST["Report"])) {
+  $reden = $_POST["reden"];
+
+  if(addReport($mysqli, $_SESSION["reportUser"], $_SESSION["login"], $reden, 0)) {
+    echo'    
+    <div class="form-control flex justify-center items-center">
+      <div class="  max-w-lg mx-auto justify-center items-center">
+        <img id="Support" src="../public/img/Support.png" alt="Support.png">
+      </div>
+        <a href="gebruikerProfiel.php?user=' . $_SESSION["reportUser"] .'" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Responsive</button>
+      
+    </div>';
+  }
+}
+
+
+
+
+
 if (isset($_GET['user'])) {
     foreach(getSeller($mysqli, $_GET['user']) as $row) {
       $_SESSION["reportUser"] = $_GET["user"];
@@ -62,11 +83,14 @@ if (isset($_GET['user'])) {
            <h2 class="text-2xl font-bold">Report user</h2>
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_1.showModal()">Report</button>
                 <dialog id="my_modal_1" class="modal">
-                     <div class="modal-box">        
+                     <div class="modal-box">
+                     <form method="post" action="gebruikerProfiel.php">      
                         <p class="py-4">Geef reden voor je report</p>
                         <textarea placeholder="Reden" name="reden" class="textarea textarea-bordered textarea-md w-full max-w-xs" ></textarea>
                         <div class="flex justify-between items-end">
-                            <button type="submit" class="btn btn-error" name="Report" action="gebruikerProfiel.php">Report</button>
+                            <button type="submit" class="btn btn-error" name="Report">Report</button>
+                             </form>
+
 
                             <div class="modal-action">
                                 <form method="dialog" class="m-0">
@@ -79,7 +103,7 @@ if (isset($_GET['user'])) {
                 </div>
                 </div>
             ';
-                if (isset($_SESSION["admin"])) {
+                if (!isset($_SESSION["admin"])) {
                     echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
            <h2 class="text-2xl font-bold">Check User Reports</h2>
@@ -87,8 +111,44 @@ if (isset($_GET['user'])) {
                 <dialog id="my_modal_2" class="modal">
                     <div class="modal-box">
                       <h3 class="font-bold text-lg">Template reports</h3>
-                      <p class="py-4">Template reports</p>
-                             <div class="modal-action">
+                      <div class="overflow-x-auto h-96">
+                      <table class="table table-pin-rows">';
+                      foreach (getReportedUsers($mysqli, $_SESSION['reportUser']) as $row) {
+                        echo "
+                        
+                        <tr>
+                      
+                            <td>
+                                <div class='flex items-center'>
+                                    <div>
+                                    <div class='font-bold'>Meldernummer:</div>
+                                    <div class='text-blue-700'>".$row['melderid']."</div>
+
+                                    
+                                    </div>
+                                </div>
+                            </td>
+                            <div class='font-bold'>Gegeven Reden: </div>
+                            <td class='text-center'>". $row["reden"] ."</td>
+                            <td>
+                            <div class='font-bold'>Behandeld: </div>";
+                            if($row["behandeld"] == 0) {
+                              echo "<p class='text-red-700'>✕</p>";
+                            } else {
+                              echo "<p class='text-lime-500'>✓</p>";
+                            }
+                            "
+                            </td>
+                          
+                        </tr>
+                       
+                        
+                        
+                        ";
+                    }
+                              echo '</table>
+                              </div>
+                              <div class="modal-action">
                                <form method="dialog">
                                  <button class="btn">Cancel</button>
                                </form>
@@ -110,6 +170,8 @@ if (isset($_GET['user'])) {
         <br>';
         
     }
+
+
 
     foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
 
@@ -177,6 +239,8 @@ if (isset($_GET['user'])) {
       ;
     };
 };
+
+
     
 ?>
 
