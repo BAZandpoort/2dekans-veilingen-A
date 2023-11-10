@@ -22,7 +22,7 @@ $_SESSION['theme'] = $theme;
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="h-screen" data-theme="<?php echo $_SESSION['theme'] ?>">
+<body class="h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
   
 </body>
 </html>

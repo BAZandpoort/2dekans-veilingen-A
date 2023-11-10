@@ -1,21 +1,22 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
-include "util.php";
+require_once "../src/components/util.php";
 session_start();
 require 'lang.php';
 
+$_SESSION["theme"] = 'retro';
 
 $gebruiker = isset($_SESSION['login']) ? $_SESSION['login'] : null;
 
 if ($gebruiker) {
   $change_theme = fetch("SELECT * from tblgebruikers Where gebruikerid = ?",
   ['type' => 'i', 'value' => $_SESSION["login"]]);
-  $theme = ($change_theme['theme'] === 'dark') ? 'dark' : 'retro';
+  $theme = ($change_theme['theme'] === 'retro') ? 'retro' : 'dark';
   $_SESSION["theme"] = $theme;
 }
 ?>
-<div data-theme="<?php $_SESSION["theme"] ?>" >
+<div data-theme='<?php $_SESSION["theme"] ?>'>
 <div class="navbar">
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>

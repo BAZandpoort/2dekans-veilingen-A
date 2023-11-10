@@ -1,14 +1,14 @@
 <?php
 session_start();
 include "./connect.php";
-require_once 'C:\xampp\htdocs\2dekansveilingen\src\components\util.php';
+require_once '../src/components/util.php';
 
 if (isset($_SESSION["login"])) {
   handleTheme($_SESSION);
   return;
 }
 
-//header('Location: /');
+header('Location: index.php');
 exit();
 
 function handleTheme($data) {
