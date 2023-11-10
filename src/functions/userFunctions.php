@@ -83,4 +83,41 @@ function getDataTblproducten($mysqli){
 function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
+
+function createSearchlist($connection, $searchItem) {
+    $lijst = array();
+    $item = array(
+                    "productid" => "",
+                    "verkoperid" => "",
+                    "foto" => "",
+                    "naam" => "",
+                    "beschrijving" => "",
+                    "categorie" => "",
+                    "startdatum" => "",
+                    "einddatum" => ""
+                );
+    
+    foreach(getSearchResults($connection, $searchItem) as $row) {
+        $item[0] = $row['productid'];
+        $item[1] = $row['verkoperid'];
+        $item[2] = $row['foto'];
+        $item[3] = $row['naam'];
+        $item[4] = $row['beschrijving'];
+        $item[5] = $row['categorie'];
+        $item[6] = $row['startdatum'];
+        $item[7] = $row['einddatum'];
+        array_push($lijst, $item);
+    };
+
+    return $lijst;
+}
+
+function getSearchResults($connection, $searchItem) {
+    return ($connection->query("SELECT * from tblproducten WHERE naam LIKE '".$searchItem."'"));
+}
+
+function getNumSearchResult($list) {
+    return count($list);
+}
+
 ?>

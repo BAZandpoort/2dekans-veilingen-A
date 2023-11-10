@@ -21,7 +21,17 @@ require 'lang.php';
                 ?>
             </ul>
         </details>
-        <input type="text" placeholder=<?= __('Search')?> class="input input-bordered bg-transparent md:w-auto" />
+        <?php
+            echo "
+                <form method='post' action='".basename($_SERVER['PHP_SELF'])."'>
+                    <input type='text' name='searchResult' placeholder='".__('Search')."' class='input input-bordered bg-transparent md:w-auto'/>
+                </form>
+            ";
+            if (isset($_POST['searchResult'])) {
+                $zoeklijst = createSearchlist($mysqli, $_POST['searchResult']);
+                header('Location: zoekresultaten.php?zoekresultatenlijst='.http_build_query($zoeklijst).'');
+            };
+        ?>
     </div>
     <div class="navbar-end">
     <div class="dropdown">
