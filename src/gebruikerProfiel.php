@@ -109,8 +109,28 @@ if (isset($_GET['user'])) {
         <br>';
         
     }
+    echo '
+<div class= "pl-10 flex flex-row ">';
+  foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
+        echo '
+        <div class="mr-4 mt-11 w-80  overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
+  <a href = "productDetails.php?gekozenProduct='.$row['productid'].'"><img id = "productFoto" class="h-48 w-full object-cover object-center" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'" /></a> 
+  <div class="p-4">
+    <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">'.$row['naam']. '</h2>
+    <p class="mb-2 text-base dark:text-gray-300 text-gray-700">'.$row['beschrijving']. '</p>
+    <div class="flex items-center">
+      <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">€ '.$row['prijs']. '</p>
+    </div>
+     <p class="mb-2 text-base dark:text-gray-300 text-gray-700">'.$row['categorie'].'</p>
+     
+  </div>
+</div>';
+  };
 
-    foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
+echo '
+</div>';
+
+   /* foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
 
 
 
@@ -172,10 +192,10 @@ if (isset($_GET['user'])) {
 
 
                 echo '<script> countDown(' . $row['productid'] . ', '. strtotime($tijd) . '); </script>';
-            
+            */
       ;
     };
-};
+//};
     
 ?>
 

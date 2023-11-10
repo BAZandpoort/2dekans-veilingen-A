@@ -19,6 +19,7 @@ if(!isset($_SESSION['login'])){
   header('location: index.php');
   return;
 };
+
 	echo '<h1 align="center">Producten bekijken<h1>';
 	//Als er geen gekozenverkoper is dan moet het naar index.
   if (!isset($_GET['gekozenVerkoper'])) {
@@ -34,7 +35,7 @@ if(!isset($_SESSION['login'])){
 echo "<h1 align='center'>Dit is de profielpagina van ".getSellerName($mysqli, $sellerID)."</h1>";
 echo "<br>";
 echo '
-<div class= "flex flex-row ">';
+<div class= "pl-10 flex flex-row ">';
   foreach(getSellerProducts($mysqli, $sellerID) as $row){
   	  	echo '
   	  	<div class="mr-4 mt-11 w-80  overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
