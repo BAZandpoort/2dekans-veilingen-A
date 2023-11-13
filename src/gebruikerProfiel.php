@@ -128,8 +128,10 @@ if (isset($_GET['user'])) {
                                     </div>
                                 </div>
                             </td>
-                            <div class='font-bold'>Gegeven Reden: </div>
-                            <td class='text-center'>". $row["reden"] ."</td>
+                              <td>
+                                 <div class='font-bold'>Reden: </div>
+                                  <div>". $row["reden"] ."</div>
+                              <td>
                             <td>
                             <div class='font-bold'>Behandeld: </div>";
                             if($row["behandeld"] == 0) {
