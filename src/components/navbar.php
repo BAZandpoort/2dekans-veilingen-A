@@ -21,6 +21,49 @@ if ($gebruiker) {
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>
     </div>
+
+    <?php
+    $maxproductdata = fetch("SELECT MAX(productid) As maxid FROM `tblboden`"); 
+    $gebruikerbestaatal = false;
+    $nietHoogste = false;
+
+if($gebruiker) {
+  for($i = 0; $i <= $maxproductdata["maxid"]; $i++) {
+
+    $currentData = fetch("SELECT * FROM tblboden WHERE productid = ? ORDER BY bod DESC", ['type' => 'i', 'value'=>$i] );
+
+    foreach($currentData as $data) {
+      if( $data['gebruikersid'] !== $gebruiker){
+
+        $nietHoogste = true;
+        $product = $data["productid"];
+        $bodenId = $data["bodenId"];
+
+      }
+    }
+      break;
+
+foreach( $currentData as $data) {
+
+  if( $data["gebruikersid"] !== $gebruiker){
+    $gebruikerbestaatal = true;
+}
+  }
+}
+}
+    if($gebruikerbestaatal && $nietHoogste){?>
+<div class="alert shadow-lg">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  <div>
+    <h3 class="font-bold">Warning!</h3>
+    <div class="text-xs">Someone outbid you</div>
+  </div>
+  <div class="flex[0.8]">
+  <button class="btn btn-sm"><a href="productDetails.php?gekozenProduct=<?php echo $product ?>">see</a></button>
+</div>
+</div>
+<?php } ?>
+
     <div class="navbar-center">
         <details class="dropdown mb-0">
             <summary class="m-1 btn btn-ghost text-black"><?= Vertalen('Categories')?></summary>

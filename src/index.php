@@ -8,8 +8,9 @@ $data = fetch('SELECT * FROM tblgebruikers WHERE gebruikerid = ?',[
 'type' => 'i',
 'value' => $gebruikerid,
 ]);
+
 $theme = $data["theme"]=='retro' ? 'retro' : 'dark';
-$_SESSION['theme'] = $theme;
+$_SESSION["theme"] = $theme;
 }
 ?>
 <!DOCTYPE html>

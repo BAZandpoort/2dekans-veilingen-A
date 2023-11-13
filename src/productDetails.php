@@ -65,7 +65,7 @@ if($hours <= 0){
         }
     </script>
 </head>
-<body class="bg-[#F1FAEE]">
+<body data-theme='<?php echo $_SESSION["theme"] ?>'>
 <?php
 if (isset($_GET['gekozenProduct'])) {
     foreach(getProduct($mysqli, $_GET['gekozenProduct']) as $row) {
@@ -78,7 +78,7 @@ if (isset($_GET['gekozenProduct'])) {
         <div class="divider divider-horizontal"></div>
         <div class="card-body">
           <div class="card bg-base-50 bg-[#FFFFFF]">
-            <div class="card-body bg-[#F1FAEE]">';
+            <div class="card-body">';
             if(isset($_GET["errorUnderPrice"])){
               print'<div class="alert alert-error">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
