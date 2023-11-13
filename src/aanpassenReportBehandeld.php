@@ -5,5 +5,5 @@
 
     changeReportChecked($mysqli, $_GET['report']);
 
-    header("Location: gebruikerProfiel.php");
+    header("Location: gebruikerProfiel.php?user=".$_SESSION["reportUser"]."");
     ?>
