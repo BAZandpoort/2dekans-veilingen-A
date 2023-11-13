@@ -83,6 +83,46 @@ function getDataTblproducten($mysqli){
 function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
+
+function createSearchlist($connection, $searchItem) {
+    $lijst = array();
+    $item = array(
+                    "productid" => "",
+                    "verkoperid" => "",
+                    "foto" => "",
+                    "naam" => "",
+                    "prijs" => "",
+                    "beschrijving" => "",
+                    "categorie" => "",
+                    "startdatum" => "",
+                    "eindtijd" => ""
+                );
+    
+    foreach(getSearchResults($connection, $searchItem) as $row) {
+        $item[0] = $row['productid'];
+        $item[1] = $row['verkoperid'];
+        $item[2] = $row['foto'];
+        $item[3] = $row['naam'];
+        $item[4] = $row['prijs'];
+        $item[5] = $row['beschrijving'];
+        $item[6] = $row['categorie'];
+        $item[7] = $row['startdatum'];
+        $item[8] = $row['eindtijd'];
+        
+        $lijst[] =  $item;
+    };
+
+    return $lijst;
+}
+
+function getSearchResults($connection, $searchItem) {
+    return ($connection->query("SELECT * from tblproducten WHERE naam LIKE '".$searchItem."%' OR naam='".$searchItem."'"));
+}
+
+function getNumSearchResult($list) {
+    return count($list);
+}
+
 function addReport($connection, $gebruikerid, $melderid, $reden, $behandeld) {
     $resultaat = $connection->query("INSERT INTO tblrapporten (gebruikerid, melderid, reden, behandeld) VALUES ('".$gebruikerid."','".$melderid."','".$reden."', '".$behandeld."')");
     return $resultaat;
