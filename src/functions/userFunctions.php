@@ -91,10 +91,11 @@ function createSearchlist($connection, $searchItem) {
                     "verkoperid" => "",
                     "foto" => "",
                     "naam" => "",
+                    "prijs" => "",
                     "beschrijving" => "",
                     "categorie" => "",
                     "startdatum" => "",
-                    "einddatum" => ""
+                    "eindtijd" => ""
                 );
     
     foreach(getSearchResults($connection, $searchItem) as $row) {
@@ -102,11 +103,13 @@ function createSearchlist($connection, $searchItem) {
         $item[1] = $row['verkoperid'];
         $item[2] = $row['foto'];
         $item[3] = $row['naam'];
-        $item[4] = $row['beschrijving'];
-        $item[5] = $row['categorie'];
-        $item[6] = $row['startdatum'];
-        $item[7] = $row['einddatum'];
-        array_push($lijst, $item);
+        $item[4] = $row['prijs'];
+        $item[5] = $row['beschrijving'];
+        $item[6] = $row['categorie'];
+        $item[7] = $row['startdatum'];
+        $item[8] = $row['eindtijd'];
+        
+        $lijst[] =  $item;
     };
 
     return $lijst;

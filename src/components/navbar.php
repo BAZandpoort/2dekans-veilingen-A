@@ -29,7 +29,8 @@ require 'lang.php';
             ";
             if (isset($_POST['searchResult'])) {
                 $zoeklijst = createSearchlist($mysqli, $_POST['searchResult']);
-                header('Location: zoekresultaten.php?zoekresultatenlijst='.http_build_query($zoeklijst).'');
+
+                header('Location: zoekresultaten.php?zoekresultatenlijst='.urlencode(serialize($zoeklijst)).'');
             };
         ?>
     </div>
