@@ -25,7 +25,7 @@ if (isset($_POST["Report"])) {
       <div class="  max-w-lg mx-auto justify-center items-center">
         <img id="Support" src="../public/img/Support.png" alt="Support.png">
       </div>
-        <a href="gebruikerProfiel.php?user=' . $_SESSION["reportUser"] .'" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg">Responsive</button>
+        <a href="gebruikerProfiel.php?user=' . $_SESSION["reportUser"] .'" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-success">Return</button></a>
       
     </div>';
   }
