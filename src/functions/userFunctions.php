@@ -61,6 +61,11 @@ function getUser($connection,$gebruikerid){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where gebruikerid= '".$gebruikerid."'");
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
+
+function getUserIDWithEmail($connection, $email) {
+    return ($connection->query("SELECT * FROM tblgebruikers where email='".$email."'")) ? $connection->query("SELECT * FROM tblgebruikers where email='".$email."'")->fetch_assoc()['gebruikerid'] : null;
+}
+
 function getProfilePicture($connection,$userid){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where gebruikerid= '".$userid."'");
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['profielfoto'];
