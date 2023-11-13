@@ -25,20 +25,24 @@ if ($gebruiker) {
         </div>
 
         <?php
-        $maxproductdata = fetch("SELECT MAX(productid) As maxid FROM `tblboden`");
+        $maxproductdata = fetch("SELECT MAX(productid) As maxid FROM tblboden");
+
         $gebruikerbestaatal = false;
         $nietHoogste = false;
+
+
 
         if ($gebruiker) {
             for ($i = 0; $i <= $maxproductdata["maxid"]; $i++) {
 
-                $currentData = fetch("SELECT * FROM tblboden WHERE productid = ? ORDER BY bod DESC", ['type' => 'i', 'value' => $i]);
+                $currentData = fetch("SELECT * FROM tblboden WHERE productid = ? ORDER BY bodenID DESC", ['type' => 'i', 'value' => $i]);
+                
 
                 foreach ($currentData as $data) {
                     if ($data['gebruikersid'] !== $gebruiker) {
 
                         $nietHoogste = true;
-                        $product = $data["productid"];
+                        $productid = $data["productid"];
                         $bodenId = $data["bodenId"];
                     }
                 }
@@ -62,7 +66,7 @@ if ($gebruiker) {
                     <div class="text-xs">Someone outbid you</div>
                 </div>
                 <div class="flex[0.8]">
-                    <button class="btn btn-sm"><a href="productDetails.php?gekozenProduct=<?php echo $product ?>">see</a></button>
+                    <button class="btn btn-sm"><a href="productDetails.php?gekozenProduct=<?php echo $productid ?>">see</a></button>
                 </div>
             </div>
         <?php } ?>

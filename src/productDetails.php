@@ -4,6 +4,11 @@ include "./components/navbar.php";
 include "./functions/adminFunctions.php";
 
 if(isset($_POST["bied"])) {
+
+  $currentData = fetch("SELECT * FROM tblboden WHERE productid = ? ORDER BY bodenID DESC", ['type' => 'i', 'value' => $i]);
+  $_SESSION["gebruikerid1"] = $data["gebruikerid"];
+  $_SESSION["productid1"] = $data["productid"];
+
   $bod = $_POST["bod"];
   $product = $_POST["product"];
 

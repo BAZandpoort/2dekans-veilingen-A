@@ -35,7 +35,7 @@
             <div class="stat">
                 <div class="stat-title"><?= Vertalen('Products sold')?></div>
                 <div class="stat-value"><?php echo getTotalSoldProducts($mysqli, $_SESSION['login']) ?></div>
-                <div class="stat-desc"><a href="verkoopgeschiedenis.php" class="link"><?= __('Overview of all active products')?></a></div>
+                <div class="stat-desc"><a href="verkoopgeschiedenis.php" class="link"><?= Vertalen('Overview of all active products')?></a></div>
             </div>
         </div>  
         <h1 class="text-2xl font-bold"><?= Vertalen('Purchases')?></h1>
