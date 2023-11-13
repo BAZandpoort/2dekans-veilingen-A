@@ -1,3 +1,20 @@
+<?php
+
+include "components/navbar.php";
+
+$gebruikerid = isset($_SESSION["login"]) ?  $_SESSION["login"] : false;
+if ($gebruikerid) {
+$data = fetch('SELECT * FROM tblgebruikers WHERE gebruikerid = ?',[
+'type' => 'i',
+'value' => $gebruikerid,
+]);
+
+$theme = $data["theme"]=='retro' ? 'retro' : 'dark';
+$_SESSION["theme"] = $theme;
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +25,7 @@
 </head>
 <body class="min-h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
   <?php
-    include "components/navbar.php";
     include "functions/adminFunctions.php";
-    include "connect.php"; 
     include "components/countdown.php";
     if (session_status() === PHP_SESSION_NONE) {
       session_start();
