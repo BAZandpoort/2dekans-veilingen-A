@@ -2,8 +2,16 @@
 include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
 include "components/countdown.php";
-?>
+include "./functions/chatFunctions.php";
 
+if (isset($_POST["liveChat"])) {
+    $ontvangersid = $_GET["user"]; 
+    $link = "chatSystem.php?user=".$_GET["user"];
+    createNotification($mysqli, $ontvangersid, $link); 
+    header('location: chatSystem.php?user='.$_GET["user"]);
+ }
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +47,9 @@ if (isset($_GET['user'])) {
                          <p>' . $row['beschrijving'] .'</p>
                     </div>
             </details>
-            <button class="btn"><a href="chatSystem.php?user='.$_GET["user"].'">live chat</a></button>
+            <form method="post" action="gebruikerProfiel.php?user='.$_GET["user"].'">
+                <button class="btn" name="liveChat">live chat</button>
+            </form>
          </div>
          </div>
 

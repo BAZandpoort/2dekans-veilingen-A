@@ -25,4 +25,17 @@ function getnotification ($mysqli, $user) {
     $resultaat = $mysqli ->query("SELECT* FROM tblnotifications WHERE ontvangersid=".$user); 
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }
+
+function updateNotification ($mysqli, $id) {
+    $sql = ("UPDATE tblnotifications
+    SET status = '1'
+    WHERE id = ".$id); 
+    return $mysqli -> query($sql); 
+}
+
+function createNotification ($mysqli, $ontvangersid, $link) {
+    $sql = ("INSERT INTO tblnotifications (notificatie, ontvangersid, status, link)
+    VALUES ('Je hebt een nieuw bericht'," . $ontvangersid . ",0, '".$link."')") ;
+    return $mysqli -> query($sql);
+}
 ?>

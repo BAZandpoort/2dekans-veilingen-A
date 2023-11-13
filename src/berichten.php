@@ -16,18 +16,30 @@ include "functions/chatFunctions.php";
         $user = $_SESSION["login"];
         $data = getnotification($mysqli, $user);
         foreach ($data as $value) {
-            echo'<a href="'.$value["link"].'">'.$value["notificatie"].'</a>'; 
-        
-       echo ' <div class="card w-96 bg-base-100 shadow-xl">
+            if ($value["status"] == 0) {
+                $titel = "ongelezen notificatie"; 
+            } else {
+                $titel = "gelezen notificatie"; 
+            }
+            if (isset($_POST["knop"])) {
+                $id = $value["id"]; 
+                updateNotification($mysqli, $id); 
+                header("Location: ".$value["link"]);
+            }
+       echo '
+       <form method="post" action="berichten.php">
+       <div class="card w-96 bg-base-100 shadow-xl">
         <div class="card-body">
-        <h2 class="card-title">'.$value["notificatie"].'</h2>
-         <p>If a dog chews shoes whose shoes does he choose?</p>
+        <h2 class="card-title">'.$titel.'</h2>
+         <p> '.$value["notificatie"].'</p>
          <div class="card-actions justify-end">
-          <button class="btn btn-primary">Buy Now</button>
+          <button class="btn btn-primary" name="knop">check bericht</button>
           </div>
          </div>
-        </div>' ;
+        </div>
+        </form>';
         }
+    
     ?>
 </body>
 </html>
