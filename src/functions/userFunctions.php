@@ -116,7 +116,7 @@ function createSearchlist($connection, $searchItem) {
 }
 
 function getSearchResults($connection, $searchItem) {
-    return ($connection->query("SELECT * from tblproducten WHERE naam LIKE '".$searchItem."'"));
+    return ($connection->query("SELECT * from tblproducten WHERE naam LIKE '".$searchItem."%' OR naam='".$searchItem."'"));
 }
 
 function getNumSearchResult($list) {
