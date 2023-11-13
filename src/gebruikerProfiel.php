@@ -103,7 +103,7 @@ if (isset($_GET['user'])) {
                 </div>
                 </div>
             ';
-                if (!isset($_SESSION["admin"])) {
+                if (isset($_SESSION["admin"])) {
                     echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
            <h2 class="text-2xl font-bold">Check User Reports</h2>
