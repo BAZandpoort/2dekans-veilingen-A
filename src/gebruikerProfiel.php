@@ -110,7 +110,7 @@ if (isset($_GET['user'])) {
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_2.showModal()">User Reports</button>
                 <dialog id="my_modal_2" class="modal">
                     <div class="modal-box">
-                      <h3 class="font-bold text-lg">Template reports</h3>
+                      <h3 class="font-bold text-lg text-center">User reports</h3>
                       <div class="overflow-x-auto h-96">
                       <table class="table table-pin-rows">';
                       foreach (getReportedUsers($mysqli, $_SESSION['reportUser']) as $row) {
