@@ -1,15 +1,17 @@
 <?php
-include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
-include "components/countdown.php";
 include "./functions/chatFunctions.php";
 
 if (isset($_POST["liveChat"])) {
     $ontvangersid = $_GET["user"]; 
     $link = "chatSystem.php?user=".$_GET["user"];
-    createNotification($mysqli, $ontvangersid, $link); 
-    header('location: chatSystem.php?user='.$_GET["user"]);
- }
+    $chatid =  bin2hex(random_bytes(16));
+    $_GET["chatid"] = $chatid;
+    createNotification($mysqli, $ontvangersid, $link, $chatid); 
+    header('location: chatSystem.php?user='.$_GET["user"].'&chatid='.$_GET["chatid"]);
+}
+include "./components/navbar.php";
+include "components/countdown.php";
 
 ?>
 <!DOCTYPE html>
