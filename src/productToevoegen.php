@@ -7,7 +7,7 @@
   <title>Add products</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
-</head>
+  </head>
   <?php
   include "connect.php";
   include "functions/sellerFunctions.php";
@@ -37,11 +37,17 @@
     if (filesize($file_name) < 0) {
       echo "Error";
     }
-    if ((empty($_POST['file']))) {
-      if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
-        echo "Error, kon de foto niet verplaatsen.";
-      };
-    }
+    if(isset($file_name) && !empty($file_name)) {
+
+      $teller = 1;
+      while (file_exists($upload_dir . $file_name)) {
+          $file_info = pathinfo($file_name);
+          $new_file_name = $file_info['filename'] . $teller . "." . $file_info['extension'];
+          $file_name = $new_file_name;
+          $teller++;
+      }
+      move_uploaded_file($file_tmp, $upload_dir . $file_name);
+  }
 
 
     if (addProduct($mysqli, $userid, $naam, $beschrijving, $prijs, $categorie, $file_name, $eindtijd)) {
@@ -49,55 +55,55 @@
     }
   }
   ?>
-<body class="h-screen bg-[#F1FAEE]">
+<body class="h-screen" data-theme="<?php echo $_SESSION['theme'] ?>">
   <div>
     <div class="flex justify-start items-start">
-      <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= __('2nd chance auctions')?></a> 
+      <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a> 
     </div>
     <form class="form-control h-full flex items-center justify-center" action="productToevoegen.php" method="post" enctype="multipart/form-data">
       <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
-        <h2 class="text-black text-2xl mb-4"><?= __('Add Product')?></h2>
+        <h2 class="text-black text-2xl mb-4"><?= Vertalen('Add Product')?></h2>
         <div class="flex flex-col gap-2">  
           <div class="flex flex-row gap-2"> 
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('Product')?></label>
-              <input type="text" name="naam" placeholder=<?= __('Product')?> class="input input-bordered w-full max-w-md text-black bg-white" required />
+              <label class="label text-black"><?= Vertalen('Product')?></label>
+              <input type="text" name="naam" placeholder=<?= Vertalen('Product')?> class="input input-bordered w-full max-w-md text-black bg-white" required />
             </div>
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('Minimum price')?></label>
-              <input type="number" name="prijs" placeholder=<?= __('Minimum price')?> step="0.01" min="0.00" class="input input-bordered w-full max-w-md text-black bg-white" required />
+              <label class="label text-black"><?= Vertalen('Minimum price')?></label>
+              <input type="number" name="prijs" placeholder=<?= Vertalen('Minimum price')?> step="0.01" min="0.00" class="input input-bordered w-full max-w-md text-black bg-white" required />
             </div>
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('How long should your auction last')?>?</label>
+              <label class="label text-black"><?= Vertalen('How long should your auction last')?>?</label>
               <select class='select select-bordered bg-white text-black' name='duur-timer' required >
-                  <option value="6">6 <?= __('hours')?></option>
-                  <option value="12">12 <?= __('hours')?></option>
-                  <option value="18">18 <?= __('hours')?></option>
-                  <option value="24">24 <?= __('hours')?></option>
-                  <option value="30">30 <?= __('hours')?></option>
-                  <option value="36">36 <?= __('hours')?></option>
-                  <option value="42">42 <?= __('hours')?></option>
-                  <option value="48">48 <?= __('hours')?></option>
+                  <option value="6">6 <?= Vertalen('hours')?></option>
+                  <option value="12">12 <?= Vertalen('hours')?></option>
+                  <option value="18">18 <?= Vertalen('hours')?></option>
+                  <option value="24">24 <?= Vertalen('hours')?></option>
+                  <option value="30">30 <?= Vertalen('hours')?></option>
+                  <option value="36">36 <?= Vertalen('hours')?></option>
+                  <option value="42">42 <?= Vertalen('hours')?></option>
+                  <option value="48">48 <?= Vertalen('hours')?></option>
               </select>
             </div>
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('Description')?></label>
-              <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving" placeholder=<?= __('Description')?> required></textarea>
+              <label class="label text-black"><?= Vertalen('Description')?></label>
+              <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving" placeholder=<?= Vertalen('Description')?> required></textarea>
             </div>
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('Product Picture')?></label>
+              <label class="label text-black"><?= Vertalen('Product Picture')?></label>
               <input type="file" name="file" class="file-input file-input-bordered bg-white text-black" required />
             </div>
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('Category')?></label>
+              <label class="label text-black"><?= Vertalen('Category')?></label>
               <?php
                 if (getAllCategories($mysqli)) {
                   print "<select class='select select-bordered bg-white text-black' name='categorie' required >
@@ -111,7 +117,7 @@
               </select>
             </div>
           </div>
-          <input type="submit" name="submit" class="btn border-none bg-white text-black hover:text-white hover:bg-black" value=<?= __('ADD PRODUCT')?>>
+          <input type="submit" name="submit" class="btn border-none bg-white text-black hover:text-white hover:bg-black" value=<?= Vertalen('ADD PRODUCT')?>>
         </div>
       </div>
     </form>

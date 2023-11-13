@@ -1,5 +1,6 @@
 <?php
     include "components/navbar.php";
+    include "functions/sellerFunctions.php";
     include "functions/buyerFunctions.php";
 
 
@@ -8,7 +9,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-[#F1FAEE]">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,26 +17,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
-<body class="min-h-screen " data-theme='<?php echo $_SESSION["theme"] ?>'>
+<body class="min-h-screen bg-[#F1FAEE]">
     <div class="overflow-x-auto max-w-4xl mx-auto p-3">
         <table class="table bg-white shadow-lg">
             <thead>
                 <tr>
                     <th class="text-left">Product</th>
-                    <th class="text-center">Prijs</th>
-                    <th class="text-center">Datum/tijd</th>
+                    <th class="text-center">Hoogste bod</th>
+                    <th class="text-center">Startdatum</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                if((getAllPurchases($mysqli, $_SESSION['login'])) == null) {
+                if((getActiveProducts($mysqli, $_SESSION['login'])) == null) {
                     echo "
                     <tr>
-                        <td colspan=4>U hebt nog geen producten gekocht.</td>
+                        <td colspan=4>U hebt nog geen actieve producten.</td>
                     </tr>
                     ";
                 } else {
-                    foreach (getAllPurchases($mysqli, $_SESSION['login']) as $row) {
+                    foreach (getActiveProducts($mysqli, $_SESSION['login']) as $row) {
                         echo "
                         <tr>
                             <td>
@@ -51,9 +52,8 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class='text-center'>€".$row['highest_bid']."</td>
+                            <td class='text-center'>€"; echo getHighestBid($mysqli, $row['productid']); echo "</td>
                             <td class='text-center'>".$row['datum']."</td>
-                            <td><a href='generatePDF.php'><button class='btn'>Factuur</button></a></td>
                         </tr>
                         ";
                     }

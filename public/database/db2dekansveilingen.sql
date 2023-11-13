@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 12 okt 2023 om 22:20
+-- Gegenereerd op: 09 nov 2023 om 09:03
 -- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.0.28
+-- PHP-versie: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -79,6 +79,13 @@ CREATE TABLE `tblfavorieten` (
   `gebruikerid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `tblfavorieten`
+--
+
+INSERT INTO `tblfavorieten` (`productid`, `gebruikerid`) VALUES
+(1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -94,16 +101,18 @@ CREATE TABLE `tblgebruikers` (
   `admin` tinyint(1) NOT NULL,
   `status` text NOT NULL,
   `profielfoto` text NOT NULL,
-  `beschrijving` text NOT NULL
+  `beschrijving` text NOT NULL,
+  `theme` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `tblgebruikers`
 --
 
-INSERT INTO `tblgebruikers` (`gebruikerid`, `email`, `voornaam`, `naam`, `wachtwoord`, `admin`, `status`, `profielfoto`, `beschrijving`) VALUES
-(1, 'jurn@gmail.com', 'jurn', 'dd', '$2y$10$5OywTtSKA8vNv3pX/rX9.eYDRMIuu2xyfHZcTAebkxf/IXeW2W2la', 0, '', 'monkey.jpg', ''),
-(2, 'test@gmail.com', 'test', 'dd', '$2y$10$6kylllePP7cds53wXeDfguP0V/uBDumcTZoUFcqYPz1Io2173U75u', 0, '', 'profile.png', 'dd');
+INSERT INTO `tblgebruikers` (`gebruikerid`, `email`, `voornaam`, `naam`, `wachtwoord`, `admin`, `status`, `profielfoto`, `beschrijving`, `theme`) VALUES
+(1, 'jurn@gmail.com', 'jurn', 'dd', '$2y$10$5OywTtSKA8vNv3pX/rX9.eYDRMIuu2xyfHZcTAebkxf/IXeW2W2la', 0, '', 'monkey.jpg', '', ''),
+(2, 'test@gmail.com', 'test', 'dd', '$2y$10$6kylllePP7cds53wXeDfguP0V/uBDumcTZoUFcqYPz1Io2173U75u', 0, '', 'profile.png', 'dd', ''),
+(3, 'casper.nauwelaerts@gmail.com', 'Casper', 'Nauwelaerts', '$2y$10$6aHJLkvvreVnKfS4676qb.ZleoPjlTU1G5Q4IxiiLo.BYFVyf4UDi', 0, '', 'profile.png', 'xdfhxd', 'dark');
 
 -- --------------------------------------------------------
 
@@ -187,7 +196,7 @@ ALTER TABLE `tblfacturen`
 -- AUTO_INCREMENT voor een tabel `tblgebruikers`
 --
 ALTER TABLE `tblgebruikers`
-  MODIFY `gebruikerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `gebruikerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `tblproducten`
