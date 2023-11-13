@@ -103,7 +103,7 @@ if (isset($_GET['user'])) {
                 </div>
                 </div>
             ';
-                if (isset($_SESSION["admin"])) {
+                if (!isset($_SESSION["admin"])) {
                     echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
            <h2 class="text-2xl font-bold">Check User Reports</h2>
@@ -114,6 +114,7 @@ if (isset($_GET['user'])) {
                       <div class="overflow-x-auto h-96">
                       <table class="table table-pin-rows">';
                       foreach (getReportedUsers($mysqli, $_SESSION['reportUser']) as $row) {
+                        
                         echo "
                         
                         <tr>
@@ -134,10 +135,22 @@ if (isset($_GET['user'])) {
                               <td>
                             <td>
                             <div class='font-bold'>Behandeld: </div>";
+ 
                             if($row["behandeld"] == 0) {
-                              echo "<p class='text-red-700'>✕</p>";
+                              echo "
+                              <label class='swap swap-flip'>
+                              <input type='checkbox' />
+                             <div class='swap-off text-red-700' >✕</div>
+                                    <div class='swap-on text-lime-500'><a href='./aanpassenReportBehandeld.php?report=".$row['rapportid']."'><button class='btn btn-ghost'>Veranderen naar behandeld?</button></a></div>
+                                    </label>";
+                                  
                             } else {
-                              echo "<p class='text-lime-500'>✓</p>";
+                              echo "
+                              <label class='swap swap-flip'>
+                              <input type='checkbox' />
+                              <div class='swap-off text-lime-500'>✓</div>
+                              <div class='swap-on text-red-700'><a href='./aanpassenReportOnbehandeld.php?report=".$row['rapportid']."'><button class='btn btn-ghost'>Veranderen naar onbehandeld?</button></a></div>
+                              </label>";
                             }
                             "
                             </td>
