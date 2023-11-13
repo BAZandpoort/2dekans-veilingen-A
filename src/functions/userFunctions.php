@@ -83,4 +83,8 @@ function getDataTblproducten($mysqli){
 function getGekozenCategorie($connection, $categorietype) {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='".$categorietype."'"));
 }
+function addReport($connection, $gebruikerid, $melderid, $reden, $behandeld) {
+    $resultaat = $connection->query("INSERT INTO tblrapporten (gebruikerid, melderid, reden, behandeld) VALUES ('".$gebruikerid."','".$melderid."','".$reden."', '".$behandeld."')");
+    return $resultaat;
+}
 ?>
