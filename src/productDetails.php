@@ -39,8 +39,8 @@ if(isset($_POST["bied"])) {
   }
 }
 
-$hours = getTimeDifference(getProductTime($mysqli,$_GET["gekozenProduct"]));
-if($hours <= 0){
+$time = strtotime(getProductTime($mysqli,$_GET["gekozenProduct"])) - strtotime(date("Y-m-d H:i:s"));
+if($time <= 0){
   header('location: overzichtVeilingen.php?errorTimeDone');
 }
 
