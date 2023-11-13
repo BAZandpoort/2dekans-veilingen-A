@@ -50,7 +50,7 @@ function convertPasswordToHash($password) {
 }
 
 function getAllFavourites($connection, $userid) {
-    $resultaat = $connection->query("SELECT tblfavorieten.productid, tblproducten.foto, tblproducten.naam, tblgebruikers.voornaam, tblgebruikers.naam AS achternaam
+    $resultaat = $connection->query("SELECT tblfavorieten.productid, tblproducten.foto, tblproducten.naam, tblproducten.eindtijd, tblgebruikers.voornaam, tblgebruikers.naam AS achternaam
                                FROM tblfavorieten 
                                INNER JOIN tblproducten ON (tblproducten.productid = tblfavorieten.productid)
                                INNER JOIN tblgebruikers ON (tblgebruikers.gebruikerid = tblfavorieten.gebruikerid)

@@ -2,6 +2,7 @@
 include "./functions/sellerFunctions.php";
 include "./components/navbar.php";
 include "./functions/adminFunctions.php";
+include "./components/countdown.php";
 
 if (isset($_POST["bied"])) {
   $bod = $_POST["bod"];
@@ -100,7 +101,15 @@ if (isset($_POST["bied"])) {
       }
       print '<p id="productBeschrijving">' . $row['beschrijving'] . '</p>
               <div class="flex">
-              <form method="post" action="favorietenToevoegen.php?product=' . $row['productid'] . '">'; ?>
+              <form method="post" action="favorietenToevoegen.php?product=' . $row['productid'] . '">'; 
+              echo '
+         <span id="product-' . $row['productid'] .'" class="countdown font-mono text-2xl text-black">
+            <span id="hours" style="--value:00;"></span>:
+            <span id="minutes" style="--value:00;"></span>:
+            <span id="seconds" style="--value:00;"></span>
+          </span>';
+
+          $tijd = $row["eindtijd"];?>
       <button class="btn w-40 mr-3">TOEVOEGEN AAN FAVORIETEN</button>
       </form>
       <button class="btn w-40" onclick="copyURL()">DELEN</button>
@@ -132,6 +141,7 @@ if (isset($_POST["bied"])) {
       </div>
       </div>
   <?php
+  echo '<script> countDown(' . $row['productid'] . ', '. strtotime($tijd) . '); </script>';
     };
   } else {
     header('location: overzichtVeilingen.php?errorNoProduct');
