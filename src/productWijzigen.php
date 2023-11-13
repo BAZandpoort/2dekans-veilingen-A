@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-[#1D3557]">
+<html lang="en" data-theme="<?php echo $_SESSION['theme'] ?>">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.7/dist/full.css" rel="stylesheet" type="text/css" />
 	<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-screen bg-[#F1FAEE]">
+<body class="h-screen" data-theme="<?php echo $_SESSION['theme'] ?>">
 	  <?php
 include "connect.php";
 include "functions/sellerFunctions.php";

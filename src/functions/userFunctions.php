@@ -123,4 +123,8 @@ function getNumSearchResult($list) {
     return count($list);
 }
 
+function addReport($connection, $gebruikerid, $melderid, $reden, $behandeld) {
+    $resultaat = $connection->query("INSERT INTO tblrapporten (gebruikerid, melderid, reden, behandeld) VALUES ('".$gebruikerid."','".$melderid."','".$reden."', '".$behandeld."')");
+    return $resultaat;
+}
 ?>

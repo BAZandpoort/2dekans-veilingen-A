@@ -16,6 +16,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Dashboard</title>
 </head>
+<body data-theme="<?php echo $_SESSION['theme'] ?>">
+    
 <body class="bg-[#F1FAEE]">
     <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-12">
         <h1 class="text-2xl font-bold">Sales</h1>
