@@ -4,6 +4,8 @@ session_start();
 
 include "connect.php";
 include "./functions/userFunctions.php";
+include "./functions/developerFunctions.php";
+
 if (isset($_SESSION["login"])) {
     header("location:index.php");
 }
@@ -18,15 +20,15 @@ if (isset($_POST["submit"])) {
              $_SESSION["login"]= $gebruikersid;
              if(checkIfAdmin($mysqli,$email)){
                 $_SESSION["admin"] = "true";
-             }
+             };
+             cache_updateUserInDatabase($mysqli, $email, $gebruikersid);
              header("Location:index.php");
          } else {
 
-        
-         }
-     }
+         };
+     };
      header('location: login.php?error');
-}
+};
 
 
 

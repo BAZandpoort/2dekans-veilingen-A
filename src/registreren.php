@@ -57,8 +57,6 @@
     <?php
         if(isset($_POST['submitknop'])) {
             if(!(isEmailCorrect($mysqli, $_POST['email']))) {
-                $gebruikerid = getUserIDWithEmail($mysqli, $_POST['email']);
-                echo $gebruikerid;
                 $voornaam = $_POST['voornaam'];
                 $achternaam = $_POST['achternaam'];
                 $email = $_POST['email'];
@@ -68,7 +66,7 @@
                 $file_name = $_FILES['file']['name'];
                 $file_tmp = $_FILES['file']['tmp_name'];
 
-                cache_createKey($mysqli, $gebruikerid, $email, $wachtwoord);
+                cache_createKey($mysqli, $email, $wachtwoord);
 
                 registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
                 if((empty($_POST['file']))) {

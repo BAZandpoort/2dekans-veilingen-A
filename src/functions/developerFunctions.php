@@ -1,7 +1,7 @@
 <?php
 
-function cache_createKey($connection, $gebuikerid, $keyName, $keyValue) {
-    return ($connection->query("INSERT INTO tblcache(gebruikerid, cachenaam, cachewaarde) VALUES('".$gebuikerid."', '".$keyName."', '".$keyValue."')"));
+function cache_createKey($connection, $keyName, $keyValue) {
+    return ($connection->query("INSERT INTO tblcache(cachenaam, cachewaarde) VALUES('".$keyName."', '".$keyValue."')"));
 };
 
 function cache_getCacheValue($connection, $keyName) {
