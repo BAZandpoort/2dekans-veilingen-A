@@ -81,7 +81,7 @@
                     move_uploaded_file($file_tmp, $upload_dir . $file_name);
                 }
 
-                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving, $adres);
+                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $adres, $file_name, $beschrijving);
 
                 /* Kan nog aangepast worden */
                 header("Location: login.php");

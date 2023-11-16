@@ -14,7 +14,7 @@ function getAllCategories($connection){
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
 
-function registerUser($connection, $fname, $lname, $email, $password, $profile_picture, $desc, $adres) {
+function registerUser($connection, $fname, $lname, $email, $password, $adres, $profile_picture, $desc) {
     if(empty($profile_picture)) {
         $profile_picture = "profile.png";
     }
@@ -25,7 +25,7 @@ function registerUser($connection, $fname, $lname, $email, $password, $profile_p
     return $resultaat;
 }
 
-function updateUser($connection, $userid, $fname, $lname, $email, $password, $profile_picture, $desc, $adres) {
+function updateUser($connection, $userid, $fname, $lname, $email, $password, $adres, $profile_picture, $desc) {
     if(empty($profile_picture)) {
         if(getProfilePicture($connection,$userid)){
             $profile_picture = getProfilePicture($connection,$userid);
@@ -34,19 +34,15 @@ function updateUser($connection, $userid, $fname, $lname, $email, $password, $pr
         }
     }
     if(empty($password)){
-        $sql = "UPDATE tblgebruikers set email = '" . $email . "', voornaam = '" . $fname . "', naam = '" . $lname . "', adres= '". $adres ."', profielfoto = '" . $profile_picture . "', beschrijving = '" . $desc . "' Where gebruikerid = '" . $userid . "'";
+        $sql = "UPDATE tblgebruikers set email = '" . $email . "', voornaam = '" . $fname . "', naam = '" . $lname . "', adres = '". $adres ."', profielfoto = '" . $profile_picture . "', beschrijving = '" . $desc . "' where gebruikerid = '" . $userid . "'";
         return ($connection->query($sql));
     }else{
         $password = convertPasswordToHash($password);
 
         return ($connection->query("UPDATE tblgebruikers set email = '" . $email . "', voornaam = '" . $fname . "', naam = '" . $lname . "',
-        wachtwoord = '" . $password . "', adres= '". $adres ."', profielfoto = '" . $profile_picture . "', beschrijving = '" . $desc . "' where gebruikerid = '" . $userid . "'"));
+        wachtwoord = '" . $password . "', adres = '". $adres ."', profielfoto = '" . $profile_picture . "', beschrijving = '" . $desc . "' where gebruikerid = '" . $userid . "'"));
     }
 }
-
-function getAdressFromUser($connection, $userid) {
-    return getUser($connection, $userid)->fetch_assoc()['adres'];
-};
 
 function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
@@ -77,6 +73,9 @@ function getGebruikersid($connection,$email){
 function checkIfAdmin($connection,$email){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '".$email."' and admin=1");
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
+}
+function getAdressFromUser($connection, $userid) {
+    return getUser($connection, $userid)->fetch_assoc()['adres'];
 }
 
 function getDataTblproducten($mysqli){
