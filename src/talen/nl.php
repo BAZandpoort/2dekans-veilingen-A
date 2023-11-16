@@ -38,7 +38,6 @@ $lang = [
     'Favorites'=>'Favorieten',
     'Add favorites to your list to view'=>'Voeg favorieten toe aan uw lijst om te bekijken',
     "hours"=>'uur',
-    'Update information'=>'Update informatie',
     'Document'=>'Document',
     'Highest offer'=>'Hoogste bod',
     'Time left'=>'Tijd over',
@@ -59,7 +58,10 @@ $lang = [
     'Date'=>'Datum',
     'See all sales'=>'Bekijk alle verkopen',
     'Your purchases'=>'Uw aankopen',
-    'See all purchases'=>'Bekijk alle aankopen'
+    'See all purchases'=>'Bekijk alle aankopen',
+    'Warning!'=> 'waarschuwing!',
+    'Someone ourtbid you'=> 'Iemand heeft een hoger bod dan jouw',
+    'see'=> 'zien'
 ];
 
 ?>
