@@ -44,6 +44,10 @@ function updateUser($connection, $userid, $fname, $lname, $email, $password, $pr
     }
 }
 
+function getAdressFromUser($connection, $userid) {
+    return getUser($connection, $userid)->fetch_assoc()['adres'];
+};
+
 function convertPasswordToHash($password) {
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
