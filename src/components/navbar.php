@@ -35,7 +35,18 @@ if ($gebruiker) {
                 ?>
             </ul>
         </details>
-        <input type="text" placeholder=<?= Vertalen('Search')?> class="input input-bordered bg-transparent md:w-auto" />
+        <?php
+            echo "
+                <form method='post' action='".basename($_SERVER['PHP_SELF'])."'>
+                    <input type='text' name='searchResult' placeholder='".Vertalen('Search')."' class='input input-bordered bg-transparent md:w-auto'/>
+                </form>
+            ";
+            if (isset($_POST['searchResult'])) {
+                $zoeklijst = createSearchlist($mysqli, $_POST['searchResult']);
+                
+                header('Location: zoekresultaten.php?zoekresultatenlijst='.urlencode(serialize($zoeklijst)).'');
+            };
+        ?>
     </div>
     <div class="navbar-end"> 
     
