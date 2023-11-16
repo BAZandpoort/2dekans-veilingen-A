@@ -37,6 +37,10 @@
                 </label>
                 <input type="password" id="wachtwoord" name="wachtwoord" placeholder=<?= Vertalen('Password')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
+                    <span class="label-text text-black"><?= Vertalen('Adress')?></span>
+                </label>
+                <input type="text"  id="adres" name="adres" placeholder=<?= Vertalen('Adress')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
+                <label class="label">
                 <span class="label-text text-black"><?= Vertalen('Description')?></span>
                 </label>
                 <textarea class="textarea textarea-bordered h-24 w-full max-w-md bg-white text-black" id="beschrijving" name="beschrijving" placeholder=<?= Vertalen('Description')?>></textarea>
@@ -59,6 +63,7 @@
                 $achternaam = $_POST['achternaam'];
                 $email = $_POST['email'];
                 $wachtwoord = $_POST['wachtwoord'];
+                $adres = $_POST['adres'];
                 $beschrijving = $_POST['beschrijving'];
                 $upload_dir = $_SERVER["DOCUMENT_ROOT"]."/2dekans-veilingen-A/public/img/";
                 $file_name = $_FILES['file']['name'];
@@ -76,7 +81,7 @@
                     move_uploaded_file($file_tmp, $upload_dir . $file_name);
                 }
 
-                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
+                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving, $adres);
 
                 /* Kan nog aangepast worden */
                 header("Location: login.php");

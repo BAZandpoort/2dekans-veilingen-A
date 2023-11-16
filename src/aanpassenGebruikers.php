@@ -27,6 +27,7 @@ if (isset($_POST["wijzigen"])) {
     $voornaam = $_POST["voornaam"];
     $naam = $_POST["naam"];
     $wachtwoord = $_POST["wachtwoord"];
+    $adres = $_POST['adres'];
     $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/2dekans-veilingen-A/public/img/";
     $file_name = $_FILES['file']['name'];
     $file_tmp = $_FILES['file']['tmp_name'];
@@ -47,7 +48,7 @@ if (isset($_POST["wijzigen"])) {
       };
     }
     $beschrijving = $_POST["beschrijving"]; 
-    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving)){
+    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving, $adress)){
         header('location: index.php');
     }else{
         print $mysqli->error;
@@ -87,6 +88,12 @@ if (isset($_POST["wijzigen"])) {
                         <label class="label text-black">'?> <?= Vertalen('Password')?><?php echo'</label>
                         <input type="password" name="wachtwoord" placeholder='?> <?= Vertalen('Password')?><?php echo' class="input input-bordered w-full max-w-md text-black bg-white" />
                     </div>
+                </div>
+                <div class="flex flex-row gap-2"> 
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">'?> <?= Vertalen('Adress')?><?php echo'</label>
+                    <input type="text" name="adres" placeholder='?> <?= Vertalen('Adress')?><?php echo' class="input input-bordered w-full max-w-md text-black bg-white" />
+                  </div>
                 </div>
                 <div class="flex flex-row gap-2">
                   <div class="flex flex-col w-full"> 
