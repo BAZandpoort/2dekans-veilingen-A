@@ -37,9 +37,9 @@
                 </label>
                 <input type="password" id="wachtwoord" name="wachtwoord" placeholder=<?= Vertalen('Password')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
-                    <span class="label-text text-black"><?= Vertalen('Adress')?></span>
+                    <span class="label-text text-black">Adress</span>
                 </label>
-                <input type="text"  id="adres" name="adres" placeholder=<?= Vertalen('Adress')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
+                <input type="text" id="adres" name="adres" placeholder="Adress" class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
                 <span class="label-text text-black"><?= Vertalen('Description')?></span>
                 </label>

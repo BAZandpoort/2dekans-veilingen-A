@@ -21,7 +21,7 @@ function registerUser($connection, $fname, $lname, $email, $password, $adres, $p
 
     $password = convertPasswordToHash($password);
 
-    $resultaat = $connection->query("INSERT INTO tblgebruikers (email, voornaam, naam, wachtwoord, adres, profielfoto, beschrijving) VALUES ('".$email."','".$fname."','".$lname."','".$password."','".$adres."','".$profile_picture."','".$desc.")");
+    $resultaat = $connection->query("INSERT INTO tblgebruikers (email, voornaam, naam, wachtwoord, adres, profielfoto, beschrijving) VALUES ('".$email."','".$fname."','".$lname."','".$password."','".$adres."','".$profile_picture."','".$desc."')");
     return $resultaat;
 }
 
