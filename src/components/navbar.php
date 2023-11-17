@@ -175,12 +175,7 @@ if(isset($_SESSION["login"])) {
         </div>
     </label>
     <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
-        <li>
-            <a href="aanpassenGebruikers.php" class="justify-between">
-            <?= Vertalen('Profile')?>
-            </a>
-        </li>
-        <li><a><?= Vertalen('Settings')?></a></li>
+        <li><a href="aanpassenGebruikers.php"><?= Vertalen('Profile')?></a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
         <li>
                         <a href="aankoopgeschiedenis.php" class="justify-between">
