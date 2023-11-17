@@ -21,9 +21,12 @@ if (isset($_POST["submit"])) {
              if(checkIfAdmin($mysqli,$email)){
                 $_SESSION["admin"] = "true";
              };
-             if (isset($_SESSION["login"])) {
-                cache_updateUserInDatabase($mysqli, $email, $_SESSION["login"]);
+             
+             if (!isset($_SESSION["login"])) {
+                cache_createKey($mysqli, $email, $password);
              };
+
+             cache_updateUserInDatabase($mysqli, $email, $_SESSION["login"]);
              header("Location:index.php");
          } else {
 
