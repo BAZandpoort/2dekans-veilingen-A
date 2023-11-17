@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 function getTimeDifference($endTime) {
     $time = strtotime($endTime) - strtotime(date("Y-m-d H:i:s"));
     return $time;
@@ -27,4 +28,5 @@ function changeReportUnchecked($connection, $rapportid) {
     $sql = "UPDATE tblrapporten set behandeld = 0 WHERE rapportid = '". $rapportid. "'";
     return ($connection->query($sql));
 }
+
 ?>

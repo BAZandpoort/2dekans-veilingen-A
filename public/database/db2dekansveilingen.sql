@@ -1,5 +1,5 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
@@ -32,10 +32,12 @@ CREATE TABLE `tblboden` (
   `productid` int(11) NOT NULL,
   `bod` decimal(10,2) NOT NULL,
   `gebruikersid` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
 
 --
--- Gegevens worden geëxporteerd voor tabel `tblboden`
+-- Tabelstructuur voor tabel `tblcache`
 --
 
 INSERT INTO `tblboden` (`bodenId`, `productid`, `bod`, `gebruikersid`) VALUES
@@ -62,6 +64,12 @@ INSERT INTO `tblboden` (`bodenId`, `productid`, `bod`, `gebruikersid`) VALUES
 (23, 1, 7000000.00, 3),
 (24, 3, 2.00, 3),
 (25, 3, 3.00, 2);
+CREATE TABLE `tblcache` (
+  `cacheid` int(11) NOT NULL,
+  `gebruikerid` int(11) NOT NULL,
+  `cachenaam` varchar(255) NOT NULL,
+  `cachewaarde` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -71,7 +79,15 @@ INSERT INTO `tblboden` (`bodenId`, `productid`, `bod`, `gebruikersid`) VALUES
 
 CREATE TABLE `tblcategorieen` (
   `categorienaam` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `tblcategorieen`
+--
+
+INSERT INTO `tblcategorieen` (`categorienaam`) VALUES
+('elektronica'),
+('speelgoed');
 
 -- --------------------------------------------------------
 
@@ -85,7 +101,7 @@ CREATE TABLE `tblfacturen` (
   `koperid` int(11) NOT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `factuurpdf` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -96,14 +112,7 @@ CREATE TABLE `tblfacturen` (
 CREATE TABLE `tblfavorieten` (
   `productid` int(11) NOT NULL,
   `gebruikerid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Gegevens worden geëxporteerd voor tabel `tblfavorieten`
---
-
-INSERT INTO `tblfavorieten` (`productid`, `gebruikerid`) VALUES
-(1, 3);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -145,20 +154,21 @@ CREATE TABLE `tblproducten` (
   `verkoperid` int(11) NOT NULL,
   `foto` text NOT NULL,
   `naam` text NOT NULL,
-  `prijs` decimal(10,2) NOT NULL,
+  `prijs` decimal(10,0) NOT NULL,
   `beschrijving` text NOT NULL,
   `categorie` text NOT NULL,
   `startdatum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `eindtijd` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `eindtijd` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `tblproducten`
 --
 
 INSERT INTO `tblproducten` (`productid`, `verkoperid`, `foto`, `naam`, `prijs`, `beschrijving`, `categorie`, `startdatum`, `eindtijd`) VALUES
-(1, 1, '804-Grey-Worm.jpg', 'Test', 7000000.00, 'dd', '', '2023-10-12 20:09:14', '2023-10-14 08:09:14'),
-(3, 2, 'download.png', 'a', 3.00, 'a', '', '2023-11-16 19:19:16', '2023-11-18 19:19:16');
+(1, 1, 'monkey.jpg', 'grasmaaier', '22', 'Dit is een grasmaaier.', 'speelgoed', '2023-10-06 13:45:32', '0000-00-00 00:00:00'),
+(2, 1, 'Appelsap_voedingswaarde.jpg', 'gebouwhuis\r\n', '22', 'Dit is een grasmaaier.', 'speelgoed', '2023-10-06 13:45:32', '0000-00-00 00:00:00'),
+(3, 1, 'RVIM5HMA_400x400.jpg', 'grasmaaier', '22', 'Dit is een grasmaaier.', 'elektronica\r\n', '2023-10-06 13:45:32', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -172,7 +182,7 @@ CREATE TABLE `tblrapporten` (
   `melderid` int(11) NOT NULL,
   `reden` text NOT NULL,
   `behandeld` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -183,6 +193,10 @@ CREATE TABLE `tblrapporten` (
 --
 ALTER TABLE `tblboden`
   ADD PRIMARY KEY (`bodenId`);
+-- Indexen voor tabel `tblcache`
+--
+ALTER TABLE `tblcache`
+  ADD PRIMARY KEY (`cacheid`);
 
 --
 -- Indexen voor tabel `tblfacturen`
@@ -217,6 +231,10 @@ ALTER TABLE `tblrapporten`
 --
 ALTER TABLE `tblboden`
   MODIFY `bodenId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+-- AUTO_INCREMENT voor een tabel `tblcache`
+--
+ALTER TABLE `tblcache`
+  MODIFY `cacheid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT voor een tabel `tblfacturen`
@@ -228,7 +246,7 @@ ALTER TABLE `tblfacturen`
 -- AUTO_INCREMENT voor een tabel `tblgebruikers`
 --
 ALTER TABLE `tblgebruikers`
-  MODIFY `gebruikerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `gebruikerid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT voor een tabel `tblproducten`

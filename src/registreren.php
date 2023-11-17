@@ -2,6 +2,7 @@
     include "connect.php";
     include "functions/userFunctions.php";
     include "functions/buyerFunctions.php";
+    include "functions/developerFunctions.php";
     require 'lang.php';
 ?>
 <!DOCTYPE html>
@@ -37,6 +38,10 @@
                 </label>
                 <input type="password" id="wachtwoord" name="wachtwoord" placeholder=<?= Vertalen('Password')?> class="input input-bordered w-full max-w-md bg-white text-black" required/>
                 <label class="label">
+                    <span class="label-text text-black">Adress</span>
+                </label>
+                <input type="text" id="adres" name="adres" placeholder="Adress" class="input input-bordered w-full max-w-md bg-white text-black" required/>
+                <label class="label">
                 <span class="label-text text-black"><?= Vertalen('Description')?></span>
                 </label>
                 <textarea class="textarea textarea-bordered h-24 w-full max-w-md bg-white text-black" id="beschrijving" name="beschrijving" placeholder=<?= Vertalen('Description')?>></textarea>
@@ -44,6 +49,8 @@
                     <span class="label-text text-black"><?= Vertalen('Profile Picture')?></span>
                 </label>
                 <input type="file" name="file" class="file-input file-input-bordered w-full max-w-md bg-white text-black" />
+
+                <input type="hidden" name="id">
                 <input type="submit" id="submitknop" name="submitknop" value=<?= Vertalen('Register')?> class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
             </form>
             <div class="flex justify-center mt-2">
@@ -59,6 +66,7 @@
                 $achternaam = $_POST['achternaam'];
                 $email = $_POST['email'];
                 $wachtwoord = $_POST['wachtwoord'];
+                $adres = $_POST['adres'];
                 $beschrijving = $_POST['beschrijving'];
                 $upload_dir = $_SERVER["DOCUMENT_ROOT"]."/2dekans-veilingen-A/public/img/";
                 $file_name = $_FILES['file']['name'];
@@ -66,6 +74,12 @@
                 
                 if(isset($file_name) && !empty($file_name)) {
 
+                cache_createKey($mysqli, $email, $wachtwoord);
+
+                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $adres, $file_name, $beschrijving);
+                if((empty($_POST['file']))) {
+                    move_uploaded_file($file_tmp, $upload_dir.$file_name);
+                };
                     $teller = 1;
                     while (file_exists($upload_dir . $file_name)) {
                         $file_info = pathinfo($file_name);
@@ -76,7 +90,7 @@
                     move_uploaded_file($file_tmp, $upload_dir . $file_name);
                 }
 
-                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
+                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $adres, $file_name, $beschrijving);
 
                 /* Kan nog aangepast worden */
                 header("Location: login.php");

@@ -20,14 +20,26 @@ if (isset($_POST["Report"])) {
   $reden = $_POST["reden"];
 
   if(addReport($mysqli, $_SESSION["reportUser"], $_SESSION["login"], $reden, 0)) {
+  
+    if($_SESSION["theme"] == 'retro') {
     echo'    
     <div class="form-control flex justify-center items-center">
       <div class="  max-w-lg mx-auto justify-center items-center">
-        <img id="Support" src="../public/img/Support.png" alt="Support.png">
+        <img id="Support" src="../public/img/Support3.png" alt="Support.png">
       </div>
         <a href="gebruikerProfiel.php?user=' . $_SESSION["reportUser"] .'" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-success">Return</button></a>
       
     </div>';
+  } else if($_SESSION["theme"] == 'dark') {
+    echo'    
+    <div class="form-control flex justify-center items-center">
+      <div class="  max-w-lg mx-auto justify-center items-center">
+        <img id="Support" src="../public/img/Support2.png" alt="Support.png">
+      </div>
+        <a href="gebruikerProfiel.php?user=' . $_SESSION["reportUser"] .'" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-success">Return</button></a>
+      
+    </div>';
+  }
   }
 }
 
@@ -192,7 +204,6 @@ if (isset($_GET['user'])) {
         echo '
         <div class=" mr-4 mt-11 w-80  overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
   <a href = "productDetails.php?gekozenProduct='.$row['productid'].'"><img id = "productFoto" class="h-48 w-full object-cover object-center" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'" width="240" hight="320" /></a> 
-
 
 
   <div class="p-4">
