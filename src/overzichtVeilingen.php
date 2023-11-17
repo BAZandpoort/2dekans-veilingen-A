@@ -10,12 +10,11 @@
   <?php
     include "components/navbar.php";
     include "functions/adminFunctions.php";
-    include "connect.php"; 
     include "components/countdown.php";
     
     echo '<div class="flex flex-wrap gap-4">';
-    if(getDataTblproducten($mysqli)){
-    foreach (getDataTblproducten($mysqli) as $data) {     
+    if(getDataTblproducten()){
+    foreach (getDataTblproducten() as $data) {     
         
       echo'<div class="card w-96 p-6 shadow-xl bg-white">';
       if (empty($data["foto"])) {

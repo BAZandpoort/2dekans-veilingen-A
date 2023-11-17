@@ -1,7 +1,5 @@
 <?php
-include "./connect.php";
 include "./functions/userFunctions.php";
-require_once "../src/components/util.php";
 session_start();
 require 'lang.php';
 
@@ -26,7 +24,7 @@ if ($gebruiker) {
             <summary class="m-1 btn btn-ghost text-black"><?= Vertalen('Categories')?></summary>
             <ul name="categorieknop" tabindex="0" class="p-2 shadow text-white bg-black menu dropdown-content z-[1] rounded-box w-32">
                 <?php
-                foreach (getAllCategories($mysqli) as $row) {
+                foreach (getAllCategories( ) as $row) {
                     echo '
                         
                         <li><a href="producten.php?gekozenCategorie=' . $row['categorienaam'] . '" name="categorieID">' . $row['categorienaam'] . '</a></li>
@@ -42,7 +40,7 @@ if ($gebruiker) {
                 </form>
             ";
             if (isset($_POST['searchResult'])) {
-                $zoeklijst = createSearchlist($mysqli, $_POST['searchResult']);
+                $zoeklijst = createSearchlist(  $_POST['searchResult']);
                 
                 header('Location: zoekresultaten.php?zoekresultatenlijst='.urlencode(serialize($zoeklijst)).'');
             };
@@ -66,12 +64,15 @@ if ($gebruiker) {
             <button class="btn btn-ghost" >Theme</button>
         </a>
         </div>
+        <?php
+        $favorites = getAllFavourites($userid);
+        ?>
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="btn btn-ghost btn-circle">
                     <div class="indicator">
                         <?php
                         $userid = $_SESSION["login"];
-                        $favorites = getAllFavourites($mysqli, $userid)->fetch_all(MYSQLI_ASSOC);
+                        
                         $count = isset($favorites["productId"]) ? 1 : count($favorites);
                         ($_SESSION["theme"] == 'retro')
                         ? $favoriteImage= "favourite.png"
@@ -110,7 +111,7 @@ if ($gebruiker) {
             <?php
             if ($_SESSION["login"]) {
                 $userid = $_SESSION["login"];
-                $image = getProfilePicture($mysqli, $userid);
+                $image = getProfilePicture(  $userid);
                 print '<img src="../public/img/' . $image . '"/>';
             }
             ?>

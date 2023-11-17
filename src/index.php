@@ -1,6 +1,5 @@
 <?php
 include "overzichtVeilingen.php";
-include "connect.php";
 
 $gebruikerid = isset($_SESSION["login"]) ?  $_SESSION["login"] : null;
 if ($gebruikerid) {

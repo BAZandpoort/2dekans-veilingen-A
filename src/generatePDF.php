@@ -5,12 +5,12 @@ session_start();
 // check if factuurid is in use
 do{
     $factuurid = rand(1000,9999);
-    $resultaat = $mysqli->query("SELECT * from tblfacturen where factuurid = '" . $factuurid . "'");
+    $resultaat =  ->query("SELECT * from tblfacturen where factuurid = '" . $factuurid . "'");
     $row = $resultaat->num_rows;
 }while ($row >= 1);
 // info voor de factuur
 $sql = "SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid";
-$resultaat = $mysqli->query($sql);
+$resultaat =  ->query($sql);
 while ($row = $resultaat->fetch_assoc()) {
         $naam = ''.$row["voornaam"].' '.$row["achternaam"].'';
 }
@@ -26,13 +26,13 @@ $pdf_file = 'order_' . $factuurid . '.pdf';
 $pdf->Output('F', '../public/orders/' . $pdf_file);
 
 $pdf_data = file_get_contents('./orders/order_' . $factuurid . '.pdf');
-$pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
+$pdf_data = mysqli_real_escape_string(  $pdf_data);
 
 $sql = "update tblfacturen SET factuurpdf ='" . $pdf_data . "' where factuurid = '" . $factuurid . "'";
-if ($mysqli->query($sql)) {
+if ( ->query($sql)) {
     echo "PDF file saved to database.";
 } else {
-    echo "Error: " . $sql . "<br>" . $mysqli->error;
+    echo "Error: " . $sql . "<br>" .  ->error;
 }
 
 define('EURO', chr(128));
@@ -59,7 +59,7 @@ $pdf->Cell(90, 10, 'Artikel', 1, 0, 'C');
 $pdf->Cell(30, 10, 'Prijs', 1, 0, 'C');
 
 $totaal = 0;
-$resultaat = $mysqli->query("SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid");
+$resultaat =  ->query("SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid");
 $pdf->SetFont('Helvetica', '', 12);
 while($row = $resultaat->fetch_assoc()){
         $pdf->SetY(60);

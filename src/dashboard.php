@@ -24,17 +24,17 @@
         <div class="flex text-left p-3 shadow rounded-lg mt-3 mb-3">
             <div class="stat">
                 <div class="stat-title">Revenue</div>
-                <div class="stat-value">€<?php echo getTotalRevenue($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value">€<?php echo getTotalRevenue(  $_SESSION['login']) ?></div>
                 <div class="stat-desc">Total amount of money brought in</div>
             </div>
             <div class="stat">
                 <div class="stat-title">Active products</div>
-                <div class="stat-value"><?php echo getTotalActiveProducts($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value"><?php echo getTotalActiveProducts(  $_SESSION['login']) ?></div>
                 <div class="stat-desc"><a href="actieveProducten.php" class="link">Overview of all active products</a></div>
             </div>
             <div class="stat">
                 <div class="stat-title">Products sold</div>
-                <div class="stat-value"><?php echo getTotalSoldProducts($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value"><?php echo getTotalSoldProducts(  $_SESSION['login']) ?></div>
                 <div class="stat-desc"><a href="verkoopgeschiedenis.php" class="link">Overview of all sold products</a></div>
             </div>
         </div>  
@@ -42,12 +42,12 @@
         <div class="flex text-left p-3 shadow rounded-lg mt-3 mb-3">
             <div class="stat">
                 <div class="stat-title">Expenses</div>
-                <div class="stat-value">€<?php echo getTotalExpenses($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value">€<?php echo getTotalExpenses(  $_SESSION['login']) ?></div>
                 <div class="stat-desc">Total amount of money spent</div>
             </div>
             <div class="stat">
                 <div class="stat-title">Products bought</div>
-                <div class="stat-value"><?php echo getTotalBoughtProducts($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value"><?php echo getTotalBoughtProducts(  $_SESSION['login']) ?></div>
                 <div class="stat-desc"><a href="aankoopgeschiedenis.php" class="link">Overview of all bought products</a></div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach (getLastSales($mysqli, $_SESSION['login'], 3) as $row) {
+                                foreach (getLastSales(  $_SESSION['login'], 3) as $row) {
                                     echo '
                                     <tr>
                                         <td>
@@ -81,7 +81,7 @@
                                             </div>
                                         </div>
                                         </td>
-                                        <td class="text-center">€'; echo getHighestBid($mysqli, $row['productid']); echo '</td>
+                                        <td class="text-center">€'; echo getHighestBid(  $row['productid']); echo '</td>
                                         <td class="text-center">'.$row['datum'].'</td>
                                     </tr>
                                     ';
@@ -109,7 +109,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach (getLastPurchases($mysqli, $_SESSION['login'], 3) as $row) {
+                                foreach (getLastPurchases(  $_SESSION['login'], 3) as $row) {
                                     echo '
                                     <tr>
                                         <td>
@@ -125,7 +125,7 @@
                                             </div>
                                         </div>
                                         </td>
-                                        <td class="text-center">€'; echo getHighestBid($mysqli, $row['productid']); echo '</td>
+                                        <td class="text-center">€'; echo getHighestBid(  $row['productid']); echo '</td>
                                         <td class="text-center">'.$row['datum'].'</td>
                                     </tr>
                                     ';

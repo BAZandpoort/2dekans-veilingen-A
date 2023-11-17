@@ -30,7 +30,7 @@
             </thead>
             <tbody>
                 <?php
-                    foreach (getAllFavourites($mysqli, $_SESSION['login']) as $row) {
+                    foreach (getAllFavourites(  $_SESSION['login']) as $row) {
                         echo "
                         <tr>
                             <td>
@@ -48,7 +48,7 @@
                             </td>
                             <td class='text-center'>€"; 
                             
-                            echo getHighestBid($mysqli, $row['productid']);
+                            echo getHighestBid(  $row['productid']);
 
                             $time = getTimeDifference($row["eindtijd"]);
                             if ($time <= 0) {

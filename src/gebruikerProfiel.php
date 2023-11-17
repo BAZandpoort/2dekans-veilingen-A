@@ -19,7 +19,7 @@ include "components/countdown.php";
 if (isset($_POST["Report"])) {
   $reden = $_POST["reden"];
 
-  if(addReport($mysqli, $_SESSION["reportUser"], $_SESSION["login"], $reden, 0)) {
+  if(addReport(  $_SESSION["reportUser"], $_SESSION["login"], $reden, 0)) {
     echo'    
     <div class="form-control flex justify-center items-center">
       <div class="  max-w-lg mx-auto justify-center items-center">
@@ -36,7 +36,7 @@ if (isset($_POST["Report"])) {
 
 
 if (isset($_GET['user'])) {
-    foreach(getSeller($mysqli, $_GET['user']) as $row) {
+    foreach(getSeller(  $_GET['user']) as $row) {
       $_SESSION["reportUser"] = $_GET["user"];
 
       echo'
@@ -113,7 +113,7 @@ if (isset($_GET['user'])) {
                       <h3 class="font-bold text-lg text-center">User reports</h3>
                       <div class="overflow-x-auto h-96">
                       <table class="table table-pin-rows">';
-                      foreach (getReportedUsers($mysqli, $_SESSION['reportUser']) as $row) {
+                      foreach (getReportedUsers(  $_SESSION['reportUser']) as $row) {
                         
                         echo "
                         
@@ -188,13 +188,13 @@ if (isset($_GET['user'])) {
     echo '
 
 <div class= "pl-10 flex flex-wrap gap-4 ">';
-  foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
+  foreach(getSellerProductInfo(  $_GET['user']) as $row) {
         echo '
         <div class=" mr-4 mt-11 w-80  overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
   <a href = "productDetails.php?gekozenProduct='.$row['productid'].'"><img id = "productFoto" class="h-48 w-full object-cover object-center" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'" width="240" hight="320" /></a> 
 
 
-    foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
+    foreach(getSellerProductInfo(  $_GET['user']) as $row) {
 
   <div class="p-4">
     <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">'.$row['naam']. '</h2>
@@ -212,7 +212,7 @@ echo '
 </div>';
 
 
-   /* foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
+   /* foreach(getSellerProductInfo(  $_GET['user']) as $row) {
 
 }
     

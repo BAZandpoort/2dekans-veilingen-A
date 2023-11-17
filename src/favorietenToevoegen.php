@@ -6,10 +6,10 @@
 
     if(isset($_SESSION['login']) && isset($_GET['product'])) {
         $sql = "SELECT * FROM tblfavorieten WHERE productid = ".$_GET['product']." AND gebruikerid = ".$_SESSION['login']."";
-        $result = $mysqli->query($sql);
+        $result =  ->query($sql);
 
         if(mysqli_num_rows($result) == 0) {
-            addProductToFavorites($mysqli, $_GET['product'], $_SESSION['login']); 
+            addProductToFavorites(  $_GET['product'], $_SESSION['login']); 
 
             header("Location: favorieten.php");
         } else {

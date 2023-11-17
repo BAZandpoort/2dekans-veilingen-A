@@ -54,7 +54,7 @@
 </div>
     <?php
         if(isset($_POST['submitknop'])) {
-            if(!(isEmailCorrect($mysqli, $_POST['email']))) {
+            if(!(isEmailCorrect(  $_POST['email']))) {
                 $voornaam = $_POST['voornaam'];
                 $achternaam = $_POST['achternaam'];
                 $email = $_POST['email'];
@@ -76,7 +76,7 @@
                     move_uploaded_file($file_tmp, $upload_dir . $file_name);
                 }
 
-                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
+                registerUser(  $voornaam, $achternaam, $email, $wachtwoord, $file_name, $beschrijving);
 
                 /* Kan nog aangepast worden */
                 header("Location: login.php");
