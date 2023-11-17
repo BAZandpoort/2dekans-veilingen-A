@@ -60,7 +60,7 @@ $lang = [
     'Your purchases'=>'Vos achats',
     'See all purchases'=>'Voir tous les achats',
     'Warning!'=> 'avertissement!',
-    'Someone ourtbid you'=> "Quelqu'un vous a enjoint",
+    'Someone outbid you'=> "Quelqu'un vous a enjoint",
     'see'=> 'voir'
 ];
 

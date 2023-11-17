@@ -60,7 +60,7 @@ $lang = [
     'Your purchases'=>'Uw aankopen',
     'See all purchases'=>'Bekijk alle aankopen',
     'Warning!'=> 'waarschuwing!',
-    'Someone ourtbid you'=> 'Iemand heeft een hoger bod dan jouw',
+    'Someone outbid you'=> 'Iemand heeft een hoger bod dan jouw',
     'see'=> 'zien'
 ];
 
