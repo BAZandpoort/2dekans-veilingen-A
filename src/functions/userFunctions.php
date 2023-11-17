@@ -20,6 +20,7 @@ function registerUser($connection, $fname, $lname, $email, $password, $profile_p
     }
 
     $password = convertPasswordToHash($password);
+    
 
     $resultaat = $connection->query("INSERT INTO tblgebruikers (email, voornaam, naam, wachtwoord, profielfoto, beschrijving) VALUES ('".$email."','".$fname."','".$lname."','".$password."','".$profile_picture."','".$desc."')");
     return $resultaat;
