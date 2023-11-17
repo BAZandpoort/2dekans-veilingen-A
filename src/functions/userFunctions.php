@@ -25,7 +25,7 @@ function registerUser($connection, $fname, $lname, $email, $password, $adres, $p
     return $resultaat;
 }
 
-function updateUser($connection, $userid, $fname, $lname, $email, $password, $adres, $profile_picture, $desc) {
+function updateUser($connection, $userid, $fname, $lname, $email, $password, $profile_picture, $desc,$adres) {
     if(empty($profile_picture)) {
         if(getProfilePicture($connection,$userid)){
             $profile_picture = getProfilePicture($connection,$userid);

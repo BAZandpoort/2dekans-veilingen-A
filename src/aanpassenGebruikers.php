@@ -48,7 +48,7 @@ if (isset($_POST["wijzigen"])) {
       };
     }
     $beschrijving = $_POST["beschrijving"]; 
-    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving, $adress)){
+    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving, $adres)){
         header('location: index.php');
     }else{
         print $mysqli->error;
