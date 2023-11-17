@@ -2,19 +2,17 @@
 include "./functions/sellerFunctions.php";
 include "./components/navbar.php";
 include "./functions/adminFunctions.php";
-include "./components/countdown.php";
 
 if(isset($_POST["bied"])) {
 
-  $currentData = fetch("SELECT * FROM tblboden WHERE productid = ? ORDER BY bodenID DESC", ['type' => 'i', 'value' => $i]);
+ /* $currentData = fetch("SELECT * FROM tblboden WHERE productid = ? ORDER BY bodenID DESC", ['type' => 'i', 'value' => $i]);
   $_SESSION["gebruikerid1"] = $data["gebruikerid"];
-  $_SESSION["productid1"] = $data["productid"];
+  $_SESSION["productid1"] = $data["productid"]; */
 
   $bod = $_POST["bod"];
   $product = $_POST["product"];
 
   $hours = getTimeDifference(getProductTime($mysqli, $product));
-  var_dump($hours);
   if ($hours <= 0) {
     header('location: overzichtVeilingen.php?errorTimeDone');
     return;
@@ -73,6 +71,7 @@ if(isset($_POST["bied"])) {
 </head>
 <body data-theme='<?php echo $_SESSION["theme"] ?>'>
 <?php
+include "./components/countdown.php";
 if (isset($_GET['gekozenProduct'])) {
     foreach(getProduct($mysqli, $_GET['gekozenProduct']) as $row) {
       echo '

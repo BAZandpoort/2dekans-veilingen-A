@@ -194,7 +194,6 @@ if (isset($_GET['user'])) {
   <a href = "productDetails.php?gekozenProduct='.$row['productid'].'"><img id = "productFoto" class="h-48 w-full object-cover object-center" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'" width="240" hight="320" /></a> 
 
 
-    foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
 
   <div class="p-4">
     <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">'.$row['naam']. '</h2>
