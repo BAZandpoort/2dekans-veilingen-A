@@ -1,6 +1,7 @@
 <?php
     include "functions/buyerFunctions.php";
     include "components/navbar.php";
+    include "functions/adminFunctions.php";
 
     if(!(isset($_SESSION['login']))) {
         header("Location: index.php");
@@ -48,11 +49,18 @@
                             <td class='text-center'>€"; 
                             
                             echo getHighestBid($mysqli, $row['productid']);
+
+                            $time = getTimeDifference($row["eindtijd"]);
+                            if ($time <= 0) {
+                                $time = "afgelopen";
+                            } else {
+                                $time = date("H:i", $time);
+                            }
                             
                             echo "</td>
-                            <td class='text-center'>24u 14m</td>
+                            <td class='text-center'>".$time."</td>
                             <th class='text-center'>
-                            <a href='bod.php?product=".$row['productid']."'><button class='btn btn-ghost btn-xs'>PLAATS BOD</button></a>
+                            <a href='productDetails.php?gekozenProduct=".$row['productid']."'><button class='btn btn-ghost btn-xs'>PLAATS BOD</button></a>
                             </th>
                             <td>
                             <a href='verwijderUitFavorieten.php?product=".$row['productid']."'><button class='btn btn-sm btn-circle btn-ghost'>✕</button>
