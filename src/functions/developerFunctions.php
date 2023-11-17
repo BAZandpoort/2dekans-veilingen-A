@@ -16,6 +16,10 @@ function cache_getInfoFromDatabase($connection, $userID) {
     return ($connection->query("SELECT * FROM tblcache WHERE gebruikerid = '".$userID."'"));
 };
 
+function cache_exists($connection, $email) {
+    return ($connection->query("SELECT * FROM tblcache WHERE cachenaam = '".$email."'"));
+};
+
 function cache_getUserEmailInDatabase($connection, $userID) {
     return cache_getInfoFromDatabase($connection, $userID)->fetch_assoc()['cachenaam']; 
 };
