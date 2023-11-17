@@ -20,6 +20,7 @@ function registerUser($connection, $fname, $lname, $email, $password, $adres, $p
     }
 
     $password = convertPasswordToHash($password);
+    
 
     $resultaat = $connection->query("INSERT INTO tblgebruikers (email, voornaam, naam, wachtwoord, adres, profielfoto, beschrijving) VALUES ('".$email."','".$fname."','".$lname."','".$password."','".$adres."','".$profile_picture."','".$desc."')");
     return $resultaat;
@@ -61,6 +62,7 @@ function getUser($connection,$gebruikerid){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where gebruikerid= '".$gebruikerid."'");
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
+
 function getProfilePicture($connection,$userid){
     $resultaat = $connection->query("SELECT * FROM tblgebruikers where gebruikerid= '".$userid."'");
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['profielfoto'];

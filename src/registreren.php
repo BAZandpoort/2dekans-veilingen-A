@@ -2,6 +2,7 @@
     include "connect.php";
     include "functions/userFunctions.php";
     include "functions/buyerFunctions.php";
+    include "functions/developerFunctions.php";
     require 'lang.php';
 ?>
 <!DOCTYPE html>
@@ -48,6 +49,8 @@
                     <span class="label-text text-black"><?= Vertalen('Profile Picture')?></span>
                 </label>
                 <input type="file" name="file" class="file-input file-input-bordered w-full max-w-md bg-white text-black" />
+
+                <input type="hidden" name="id">
                 <input type="submit" id="submitknop" name="submitknop" value=<?= Vertalen('Register')?> class="btn text-black bg-white mt-3 w-full border-white hover:text-white hover:bg-black"/>
             </form>
             <div class="flex justify-center mt-2">
@@ -71,6 +74,12 @@
                 
                 if(isset($file_name) && !empty($file_name)) {
 
+                cache_createKey($mysqli, $email, $wachtwoord);
+
+                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $adres, $file_name, $beschrijving);
+                if((empty($_POST['file']))) {
+                    move_uploaded_file($file_tmp, $upload_dir.$file_name);
+                };
                     $teller = 1;
                     while (file_exists($upload_dir . $file_name)) {
                         $file_info = pathinfo($file_name);
