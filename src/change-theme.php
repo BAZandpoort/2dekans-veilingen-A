@@ -25,7 +25,6 @@ function handleTheme($data) {
     ['type' => 'i', 'value' => $gebruiker],
   );
   
-  var_dump($change_theme);
   $_SESSION['gebruiker']['theme'] = $theme;
   
   header('Location: index.php');

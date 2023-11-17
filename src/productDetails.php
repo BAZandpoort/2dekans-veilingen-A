@@ -2,14 +2,17 @@
 include "./functions/sellerFunctions.php";
 include "./components/navbar.php";
 include "./functions/adminFunctions.php";
-include "./components/countdown.php";
 
-if (isset($_POST["bied"])) {
+if(isset($_POST["bied"])) {
+
+ /* $currentData = fetch("SELECT * FROM tblboden WHERE productid = ? ORDER BY bodenID DESC", ['type' => 'i', 'value' => $i]);
+  $_SESSION["gebruikerid1"] = $data["gebruikerid"];
+  $_SESSION["productid1"] = $data["productid"]; */
+
   $bod = $_POST["bod"];
   $product = $_POST["product"];
 
   $hours = getTimeDifference(getProductTime($mysqli, $product));
-  var_dump($hours);
   if ($hours <= 0) {
     header('location: overzichtVeilingen.php?errorTimeDone');
     return;
@@ -66,11 +69,11 @@ if (isset($_POST["bied"])) {
     }
   </script>
 </head>
-
-<body class="bg-[#F1FAEE]">
-  <?php
-  if (isset($_GET['gekozenProduct'])) {
-    foreach (getProduct($mysqli, $_GET['gekozenProduct']) as $row) {
+<body data-theme='<?php echo $_SESSION["theme"] ?>'>
+<?php
+include "./components/countdown.php";
+if (isset($_GET['gekozenProduct'])) {
+    foreach(getProduct($mysqli, $_GET['gekozenProduct']) as $row) {
       echo '
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2 border-base-300 m-4">
@@ -80,9 +83,9 @@ if (isset($_POST["bied"])) {
         <div class="divider divider-horizontal"></div>
         <div class="card-body">
           <div class="card bg-base-50 bg-[#FFFFFF]">
-            <div class="card-body bg-[#F1FAEE]">';
-      if (isset($_GET["errorUnderPrice"])) {
-        print '<div class="alert alert-error">
+            <div class="card-body">';
+            if(isset($_GET["errorUnderPrice"])){
+              print'<div class="alert alert-error">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <span>Error! Can not bid under minimal price.</span>
               </div>';
