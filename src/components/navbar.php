@@ -24,6 +24,7 @@ if ($gebruiker) {
 <div class="navbar" >
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>
+    
     <?php
     //zet standaard op false
     $gebruikerbestaatal = false;
@@ -72,12 +73,11 @@ if(isset($_SESSION["login"])) {
             <button class="btn btn-sm" ><?= Vertalen('see')?></button>
         </a>
         </div>
-  
-</div>
 </div>
     </div>
 <?php }
  ?>
+ </div>
 
 
 
