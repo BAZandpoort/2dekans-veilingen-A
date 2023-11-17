@@ -59,6 +59,15 @@ $_SESSION["theme"] = $theme;
          $hours = getTimeDifference($data['eindtijd']);
          if ($hours <= 0) {
             echo "tijd is afgelopen"; 
+          // fetch hoogste gebruiker van boden en producten van het id dat afgelopen is.
+          
+          //zet product en hoogste bieder in tblfacturen.
+
+          //als dit is gebeurt dan verwijder alle rows met id.
+
+          //ga terug naar index
+
+
          } else {
          echo '
          <span id="product-' . $data['productid'] .'" class="countdown font-mono text-2xl text-black">

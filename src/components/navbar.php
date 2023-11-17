@@ -16,7 +16,7 @@ if ($gebruiker) {
   $change_theme = fetch("SELECT * from tblgebruikers Where gebruikerid = ?",
   ['type' => 'i', 'value' => $_SESSION["login"]]);
   //als theme retro is pak dan retro anders dark
-  $theme = ($change_theme['theme'] === 'retro') ? 'retro' : 'dark';
+  $theme = ($change_theme['theme'] === 'dark') ? 'dark' : 'retro';
   $_SESSION["theme"] = $theme;
 }
 ?>
@@ -24,8 +24,6 @@ if ($gebruiker) {
 <div class="navbar" >
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>
-    </div>
-
     <?php
     //zet standaard op false
     $gebruikerbestaatal = false;
@@ -62,16 +60,22 @@ if(isset($_SESSION["login"])) {
     }
 }
     if($gebruikerbestaatal && $nietHoogste){?>
-<div class="alert shadow-lg">
+<div class="alert max-w-xs shadow-lg ml-2">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
   <div>
     <h3 class="font-bold"><?= Vertalen('Warning!')?></h3>
     <div class="text-xs"><?= Vertalen('Someone outbid you')?></div>
   </div>
   <div class="flex[0.8]">
-  <button class="btn btn-sm"><a href="productDetails.php?gekozenProduct=<?php echo $product ?>"><?= Vertalen('see')?></a></button>
+  <div>
+  <a href="productDetails.php?gekozenProduct=<?php echo $product ?>">
+            <button class="btn btn-sm" ><?= Vertalen('see')?></button>
+        </a>
+        </div>
+  
 </div>
 </div>
+    </div>
 <?php }
  ?>
 
