@@ -4,7 +4,7 @@ include "./functions/chatFunctions.php";
 
 if (isset($_POST["liveChat"])) {
     $ontvangersid = $_GET["user"]; 
-    $link = "chatSystem.php?user=".$_GET["user"];
+    $link = "chatSystem.php?user=".$_GET["user"]."&chatid='".$_GET["chatid"]."'";
     $chatid =  bin2hex(random_bytes(16));
     $_GET["chatid"] = $chatid;
     createNotification($mysqli, $ontvangersid, $link, $chatid); 
