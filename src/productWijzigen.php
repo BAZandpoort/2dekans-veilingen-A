@@ -49,7 +49,6 @@ if (isset($_POST['submit'])) {
     if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
       echo "Error, kon de foto niet verplaatsen.";
     };
-    modifyProduct2($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie);
 }
     if(modifyProduct($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie, $file_name)){
     header('location: index.php');
