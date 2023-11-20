@@ -39,7 +39,7 @@
                         echo "
                         <tr>
                             <td>
-                                <div class='flex items-center space-x-3'>
+                            <a href='productDetails.php?gekozenProduct=" . $data["productid"] . "'><div class='flex items-center space-x-3'>
                                     <div class='avatar'>
                                     <div class='mask mask-squircle w-16 h-16'>
                                         <img src='../public/img/".$row['foto']."' alt='".$row['foto']."'/>
@@ -49,11 +49,11 @@
                                     <div class='font-bold'>".$row['naam_product']."</div>
                                     <div class='text-sm opacity-50'>".$row['voornaam']." ".$row['naam']."</div>
                                     </div>
-                                </div>
+                                </div></a>
                             </td>
                             <td class='text-center'>€".$row['highest_bid']."</td>
                             <td class='text-center'>".$row['datum']."</td>
-                            <td><a href='generatePDF.php'><button class='btn'>Factuur</button></a></td>
+                            <td><a href='generatePDF.php?id=".$row["factuurid"]."'><button class='btn'>Factuur</button></a></td>
                         </tr>
                         ";
                     }

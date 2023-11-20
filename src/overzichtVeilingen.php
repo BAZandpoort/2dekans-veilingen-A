@@ -26,13 +26,19 @@ $_SESSION["theme"] = $theme;
 <body class="min-h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
   <?php
     include "functions/adminFunctions.php";
+    include "functions/buyerFunctions.php";
     include "components/countdown.php";
     if (session_status() === PHP_SESSION_NONE) {
       session_start();
     }
     echo '<div class="flex flex-wrap gap-4">';
     if(getDataTblproducten($mysqli)){
-    foreach (getDataTblproducten($mysqli) as $data) {     
+    foreach (getDataTblproducten($mysqli) as $data) {
+      
+      $hours = getTimeDifference($data['eindtijd']);
+         if ($hours <= 0) {
+          addFactuur($mysqli,$data['productid'],$data['eindtijd']);
+         } else {
         
       echo'<div class="card w-96 p-6 shadow-xl bg-white">';
       if (empty($data["foto"])) {
@@ -56,17 +62,12 @@ $_SESSION["theme"] = $theme;
          echo '<div class="badge badge-outline text-black">'.$data["categorie"].'</div>';
         }
          echo ' <div class="badge badge-outline text-black"> € '.$data["prijs"].'</div> ';
-         $hours = getTimeDifference($data['eindtijd']);
-         if ($hours <= 0) {
-            echo "tijd is afgelopen"; 
-         } else {
          echo '
          <span id="product-' . $data['productid'] .'" class="countdown font-mono text-2xl text-black">
             <span id="hours" style="--value:00;"></span>:
             <span id="minutes" style="--value:00;"></span>:
             <span id="seconds" style="--value:00;"></span>
           </span>';
-         }
           echo '<a href="../src/favorietenToevoegen.php?product= '.$data['productid'].'">
             <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
           </a>
@@ -78,6 +79,8 @@ $_SESSION["theme"] = $theme;
            } 
         print'</div>
       </div>
+      ';}
+      echo '
     </div>';
     $tijd = $data["eindtijd"];
 

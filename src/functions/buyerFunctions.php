@@ -10,6 +10,21 @@ function getHighestBid($connection, $productid) {
     }
 }
 
+function getBuyer($connection,$productid) {
+    $resultaat = $connection->query("SELECT gebruikersid FROM tblboden WHERE bod = '".getHighestBid($connection,$productid)."' AND productid = '".$productid."'");
+    $row = $resultaat->fetch_assoc();
+    return $row["gebruikersid"];
+}
+
+function addFactuur($connection, $productid,$datum) {
+    $check = $connection->query("SELECT count(*) FROM tblfacturen WHERE productid = '".$productid."' AND koperid = '".getBuyer($connection,$productid)."'");
+    $count = $check->fetch_assoc()["count(*)"];
+    if ($count <= 0) { 
+     $resultaat = $connection->query("INSERT INTO tblfacturen (productid,koperid,datum) VALUES ('".$productid."','".getBuyer($connection,$productid)."','".$datum."')");
+     return $resultaat;
+    }
+}
+
 function addProductToFavorites($connection, $productid, $gebruikerid) {
     $resultaat = $connection->query("INSERT INTO tblfavorieten (productid, gebruikerid) VALUES ('".$productid."','".$gebruikerid."')");
     return $resultaat;
@@ -21,7 +36,7 @@ function deleteProductFromFavorites($connection, $productid, $gebruikerid) {
 }
 
 function getAllPurchases($connection, $userid) {
-    $resultaat = $connection->query("SELECT tblproducten.foto, tblproducten.naam AS naam_product, MAX(tblboden.bod) AS highest_bid, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum
+    $resultaat = $connection->query("SELECT tblproducten.foto, tblproducten.naam AS naam_product, MAX(tblboden.bod) AS highest_bid, tblgebruikers.voornaam, tblgebruikers.naam, tblfacturen.datum, tblfacturen.factuurid
                                      FROM tblfacturen
                                      INNER JOIN tblproducten ON (tblfacturen.productid = tblproducten.productid)
                                      INNER JOIN tblboden ON (tblboden.productid = tblfacturen.productid)
