@@ -28,7 +28,6 @@ include "functions/chatFunctions.php";
             if (isset($_POST["knopCheck"])) {
                 $id = $value["id"];
                 updateNotification($mysqli, $id);
-                var_dump($value["link"]);
                 header("Location: " . $value["link"]);
             }
             if (isset($_POST["knopVerwijder"])) {
@@ -52,6 +51,13 @@ include "functions/chatFunctions.php";
          </div>
         </div>
         </form>';
+    } else {
+    ?>
+        <div class="max-w-full p-3 flex justify-center">
+            <p colspan=4>U hebt geen berichten.</p>
+        </div>
+
+    <?php
     }
 
     ?>
