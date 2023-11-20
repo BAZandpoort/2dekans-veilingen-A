@@ -1,12 +1,12 @@
 <?php
 include "../src/connect.php";
 function getChatData($mysqli, $chatid){
-    $resultaat = $mysqli->query("SELECT * FROM tblchat WHERE gesprekID='".$chatid."'"); 
+    $resultaat = $mysqli->query("SELECT * FROM tblchat WHERE gesprekID = '".$chatid."'"); 
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }
 
 function InsertIntoChatTbl($mysqli, $ontvanger, $zenderVoornaam, $zenderAchternaam, $bericht, $chatid){
-    $sql = "INSERT INTO tblchat (gesprekID, ontvanger, zenderVoornaam, zenderAchternaam, bericht) VALUES ('".$chatid."','".$ontvanger."','".$zenderVoornaam."','".$zenderAchternaam ."','".$bericht."')";
+    $sql = "INSERT INTO tblchat(gesprekID, ontvanger, zenderVoornaam, zenderAchternaam, bericht) VALUES ('".$chatid."','".$ontvanger."','".$zenderVoornaam."','".$zenderAchternaam ."','".$bericht."')";
     return $mysqli->query($sql);
     
 }
@@ -35,7 +35,7 @@ function updateNotification ($mysqli, $id) {
 function createNotification ($mysqli, $ontvangersid, $link) {
     $sql = ("INSERT INTO tblnotifications (notificatie, ontvangersid, status, link)
     VALUES ('Je hebt een nieuw bericht'," . $ontvangersid . ",0, '".$link."')") ;
-    return $mysqli -> query($sql);
+    return $mysqli->query($sql);
 }
 
 function deleteNotification($mysqli, $id) {

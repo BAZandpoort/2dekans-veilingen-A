@@ -27,12 +27,13 @@
     $chatid = $_POST["chatid"];
     $ontvangerNaam = getOntvanger($mysqli, $ontvanger);
     $bericht = $_POST["bericht"];
+
     InsertIntoChatTbl($mysqli, $ontvangerNaam, $zenderVoornaam, $zenderAchternaam, $bericht, $chatid);
   }
   if (!empty($_GET["user"])) {
     $ontvanger = $_GET["user"];
   }
-  if (!empty($_GET["chatid"])) {
+  if (isset($_GET["chatid"])) {
     $chatid = $_GET["chatid"];
   }
   $data = getChatData($mysqli, $chatid);
@@ -72,14 +73,14 @@
   echo '
   <form method="post" action="chatSystem.php">
   <input type="hidden" value="' . $ontvanger . '" name="user">
-  <input type="hidden" value="' . $chatid . '" name="chatid">
+  
+  <input type="hidden" value=' . $chatid . ' name="chatid">
 <textarea class="textarea textarea-bordered" placeholder="write your message here" name="bericht"></textarea>
 <button type="submit" class="btn" name="knop">verzenden</button>
 <button type="submit" class="btn" name="knop2">chat verlaten</button>
 </form>
 </div>
 ';
-
   ?>
 </body>
 

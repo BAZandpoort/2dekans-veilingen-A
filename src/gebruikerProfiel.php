@@ -4,11 +4,10 @@ include "./functions/chatFunctions.php";
 
 if (isset($_POST["liveChat"])) {
     $ontvangersid = $_GET["user"];
-    $link = "chatSystem.php?user=" . $_GET["user"] . " &chatid='" . $_GET["chatid"] . "'";
     $chatid = bin2hex(random_bytes(16));
-    $_GET["chatid"] = $chatid;
+    $link = 'chatSystem.php?user='. $_GET["user"].'&chatid="' . $chatid. '"';
     createNotification($mysqli, $ontvangersid, $link, $chatid);
-    header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $_GET["chatid"]);
+    header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid="'.$chatid.'"');
 }
 include "./components/navbar.php";
 include "components/countdown.php";
