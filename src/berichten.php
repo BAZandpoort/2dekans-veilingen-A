@@ -30,7 +30,7 @@ include "functions/chatFunctions.php";
                 updateNotification($mysqli, $id);
                 var_dump($value["link"]);
                 var_dump($id);
-                header("Location: " . $value["link"]);
+                header('Location:' . $value["link"]);
             }
             if (isset($_POST["knopVerwijder"])) {
                 $id = $value["id"];

@@ -5,9 +5,9 @@ include "./functions/chatFunctions.php";
 if (isset($_POST["liveChat"])) {
     $ontvangersid = $_GET["user"];
     $chatid = bin2hex(random_bytes(16));
-    $link = 'chatSystem.php?user='. $_GET["user"].'&chatid="' . $chatid. '"';
+    $link = 'chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '';
     createNotification($mysqli, $ontvangersid, $link, $chatid);
-    header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid="'.$chatid.'"');
+    header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '');
 }
 include "./components/navbar.php";
 include "components/countdown.php";

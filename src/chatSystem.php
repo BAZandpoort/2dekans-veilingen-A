@@ -14,12 +14,12 @@
   include "functions/chatFunctions.php";
   ?>
   <?php
-  if (isset($_POST["knop2"])) {
+  if (isset($_POST["knopVerwijder"])) {
     $chatid = $_POST["chatid"];
     delectechat($mysqli, $chatid);
     header("Location: overzichtVeilingen.php");
   }
-  if (isset($_POST["knop"])) {
+  if (isset($_POST["knopVerzend"])) {
     $data3 = getZender($mysqli, $_SESSION["login"])[0];
     $zenderVoornaam = $data3["voornaam"];
     $zenderAchternaam = $data3["naam"];
@@ -75,9 +75,13 @@
   <input type="hidden" value="' . $ontvanger . '" name="user">
   
   <input type="hidden" value=' . $chatid . ' name="chatid">
-<textarea class="textarea textarea-bordered" placeholder="write your message here" name="bericht"></textarea>
-<button type="submit" class="btn" name="knop">verzenden</button>
-<button type="submit" class="btn" name="knop2">chat verlaten</button>
+<div class="flex flex-col">
+  <textarea class="textarea textarea-bordered w-1/4" placeholder="write your message here" name="bericht"></textarea>
+  <div class="flex flex-row">
+    <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
+    <button type="submit" class="btn m-1" name="knopVerwijder">chat verwijderen</button>
+  </div>
+</div>
 </form>
 </div>
 ';
