@@ -1,7 +1,6 @@
 <?php
-include "../src/connect.php";
-function getChatData($mysqli, $chatid){
-    $resultaat = $mysqli->query("SELECT * FROM tblchat WHERE gesprekID = '".$chatid."'"); 
+function getChatData($mysqli, $id){
+    $resultaat = $mysqli->query("SELECT * FROM tblchat WHERE zenderid= '".$id."' or ontvangerid= '".$id."'"); 
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }
 
@@ -20,7 +19,7 @@ function getOntvanger ($mysqli,$user) {
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['voornaam']; 
 }
 
-function getnotification ($mysqli,$user) {
+function getnotification($mysqli,$user) {
     $resultaat = $mysqli ->query("SELECT* FROM tblnotifications WHERE ontvangersid=".$user." ORDER BY id DESC"); 
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }

@@ -1,7 +1,6 @@
 <?php
 include "components/navbar.php";
 include "functions/chatFunctions.php";
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,54 +14,81 @@ include "functions/chatFunctions.php";
 
 <body class="min-h-screen bg-[#F1FAEE]">
     <?php
-    $user = $_SESSION["login"];
-    $data = getnotification($mysqli, $user);
-    if ($data != false) {
-
-        foreach ($data as $value) {
-            if ($value["status"] == 0) {
-                $titel = "ongelezen notificatie";
-            } else {
-                $titel = "gelezen notificatie";
-            }
-            if (isset($_POST["knopCheck"])) {
-                $id = $value["id"];
-                updateNotification($mysqli, $id);
-                var_dump($value["link"]);
-                var_dump($id);
-                header('Location:' . $value["link"]);
-            }
-            if (isset($_POST["knopVerwijder"])) {
-                $id = $value["id"];
-                deleteNotification($mysqli, $id);
-                header("Location: berichten.php");
-            }
-        }
-
-
-        echo '
-       <form method="post" action="berichten.php">
-       <div class="card w-96 bg-base-100 shadow-xl">
-        <div class="card-body">
-        <h2 class="card-title">' . $titel . '</h2>
-         <p> ' . $value["notificatie"] . '</p>
-         <div class="card-actions justify-end">
-          <button class="btn btn-primary" name="knopCheck">check bericht</button>
-          <button class="btn btn-primary" name="knopVerwijder">melding verwijderen</button>
-          </div>
-         </div>
-        </div>
-        </form>';
-    } else {
-    ?>
-        <div class="max-w-full p-3 flex justify-center">
-            <p colspan=4>U hebt geen berichten.</p>
-        </div>
-
-    <?php
+    if(!isset($_SESSION["login"])){
+        header('location: login.php');
     }
 
+    $user = $_SESSION["login"];
+    
+    if (isset($_POST["knopVerwijder"])) {
+        $id = $value["id"];
+        deleteNotification($mysqli, $id);
+        header("Location: berichten.php");
+    }
     ?>
+    <div class="overflow-x-auto max-w-2xl mx-auto p-3">
+    <table class="table bg-white shadow-lg">
+        <thead>
+            <tr>
+                <th class="text-left">Profiel</th>
+                <th class="text-left">Naam</th>
+                <th class="text-center">Bericht</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if(!(getChatData($mysqli, $user))) {
+                echo "
+                <tr>
+                    <td colspan=4>U hebt geen berichten.</td>
+                </tr> 
+                ";
+            } else {
+                foreach(getChatData($mysqli, $user) as $row) {
+                    ($row["zenderid"] == $_SESSION["login"])
+                    ?$otherUserid = $row["ontvangerid"]
+                    :$otherUserid = $row["zenderid"];
+                    $foto = getProfilePicture($mysqli,$otherUserid);
+                    $dataOtherUser = getUser($mysqli, $otherUserid);
+                    echo "
+                    <tr>
+                        <div>
+                            <td>
+                                <div class='flex items-center space-x-3'>
+                                    <div class='avatar'>
+                                        <div class='mask mask-squircle w-16 h-16'>
+                                            <img src='../public/img/".$foto."' alt='".$foto."'/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class='text-left'>
+                                <div>
+                                    <div class='font-bold'>".$dataOtherUser[0]['voornaam']." ".$dataOtherUser[0]['naam']."</div>
+                                </div>
+                            </td>
+                            <td class= 'text-center'>
+                                <div>
+                                <div class='text-sm opacity-50'>".$row['bericht']."</div>
+                                </div>
+                            </td>
+                            <td class='text-right'>
+                                <a href=".$row['link'].">   
+                                    <button class='btn btn-primary btn-sm'>Chat</button>
+                                </a>
+                            </td>
+                            <form method='post' action='berichten.php'>
+                                <td class='text-right'>
+                                    <button name='knopVerwijder' class='btn btn-sm btn-circle btn-ghost'>✕</button>
+                                </td>
+                            </form>
+                    </tr>";
+                }
+            }
+            ?>
+        </tbody>
+    </table>
+</div>
 </body>
 
 </html>
