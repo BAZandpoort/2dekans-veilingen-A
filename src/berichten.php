@@ -21,10 +21,11 @@ include "functions/chatFunctions.php";
     $user = $_SESSION["login"];
     
     if (isset($_POST["knopVerwijder"])) {
-        $id = $value["id"];
-        deleteNotification($mysqli, $id);
+        $chatid = $_POST["chatid"];
+        deletechat($mysqli, $chatid);
         header("Location: berichten.php");
     }
+
     ?>
     <div class="overflow-x-auto max-w-2xl mx-auto p-3">
     <table class="table bg-white shadow-lg">
@@ -78,6 +79,7 @@ include "functions/chatFunctions.php";
                                 </a>
                             </td>
                             <form method='post' action='berichten.php'>
+                            <hidden name='chatid' value='".$row['gesprekid']."'>
                                 <td class='text-right'>
                                     <button name='knopVerwijder' class='btn btn-sm btn-circle btn-ghost'>✕</button>
                                 </td>
