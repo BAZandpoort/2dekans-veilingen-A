@@ -42,8 +42,8 @@ function deleteNotification($mysqli, $id) {
     return $mysqli -> query($sql); 
 }
 
-function delectechat($mysqli, $chatid) {
-    $sql = ("DELETE FROM tblnotifications WHERE id= '" .$chatid."'"); 
+function deletechat($mysqli, $chatid) {
+    $sql = ("DELETE FROM tblchat WHERE gesprekid= '" .$chatid."'"); 
     return $mysqli -> query($sql); 
 }
 ?>

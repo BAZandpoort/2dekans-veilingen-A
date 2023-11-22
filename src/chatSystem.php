@@ -16,7 +16,7 @@
   <?php
   if (isset($_POST["knopVerwijder"])) {
     $chatid = $_POST["chatid"];
-    delectechat($mysqli, $chatid);
+    deletechat($mysqli, $chatid);
     header("Location: overzichtVeilingen.php");
   }
   if (isset($_POST["knopVerzend"])) {
@@ -79,7 +79,6 @@
   <textarea class="textarea textarea-bordered w-1/4" placeholder="write your message here" name="bericht"></textarea>
   <div class="flex flex-row">
     <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
-    <button type="submit" class="btn m-1" name="knopVerwijder">chat verwijderen</button>
   </div>
 </div>
 </form>
