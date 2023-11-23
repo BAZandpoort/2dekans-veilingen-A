@@ -68,19 +68,20 @@
     }
   }
   echo '
-  <div class="flex justify-end flex-col">
-    <form method="post" action="chatSystem.php">
-      <input type="hidden" value=' . $ontvangerid . ' name="ontvangerid">
+  <div class="flex justify-end">
+    <div class="flex flex-col">
+      <form method="post" action="chatSystem.php" >
+        <input type="hidden" value=' . $ontvangerid . ' name="ontvangerid">
 
-      <input type="hidden" value=' . $chatid . ' name="chatid">
+        <input type="hidden" value=' . $chatid . ' name="chatid">
 
-      <textarea class="textarea textarea-bordered w-1/4" placeholder="write your message here" name="bericht"></textarea>
-      <div class="flex flex-row">
-        <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
-        <button type="submit" name="leaveChat" class="btn m-1">Leave chat</button>
-      </div>
-    </form>
-
+        <textarea class="textarea textarea-bordered w-full" placeholder="write your message here" name="bericht"></textarea>
+        <div class="flex flex-row">
+          <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
+          <button type="submit" name="leaveChat" class="btn m-1">Leave chat</button>
+        </div>
+      </form>
+    </div>
   </div>
 ';
   ?>
