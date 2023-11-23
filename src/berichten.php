@@ -51,6 +51,7 @@ include "functions/chatFunctions.php";
                     :$otherUserid = $row["zenderid"];
                     $foto = getProfilePicture($mysqli,$otherUserid);
                     $dataOtherUser = getUser($mysqli, $otherUserid);
+                    $message = getMessage($mysqli, $row["gesprekid"]);
                     echo "
                     <tr>
                         <div>
@@ -70,7 +71,7 @@ include "functions/chatFunctions.php";
                             </td>
                             <td class= 'text-center'>
                                 <div>
-                                <div class='text-sm opacity-50'>".$row['bericht']."</div>
+                                <div class='text-sm opacity-50'>".$message."</div>
                                 </div>
                             </td>
                             <td class='text-right'>

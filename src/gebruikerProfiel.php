@@ -5,9 +5,9 @@ include "./functions/chatFunctions.php";
 
 if (isset($_POST["liveChat"])) {
     if(isset($_SESSION["login"])){
-        if(checkIfChatExists($mysqli,$_SESSION['login'],$_GET['user'])){
-            $chatdata = checkIfChatExists($mysqli,$_SESSION['login'],$_GET['user']);
-            header('location: '.$chatdata[0]['link']);
+        if(doesChatExists($mysqli,$_SESSION['login'],$_GET['user'])){
+            $chatdataLink = doesChatExists($mysqli,$_SESSION['login'],$_GET['user']);
+            header('location: '.$chatdataLink);
         }else{
             $ontvangersid = $_GET["user"];
             $chatid = bin2hex(random_bytes(16));
