@@ -12,13 +12,13 @@
   <?php
   include "components/navbar.php";
   include "functions/chatFunctions.php";
-  ?>
-  <?php
+
   if (isset($_POST["knopVerwijder"])) {
     $chatid = $_POST["chatid"];
     deletechat($mysqli, $chatid);
     header("Location: overzichtVeilingen.php");
   }
+  
   if (isset($_POST["knopVerzend"])) {
     $data3 = getZender($mysqli, $_SESSION["login"])[0];
     $zenderVoornaam = $data3["voornaam"];
@@ -30,12 +30,15 @@
 
     InsertIntoChatTbl($mysqli, $ontvangerNaam, $zenderVoornaam, $zenderAchternaam, $bericht, $chatid);
   }
-  if (!empty($_GET["user"])) {
+  
+  if (isset($_GET["user"])) {
     $ontvanger = $_GET["user"];
   }
+  
   if (isset($_GET["chatid"])) {
     $chatid = $_GET["chatid"];
   }
+  
   $data = getChatData($mysqli, $chatid);
   if ($data) {
     foreach ($data as $value) {

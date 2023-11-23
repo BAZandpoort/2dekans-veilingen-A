@@ -79,7 +79,7 @@ include "functions/chatFunctions.php";
                                 </a>
                             </td>
                             <form method='post' action='berichten.php'>
-                            <hidden name='chatid' value='".$row['gesprekid']."'>
+                                <input type='hidden' name='chatid' value='".$row['gesprekid']."'>
                                 <td class='text-right'>
                                     <button name='knopVerwijder' class='btn btn-sm btn-circle btn-ghost'>✕</button>
                                 </td>
@@ -93,4 +93,4 @@ include "functions/chatFunctions.php";
 </div>
 </body>
 
-</html>
+</html> 

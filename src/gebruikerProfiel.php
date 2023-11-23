@@ -1,16 +1,26 @@
 <?php
+include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
 include "./functions/chatFunctions.php";
 
 if (isset($_POST["liveChat"])) {
-    $ontvangersid = $_GET["user"];
-    $chatid = bin2hex(random_bytes(16));
-    $link = 'chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '';
-    createNotification($mysqli, $ontvangersid, $link, $chatid);
-    header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '');
+    if(isset($_SESSION["login"])){
+        if(checkIfChatExists($mysqli,$_SESSION['login'],$_GET['user'])){
+            $chatdata = checkIfChatExists($mysqli,$_SESSION['login'],$_GET['user']);
+            header('location: '.$chatdata[0]['link']);
+        }else{
+            $ontvangersid = $_GET["user"];
+            $chatid = bin2hex(random_bytes(16));
+            $link = 'chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '';
+            createChat($mysqli,$chatid, $ontvangersid,$_SESSION["login"], $link);
+            header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '');
+        }
+
+    }
+    //header('location: gebruikerprofiel.php?user='.$_GET["user"]);
 }
-include "./components/navbar.php";
-include "components/countdown.php";
+
+include "./components/countdown.php";
 
 ?>
 <!DOCTYPE html>

@@ -31,9 +31,9 @@ function updateNotification ($mysqli, $id) {
     return $mysqli -> query($sql); 
 }
 
-function createNotification ($mysqli, $ontvangersid, $link) {
-    $sql = ("INSERT INTO tblnotifications (notificatie, ontvangersid, status, link)
-    VALUES ('Je hebt een nieuw bericht'," . $ontvangersid . ",0, '".$link."')") ;
+function createChat ($mysqli, $gesprekid,$ontvangersid,$zenderid, $link) {
+    $sql = ("INSERT INTO tblchat (gesprekid, ontvangerid, zenderid, link)
+    VALUES ('".$gesprekid."'," . $ontvangersid . ",".$zenderid.", '".$link."')") ;
     return $mysqli->query($sql);
 }
 
@@ -45,5 +45,12 @@ function deleteNotification($mysqli, $id) {
 function deletechat($mysqli, $chatid) {
     $sql = ("DELETE FROM tblchat WHERE gesprekid= '" .$chatid."'"); 
     return $mysqli -> query($sql); 
+}
+
+function checkIfChatExists($connection,$userid,$otherUserId){
+    $query = "SELECT * FROM tblchat where ontvangerid='".$userid."' OR zenderid='".$userid."'
+    AND ontvangerid='".$otherUserId."' OR zenderid='".$otherUserId."'";
+    $resultaat = $connection->query($query);
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
 }
 ?>
