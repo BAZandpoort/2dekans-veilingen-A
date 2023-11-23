@@ -12,27 +12,20 @@
   <?php
   include "components/navbar.php";
   include "functions/chatFunctions.php";
-
-  if (isset($_POST["knopVerwijder"])) {
-    $chatid = $_POST["chatid"];
-    deletechat($mysqli, $chatid);
-    header("Location: overzichtVeilingen.php");
-  }
   
-  if (isset($_POST["knopVerzend"])) {
-    $data3 = getZender($mysqli, $_SESSION["login"])[0];
-    $zenderVoornaam = $data3["voornaam"];
-    $zenderAchternaam = $data3["naam"];
-    $ontvanger = $_POST["user"];
-    $chatid = $_POST["chatid"];
-    $ontvangerNaam = getOntvanger($mysqli, $ontvanger);
-    $bericht = $_POST["bericht"];
+  if(!isset($_SESSION["login"])){
+    header('location: login.php');
+  }
 
-    InsertIntoChatTbl($mysqli, $ontvangerNaam, $zenderVoornaam, $zenderAchternaam, $bericht, $chatid);
+  if (isset($_POST["knopVerzend"])) {
+    $ontvangerid = $_POST["ontvangerid"];
+    $chatid = $_POST["chatid"];
+    $message = $_POST["bericht"];
+    createMessage($mysqli,$chatid,$_SESSION["login"],$ontvangerid,$message);
   }
   
   if (isset($_GET["user"])) {
-    $ontvanger = $_GET["user"];
+    $ontvangerid = $_GET["user"];
   }
   
   if (isset($_GET["chatid"])) {
@@ -47,7 +40,7 @@
       $zenderAchternaam = $value["zenderAchternaam"];
       if (($zenderVoornaam == $data2["voornaam"]) && ($zenderAchternaam == $data2["naam"])) {
         echo '
-          <div class="chat chat-start">
+          <div class="chat chat-end">
           <div class="chat-header">';
         echo $value["zenderVoornaam"];
         echo '
@@ -59,7 +52,7 @@
               ';
       } else {
         echo '
-          <div class="chat chat-end">
+          <div class="chat chat-start">
           <div class="chat-header">';
         echo $value["zenderVoornaam"];
         echo '
@@ -72,13 +65,12 @@
       }
     }
   }
-
   echo '
   <form method="post" action="chatSystem.php">
-  <input type="hidden" value="' . $ontvanger . '" name="user">
+  <input type="hidden" value=' . $ontvangerid . ' name="ontvangerid">
   
   <input type="hidden" value=' . $chatid . ' name="chatid">
-<div class="flex flex-col">
+<div class="flex justify-end flex-col">
   <textarea class="textarea textarea-bordered w-1/4" placeholder="write your message here" name="bericht"></textarea>
   <div class="flex flex-row">
     <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
