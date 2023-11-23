@@ -51,7 +51,7 @@ include "functions/chatFunctions.php";
                     :$otherUserid = $row["zenderid"];
                     $foto = getProfilePicture($mysqli,$otherUserid);
                     $dataOtherUser = getUser($mysqli, $otherUserid);
-                    $message = getMessage($mysqli, $row["gesprekid"]);
+                    $message = getLastMessage($mysqli, $row["gesprekid"]);
                     echo "
                     <tr>
                         <div>

@@ -1,13 +1,12 @@
 <?php
-function getChatData($mysqli, $id){
-    $resultaat = $mysqli->query("SELECT * FROM tblchat WHERE zenderid= '".$id."' or ontvangerid= '".$id."'"); 
+function getMessages($connection, $chatid){
+    $resultaat = $connection->query("SELECT * FROM tblmessage WHERE chatid='".$chatid."'"); 
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }
 
-function InsertIntoChatTbl($mysqli, $ontvanger, $zenderVoornaam, $zenderAchternaam, $bericht, $chatid){
-    $sql = "INSERT INTO tblchat(gesprekID, ontvanger, zenderVoornaam, zenderAchternaam, bericht) VALUES ('".$chatid."','".$ontvanger."','".$zenderVoornaam."','".$zenderAchternaam ."','".$bericht."')";
-    return $mysqli->query($sql);
-    
+function getChatData($connection, $id){
+    $resultaat = $connection->query("SELECT * FROM tblchat WHERE zenderid= '".$id."' or ontvangerid= '".$id."'"); 
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC); 
 }
 
 function getOntvanger ($mysqli,$user) {
@@ -15,7 +14,7 @@ function getOntvanger ($mysqli,$user) {
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['voornaam']; 
 }
 
-function getMessage($connection,$chatid) {
+function getLastMessage($connection,$chatid) {
     $resultaat = $connection->query("SELECT * FROM tblmessage WHERE chatid='".$chatid."' ORDER BY messageid DESC limit 1"); 
     return ($resultaat->num_rows == 0)?"geen berichten":$resultaat->fetch_assoc()['message']; 
 }

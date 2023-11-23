@@ -17,6 +17,11 @@
     header('location: login.php');
   }
 
+  if(isset($_POST["leaveChat"])){
+    header('location: berichten.php');
+    return;
+  }
+
   if (isset($_POST["knopVerzend"])) {
     $ontvangerid = $_POST["ontvangerid"];
     $chatid = $_POST["chatid"];
@@ -32,20 +37,17 @@
     $chatid = $_GET["chatid"];
   }
   
-  $data = getChatData($mysqli, $chatid);
-  if ($data) {
-    foreach ($data as $value) {
-      $data2 = getZender($mysqli, $_SESSION["login"])[0];
-      $zenderVoornaam = $value["zenderVoornaam"];
-      $zenderAchternaam = $value["zenderAchternaam"];
-      if (($zenderVoornaam == $data2["voornaam"]) && ($zenderAchternaam == $data2["naam"])) {
+  if (getMessages($mysqli,$chatid)) {
+    foreach (getMessages($mysqli,$chatid) as $value) {
+      $zenderid = $value["zenderid"];
+      if ($_SESSION["login"] == $zenderid) {
         echo '
           <div class="chat chat-end">
           <div class="chat-header">';
-        echo $value["zenderVoornaam"];
+        echo getUser($mysqli,$zenderid)[0]['voornaam'];
         echo '
             </div>
-            <div class="chat-bubble">' . $value["bericht"] . '</div>
+            <div class="chat-bubble">' . $value["message"] . '</div>
             <div class="chat-footer opacity-50">
             </div>
           </div>
@@ -54,10 +56,10 @@
         echo '
           <div class="chat chat-start">
           <div class="chat-header">';
-        echo $value["zenderVoornaam"];
+        echo getUser($mysqli,$zenderid)[0]['voornaam'];
         echo '
             </div>
-            <div class="chat-bubble">' . $value["bericht"] . '</div>
+            <div class="chat-bubble">' . $value["message"] . '</div>
             <div class="chat-footer opacity-50">
             </div>
           </div>
@@ -66,18 +68,20 @@
     }
   }
   echo '
-  <form method="post" action="chatSystem.php">
-  <input type="hidden" value=' . $ontvangerid . ' name="ontvangerid">
-  
-  <input type="hidden" value=' . $chatid . ' name="chatid">
-<div class="flex justify-end flex-col">
-  <textarea class="textarea textarea-bordered w-1/4" placeholder="write your message here" name="bericht"></textarea>
-  <div class="flex flex-row">
-    <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
+  <div class="flex justify-end flex-col">
+    <form method="post" action="chatSystem.php">
+      <input type="hidden" value=' . $ontvangerid . ' name="ontvangerid">
+
+      <input type="hidden" value=' . $chatid . ' name="chatid">
+
+      <textarea class="textarea textarea-bordered w-1/4" placeholder="write your message here" name="bericht"></textarea>
+      <div class="flex flex-row">
+        <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
+        <button type="submit" name="leaveChat" class="btn m-1">Leave chat</button>
+      </div>
+    </form>
+
   </div>
-</div>
-</form>
-</div>
 ';
   ?>
 </body>
