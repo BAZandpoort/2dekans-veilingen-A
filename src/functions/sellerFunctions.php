@@ -45,11 +45,32 @@ function getSellerLastName($connection, $sellerID) {
     return getSeller($connection, $sellerID)->fetch_assoc()['naam'];
 };
 
+function getSellerProductInfo($connection, $verkoperid) {
+    return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
+};
+
+function getProductPrice($connection,$productid){
+    return getProduct($connection, $productid)->fetch_assoc()['prijs'];
+}
+
+function getProductSellerid($connection,$productid){
+    return getProduct($connection, $productid)->fetch_assoc()['verkoperid'];
+}
+function getProductTime($connection,$productid){
+    return getProduct($connection,$productid)->fetch_assoc()['eindtijd'];
+}
+
+function getSellerProducts($connection, $sellerID){
+    $resultaat = $connection->query("SELECT * FROM tblproducten WHERE verkoperid = '".$sellerID."'");
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
+    
+};
+
 function getTotalSoldProducts($connection, $sellerID) {
     $resultaat = $connection->query("SELECT COUNT(tblproducten.naam) AS total_sold FROM tblfacturen
                                      INNER JOIN tblproducten ON (tblproducten.productid = tblfacturen.productid) 
                                      WHERE tblproducten.verkoperid = ".$sellerID." AND CURRENT_TIMESTAMP > eindtijd");
-    
+
     $row = $resultaat->fetch_assoc();
     return $row['total_sold'];
 }

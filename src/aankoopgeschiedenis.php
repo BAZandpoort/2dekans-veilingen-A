@@ -8,7 +8,7 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="en" class="bg-[#F1FAEE]">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
 </head>
-<body class="min-h-screen bg-[#F1FAEE]">
+<body class="min-h-screen " data-theme='<?php echo $_SESSION["theme"] ?>'>
     <div class="overflow-x-auto max-w-4xl mx-auto p-3">
         <table class="table bg-white shadow-lg">
             <thead>
@@ -39,7 +39,7 @@
                         echo "
                         <tr>
                             <td>
-                                <div class='flex items-center space-x-3'>
+                            <a href='productDetails.php?gekozenProduct=" . $data["productid"] . "'><div class='flex items-center space-x-3'>
                                     <div class='avatar'>
                                     <div class='mask mask-squircle w-16 h-16'>
                                         <img src='../public/img/".$row['foto']."' alt='".$row['foto']."'/>
@@ -49,11 +49,11 @@
                                     <div class='font-bold'>".$row['naam_product']."</div>
                                     <div class='text-sm opacity-50'>".$row['voornaam']." ".$row['naam']."</div>
                                     </div>
-                                </div>
+                                </div></a>
                             </td>
                             <td class='text-center'>€".$row['highest_bid']."</td>
                             <td class='text-center'>".$row['datum']."</td>
-                            <td><a href='generatePDF.php'><button class='btn'>Factuur</button></a></td>
+                            <td><a href='generatePDF.php?id=".$row["factuurid"]."'><button class='btn'>Factuur</button></a></td>
                         </tr>
                         ";
                     }
