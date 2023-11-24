@@ -1,20 +1,42 @@
 <?php
 include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
-include "./functions/adminFunctions.php";
-include "components/countdown.php";
-?>
+include "./functions/chatFunctions.php";
 
+if (isset($_POST["liveChat"])) {
+    if(isset($_SESSION["login"])){
+        if(doesChatExists($mysqli,$_SESSION['login'],$_GET['user'])){
+            $chatdataLink = doesChatExists($mysqli,$_SESSION['login'],$_GET['user']);
+            header('location: '.$chatdataLink);
+            return;
+        }else{
+            $ontvangersid = $_GET["user"];
+            $chatid = bin2hex(random_bytes(16));
+            $link = 'chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '';
+            createChat($mysqli,$chatid, $ontvangersid,$_SESSION["login"], $link);
+            header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '');
+            return;
+        }
+
+    }
+    header('location: gebruikerprofiel.php?user='.$_GET["user"]);
+}
+
+include "./components/countdown.php";
+
+?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <title>Profiel gebruiker</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body data-theme="<?php echo $_SESSION['theme'] ?>">
-<?php
+    <?php
 
 if (isset($_POST["Report"])) {
   $reden = $_POST["reden"];
@@ -42,22 +64,17 @@ if (isset($_POST["Report"])) {
   }
   }
 }
-
-
-
-
-
-if (isset($_GET['user'])) {
-    foreach(getSeller($mysqli, $_GET['user']) as $row) {
+    if (isset($_GET['user'])) {
+        foreach (getSeller($mysqli, $_GET['user']) as $row) {
       $_SESSION["reportUser"] = $_GET["user"];
 
-      echo'
+            echo '
       <div class="divider lg:divider-horizontal bg-base-50"></div>
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2">
        <div class="avatar">
-         <div class="h-80 w-80 rounded-full ">
-          <img id="gebruikerFoto" src="../public/img/'.$row['profielfoto'].'" alt="'.$row['profielfoto'].'"/>
+         <div class="w-50 rounded-full ">
+          <img id="gebruikerFoto" src="../public/img/' . $row['profielfoto'] . '" alt="' . $row['profielfoto'] . '"/>
         </div>
         </div>
 
@@ -65,14 +82,17 @@ if (isset($_GET['user'])) {
 
          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div class="card-body">
-            <h2 class="text-2xl font-bold">Naam:  ' .$row['voornaam'].' '.$row['naam'].'</h2>
-            <h2 class="text-2xl font-bold">Email:  '.$row['email'].'</h2>
+            <h2 class="text-2xl font-bold"> ' . $row['voornaam'] . ' ' . $row['naam'] . '</h2>
+            <h2 class="text-2xl font-bold"> ' . $row['email'] . '</h2>
             <details class="collapse bg-base-200">
                 <summary class="collapse-title text-xl font-medium">Description</summary>
                     <div class="collapse-content"> 
-                         <p>' . $row['beschrijving'] .'</p>
+                         <p>' . $row['beschrijving'] . '</p>
                     </div>
             </details>
+            <form method="post" action="gebruikerProfiel.php?user=' . $_GET["user"] . '">
+                <button class="btn" name="liveChat">live chat</button>
+            </form>
          </div>
          </div>
 
@@ -113,10 +133,9 @@ if (isset($_GET['user'])) {
                      </div>
                 </dialog>
                 </div>
-                </div>
-            ';
-                if (isset($_SESSION["admin"])) {
-                    echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                </div>';
+            if (isset($_SESSION["admin"])) {
+                echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
            <h2 class="text-2xl font-bold">Check User Reports</h2>
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_2.showModal()">User Reports</button>
@@ -183,8 +202,8 @@ if (isset($_GET['user'])) {
                      </div>
                 </dialog>
                    <a href="verwijderGebruiker.php?verwijder=' . $row["gebruikerid"] . '" class="btn bg-red">Verwijder</a>';
-                } 
-                echo'
+            }
+            echo '
           </div>
           </div>
 
@@ -195,109 +214,74 @@ if (isset($_GET['user'])) {
         </div>
 
         <br>';
-        
-    }
-    echo '
-
-<div class= "pl-10 flex flex-wrap gap-4 ">';
-  foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
-        echo '
-        <div class=" mr-4 mt-11 w-80  overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
-  <a href = "productDetails.php?gekozenProduct='.$row['productid'].'"><img id = "productFoto" class="h-48 w-full object-cover object-center" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'" width="240" hight="320" /></a> 
+        }
+        foreach (getSellerProductInfo($mysqli, $_GET['user']) as $row) {
 
 
-  <div class="p-4">
-    <h2 class="mb-2 text-lg font-medium dark:text-white text-gray-900">'.$row['naam']. '</h2>
-    <p class="mb-2 text-base dark:text-gray-300 text-gray-700">'.$row['beschrijving']. '</p>
-    <div class="flex items-center">
-      <p class="mr-2 text-lg font-semibold text-gray-900 dark:text-white">€ '.$row['prijs']. '</p>
-    </div>
-     <p class="mb-2 text-base dark:text-gray-300 text-gray-700">'.$row['categorie'].'</p>
-     
-  </div>
-</div>';
-  };
 
-echo '
-</div>';
-
-
-   /* foreach(getSellerProductInfo($mysqli, $_GET['user']) as $row) {
-
-}
-    
-   
-/*
-
-
-        echo'
+            echo '
         
         <div class="flex flex-wrap gap-12">
         
               
              <div class="card w-96 p-6 shadow-xl bg-white">';
-                if (empty($row["foto"])) {
-                echo' <figure><img src="../public/img/brokenImageIcon.png" width="240" hight="320" /></figure>';  
-                } else {
-                echo'
-                <figure><img src="../public/img/'.$row["foto"].'" width="240" hight="320" /></figure>';
-                }
-                echo'
+            if (empty($row["foto"])) {
+                echo ' <figure><img src="../public/img/brokenImageIcon.png" width="240" hight="320" /></figure>';
+            } else {
+                echo '
+                <figure><img src="../public/img/' . $row["foto"] . '" width="240" hight="320" /></figure>';
+            }
+            echo '
                 <div class="card-body"> 
-                <a href="productDetails.php?gekozenProduct='.$row['productid'].'" id="productNaam" class="card-title">
+                <a href="productDetails.php?gekozenProduct=' . $row['productid'] . '" id="productNaam" class="card-title">
                     <h2 class="card-title text-black">
-                    '.$row["naam"].'
+                    ' . $row["naam"] . '
                     </h2>
                 </a>
-                <p class="text-black">'.$row["beschrijving"].'</p>
+                <p class="text-black">' . $row["beschrijving"] . '</p>
                     <div class="card-actions justify-end">';
-                    if (empty($row["categorie"])) {
-                    echo ' <div class="badge badge-outline text-black">none</div> ';
-                    } else {
-                    echo '<div class="badge badge-outline text-black">'.$row["categorie"].'</div>';
-                    }
-                    echo ' <div class="badge badge-outline text-black"> € '.$row["prijs"].'</div> ';
-                    $dateNow = date("Y-m-d H:i:s");
-                    $start = strtotime($dateNow);
-                    $end = strtotime($row['eindtijd']);
-            
-                    $hours = intval(($end - $start)/3600);
-                    if ($hours <= 0) {
-                        echo "tijd is afgelopen"; 
-                    } else {
-                    echo '
-                    <span id="product-' . $row['productid'] .'" class="countdown font-mono text-2xl text-black">
+            if (empty($row["categorie"])) {
+                echo ' <div class="badge badge-outline text-black">none</div> ';
+            } else {
+                echo '<div class="badge badge-outline text-black">' . $row["categorie"] . '</div>';
+            }
+            echo ' <div class="badge badge-outline text-black"> € ' . $row["prijs"] . '</div> ';
+            $dateNow = date("Y-m-d H:i:s");
+            $start = strtotime($dateNow);
+            $end = strtotime($row['eindtijd']);
+
+            $hours = intval(($end - $start) / 3600);
+            if ($hours <= 0) {
+                echo "tijd is afgelopen";
+            } else {
+                echo '
+                    <span id="product-' . $row['productid'] . '" class="countdown font-mono text-2xl text-black">
                         <span id="hours" style="--value:00;"></span>:
                         <span id="minutes" style="--value:00;"></span>:
                         <span id="seconds" style="--value:00;"></span>
                     </span>';
-                    }
-                    echo '<img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
+            }
+            echo '<img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
                     
                     <a href="bod.php?product=' . $row["productid"] . '"">
                     <button class="btn btn-outline text-black bg-white border-white hover:text-white hover:bg-black ">Bid</button>
                     </a>';
-                    if (isset($_SESSION["admin"])) {
-                        echo '<a href="productVerwijderenAdmin.php?verwijder=' . $row["productid"] . '" class="btn bg-[#FF7F7F]">Verwijder</a>';
-                    } 
-                    print'
+            if (isset($_SESSION["admin"])) {
+                echo '<a href="productVerwijderenAdmin.php?verwijder=' . $row["productid"] . '" class="btn bg-[#FF7F7F]">Verwijder</a>';
+            }
+            print '
                 </div>
                 </div>
                 </div>';
-                $tijd = $row["eindtijd"];
+            $tijd = $row["eindtijd"];
 
 
-                echo '<script> countDown(' . $row['productid'] . ', '. strtotime($tijd) . '); </script>';
-            */
-      ;
-    
-//};
+            echo '<script> countDown(' . $row['productid'] . ', ' . strtotime($tijd) . '); </script>';;
+        };
+    };
 
-};
-
-
-    
-?>
+    ?>
 
 </body>
+
 </html>
