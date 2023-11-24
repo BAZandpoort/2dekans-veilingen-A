@@ -8,16 +8,18 @@ if (isset($_POST["liveChat"])) {
         if(doesChatExists($mysqli,$_SESSION['login'],$_GET['user'])){
             $chatdataLink = doesChatExists($mysqli,$_SESSION['login'],$_GET['user']);
             header('location: '.$chatdataLink);
+            return;
         }else{
             $ontvangersid = $_GET["user"];
             $chatid = bin2hex(random_bytes(16));
             $link = 'chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '';
             createChat($mysqli,$chatid, $ontvangersid,$_SESSION["login"], $link);
             header('location: chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '');
+            return;
         }
 
     }
-    //header('location: gebruikerprofiel.php?user='.$_GET["user"]);
+    header('location: gebruikerprofiel.php?user='.$_GET["user"]);
 }
 
 include "./components/countdown.php";
@@ -213,8 +215,6 @@ if (isset($_POST["Report"])) {
 
         <br>';
         }
-    echo '
-
         foreach (getSellerProductInfo($mysqli, $_GET['user']) as $row) {
 
 

@@ -68,7 +68,6 @@ $_SESSION["theme"] = $theme;
             <span id="minutes" style="--value:00;"></span>:
             <span id="seconds" style="--value:00;"></span>
           </span>';
-         }
           echo '<a href="../src/favorietenToevoegen.php?product='.$data['productid'].'">
             <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
           </a>
