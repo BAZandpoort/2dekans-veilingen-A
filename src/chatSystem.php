@@ -8,7 +8,7 @@
   <title>title</title>
 </head>
 
-<body class="min-h-screen bg-[#F1FAEE]">
+<body class="min-h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
   <?php
   include "components/navbar.php";
   include "functions/chatFunctions.php";
@@ -77,8 +77,8 @@
 
         <textarea class="textarea textarea-bordered w-full" placeholder="write your message here" name="bericht"></textarea>
         <div class="flex flex-row">
-          <button type="submit" class="btn m-1" name="knopVerzend">verzenden</button>
-          <button type="submit" name="leaveChat" class="btn m-1">Leave chat</button>
+          <button type="submit" class="btn m-1" name="knopVerzend">'.Vertalen('Send').'</button>
+          <button type="submit" name="leaveChat" class="btn m-1">'.Vertalen('Leave').'</button>
         </div>
       </form>
     </div>

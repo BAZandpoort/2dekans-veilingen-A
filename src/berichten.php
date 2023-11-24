@@ -12,7 +12,7 @@ include "functions/chatFunctions.php";
     <title>title</title>
 </head>
 
-<body class="min-h-screen bg-[#F1FAEE]">
+<body class="min-h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
     <?php
     if(!isset($_SESSION["login"])){
         header('location: login.php');
@@ -31,9 +31,9 @@ include "functions/chatFunctions.php";
     <table class="table bg-white shadow-lg">
         <thead>
             <tr>
-                <th class="text-left">Profiel</th>
-                <th class="text-left">Naam</th>
-                <th class="text-center">Bericht</th>
+                <th class="text-left"><?=Vertalen('Profile')?></th>
+                <th class="text-left"><?=Vertalen('Name')?></th>
+                <th class="text-center"><?=Vertalen('Message')?></th>
             </tr>
         </thead>
         <tbody>
@@ -76,7 +76,7 @@ include "functions/chatFunctions.php";
                             </td>
                             <td class='text-right'>
                                 <a href=".$row['link'].">   
-                                    <button class='btn btn-primary btn-sm'>Chat</button>
+                                    <button class='btn btn-primary btn-sm'>".Vertalen('Chat')."</button>
                                 </a>
                             </td>
                             <form method='post' action='berichten.php'>
