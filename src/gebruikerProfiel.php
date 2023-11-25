@@ -111,8 +111,14 @@ if (isset($_POST["Report"])) {
            </div>
            
            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-           <div class="card-body">
-           <h2 class="text-2xl font-bold">Report user</h2>
+           <div class="card-body">';
+           if($_SESSION['login'] == $_GET['user']){
+            print'<h2 class="text-2xl font-bold">Edit account</h2>
+            <a href="aanpassenGebruikers.php">
+              <button class="btn btn-wide hover:bg-[#FF7F7F]">Edit</button>
+            </a>';
+           }else{
+            print'<h2 class="text-2xl font-bold">Report user</h2>
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_1.showModal()">Report</button>
                 <dialog id="my_modal_1" class="modal">
                      <div class="modal-box">
@@ -131,8 +137,9 @@ if (isset($_POST["Report"])) {
                             </div>
                         </div>    
                      </div>
-                </dialog>
-                </div>
+                </dialog>';
+           }
+                print'</div>
                 </div>';
             if (isset($_SESSION["admin"])) {
                 echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
