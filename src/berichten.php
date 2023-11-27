@@ -31,9 +31,9 @@ include "functions/chatFunctions.php";
     <table class="table bg-white shadow-lg">
         <thead>
             <tr>
-                <th class="text-left"><?=Vertalen('Profile')?></th>
-                <th class="text-left"><?=Vertalen('Name')?></th>
-                <th class="text-center"><?=Vertalen('Message')?></th>
+                <th class="text-left"><?=__('Profile')?></th>
+                <th class="text-left"><?=__('Name')?></th>
+                <th class="text-center"><?=__('Message')?></th>
             </tr>
         </thead>
         <tbody>
@@ -76,7 +76,7 @@ include "functions/chatFunctions.php";
                             </td>
                             <td class='text-right'>
                                 <a href=".$row['link'].">   
-                                    <button class='btn btn-primary btn-sm'>".Vertalen('Chat')."</button>
+                                    <button class='btn btn-primary btn-sm'>".__('Chat')."</button>
                                 </a>
                             </td>
                             <form method='post' action='berichten.php'>

@@ -5,7 +5,7 @@
 -- Host: 127.0.0.1
 -- Gegenereerd op: 24 nov 2023 om 14:25
 -- Serverversie: 10.4.28-MariaDB
--- PHP-versie: 8.2.4
+-- PHP-versie: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `tblboden` (
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `tblcache`
+-- Gegevens worden geëxporteerd voor tabel `tblboden`
 --
 
 CREATE TABLE `tblcache` (
@@ -53,6 +53,12 @@ CREATE TABLE `tblcache` (
 INSERT INTO `tblcache` (`cacheid`, `gebruikerid`, `cachenaam`, `cachewaarde`) VALUES
 (1, 9, 'jurn@gmail.com', '$2y$10$xiKis/.t.7dNVMq8z0HiZeYbrENIOHsyyHtmqdzJhHImiZ7kjkKtm'),
 (2, 7, 'nils@gmail.com', '$2y$10$1nKxYeBeYdpvvLvKxGbA9OofxdF5VVHS76NdZw9HQiJojEkmnNtTq');
+INSERT INTO `tblboden` (`productid`, `bod`, `gebruikersid`) VALUES
+(1, 20.00, 2),
+(1, 21.50, 2),
+(1, 22.40, 2),
+(1, 30.67, 2),
+(1, 31.80, 2);
 
 -- --------------------------------------------------------
 
@@ -180,11 +186,11 @@ CREATE TABLE `tblproducten` (
   `verkoperid` int(11) NOT NULL,
   `foto` text NOT NULL,
   `naam` text NOT NULL,
-  `prijs` decimal(10,0) NOT NULL,
+  `prijs` decimal(10,2) NOT NULL,
   `beschrijving` text NOT NULL,
   `categorie` text NOT NULL,
   `startdatum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `eindtijd` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `eindtijd` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

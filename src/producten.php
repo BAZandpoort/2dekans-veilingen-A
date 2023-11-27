@@ -11,7 +11,7 @@ include "components/countdown.php";
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.4/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body >
+<body class="bg-[#F1FAEE]">
     <div class="flex x-45 float right">
   <?php
     if(isset($_GET["error1"])){
