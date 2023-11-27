@@ -83,11 +83,12 @@ require 'lang.php';
     </label>
     <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
         <li>
-            <a href="aanpassenGebruikers.php" class="justify-between">
-            <?= __('Profile')?>
+            <?php
+            print'<a href="gebruikerProfiel.php?user='.$userid.'" class="justify-between">';
+            ?>
+            <?= Vertalen('Profile')?>
             </a>
         </li>
-        <li><a><?= __('Settings')?></a></li>
         <li><a href="berichten.php">Berichten</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
         <li>

@@ -66,6 +66,11 @@
                 
                 if(isset($file_name) && !empty($file_name)) {
 
+                cache_createKey($mysqli, $email, $wachtwoord);
+
+                if((empty($_POST['file']))) {
+                    move_uploaded_file($file_tmp, $upload_dir.$file_name);
+                };
                     $teller = 1;
                     while (file_exists($upload_dir . $file_name)) {
                         $file_info = pathinfo($file_name);

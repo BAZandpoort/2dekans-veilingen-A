@@ -66,8 +66,8 @@
         <div class="flex flex-col gap-2">  
           <div class="flex flex-row gap-2"> 
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('Product')?></label>
-              <input type="text" name="naam" placeholder=<?= __('Product')?> class="input input-bordered w-full max-w-md text-black bg-white" required />
+              <label class="label text-black"><?= Vertalen('Product')?></label>
+              <input type="text" maxlength="32" name="naam" placeholder=<?= Vertalen('Product')?> class="input input-bordered w-full max-w-md text-black bg-white" required />
             </div>
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= __('Minimum price')?></label>
@@ -78,21 +78,22 @@
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= __('How long should your auction last')?>?</label>
               <select class='select select-bordered bg-white text-black' name='duur-timer' required >
-                  <option value="6">6 <?= __('hours')?></option>
-                  <option value="12">12 <?= __('hours')?></option>
-                  <option value="18">18 <?= __('hours')?></option>
-                  <option value="24">24 <?= __('hours')?></option>
-                  <option value="30">30 <?= __('hours')?></option>
-                  <option value="36">36 <?= __('hours')?></option>
-                  <option value="42">42 <?= __('hours')?></option>
-                  <option value="48">48 <?= __('hours')?></option>
+                  <option value="1">1 <?= Vertalen('hour')?></option>
+                  <option value="6">6 <?= Vertalen('hours')?></option>
+                  <option value="12">12 <?= Vertalen('hours')?></option>
+                  <option value="18">18 <?= Vertalen('hours')?></option>
+                  <option value="24">24 <?= Vertalen('hours')?></option>
+                  <option value="30">30 <?= Vertalen('hours')?></option>
+                  <option value="36">36 <?= Vertalen('hours')?></option>
+                  <option value="42">42 <?= Vertalen('hours')?></option>
+                  <option value="48">48 <?= Vertalen('hours')?></option>
               </select>
             </div>
           </div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
-              <label class="label text-black"><?= __('Description')?></label>
-              <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving" placeholder=<?= __('Description')?> required></textarea>
+              <label class="label text-black"><?= Vertalen('Description')?></label>
+              <textarea class="textarea textarea-bordered h-24  text-black bg-white" maxlength="256" name="beschrijving" placeholder=<?= Vertalen('Description')?> required></textarea>
             </div>
           </div>
           <div class="flex flex-row gap-2">

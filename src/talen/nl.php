@@ -39,6 +39,7 @@ $lang = [
     'Add favorites to your list to view'=>'Voeg favorieten toe aan uw lijst om te bekijken',
     "hours"=>'uur',
     'Update information'=>'Update informatie',
+    'hours'=>'uur',
     'Document'=>'Document',
     'Highest offer'=>'Hoogste bod',
     'Time left'=>'Tijd over',

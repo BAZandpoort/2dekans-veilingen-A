@@ -12,8 +12,12 @@
     include "functions/adminFunctions.php";
     include "connect.php"; 
     include "components/countdown.php";
-    
-    echo '<div class="flex flex-wrap gap-4">';
+    if (session_status() === PHP_SESSION_NONE) {
+      session_start();
+    }
+    ?>
+    <div class="flex flex-wrap gap-4">
+      <?php
     if(getDataTblproducten($mysqli)){
     foreach (getDataTblproducten($mysqli) as $data) {     
         
@@ -60,13 +64,17 @@
            } 
         print'</div>
       </div>
-    </div>';
+      </div>
+      ';}
     $tijd = $data["eindtijd"];
 
 
     echo '<script> countDown(' . $data['productid'] . ', '. strtotime($tijd) . '); </script>';
 
     }
+    ?>
+    </div>
+    <?php
   }
   if(isset($_GET["errorFailedToBid"])){
     print'<div class="alert alert-error">
