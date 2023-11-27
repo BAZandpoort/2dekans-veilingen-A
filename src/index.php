@@ -1,5 +1,7 @@
 <?php
 include "overzichtVeilingen.php";
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +13,7 @@ include "overzichtVeilingen.php";
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="h-screen bg-[#F1FAEE]">
+<body class="h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
   
 </body>
 </html>
