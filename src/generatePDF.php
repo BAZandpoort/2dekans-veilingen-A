@@ -2,7 +2,12 @@
 require './fpdf186/fpdf.php';
 include 'connect.php';
 session_start();
-    $factuurid = $_GET["id"];
+// check if factuurid is in use
+do{
+    $factuurid = rand(1000,9999);
+    $resultaat = $mysqli->query("SELECT * from tblfacturen where factuurid = '" . $factuurid . "'");
+    $row = $resultaat->num_rows;
+}while ($row >= 1);
 // info voor de factuur
 $sql = "SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid";
 $resultaat = $mysqli->query($sql);
@@ -23,7 +28,7 @@ $pdf->Output('F', '../public/orders/' . $pdf_file);
 $pdf_data = file_get_contents('./orders/order_' . $factuurid . '.pdf');
 $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
 
-$sql = "UPDATE tblfacturen SET factuurpdf ='" . $pdf_data . "' WHERE factuurid = '" . $factuurid . "'";
+$sql = "update tblfacturen SET factuurpdf ='" . $pdf_data . "' where factuurid = '" . $factuurid . "'";
 if ($mysqli->query($sql)) {
     echo "PDF file saved to database.";
 } else {

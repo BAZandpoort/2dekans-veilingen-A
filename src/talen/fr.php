@@ -38,6 +38,7 @@ $lang = [
     'Favorites'=>'Favoris',
     'Add favorites to your list to view'=>'Ajoutez des favoris à votre liste pour afficher',
     'hours'=>'heures',
+    'Update information'=>'Mettre à jour les informations',
     'hour'=>'heure',
     'Document'=>'Document',
     'Highest offer'=>'Offre la plus élevée',
@@ -62,7 +63,10 @@ $lang = [
     'See all purchases'=>'Voir tous les achats',
     'Warning!'=> 'avertissement!',
     'Someone outbid you'=> "Quelqu'un vous a enjoint",
-    'see'=> 'voir'
+    'see'=> 'voir',
+    'Message'=> 'Message',
+    'Send'=> 'Envoyer',
+    'Leave'=> 'Sortir'
 ];
 
 ?>
