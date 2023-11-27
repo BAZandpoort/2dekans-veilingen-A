@@ -141,4 +141,5 @@ function getAllSales ($connection, $sellerID) {
     }
 }
 
+
 ?>
