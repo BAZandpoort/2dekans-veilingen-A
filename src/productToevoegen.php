@@ -78,6 +78,7 @@
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= Vertalen('How long should your auction last')?>?</label>
               <select class='select select-bordered bg-white text-black' name='duur-timer' required >
+                  <option value="1">1 <?= Vertalen('hour')?></option>
                   <option value="6">6 <?= Vertalen('hours')?></option>
                   <option value="12">12 <?= Vertalen('hours')?></option>
                   <option value="18">18 <?= Vertalen('hours')?></option>

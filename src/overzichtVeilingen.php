@@ -31,7 +31,9 @@ $_SESSION["theme"] = $theme;
     if (session_status() === PHP_SESSION_NONE) {
       session_start();
     }
-    echo '<div class="flex flex-wrap gap-4">';
+    ?>
+    <div class="flex flex-wrap gap-4">
+      <?php
     if(getDataTblproducten($mysqli)){
     foreach (getDataTblproducten($mysqli) as $data) {
       
@@ -79,15 +81,17 @@ $_SESSION["theme"] = $theme;
            } 
         print'</div>
       </div>
+      </div>
       ';}
-      echo '
-    </div>';
     $tijd = $data["eindtijd"];
 
 
     echo '<script> countDown(' . $data['productid'] . ', '. strtotime($tijd) . '); </script>';
 
     }
+    ?>
+    </div>
+    <?php
   }
   if(isset($_GET["errorFailedToBid"])){
     print'<div class="alert alert-error">

@@ -12,11 +12,13 @@ function getHighestBid($connection, $productid) {
 
 function getBuyer($connection,$productid) {
     $resultaat = $connection->query("SELECT gebruikersid FROM tblboden WHERE bod = '".getHighestBid($connection,$productid)."' AND productid = '".$productid."'");
-    $row = $resultaat->fetch_assoc();
-    return $row["gebruikersid"];
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()["gebruikersid"];
 }
 
 function addFactuur($connection, $productid,$datum) {
+    if (getBuyer($connection,$productid) == false) {
+        return;
+    }
     $check = $connection->query("SELECT count(*) FROM tblfacturen WHERE productid = '".$productid."' AND koperid = '".getBuyer($connection,$productid)."'");
     $count = $check->fetch_assoc()["count(*)"];
     if ($count <= 0) { 
