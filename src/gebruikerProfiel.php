@@ -3,6 +3,23 @@ include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
 include "./functions/adminFunctions.php";
 include "components/countdown.php";
+
+include "./functions/chatFunctions.php";
+    if(isset($_SESSION["login"])){
+        if(doesChatExists($mysqli,$_SESSION['login'],$_GET['user'])){
+            $chatdataLink = doesChatExists($mysqli,$_SESSION['login'],$_GET['user']);
+            $link = $chatdataLink;
+
+        }else{
+            $ontvangersid = $_GET["user"];
+            $chatid = bin2hex(random_bytes(16));
+            $link = 'chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '';
+            createChat($mysqli,$chatid, $ontvangersid,$_SESSION["login"], $link);
+        }
+    } else {
+      $link = 'gebruikerprofiel.php?user='.$_GET["user"];
+    }
+include "./components/countdown.php";
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +90,9 @@ if (isset($_GET['user'])) {
                          <p>' . $row['beschrijving'] .'</p>
                     </div>
             </details>
+            <a href="'.$link.'">
+                <button class="btn" name="liveChat">live chat</button>
+                </a>
          </div>
          </div>
 
@@ -92,7 +112,7 @@ if (isset($_GET['user'])) {
            
            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">';
-           if($_SESSION['login'] == $_GET['user']){
+           if( isset($_SESSION['login']) && $_SESSION['login'] == $_GET['user']){
             print'<h2 class="text-2xl font-bold">Edit account</h2>
             <a href="aanpassenGebruikers.php">
               <button class="btn btn-wide hover:bg-[#FF7F7F]">Edit</button>
