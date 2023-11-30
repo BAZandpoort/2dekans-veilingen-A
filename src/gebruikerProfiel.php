@@ -112,7 +112,7 @@ if (isset($_GET['user'])) {
            
            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">';
-           if($_SESSION['login'] == $_GET['user']){
+           if( isset($_SESSION['login']) && $_SESSION['login'] == $_GET['user']){
             print'<h2 class="text-2xl font-bold">Edit account</h2>
             <a href="aanpassenGebruikers.php">
               <button class="btn btn-wide hover:bg-[#FF7F7F]">Edit</button>

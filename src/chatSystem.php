@@ -73,10 +73,7 @@
         <textarea class="textarea textarea-bordered w-full" placeholder="write your message here" name="bericht"></textarea>
         <div class="flex flex-row">
           <button type="submit" class="btn m-1" name="knopVerzend">'.Vertalen('Send').'</button>
-          <a href="berichten.php">
-          <button name="leaveChat" class="btn m-1">'.Vertalen('Leave').'</button>
-          </a>
-        </div>
+        </div>  
       </form>
     </div>
   </div>
