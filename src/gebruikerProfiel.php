@@ -3,6 +3,23 @@ include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
 include "./functions/adminFunctions.php";
 include "components/countdown.php";
+
+include "./functions/chatFunctions.php";
+    if(isset($_SESSION["login"])){
+        if(doesChatExists($mysqli,$_SESSION['login'],$_GET['user'])){
+            $chatdataLink = doesChatExists($mysqli,$_SESSION['login'],$_GET['user']);
+            $link = $chatdataLink;
+
+        }else{
+            $ontvangersid = $_GET["user"];
+            $chatid = bin2hex(random_bytes(16));
+            $link = 'chatSystem.php?user=' . $_GET["user"] . '&chatid=' . $chatid . '';
+            createChat($mysqli,$chatid, $ontvangersid,$_SESSION["login"], $link);
+        }
+    } else {
+      $link = 'gebruikerprofiel.php?user='.$_GET["user"];
+    }
+include "./components/countdown.php";
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +90,9 @@ if (isset($_GET['user'])) {
                          <p>' . $row['beschrijving'] .'</p>
                     </div>
             </details>
+            <a href="'.$link.'">
+                <button class="btn" name="liveChat">live chat</button>
+                </a>
          </div>
          </div>
 
@@ -91,8 +111,14 @@ if (isset($_GET['user'])) {
            </div>
            
            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-           <div class="card-body">
-           <h2 class="text-2xl font-bold">Report user</h2>
+           <div class="card-body">';
+           if( isset($_SESSION['login']) && $_SESSION['login'] == $_GET['user']){
+            print'<h2 class="text-2xl font-bold">Edit account</h2>
+            <a href="aanpassenGebruikers.php">
+              <button class="btn btn-wide hover:bg-[#FF7F7F]">Edit</button>
+            </a>';
+           }else{
+            print'<h2 class="text-2xl font-bold">Report user</h2>
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_1.showModal()">Report</button>
                 <dialog id="my_modal_1" class="modal">
                      <div class="modal-box">
@@ -111,12 +137,12 @@ if (isset($_GET['user'])) {
                             </div>
                         </div>    
                      </div>
-                </dialog>
-                </div>
-                </div>
-            ';
-                if (isset($_SESSION["admin"])) {
-                    echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                </dialog>';
+           }
+                print'</div>
+                </div>';
+            if (isset($_SESSION["admin"])) {
+                echo ' <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
            <div class="card-body">
            <h2 class="text-2xl font-bold">Check User Reports</h2>
             <button class="btn  hover:bg-[#FF7F7F]" onclick="my_modal_2.showModal()">User Reports</button>

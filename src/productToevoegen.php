@@ -67,7 +67,7 @@
           <div class="flex flex-row gap-2"> 
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= Vertalen('Product')?></label>
-              <input type="text" name="naam" placeholder=<?= Vertalen('Product')?> class="input input-bordered w-full max-w-md text-black bg-white" required />
+              <input type="text" maxlength="32" name="naam" placeholder=<?= Vertalen('Product')?> class="input input-bordered w-full max-w-md text-black bg-white" required />
             </div>
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= Vertalen('Minimum price')?></label>
@@ -78,6 +78,7 @@
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= Vertalen('How long should your auction last')?>?</label>
               <select class='select select-bordered bg-white text-black' name='duur-timer' required >
+                  <option value="1">1 <?= Vertalen('hour')?></option>
                   <option value="6">6 <?= Vertalen('hours')?></option>
                   <option value="12">12 <?= Vertalen('hours')?></option>
                   <option value="18">18 <?= Vertalen('hours')?></option>
@@ -92,7 +93,7 @@
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= Vertalen('Description')?></label>
-              <textarea class="textarea textarea-bordered h-24  text-black bg-white" name="beschrijving" placeholder=<?= Vertalen('Description')?> required></textarea>
+              <textarea class="textarea textarea-bordered h-24  text-black bg-white" maxlength="256" name="beschrijving" placeholder=<?= Vertalen('Description')?> required></textarea>
             </div>
           </div>
           <div class="flex flex-row gap-2">

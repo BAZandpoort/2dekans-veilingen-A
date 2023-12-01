@@ -76,7 +76,6 @@
 
                 cache_createKey($mysqli, $email, $wachtwoord);
 
-                registerUser($mysqli, $voornaam, $achternaam, $email, $wachtwoord, $adres, $file_name, $beschrijving);
                 if((empty($_POST['file']))) {
                     move_uploaded_file($file_tmp, $upload_dir.$file_name);
                 };
