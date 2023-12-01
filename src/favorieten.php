@@ -54,11 +54,17 @@
                             if ($time <= 0) {
                                 $time = "afgelopen";
                             } else {
-                                $time = date("H:i", $time);
+                                echo '
+                                <td class="text-center">  
+                                <span id="product-' . $row['productid'] .'" class="countdown font-mono text-2xl text-black">
+                                    <span id="hours" style="--value:00;"></span>:
+                                    <span id="minutes" style="--value:00;"></span>:
+                                    <span id="seconds" style="--value:00;"></span>
+                                    </span>
+                                    </td>
+                                    <script>  countDown(' . $row['productid'] . ', '. strtotime($row["eindtijd"]) . '); </script>';
                             }
-                            
-                            echo "</td>
-                            <td class='text-center'>".$time."</td>
+                            echo "
                             <th class='text-center'>
                             <a href='productDetails.php?gekozenProduct=".$row['productid']."'><button class='btn btn-ghost btn-xs'>PLAATS BOD</button></a>
                             </th>
