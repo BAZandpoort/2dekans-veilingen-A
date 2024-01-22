@@ -132,4 +132,8 @@ function addReport($connection, $gebruikerid, $melderid, $reden, $behandeld) {
     $resultaat = $connection->query("INSERT INTO tblrapporten (gebruikerid, melderid, reden, behandeld) VALUES ('".$gebruikerid."','".$melderid."','".$reden."', '".$behandeld."')");
     return $resultaat;
 }
+function addRateInDb($mysqli, $rating1) {
+    $resultaat = $mysqli->query("INSERT INTO tblgebruikers (rating) VALUES ('".$rating1); 
+    return $resultaat;
+}
 ?>

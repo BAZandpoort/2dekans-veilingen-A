@@ -2,6 +2,7 @@
 include "./components/navbar.php";
 include "./functions/sellerFunctions.php";
 include "./functions/adminFunctions.php";
+require_once "./functions/userFunctions.php"; 
 include "components/countdown.php";
 
 include "./functions/chatFunctions.php";
@@ -104,7 +105,35 @@ if (isset($_GET['user'])) {
                 if($row["admin"] == "1") {
                 echo'<h2 class="text-2xl font-bold text-lime-600">Admin</h2>';
               } else {
-                echo'<h2 class="text-2xl font-bold text-lime-600">Gebruiker</h2>';
+                if(isset($_POST["rate"])) {
+                  $user = $_POST["user"];
+                  $rating1 = ($_POST["rating-10"])/2;
+                  addRateInDb($mysqli, $rating1); 
+                  
+                }else{
+                  $user = $_GET["user"];
+                }
+
+                echo'<h2 class="text-2xl font-bold text-lime-600">Gebruiker</h2>
+                <h2 class="text-2xl font-bold">Overall Review</h2>  
+                <form method="post" action="gebruikerProfiel.php?user='.$user.'">
+                <div class="rating rating-lg rating-half">
+                    <input type="radio" name="rating-10" class="rating-hidden" value="0" />
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" value="1" />
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2 "value="2" />
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" value="3"/>
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" value="4"/>
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" value="5"/>
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" value="6"/>
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" value="7"/>
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" value="8"/>
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" value="9"/>
+                     <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" value="10"/>
+                     <input type="hidden" name="user" value="'.$user.'" id="user" />
+                     </div>
+                     <button class="btn btn-wide hover:bg-[#FF7F7F]" name="rate" >Rate</button>
+                     </form>
+ ';                
               }
              echo '
            </div>
@@ -270,6 +299,7 @@ echo '
                 }
                 echo'
                 <div class="card-body"> 
+                
                 <a href="productDetails.php?gekozenProduct='.$row['productid'].'" id="productNaam" class="card-title">
                     <h2 class="card-title text-black">
                     '.$row["naam"].'
