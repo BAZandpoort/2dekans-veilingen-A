@@ -1,8 +1,9 @@
 <?php
 
 function cache_createKey($connection, $keyName, $keyValue) {
-    return ($connection->query("INSERT INTO tblcache(cachenaam, cachewaarde) VALUES('".$keyName."', '".password_hash($keyValue, PASSWORD_DEFAULT)."')"));
-};
+    return ($connection->query("INSERT INTO tblcache(cachenaam,gebruikerid, cachewaarde) VALUES('".$keyName."',0,'".password_hash($keyValue, PASSWORD_DEFAULT)."')"));
+    
+}
 
 function cache_getCacheValue($connection, $keyName) {
     return ($connection->query("SELECT * FROM tblcache WHERE cachenaam='".$keyName."'")->fetch_assoc()['cachewaarde']);

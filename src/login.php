@@ -22,12 +22,12 @@ if (isset($_POST["submit"])) {
                 $_SESSION["admin"] = "true";
              };
 
-             if (mysqli_num_rows(cache_exists($mysqli, $email)) <= 0) {
+             if (mysqli_num_rows(cache_exists($mysqli, $email)) < 0) {
                 cache_createKey($mysqli, $email, $password);
              }
 
             cache_updateUserInDatabase($mysqli, $email, $_SESSION["login"]);
-             header("Location:index.php");
+             header("location:index.php");
          } else {
 
          };
