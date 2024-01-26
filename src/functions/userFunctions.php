@@ -132,8 +132,24 @@ function addReport($connection, $gebruikerid, $melderid, $reden, $behandeld) {
     $resultaat = $connection->query("INSERT INTO tblrapporten (gebruikerid, melderid, reden, behandeld) VALUES ('".$gebruikerid."','".$melderid."','".$reden."', '".$behandeld."')");
     return $resultaat;
 }
-function addRateInDb($mysqli, $rating1) {
-    $resultaat = $mysqli->query("INSERT INTO tblgebruikers (rating) VALUES ('".$rating1); 
+function addRate($mysqli, $rating1, $gebruikerRate, $user) {
+    $resultaat = $mysqli->query("INSERT INTO tblrating (gebruikersID, raterID, rate) VALUES ('".$gebruikerRate."','".$user."','".$rating1. "')"); 
     return $resultaat;
+}
+function getGemiddeldeRating($mysqli, $user) {
+    $query="SELECT  avg(rate) as rating FROM tblrating WHERE gebruikersID = '".$user."'";
+    $resultaat = $mysqli->query($query);
+   // return var_dump($resultaat); 
+   return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['rating'];
+}
+function getCountRating($mysqli,$user) {
+    $query="SELECT count(rate) as rating FROM tblrating WHERE gebruikersID = '".$user."'";
+    $resultaat = $mysqli->query($query);
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['rating'];
+}
+function checkIfRated($mysqli, $user, $gebruikerRate) {
+    $query = "SELECT count(rate) as rating FROM tblrating WHERE gebruikersID = '".$user."' AND raterID = '".$gebruikerRate."'"; 
+    $resultaat = $mysqli->query($query); 
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['rating'];
 }
 ?>

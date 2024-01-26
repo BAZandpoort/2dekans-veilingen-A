@@ -103,17 +103,16 @@ if (isset($_GET['user'])) {
 
            ';
                 if($row["admin"] == "1") {
-                echo'<h2 class="text-2xl font-bold text-lime-600">Admin</h2>';
+                echo'<h2 class="text-2xl font-bold text-lime-600">Admin</h2>'; 
               } else {
                 if(isset($_POST["rate"])) {
                   $user = $_POST["user"];
                   $rating1 = ($_POST["rating-10"])/2;
-                  addRateInDb($mysqli, $rating1); 
-                  
+                  $loginUser = $_SESSION["login"];
+                  addRate($mysqli, $rating1, $user, $loginUser); 
                 }else{
                   $user = $_GET["user"];
                 }
-
                 echo'<h2 class="text-2xl font-bold text-lime-600">Gebruiker</h2>
                 <h2 class="text-2xl font-bold">Overall Review</h2>  
                 <form method="post" action="gebruikerProfiel.php?user='.$user.'">
@@ -130,12 +129,33 @@ if (isset($_GET['user'])) {
                      <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-1" value="9"/>
                      <input type="radio" name="rating-10" class="bg-green-500 mask mask-star-2 mask-half-2" value="10"/>
                      <input type="hidden" name="user" value="'.$user.'" id="user" />
-                     </div>
-                     <button class="btn btn-wide hover:bg-[#FF7F7F]" name="rate" >Rate</button>
-                     </form>
- ';                
-              }
+                     </div>'; 
+                     $loginUser = $_SESSION["login"];
+                     $alreadyChecked = checkIfRated($mysqli, $user, $loginUser); 
+                     if ($alreadyChecked == "0") {
+                    echo' <button class="btn btn-wide hover:bg-[#FF7F7F]" name="rate" >Rate</button>'; 
+                     }
+                     echo '
+                     </form>';                  
+                    $gemiddeldeRating = getGemiddeldeRating($mysqli,$user); 
+                    $countRating = getCountRating($mysqli, $user); 
+                    if ($countRating === "0") {
+                      echo "Deze gebruiker is nog niet beoordeeld"; 
+                    } else {
+                      $gemiddeldeRating = round($gemiddeldeRating, 0); 
+                      echo ' 
+                      <div class="stats shadow">
+                      <div class="stat">
+                      <div class="stat-title">Beoordeling</div>
+                      <div class="stat-value text-primary">'.$gemiddeldeRating.'/5</div>
+                      </div>
+                      </div>
+                      ';
+                    }
+
+              } 
              echo '
+
            </div>
            </div>
            
