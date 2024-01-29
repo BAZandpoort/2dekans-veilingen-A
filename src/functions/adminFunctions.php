@@ -28,4 +28,5 @@ function changeReportUnchecked($rapportid) {
     $resultaat = fetch("UPDATE tblrapporten set behandeld = 0 WHERE rapportid = ?",['type'=>'i', 'value'=>$rapportid]);
     return ($resultaat);
 }
+
 ?>

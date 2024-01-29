@@ -1,3 +1,10 @@
+<?php
+include "components/navbar.php";
+include "functions/adminFunctions.php";
+include "connect.php"; 
+include "components/countdown.php";
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,12 +13,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>title</title>
 </head>
-<body class="min-h-screen bg-[#F1FAEE]">
+<body class="min-h-screen" data-theme='<?php echo $_SESSION["theme"] ?>'>
   <?php
-    include "components/navbar.php";
-    include "functions/adminFunctions.php";
-    include "connect.php"; 
-    include "components/countdown.php";
     
     echo '<div class="flex flex-wrap gap-4">';
     
@@ -32,24 +35,24 @@
         echo'
         <div class="card-body"> 
         <a href="productDetails.php?gekozenProduct='.$output[$i][0].'" id="productNaam" class="card-title">
-          <h2 class="card-title text-black">
+          <h2 class="card-title">
             '.$output[$i][3].'
           </h2>
         </a>
-         <p class="text-black">'.$output[$i][5].'</p>
+         <p class="">'.$output[$i][5].'</p>
           <div class="card-actions justify-end">';
           if (empty($output[$i][6])) {
-           echo ' <div class="badge badge-outline text-black">none</div> ';
+           echo ' <div class="badge badge-outline">none</div> ';
           } else {
-           echo '<div class="badge badge-outline text-black">'.$output[$i][6].'</div>';
+           echo '<div class="badge badge-outline">'.$output[$i][6].'</div>';
           }
-           echo ' <div class="badge badge-outline text-black"> € '.$output[$i][4].'</div> ';
+           echo ' <div class="badge badge-outline"> € '.$output[$i][4].'</div> ';
            $hours = getTimeDifference($output[$i][8]);
            if ($hours <= 0) {
               echo "tijd is afgelopen"; 
            } else {
            echo '
-           <span id="product-' . $output[$i][0] .'" class="countdown font-mono text-2xl text-black">
+           <span id="product-' . $output[$i][0] .'" class="countdown font-mono text-2xl">
               <span id="hours" style="--value:00;"></span>:
               <span id="minutes" style="--value:00;"></span>:
               <span id="seconds" style="--value:00;"></span>
@@ -59,10 +62,10 @@
               <img src="../public/img/addfavorite.png" class="h-10 w-10" class="btn">
             </a>
             <a href="productDetails.php?gekozenProduct=' . $output[$i][0] . '"">
-            <button class="btn btn-outline text-black bg-white border-white hover:text-white hover:bg-black ">Bid</button>
+            <button class="btn btn-outline">Bid</button>
             </a>';
             if (isset($_SESSION['admin'])) {
-              echo '<a href="productVerwijderenAdmin.php?verwijder=' . $output[$i][0] . '" class="btn bg-[#FF7F7F]">Verwijder</a>';
+              echo '<a href="productVerwijderenAdmin.php?verwijder=' . $output[$i][0] . '" class="btn">Verwijder</a>';
             };
           print'</div>
         </div>

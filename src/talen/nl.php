@@ -38,11 +38,31 @@ $lang = [
     'Favorites'=>'Favorieten',
     'Add favorites to your list to view'=>'Voeg favorieten toe aan uw lijst om te bekijken',
     "hours"=>'uur',
-    'Update information'=>'Update informatie',
+    'hours'=>'uur',
     'Document'=>'Document',
     'Highest offer'=>'Hoogste bod',
     'Time left'=>'Tijd over',
-    'Purchase History'=>'Aankoop geschiedenis'
+    'Purchase History'=>'Aankoop geschiedenis',
+    'Sales'=>'Verkoop',
+    'Revenue'=>'Winst',
+    'Total amount of money brought in'=>'Totaal binnengebracht geldbedrag',
+    'Active products'=>'Actieve producten',
+    'Products sold'=>'Producten verkocht',
+    'Overview of all active products'=>'Overzicht van alle actieve producten',
+    'Purchases'=>'Aankopen',
+    'Expenses'=>'Uitgaven',
+    'Total amount of money spent'=>'Totaal uitgegeven geldbedrag',
+    'Products bought'=>'Producten gekocht',
+    'Your sales'=>'Jouw omzet',
+    'Name'=>'Naam',
+    'Price'=>'Prijs',
+    'Date'=>'Datum',
+    'See all sales'=>'Bekijk alle verkopen',
+    'Your purchases'=>'Uw aankopen',
+    'See all purchases'=>'Bekijk alle aankopen',
+    'Warning!'=> 'waarschuwing!',
+    'Someone outbid you'=> 'Iemand heeft een hoger bod dan jouw',
+    'see'=> 'zien'
 ];
 
 ?>

@@ -38,11 +38,31 @@ $lang = [
     'Favorites'=>'Favoris',
     'Add favorites to your list to view'=>'Ajoutez des favoris à votre liste pour afficher',
     'hours'=>'heures',
-    'Update information'=>'Mettre à jour les informations',
+    'hour'=>'heure',
     'Document'=>'Document',
     'Highest offer'=>'Offre la plus élevée',
     'Time left'=>'Temps restant',
-    'Purchase History'=>"Historique d'achat"
+    'Purchase History'=>"Historique d'achat",
+    'Sales'=>'Ventes',
+    'Revenue'=>'Revenu',
+    'Total amount of money brought in'=>'Montant total apporté',
+    'Active products'=>'Produits actifs',
+    'Products sold'=>'Produits vendus',
+    'Overview of all active products'=>'Aperçu de tous les produits actifs',
+    'Purchases'=>'Achats',
+    'Expenses'=>'Dépenses',
+    'Total amount of money spent'=>'Montant total dépensé',
+    'Products bought'=>'Produits achetés',
+    'Your sales'=>'Vos ventes',
+    'Name'=>'Nom',
+    'Price'=>'Prix',
+    'Date'=>'Date',
+    'See all sales'=>'Voir toutes les ventes',
+    'Your purchases'=>'Vos achats',
+    'See all purchases'=>'Voir tous les achats',
+    'Warning!'=> 'avertissement!',
+    'Someone outbid you'=> "Quelqu'un vous a enjoint",
+    'see'=> 'voir'
 ];
 
 ?>

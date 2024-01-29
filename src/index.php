@@ -1,15 +1,7 @@
 <?php
 include "overzichtVeilingen.php";
 
-$gebruikerid = isset($_SESSION["login"]) ?  $_SESSION["login"] : null;
-if ($gebruikerid) {
-$data = fetch('SELECT * FROM tblgebruikers WHERE gebruikerid = ?',[
-'type' => 'i',
-'value' => $gebruikerid,
-]);
-$theme = $data["theme"]=='retro' ? 'retro' : 'dark';
-$_SESSION['theme'] = $theme;
-}
+
 ?>
 <!DOCTYPE html>
 <html>

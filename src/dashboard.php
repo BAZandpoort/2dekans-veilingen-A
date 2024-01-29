@@ -20,47 +20,47 @@
     
 <body class="bg-[#F1FAEE]">
     <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-12">
-        <h1 class="text-2xl font-bold">Sales</h1>
+        <h1 class="text-2xl font-bold"><?= Vertalen('Sales')?></h1>
         <div class="flex text-left p-3 shadow rounded-lg mt-3 mb-3">
             <div class="stat">
-                <div class="stat-title">Revenue</div>
-                <div class="stat-value">€<?php echo getTotalRevenue(  $_SESSION['login']) ?></div>
-                <div class="stat-desc">Total amount of money brought in</div>
+                <div class="stat-title"><?= Vertalen('Revenue')?></div>
+                <div class="stat-value">€<?php echo getTotalRevenue($_SESSION['login']) ?></div>
+                <div class="stat-desc"><?= Vertalen('Total amount of money brought in')?></div>
             </div>
             <div class="stat">
-                <div class="stat-title">Active products</div>
-                <div class="stat-value"><?php echo getTotalActiveProducts(  $_SESSION['login']) ?></div>
-                <div class="stat-desc"><a href="actieveProducten.php" class="link">Overview of all active products</a></div>
+                <div class="stat-title"><?= Vertalen('Active products')?></div>
+                <div class="stat-value"><?php echo getTotalActiveProducts($_SESSION['login']) ?></div>
+                <div class="stat-desc"><a href="actieveProducten.php" class="link"><?= Vertalen('Overview of all active products')?></a></div>
             </div>
             <div class="stat">
-                <div class="stat-title">Products sold</div>
-                <div class="stat-value"><?php echo getTotalSoldProducts(  $_SESSION['login']) ?></div>
-                <div class="stat-desc"><a href="verkoopgeschiedenis.php" class="link">Overview of all sold products</a></div>
+                <div class="stat-title"><?= Vertalen('Products sold')?></div>
+                <div class="stat-value"><?php echo getTotalSoldProducts($_SESSION['login']) ?></div>
+                <div class="stat-desc"><a href="verkoopgeschiedenis.php" class="link"><?= Vertalen('Overview of all active products')?></a></div>
             </div>
         </div>  
-        <h1 class="text-2xl font-bold">Purchases</h1>
+        <h1 class="text-2xl font-bold"><?= Vertalen('Purchases')?></h1>
         <div class="flex text-left p-3 shadow rounded-lg mt-3 mb-3">
             <div class="stat">
-                <div class="stat-title">Expenses</div>
-                <div class="stat-value">€<?php echo getTotalExpenses(  $_SESSION['login']) ?></div>
-                <div class="stat-desc">Total amount of money spent</div>
+                <div class="stat-title"><?= Vertalen('Expenses')?></div>
+                <div class="stat-value">€<?php echo getTotalExpenses($_SESSION['login']) ?></div>
+                <div class="stat-desc"><?= Vertalen('Total amount of money spent')?></div>
             </div>
             <div class="stat">
-                <div class="stat-title">Products bought</div>
-                <div class="stat-value"><?php echo getTotalBoughtProducts(  $_SESSION['login']) ?></div>
-                <div class="stat-desc"><a href="aankoopgeschiedenis.php" class="link">Overview of all bought products</a></div>
+                <div class="stat-title"><?= Vertalen('Products bought')?></div>
+                <div class="stat-value"><?php echo getTotalBoughtProducts($_SESSION['login']) ?></div>
+                <div class="stat-desc"><a href="aankoopgeschiedenis.php" class="link"><?= Vertalen('Overview of all bought products')?></a></div>
             </div>
         </div>
         <div class="flex">
             <div class="w-1/2 mr-3">
-                <h1 class="text-2xl font-bold">Your sales</h1>
+                <h1 class="text-2xl font-bold"><?= Vertalen('Your sales')?></h1>
                 <div class="overflow-x-auto shadow rounded-lg mt-3 mb-3">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Date</th>
+                            <th><?= Vertalen('Name')?></th>
+                            <th class="text-center"><?= Vertalen('Price')?></th>
+                            <th class="text-center"><?= Vertalen('Date')?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -90,21 +90,21 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="3"><a href="verkoopgeschiedenis.php" class="link">See all sales</a></td>
+                            <td colspan="3"><a href="verkoopgeschiedenis.php" class="link"><?= Vertalen('See all sales')?></a></td>
                         </tr>
                         </tfoot>
                     </table>
                 </div>
             </div>
             <div class="w-1/2 ml-3">
-                <h1 class="text-2xl font-bold">Your purchases</h1>
+                <h1 class="text-2xl font-bold"><?= Vertalen('Your purchases')?></h1>
                 <div class="overflow-x-auto shadow rounded-lg mt-3 mb-3">
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Name</th>
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Date</th>
+                            <th><?= Vertalen('Name')?></th>
+                            <th class="text-center"><?= Vertalen('Price')?></th>
+                            <th class="text-center"><?= Vertalen('Date')?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -134,7 +134,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="3"><a href="aankoopgeschiedenis.php" class="link">See all purchases</a></td>
+                            <td colspan="3"><a href="aankoopgeschiedenis.php" class="link"><?= Vertalen('See all purchases')?></a></td>
                         </tr>
                         </tfoot>
                     </table>

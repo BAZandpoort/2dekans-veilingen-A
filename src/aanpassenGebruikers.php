@@ -27,6 +27,7 @@ if (isset($_POST["wijzigen"])) {
     $voornaam = $_POST["voornaam"];
     $naam = $_POST["naam"];
     $wachtwoord = $_POST["wachtwoord"];
+    $adres = $_POST['adres'];
     $upload_dir = $_SERVER['DOCUMENT_ROOT'] . "/2dekans-veilingen-A/public/img/";
     $file_name = $_FILES['file']['name'];
     $file_tmp = $_FILES['file']['tmp_name'];
@@ -47,7 +48,7 @@ if (isset($_POST["wijzigen"])) {
       };
     }
     $beschrijving = $_POST["beschrijving"]; 
-    if(updateUser(  $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving)){
+    if(updateUser(  $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving,$adres)){
         header('location: index.php');
     }else{
         print  ->error;
@@ -60,7 +61,7 @@ if (isset($_POST["wijzigen"])) {
       <body class= "h-screen" data-theme="<?php echo $_SESSION["theme"] ?>" <?php echo' >
         <div>
           <div class="flex justify-start items-start">
-            <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"></a> 
+          <a href="index.php" class="btn btn-ghost normal-case text-xl text-black">'?><?= Vertalen('2nd chance auctions')?><?php echo'</a> 
           </div>
           <form class="form-control h-full flex items-center justify-center" method="post" action="aanpassenGebruikers.php" enctype="multipart/form-data">
             <div class="card w-full max-w-lg shadow-2xl bg-white p-8 mx-auto justify-center items-center">
@@ -87,6 +88,12 @@ if (isset($_POST["wijzigen"])) {
                         <label class="label text-black">'?> <?= Vertalen('Password')?><?php echo'</label>
                         <input type="password" name="wachtwoord" placeholder='?> <?= Vertalen('Password')?><?php echo' class="input input-bordered w-full max-w-md text-black bg-white" />
                     </div>
+                </div>
+                <div class="flex flex-row gap-2"> 
+                  <div class="flex flex-col w-full"> 
+                    <label class="label text-black">'?> <?= Vertalen('Adress')?><?php echo'</label>
+                    <input type="text" name="adres" placeholder='?> <?= Vertalen('Adress')?><?php echo' class="input input-bordered w-full max-w-md text-black bg-white" />
+                  </div>
                 </div>
                 <div class="flex flex-row gap-2">
                   <div class="flex flex-col w-full"> 

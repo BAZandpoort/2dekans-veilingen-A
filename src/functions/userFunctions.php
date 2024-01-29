@@ -69,7 +69,8 @@ function updateUser($userid, $fname, $lname, $email, $password, $profile_picture
     }
 }
 
-function convertPasswordToHash($password) {
+function convertPasswordToHash($password)
+{
     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
     return $hashedpassword;
 }
@@ -136,7 +137,6 @@ function createSearchlist($searchItem) {
         $item[6] = $row['categorie'];
         $item[7] = $row['startdatum'];
         $item[8] = $row['eindtijd'];
-       
         $lijst[] =  $item;
     };
 
@@ -147,7 +147,8 @@ function getSearchResults($searchItem) {
     return (fetch("SELECT * from tblproducten WHERE naam LIKE '?%' OR naam='?'",['type' => 's', 'value' => $searchItem],['type' => 's', 'value' => $searchItem]));
 }
 
-function getNumSearchResult($list) {
+function getNumSearchResult($list)
+{
     return count($list);
 }
 
@@ -159,5 +160,25 @@ function addReport($gebruikerid, $melderid, $reden, $behandeld) {
     ['type' => 'i', 'value' => $$behandeld],
 );
     return $resultaat;
+}
+function addRate($mysqli, $rating1, $gebruikerRate, $user) {
+    $resultaat = $mysqli->query("INSERT INTO tblrating (gebruikersID, raterID, rate) VALUES ('".$gebruikerRate."','".$user."','".$rating1. "')"); 
+    return $resultaat;
+}
+function getGemiddeldeRating($mysqli, $user) {
+    $query="SELECT  avg(rate) as rating FROM tblrating WHERE gebruikersID = '".$user."'";
+    $resultaat = $mysqli->query($query);
+   // return var_dump($resultaat); 
+   return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['rating'];
+}
+function getCountRating($mysqli,$user) {
+    $query="SELECT count(rate) as rating FROM tblrating WHERE gebruikersID = '".$user."'";
+    $resultaat = $mysqli->query($query);
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['rating'];
+}
+function checkIfRated($mysqli, $user, $gebruikerRate) {
+    $query = "SELECT count(rate) as rating FROM tblrating WHERE gebruikersID = '".$user."' AND raterID = '".$gebruikerRate."'"; 
+    $resultaat = $mysqli->query($query); 
+    return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['rating'];
 }
 ?>

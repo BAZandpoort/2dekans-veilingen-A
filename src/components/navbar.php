@@ -6,19 +6,80 @@ require 'lang.php';
 $_SESSION["theme"] = 'retro';
 
 $gebruiker = isset($_SESSION['login']) ? $_SESSION['login'] : null;
+//id naar int zetten
+$gebruiker = $gebruiker +0;
 
+//als je bent ingelogd dan verschijnt knop
 if ($gebruiker) {
   $change_theme = fetch("SELECT * from tblgebruikers Where gebruikerid = ?",
   ['type' => 'i', 'value' => $_SESSION["login"]]);
-  $theme = ($change_theme['theme'] === 'retro') ? 'retro' : 'dark';
+  //als theme retro is pak dan retro anders dark
+  $theme = ($change_theme['theme'] === 'dark') ? 'dark' : 'retro';
   $_SESSION["theme"] = $theme;
 }
 ?>
 <div data-theme='<?php $_SESSION["theme"] ?>'>
-<div class="navbar">
+<div class="navbar" >
     <div class="navbar-start">
         <a href="index.php" class="btn btn-ghost normal-case text-xl text-black"><?= Vertalen('2nd chance auctions')?></a>
+    
+    <?php
+    //zet standaard op false
+    $gebruikerbestaatal = false;
+    $nietHoogste = false;
+
+    //krijg max id van alle producten van tblboden
+    $meesteID = fetch("SELECT MAX(productid) As maxid FROM `tblboden`"); 
+
+//als je ingelogd bent
+if(isset($_SESSION["login"])) {
+    //for loop om maxid als int te krijgen
+    for($i = 1; $i <= $meesteID["maxid"]; $i++) {
+
+    //heeft aangelogde gebruiker al geboden
+    $tabeldata2 = fetchSingle("SELECT * FROM `tblboden` WHERE productid = ? ORDER BY bod DESC", ['type' => 'i', 'value'=>$i] );
+    foreach($tabeldata2 as $data) {
+        //als gebruiker het zelfde is als gebruikersid dan bestaat de gebruiker al
+        if($data['gebruikersid'] === $gebruiker){
+            $gebruikerbestaatal = true;
+        }
+    }
+    
+    if($gebruikerbestaatal == true){
+    $tabeldata = fetchSingle("SELECT * FROM `tblboden` WHERE productid = ? ORDER BY bod DESC limit 1", ['type' => 'i', 'value'=>$i] );
+   
+    foreach($tabeldata as $data) {
+    //als gebruiker niet het zelfde is als gebruikerid dan is gebruiker ni de hoogste
+    if( $data['gebruikersid'] !== $gebruiker){
+        $nietHoogste = true;
+        $product = $data["productid"];
+    }
+    }
+    }
+    }
+}
+    if($gebruikerbestaatal && $nietHoogste){?>
+<div class="alert max-w-xs shadow-lg ml-2">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-info shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+  <div>
+    <h3 class="font-bold"><?= Vertalen('Warning!')?></h3>
+    <div class="text-xs"><?= Vertalen('Someone outbid you')?></div>
+  </div>
+  <div class="flex[0.8]">
+  <div>
+  <a href="productDetails.php?gekozenProduct=<?php echo $product ?>">
+            <button class="btn btn-sm" ><?= Vertalen('see')?></button>
+        </a>
+        </div>
+</div>
     </div>
+<?php }
+ ?>
+ </div>
+
+
+
+
     <div class="navbar-center">
         <details class="dropdown mb-0">
             <summary class="m-1 btn btn-ghost text-black"><?= Vertalen('Categories')?></summary>
@@ -119,11 +180,13 @@ if ($gebruiker) {
     </label>
     <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-black text-white rounded-box w-52">
         <li>
-            <a href="aanpassenGebruikers.php" class="justify-between">
+            <?php
+            print'<a href="gebruikerProfiel.php?user='.$userid.'" class="justify-between">';
+            ?>
             <?= Vertalen('Profile')?>
             </a>
         </li>
-        <li><a><?= Vertalen('Settings')?></a></li>
+        <li><a href="berichten.php">Berichten</a></li>
         <li><a href="dashboard.php">Dashboard</a></li>
         <li>
                         <a href="aankoopgeschiedenis.php" class="justify-between">
@@ -139,7 +202,6 @@ if ($gebruiker) {
             print '<a href="login.php" class="btn btn-ghost text-black ml-2">Login</a>';
         }
 ?>
-</div>
 </div>
 </div>
 </html>

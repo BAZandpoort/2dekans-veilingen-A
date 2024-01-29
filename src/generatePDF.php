@@ -2,12 +2,7 @@
 require './fpdf186/fpdf.php';
 include 'connect.php';
 session_start();
-// check if factuurid is in use
-do{
-    $factuurid = rand(1000,9999);
-    $resultaat =  ->query("SELECT * from tblfacturen where factuurid = '" . $factuurid . "'");
-    $row = $resultaat->num_rows;
-}while ($row >= 1);
+    $factuurid = $_GET["id"];
 // info voor de factuur
 $sql = "SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid";
 $resultaat =  ->query($sql);
