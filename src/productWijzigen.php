@@ -49,9 +49,8 @@ if (isset($_POST['submit'])) {
     if (!(move_uploaded_file($file_tmp, $upload_dir . $file_name))) {
       echo "Error, kon de foto niet verplaatsen.";
     };
-    modifyProduct2($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie);
 }
-    if(modifyProduct($mysqli, $naam, $productID ,$beschrijving, $prijs, $categorie, $file_name)){
+    if(modifyProduct(  $naam, $productID ,$beschrijving, $prijs, $categorie, $file_name)){
     header('location: index.php');
     }else{
 	echo "Error product wijzigen.";
@@ -65,13 +64,13 @@ if (isset($_POST['submit'])) {
     header("Location: index.php");
   } else {
     $productID = $_GET['gekozenProduct'];
-    if(mysqli_num_rows(getProduct($mysqli, $productID)) == 0) {
+    if(mysqli_num_rows(getProduct(  $productID)) == 0) {
       header("Location: index.php");  
       //Als productID niet bestaat dan moet het naar index.
     }
   }
  
-  foreach(getProduct($mysqli, $productID) as $row) {
+  foreach(getProduct(  $productID) as $row) {
 
 
 echo '<div>
@@ -108,14 +107,14 @@ echo '<div>
           <div class="flex flex-row gap-2">
             <div class="flex flex-col w-full"> 
               <label class="label text-black" >Categorie</label>';
-                $productCategorie = getProductCategorie($mysqli,$productID);
+                $productCategorie = getProductCategorie( $productID);
                 print'<select class="select select-bordered bg-white text-black" name="categorie" required >';
                 if($row["categorie"] == false ){
                   print' <option selected disabled>Kies een categorie</option>';
 
                 }
 
-                foreach(getAllCategories($mysqli) as $row1){
+                foreach(getAllCategories( ) as $row1){
                   if($row["categorie"] == $row1["categorienaam"]){
                     print' <option disabled>Kies een categorie</option>
                     <option selected value="'.$row1["categorienaam"].'">'.$row1["categorienaam"].'</option>';

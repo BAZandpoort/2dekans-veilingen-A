@@ -14,11 +14,11 @@ if (isset($_SESSION["login"])) {
 if (isset($_POST["submit"])) {
  $email = $_POST["email"];
  $password = $_POST["password"];
- if(isEmailCorrect($mysqli,$email)){
-     if(isPasswordCorrect($mysqli,$password,$email)){  
-        $gebruikersid = getGebruikersid($mysqli,$email);
+ if(isEmailCorrect( $email)){
+     if(isPasswordCorrect( $password,$email)){  
+        $gebruikersid = getGebruikersid( $email);
              $_SESSION["login"]= $gebruikersid;
-             if(checkIfAdmin($mysqli,$email)){
+             if(checkIfAdmin( $email)){
                 $_SESSION["admin"] = "true";
              };
 

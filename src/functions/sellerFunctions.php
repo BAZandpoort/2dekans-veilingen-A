@@ -1,67 +1,75 @@
 <?php  
-
-function addProduct($connection, $userid,$naam, $beschrijving, $prijs, $categorie, $foto, $eindtijd){
-    return($connection ->query("INSERT INTO tblproducten (verkoperid,naam, beschrijving, prijs, categorie, foto, eindtijd ) VALUES ($userid,'".$naam."'
-        , '".$beschrijving."','" .$prijs."','" .$categorie."','" .$foto."','".$eindtijd."')"));
+require_once '../src/components/util.php';
+function addProduct($userid,$naam, $beschrijving, $prijs, $categorie, $foto, $eindtijd){
+    $query = "INSERT INTO tblproducten (verkoperid,naam, beschrijving, prijs, categorie, foto, eindtijd ) VALUES (?,?,?,?,?,?,?)";
+    return(insert($query,
+        ['type'=>'i', 'value'=>$userid],
+        ['type'=>'s', 'value'=>$naam],
+        ['type'=>'s', 'value'=>$beschrijving],
+        ['type'=>'d', 'value'=>$prijs],
+        ['type'=>'s', 'value'=>$categorie],
+        ['type'=>'s', 'value'=>$foto],
+        ['type'=>'s', 'value'=>$eindtijd]
+    ));
 }
 
-function modifyProduct($connection,$naam ,$productID ,$beschrijving, $prijs, $categorie, $foto){
+function modifyProduct($naam ,$productID ,$beschrijving, $prijs, $categorie, $foto){
     if(empty($foto)) {
-        if(getProduct($connection,$productID)){
-            $foto = getProductPicture($connection,$productID);
-        }else{
-            print $connection->error;
+        if(getProduct($productID)){
+            $foto = getProductPicture($productID);
         }
     }
-    return($connection->query("UPDATE tblproducten SET naam = '".$naam."' , beschrijving = '".$beschrijving."', prijs = '" .$prijs."', categorie = '" .$categorie."', foto = '" .$foto."' WHERE productid = '".$productID."'") ) ;
-
+    $query = "UPDATE tblproducten SET naam =?, beschrijving =?, prijs =?, categorie =?, foto =? WHERE productid =?";
+    return(insert($query,
+        ['type'=>'s', 'value'=>$naam],
+        ['type'=>'s', 'value'=>$beschrijving],
+        ['type'=>'d', 'value'=>$prijs],
+        ['type'=>'s', 'value'=>$categorie],
+        ['type'=>'s', 'value'=>$foto],
+        ['type'=>'i', 'value'=>$productID]
+    ));
 }
 
-function modifyProduct2($connection,$naam ,$productID ,$beschrijving, $prijs, $categorie){
-    return($connection->query("UPDATE tblproducten SET naam = '".$naam."' , beschrijving = '".$beschrijving."', prijs = '" .$prijs."', categorie = '" .$categorie."' WHERE productid = '".$productID."'") ) ;
-
+function getProduct($productID){
+    return fetch("SELECT * FROM tblproducten WHERE productid =?",['type'=>'i', 'value'=>$productID]);
 }
-
-function getProduct($connection,$productID){
-    return $connection->query("SELECT * FROM tblproducten WHERE productid = '".$productID."'");
-}
-function getProductCategorie($connection, $productID){  
-    $resultaat = $connection->query("SELECT categorie FROM tblproducten where productid= '".$productID."'");
+function getProductCategorie($productID){  
+    $resultaat = fetch("SELECT categorie FROM tblproducten where productid=?",['type'=>'i', 'value'=> $productID]);
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['categorie'];
 }
-function getProductPicture($connection,$productID) {
-    return getProduct($connection,$productID)->fetch_assoc()['foto'];
+function getProductPicture($productID) {
+    return getProduct($productID)->fetch_assoc()['foto'];
 }
 
-function getSeller($connection, $sellerID) {
-    return ($connection->query("SELECT * FROM tblgebruikers WHERE gebruikerid = '".$sellerID."'")); 
+function getSeller($sellerID) {
+    return (fetch("SELECT * FROM tblgebruikers WHERE gebruikerid =?",['type'=>'i', 'value'=>$sellerID])); 
 };
 
-function getSellerName($connection, $sellerID) {
-    return getSeller($connection, $sellerID)->fetch_assoc()['voornaam'];
+function getSellerName($sellerID) {
+    return getSeller($sellerID)->fetch_assoc()['voornaam'];
 };
 
-function getSellerLastName($connection, $sellerID) {
-    return getSeller($connection, $sellerID)->fetch_assoc()['naam'];
+function getSellerLastName($sellerID) {
+    return getSeller($sellerID)->fetch_assoc()['naam'];
 };
 
-function getSellerProductInfo($connection, $verkoperid) {
-    return ($connection->query("SELECT * FROM tblproducten WHERE verkoperid = '" . $verkoperid . "'")); 
+function getSellerProductInfo($verkoperid) {
+    return (fetch("SELECT * FROM tblproducten WHERE verkoperid =?",['type'=>'i', 'value'=>$verkoperid])); 
 };
 
-function getProductPrice($connection,$productid){
-    return getProduct($connection, $productid)->fetch_assoc()['prijs'];
+function getProductPrice($productid){
+    return getProduct($productid)->fetch_assoc()['prijs'];
 }
 
-function getProductSellerid($connection,$productid){
-    return getProduct($connection, $productid)->fetch_assoc()['verkoperid'];
+function getProductSellerid($productid){
+    return getProduct($productid)->fetch_assoc()['verkoperid'];
 }
-function getProductTime($connection,$productid){
-    return getProduct($connection,$productid)->fetch_assoc()['eindtijd'];
+function getProductTime($productid){
+    return getProduct($productid)->fetch_assoc()['eindtijd'];
 }
 
-function getSellerProducts($connection, $sellerID){
-    $resultaat = $connection->query("SELECT * FROM tblproducten WHERE verkoperid = '".$sellerID."'");
+function getSellerProducts($sellerID){
+    $resultaat = fetch("SELECT * FROM tblproducten WHERE verkoperid =?",['type'=>'i', 'value'=>$sellerID]);
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_all(MYSQLI_ASSOC);
     
 };

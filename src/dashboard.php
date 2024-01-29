@@ -29,7 +29,7 @@
             </div>
             <div class="stat">
                 <div class="stat-title"><?= Vertalen('Active products')?></div>
-                <div class="stat-value"><?php echo getTotalActiveProducts($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value"><?php echo getTotalActiveProducts($myqli, $_SESSION['login']) ?></div>
                 <div class="stat-desc"><a href="actieveProducten.php" class="link"><?= Vertalen('Overview of all active products')?></a></div>
             </div>
             <div class="stat">
@@ -42,12 +42,12 @@
         <div class="flex text-left p-3 shadow rounded-lg mt-3 mb-3">
             <div class="stat">
                 <div class="stat-title"><?= Vertalen('Expenses')?></div>
-                <div class="stat-value">€<?php echo getTotalExpenses($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value">€<?php echo getTotalExpenses($_SESSION['login']) ?></div>
                 <div class="stat-desc"><?= Vertalen('Total amount of money spent')?></div>
             </div>
             <div class="stat">
                 <div class="stat-title"><?= Vertalen('Products bought')?></div>
-                <div class="stat-value"><?php echo getTotalBoughtProducts($mysqli, $_SESSION['login']) ?></div>
+                <div class="stat-value"><?php echo getTotalBoughtProducts($_SESSION['login']) ?></div>
                 <div class="stat-desc"><a href="aankoopgeschiedenis.php" class="link"><?= Vertalen('Overview of all bought products')?></a></div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach (getLastSales($mysqli, $_SESSION['login'], 3) as $row) {
+                                foreach (getLastSales($mysqli,  $_SESSION['login'], 3) as $row) {
                                     echo '
                                     <tr>
                                         <td>
@@ -81,7 +81,7 @@
                                             </div>
                                         </div>
                                         </td>
-                                        <td class="text-center">€'; echo getHighestBid($mysqli, $row['productid']); echo '</td>
+                                        <td class="text-center">€'; echo getHighestBid(  $row['productid']); echo '</td>
                                         <td class="text-center">'.$row['datum'].'</td>
                                     </tr>
                                     ';
@@ -109,7 +109,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                foreach (getLastPurchases($mysqli, $_SESSION['login'], 3) as $row) {
+                                foreach (getLastPurchases(  $_SESSION['login'], 3) as $row) {
                                     echo '
                                     <tr>
                                         <td>
@@ -125,7 +125,7 @@
                                             </div>
                                         </div>
                                         </td>
-                                        <td class="text-center">€'; echo getHighestBid($mysqli, $row['productid']); echo '</td>
+                                        <td class="text-center">€'; echo getHighestBid(  $row['productid']); echo '</td>
                                         <td class="text-center">'.$row['datum'].'</td>
                                     </tr>
                                     ';

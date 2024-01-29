@@ -5,7 +5,7 @@ session_start();
     $factuurid = $_GET["id"];
 // info voor de factuur
 $sql = "SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid";
-$resultaat = $mysqli->query($sql);
+$resultaat =  $mysqli->query($sql);
 while ($row = $resultaat->fetch_assoc()) {
         $naam = ''.$row["voornaam"].' '.$row["achternaam"].'';
 }
@@ -23,11 +23,11 @@ $pdf->Output('F', '../public/orders/' . $pdf_file);
 $pdf_data = file_get_contents('./orders/order_' . $factuurid . '.pdf');
 $pdf_data = mysqli_real_escape_string($mysqli, $pdf_data);
 
-$sql = "UPDATE tblfacturen SET factuurpdf ='" . $pdf_data . "' WHERE factuurid = '" . $factuurid . "'";
-if ($mysqli->query($sql)) {
+$sql = "update tblfacturen SET factuurpdf ='" . $pdf_data . "' where factuurid = '" . $factuurid . "'";
+if ( $mysqli->query($sql)) {
     echo "PDF file saved to database.";
 } else {
-    echo "Error: " . $sql . "<br>" . $mysqli->error;
+    echo "Error: " . $sql . "<br>" .  $mysqli->error;
 }
 
 define('EURO', chr(128));
@@ -54,7 +54,7 @@ $pdf->Cell(90, 10, 'Artikel', 1, 0, 'C');
 $pdf->Cell(30, 10, 'Prijs', 1, 0, 'C');
 
 $totaal = 0;
-$resultaat = $mysqli->query("SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid");
+$resultaat =  $mysqli->query("SELECT tblgebruikers.naam as achternaam, tblproducten.naam as naam, tblgebruikers.voornaam as voornaam, tblproducten.prijs as prijs FROM tblgebruikers,tblproducten,tblfacturen WHERE tblgebruikers.gebruikerid = '" . $_SESSION["login"] . "' AND tblgebruikers.gebruikerid = tblfacturen.koperid AND tblfacturen.productid = tblproducten.productid");
 $pdf->SetFont('Helvetica', '', 12);
 while($row = $resultaat->fetch_assoc()){
         $pdf->SetY(60);

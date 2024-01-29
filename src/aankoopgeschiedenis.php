@@ -28,14 +28,14 @@
             </thead>
             <tbody>
                 <?php
-                if((getAllPurchases($mysqli, $_SESSION['login'])) == null) {
+                if((getAllPurchases(  $_SESSION['login'])) == null) {
                     echo "
                     <tr>
                         <td colspan=4>U hebt nog geen producten gekocht.</td>
                     </tr>
                     ";
                 } else {
-                    foreach (getAllPurchases($mysqli, $_SESSION['login']) as $row) {
+                    foreach (getAllPurchases(  $_SESSION['login']) as $row) {
                         echo "
                         <tr>
                             <td>

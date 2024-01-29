@@ -26,17 +26,17 @@ if(!isset($_SESSION['login'])){
     header("Location: index.php");
   } else {
     $sellerID = $_GET['gekozenVerkoper'];
-    if(!(getSellerProducts($mysqli, $sellerID))){
+    if(!(getSellerProducts(  $sellerID))){
      header("Location: index.php");  
       //Als sellerID niet bestaat dan moet het naar index.
     }
   }
  
-echo "<h1 align='center'>Dit is de profielpagina van ".getSellerName($mysqli, $sellerID)."</h1>";
+echo "<h1 align='center'>Dit is de profielpagina van ".getSellerName(  $sellerID)."</h1>";
 echo "<br>";
 echo '
 <div class= "pl-10 flex flex-wrap gap-4 ">';
-  foreach(getSellerProducts($mysqli, $sellerID) as $row){
+  foreach(getSellerProducts(  $sellerID) as $row){
   	  	echo '
   	  	<div class=" mr-4 mt-11 w-80  overflow-hidden rounded-lg bg-white dark:bg-slate-800 shadow-md duration-300 hover:scale-105 hover:shadow-lg">
   <a href = "productDetails.php?gekozenProduct='.$row['productid'].'"><img id = "productFoto" class="h-48 w-full object-cover object-center" src="../public/img/'.$row['foto'].'" alt="'.$row['foto'].'" width="240" hight="320" /></a> 

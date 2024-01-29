@@ -34,8 +34,8 @@ $_SESSION["theme"] = $theme;
     ?>
     <div class="flex flex-wrap gap-4">
       <?php
-    if(getDataTblproducten($mysqli)){
-    foreach (getDataTblproducten($mysqli) as $data) {
+    if(getDataTblproducten()){
+    foreach (getDataTblproducten() as $data) {
       
       $hours = getTimeDifference($data['eindtijd']);
          if ($hours <= 0) {

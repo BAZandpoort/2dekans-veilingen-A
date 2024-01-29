@@ -1,32 +1,32 @@
-<?php
-
+<?php 
+require_once '../src/components/util.php';
 function getTimeDifference($endTime) {
     $time = strtotime($endTime) - strtotime(date("Y-m-d H:i:s"));
     return $time;
 }
 
-function deleteUser($connection, $gebruikerid) {
-    $resultaat = $connection->query("DELETE FROM tblgebruikers where gebruikerid = '". $gebruikerid."'");
+function deleteUser($gebruikerid) {
+    $resultaat = insert("DELETE FROM tblgebruikers where gebruikerid = ?",['type'=>'i','value'=>$gebruikerid]);
     return $resultaat;
 }
 
-function deleteProducts($connection, $verkoperid) {
-    $resultaat = $connection->query("DELETE FROM tblproducten where verkoperid = '". $verkoperid."'");
+function deleteProducts($verkoperid) {
+    $resultaat = insert("DELETE FROM tblproducten where verkoperid = ?", ['type'=>'i', 'value'=>$verkoperid]);
     return $resultaat;
 }
 
-function getReportedUsers($connection, $gebruikerid) {
-    $resultaat = $connection->query("SELECT * FROM tblrapporten WHERE gebruikerid = ".$gebruikerid."");
+function getReportedUsers($gebruikerid) {
+    $resultaat = fetch("SELECT * FROM tblrapporten WHERE gebruikerid = ?",['type'=>'i', 'value'=>$gebruikerid]);
     return $resultaat;
 }
 
-function changeReportChecked($connection, $rapportid) {
-        $sql = "UPDATE tblrapporten set behandeld = 1 WHERE rapportid = '". $rapportid. "'";
-        return ($connection->query($sql));
+function changeReportChecked($rapportid) {
+        $resultaat = insert("UPDATE tblrapporten set behandeld = 1 WHERE rapportid = ?",['type'=>'i', 'value'=>$rapportid]);
+        return $resultaat;
 }
-function changeReportUnchecked($connection, $rapportid) {
-    $sql = "UPDATE tblrapporten set behandeld = 0 WHERE rapportid = '". $rapportid. "'";
-    return ($connection->query($sql));
+function changeReportUnchecked($rapportid) {
+    $resultaat = fetch("UPDATE tblrapporten set behandeld = 0 WHERE rapportid = ?",['type'=>'i', 'value'=>$rapportid]);
+    return ($resultaat);
 }
 
 ?>

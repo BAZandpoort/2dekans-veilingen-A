@@ -48,15 +48,15 @@ if (isset($_POST["wijzigen"])) {
       };
     }
     $beschrijving = $_POST["beschrijving"]; 
-    if(updateUser($mysqli, $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving, $adres)){
+    if(updateUser(  $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving,$adres)){
         header('location: index.php');
     }else{
-        print $mysqli->error;
+        print  $mysqli->error;
     }
 
 
 }
-    foreach(getUser($mysqli,$_SESSION["login"]) as $row){
+    foreach(getUser( $_SESSION["login"]) as $row){
       ?>  
       <body class= "h-screen" data-theme="<?php echo $_SESSION["theme"] ?>" <?php echo' >
         <div>

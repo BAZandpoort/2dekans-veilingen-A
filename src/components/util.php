@@ -1,5 +1,4 @@
 <?php
-
 include 'connect.php';
 
 function fetch($query, ...$params) {

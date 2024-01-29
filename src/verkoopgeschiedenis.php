@@ -29,14 +29,14 @@
             </thead>
             <tbody>
                 <?php
-                if((getAllSales($mysqli, $_SESSION['login'])) == null) {
+                if((getAllSales(  $_SESSION['login'])) == null) {
                     echo "
                     <tr>
                         <td colspan=4>U hebt nog geen producten verkocht.</td>
                     </tr>
                     ";
                 } else {
-                    foreach (getAllSales($mysqli, $_SESSION['login']) as $row) {
+                    foreach (getAllSales(  $_SESSION['login']) as $row) {
                         echo "
                         <tr>
                             <td>
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class='text-center'>€"; echo getHighestBid($mysqli, $row['productid']); echo "</td>
+                            <td class='text-center'>€"; echo getHighestBid(  $row['productid']); echo "</td>
                             <td class='text-center'>".$row['datum']."</td>
                         </tr>
                         ";

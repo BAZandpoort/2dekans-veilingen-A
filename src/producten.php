@@ -47,7 +47,7 @@ include "components/countdown.php";
   echo '<div class="flex flex-wrap gap-4">';
   if (isset($_GET['gekozenCategorie'])) {
     $categorie = $_GET['gekozenCategorie'];
-    foreach(getGekozenCategorie($mysqli, $categorie) as $data) {
+    foreach(getGekozenCategorie(  $categorie) as $data) {
         echo'<div class="card w-96 p-6 shadow-xl bg-white">';
         if (empty($data["foto"])) {
          echo' <figure><img src="../public/img/brokenImageIcon.png" width="240" hight="320" /></figure>';  

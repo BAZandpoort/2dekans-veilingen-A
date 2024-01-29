@@ -50,7 +50,7 @@
   }
 
 
-    if (addProduct($mysqli, $userid, $naam, $beschrijving, $prijs, $categorie, $file_name, $eindtijd)) {
+    if (addProduct(  $userid, $naam, $beschrijving, $prijs, $categorie, $file_name, $eindtijd)) {
       header('location: index.php');
     }
   }
@@ -106,11 +106,11 @@
             <div class="flex flex-col w-full"> 
               <label class="label text-black"><?= Vertalen('Category')?></label>
               <?php
-                if (getAllCategories($mysqli)) {
+                if (getAllCategories( )) {
                   print "<select class='select select-bordered bg-white text-black' name='categorie' required >
                   <option disabled selected>Choose a category</option>";
 
-                  foreach (getAllCategories($mysqli) as $row) {
+                  foreach (getAllCategories( ) as $row) {
                     print " <option value= " . $row["categorienaam"] . " >" . $row["categorienaam"] . " </option>";
                   }
                 }

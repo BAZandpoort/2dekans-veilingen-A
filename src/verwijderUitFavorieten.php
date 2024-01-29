@@ -3,7 +3,7 @@
     include "functions/buyerFunctions.php";
     session_start();
 
-    deleteProductFromFavorites($mysqli, $_GET['product'], $_SESSION['login']);
+    deleteProductFromFavorites(  $_GET['product'], $_SESSION['login']);
 
     header("Location: favorieten.php");
 ?>

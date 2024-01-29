@@ -12,7 +12,7 @@ if(isset($_POST["bied"])) {
   $bod = $_POST["bod"];
   $product = $_POST["product"];
 
-  $hours = getTimeDifference(getProductTime($mysqli, $product));
+  $hours = getTimeDifference(getProductTime($product));
   if ($hours <= 0) {
     header('location: overzichtVeilingen.php?errorTimeDone');
     return;
@@ -23,20 +23,20 @@ if(isset($_POST["bied"])) {
     return;
   }
 
-  if (getProductSellerid($mysqli, $product) == $_SESSION["login"]) {
+  if (getProductSellerid(  $product) == $_SESSION["login"]) {
     header("location: productDetails.php?error4&gekozenProduct=" . $product . "");
     return;
   }
 
-  if (getProductPrice($mysqli, $product) > $bod) {
+  if (getProductPrice(  $product) > $bod) {
     header("location: productDetails.php?errorUnderPrice&gekozenProduct=" . $product . "");
     return;
   } else {
 
     $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('" . $product . "', '" . $bod . "', '" . $_SESSION["login"] . "')";
-    if ($mysqli->query($sql)) {
+    if ( $mysqli->query($sql)) {
       $sql2 = "UPDATE tblproducten  SET prijs =  '" . $bod . "' WHERE productid = '" . $product . "'";
-      if ($mysqli->query($sql2)) {
+      if ( $mysqli->query($sql2)) {
 
         header("location: overzichtVeilingen.php?succes");
         return;
@@ -73,7 +73,7 @@ if(isset($_POST["bied"])) {
 <?php
 include "./components/countdown.php";
 if (isset($_GET['gekozenProduct'])) {
-    foreach(getProduct($mysqli, $_GET['gekozenProduct']) as $row) {
+    foreach(getProduct( $_GET['gekozenProduct']) as $row) {
       echo '
       <div class="divider"></div>
       <div class="bg-[#F1FAEE] card card-side bg-base-100 shadow-xl border-2 border-base-300 m-4">
@@ -97,7 +97,7 @@ if (isset($_GET['gekozenProduct'])) {
               </div>';
       }
       print '<h2 class="text-2xl font-bold" id="productNaam"> ' . $row['naam'] . '</h2>
-            <p class="text-slate-400 hover:text-blue-800"  id="productVerkoper"><a href="gebruikerProfiel.php?user=' . $row["verkoperid"] . '">' . getSellerName($mysqli, $row['verkoperid']) . ' ' . getSellerLastName($mysqli, $row['verkoperid']) . '</a></p>
+            <p class="text-slate-400 hover:text-blue-800"  id="productVerkoper"><a href="gebruikerProfiel.php?user=' . $row["verkoperid"] . '">' . getSellerName(  $row['verkoperid']) . ' ' . getSellerLastName(  $row['verkoperid']) . '</a></p>
               <div id="productprijs" class="badge badge-outline text-black"> € ' . $row["prijs"] . '</div>';
       if ($row['categorie']) {
         print '<div id="productprijs" class="badge badge-outline text-black">' . $row["categorie"] . '</div> ';
