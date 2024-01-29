@@ -183,7 +183,7 @@ function checkIfRated($mysqli, $user, $gebruikerRate) {
 }
 
 /*
-deze request is speciaal voor Nils 
+deze request is speciaal voor Nils die die serie al negen jaar niet meer kijkt tot zijn spijt
 My little pony, my little pony
 What is friendship all about
 My little pony, my little pony
