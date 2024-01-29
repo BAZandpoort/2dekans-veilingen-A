@@ -181,42 +181,4 @@ function checkIfRated($mysqli, $user, $gebruikerRate) {
     $resultaat = $mysqli->query($query); 
     return ($resultaat->num_rows == 0)?false:$resultaat->fetch_assoc()['rating'];
 }
-
-/*
-deze request is speciaal voor Nils die die serie al negen jaar niet meer kijkt tot zijn spijt
-My little pony, my little pony
-What is friendship all about
-My little pony, my little pony
-Friendship is magic
-I used to wonder what friendship could be
-(My little pony)
-Until you all shared its magic with me
-When I was young I was too busy to make any friends
-Such silliness did not seem worth the effort it expends
-But my little ponies, you opened up my eyes
-And now the truth is crystal clear, as splendid summer skies
-And it's such a wonderful surprise
-I used to wonder what friendship could be
-(My little pony)
-Until you all shared its magic with me
-When danger makes me want to hide, you'll Rainbow Dash to my side
-Kindness is never in short supply, once smitten twice Fluttershy
-For honesty no pony can deny, you are the Applejack of my eye
-A heart that shines so beautiful, a Rarity to come by
-And you all make fun and laughter as easy as Pinkie Pie
-I used to wonder what friendship could be
-(My little pony)
-Until you all shared its magic with me
-Our friendship's magic and it's growing all the time
-A new adventure waits for us each day is yours and mine
-We'll make it special every time
-We'll make it special every time
-What a wonderful wonder friendship brings
-(My little pony)
-Do you know you're all my very best
-Friends, you're my very best
-(Friends!) Friends, you're my very best
-(Friends!) Friends, you're my very best
-(Friends!) Friends
-*/
 ?>
