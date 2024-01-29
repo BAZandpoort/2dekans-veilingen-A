@@ -183,6 +183,7 @@ function checkIfRated($mysqli, $user, $gebruikerRate) {
 }
 
 /*
+deze request is speciaal voor Nils 
 My little pony, my little pony
 What is friendship all about
 My little pony, my little pony
