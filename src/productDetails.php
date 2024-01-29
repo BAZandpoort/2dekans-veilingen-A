@@ -34,9 +34,9 @@ if(isset($_POST["bied"])) {
   } else {
 
     $sql = "INSERT INTO tblboden (productid, bod, gebruikersid) VALUES ('" . $product . "', '" . $bod . "', '" . $_SESSION["login"] . "')";
-    if ( ->query($sql)) {
+    if ( $mysqli->query($sql)) {
       $sql2 = "UPDATE tblproducten  SET prijs =  '" . $bod . "' WHERE productid = '" . $product . "'";
-      if ( ->query($sql2)) {
+      if ( $mysqli->query($sql2)) {
 
         header("location: overzichtVeilingen.php?succes");
         return;

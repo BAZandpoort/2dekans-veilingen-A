@@ -51,7 +51,7 @@ if (isset($_POST["wijzigen"])) {
     if(updateUser(  $gebruikerid, $voornaam, $naam, $email, $wachtwoord, $file_name, $beschrijving,$adres)){
         header('location: index.php');
     }else{
-        print  ->error;
+        print  $mysqli->error;
     }
 
 
