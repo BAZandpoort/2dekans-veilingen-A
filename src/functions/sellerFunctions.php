@@ -1,5 +1,5 @@
 <?php  
-include '../src/components/util.php';
+require_once '../src/components/util.php';
 function addProduct($userid,$naam, $beschrijving, $prijs, $categorie, $foto, $eindtijd){
     $query = "INSERT INTO tblproducten (verkoperid,naam, beschrijving, prijs, categorie, foto, eindtijd ) VALUES (?,?,?,?,?,?,?)";
     return(insert($query,

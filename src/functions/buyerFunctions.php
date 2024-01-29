@@ -1,5 +1,5 @@
 <?php
-include '../src/components/util.php';
+require_once '../src/components/util.php';
 function getHighestBid($productid) {
     $resultaat = fetch("SELECT MAX(bod) AS highest_bid FROM tblboden WHERE productid = ?",['type'=>'i', 'value'=>$productid]);
     $row = $resultaat->fetch_assoc();

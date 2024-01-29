@@ -1,5 +1,5 @@
 <?php 
-include '../src/components/util.php';
+require_once '../src/components/util.php';
 function getTimeDifference($endTime) {
     $time = strtotime($endTime) - strtotime(date("Y-m-d H:i:s"));
     return $time;
