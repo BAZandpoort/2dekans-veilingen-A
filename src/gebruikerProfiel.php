@@ -63,7 +63,7 @@ include "./components/countdown.php";
   }
 
 
-
+  //TODO: Als een gebruiker een product gewonnen heeft moet er een bericht gestuurd worden naar de verkoper met de gebruiker's zen adres.
 
 
   if (isset($_GET['user'])) {
