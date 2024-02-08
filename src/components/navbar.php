@@ -193,8 +193,9 @@ if(isset($_SESSION["login"])) {
                             <?=Vertalen('Purchase History')?>
                         </a>
                     </li>
-        <li><a href="productToevoegen.php"><?= Vertalen('Add Product')?></a></li>
         <li><a href="reclame.php"><?= Vertalen('Make Ads')?></a></li>
+        <li><a href="productToevoegen.php"><?= Vertalen('Add Product')?></a></li>
+        
         <li><a href="loguit.php"><?= Vertalen('Logout')?></a></li>
     </ul>
 </div>

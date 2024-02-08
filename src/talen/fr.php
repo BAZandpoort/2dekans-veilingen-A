@@ -62,7 +62,8 @@ $lang = [
     'See all purchases'=>'Voir tous les achats',
     'Warning!'=> 'avertissement!',
     'Someone outbid you'=> "Quelqu'un vous a enjoint",
-    'see'=> 'voir'
+    'see'=> 'voir',
+    'Make Ads'=>'Faire des annonces'
 ];
 
 ?>
