@@ -5,11 +5,16 @@ include "../functions/maintenanceFunctions.php";
 if (isset($_GET["enable"])) {
     setMaintenance($mysqli);
     header('location: ../index.php');
+<<<<<<< Updated upstream
   }
+=======
+}
+>>>>>>> Stashed changes
 
 if (isset($_GET["disable"])) {
     unsetMaintenance($mysqli);
     header('location: ../index.php');
+<<<<<<< Updated upstream
   }
 
 
@@ -71,4 +76,7 @@ return;
 }
 
 
+=======
+}
+>>>>>>> Stashed changes
 ?>
