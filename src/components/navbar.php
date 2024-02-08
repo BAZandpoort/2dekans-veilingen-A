@@ -6,6 +6,13 @@ require_once "../src/components/util.php";
 session_start();
 require 'lang.php';
 
+
+if(!isset($_SESSION["admin"])) {
+    if(getMaintenance($mysqli) == 1) {
+      header('location: _maintenance.php');
+    }
+  }
+  
 $_SESSION["theme"] = 'retro';
 
 $gebruiker = isset($_SESSION['login']) ? $_SESSION['login'] : null;
