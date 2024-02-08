@@ -66,6 +66,6 @@ function showMaintenance($connection) {
     </html>
     <?php
     return;
+
 }
 
-?>

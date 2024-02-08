@@ -1,7 +1,9 @@
 <?php
-include "overzichtVeilingen.php";
+  include "overzichtVeilingen.php";
 
 
+
+  
 ?>
 <!DOCTYPE html>
 <html>

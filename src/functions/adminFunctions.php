@@ -29,4 +29,6 @@ function changeReportUnchecked($connection, $rapportid) {
     return ($connection->query($sql));
 }
 
+
+
 ?>
