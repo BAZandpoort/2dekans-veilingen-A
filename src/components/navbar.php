@@ -204,7 +204,7 @@ if(isset($_SESSION["login"])) {
         <li><a href="productToevoegen.php"><?= Vertalen('Add Product')?></a></li>
 
         <?php
-        if($_SESSION["admin"] = "true"){
+        if(isset($_SESSION["admin"]) == "true"){
             if(getMaintenance($mysqli) == 0) {
             echo'
             <li><a href="components/maintenance.php?enable" class="text-red-600">MAINTENANCE</a></li>
