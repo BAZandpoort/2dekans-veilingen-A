@@ -2,8 +2,11 @@
 include "connect.php";
 include "functions/maintenanceFunctions.php";
 
-
-showMaintenance($mysqli)
+if(getMaintenance($mysqli) == 0) {
+    header('location: index.php');
+} else {
+    showMaintenance($mysqli);
+}
 
 
 ?>
