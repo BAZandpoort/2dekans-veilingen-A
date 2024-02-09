@@ -84,7 +84,7 @@ function getGebruikersid($connection, $email)
 }
 function checkIfAdmin($connection, $email)
 {
-    $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '" . $email . "' and admin=1");
+    $resultaat = $connection->query("SELECT * FROM tblgebruikers where email = '" . $email . "' and admin = 1");
     return ($resultaat->num_rows == 0) ? false : $resultaat->fetch_all(MYSQLI_ASSOC);
 }
 function getAdressFromUser($connection, $userid)

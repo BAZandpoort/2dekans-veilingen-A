@@ -1,10 +1,18 @@
 <?php
 include "./connect.php";
 include "./functions/userFunctions.php";
+include "./functions/maintenanceFunctions.php";
 require_once "../src/components/util.php";
 session_start();
 require 'lang.php';
 
+
+if(!isset($_SESSION["admin"])) {
+    if(getMaintenance($mysqli) == 1) {
+      header('location: _maintenance.php');
+    }
+  }
+  
 $_SESSION["theme"] = 'retro';
 
 $gebruiker = isset($_SESSION['login']) ? $_SESSION['login'] : null;
@@ -194,6 +202,20 @@ if(isset($_SESSION["login"])) {
                         </a>
                     </li>
         <li><a href="productToevoegen.php"><?= Vertalen('Add Product')?></a></li>
+
+        <?php
+        if(isset($_SESSION["admin"]) == "true"){
+            if(getMaintenance($mysqli) == 0) {
+            echo'
+            <li><a href="components/maintenance.php?enable" class="text-red-600">MAINTENANCE</a></li>
+            ';
+            } else {
+                echo'
+            <li><a href="components/maintenance.php?disable" class="text-green-600">DISABLE MAINTENANCE</a></li>
+            ';
+            }
+        }
+        ?>
         <li><a href="loguit.php"><?= Vertalen('Logout')?></a></li>
     </ul>
 </div>
