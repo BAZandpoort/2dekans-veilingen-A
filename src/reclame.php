@@ -2,14 +2,26 @@
 <?php
 include "connect.php";
 include "components/navbar.php";
-if (isset($_POST["submit"])) {
-  header("location:index.php");
 
-  
+var_dump($_SESSION['login']);
+if (isset($_POST["submit"])){
 
+  $change_reclame = insert(
+    'UPDATE tblgebruikers SET reclame= 1 WHERE gebruikerid = ? ',
+    ['type' => 'i', 'value' => $_SESSION['login'] ],
+    
+  );
+var_dump($change_reclame);
 
-
+?>
+<div class="h-screen flex items-center justify-center items-center">
+<a href="index.php" class="btn normal-case text-xl text-black text-center btn-center h-screen flex items-center justify-center items-center">Click to go back</a>
+</div>
+<?php
 };
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en" data-theme="<?php echo $_SESSION['theme'] ?>">
@@ -28,20 +40,16 @@ $_SESSION["theme"] = 'retro';
 $theme = ($change_theme['theme'] === 'dark') ? 'dark' : 'retro';
 $_SESSION["theme"] = $theme;
 
-
-
-
-
-
 ?>
+
 <div class="h-screen flex items-center justify-center">
 <div class="card w-96 bg-base-100 shadow-xl ">
-  <figure class="px-10 pt-10 w-max h-max ">
+  <figure class="px-10 pt-10 w-auto h-auto ">
     <img src="../public/img/adss.png" alt="ads" class="rounded-xl object-center" >
   </figure>
   <div class="card-body items-center text-center">
     <h2 class="card-title">Want ads?</h2>
-    <p>By buying this your products will be on top of the search results. And will never be gone.</p>
+    <p>By buying this your products will be on top of the search results.</p>
     <div class="card-actions">
     <form method="post" action="reclame.php">
     <button name="submit" class="btn text-black object-center bg-white mt-3 w-full border-white hover:text-white hover:bg-black">Buy now</button>

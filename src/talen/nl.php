@@ -66,4 +66,3 @@ $lang = [
     'Make Ads'=>'maak ads'
 ];
 
-?>
