@@ -3,7 +3,7 @@
 include "connect.php";
 include "components/navbar.php";
 
-var_dump($_SESSION['login']);
+
 if (isset($_POST["submit"])){
 
   $change_reclame = insert(
@@ -11,7 +11,7 @@ if (isset($_POST["submit"])){
     ['type' => 'i', 'value' => $_SESSION['login'] ],
     
   );
-var_dump($change_reclame);
+
 
 ?>
 <div class="h-screen flex items-center justify-center items-center">

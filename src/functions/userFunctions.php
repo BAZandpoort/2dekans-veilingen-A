@@ -98,6 +98,11 @@ function getDataTblproducten($mysqli)
     return ($resultaat->num_rows == 0) ? false : $resultaat->fetch_all(MYSQLI_ASSOC);
 }
 
+function getDataTblproductenreclame($mysqli)
+{
+    $resultaat = $mysqli->query("SELECT *  FROM tblproducten, tblgebruikers WHERE reclame = 1 AND gebruikerid = verkoperid");
+    return ($resultaat->num_rows == 0) ? false : $resultaat->fetch_all(MYSQLI_ASSOC);
+}
 function getGekozenCategorie($connection, $categorietype)
 {
     return ($connection->query("SELECT * FROM tblproducten WHERE categorie='" . $categorietype . "'"));
