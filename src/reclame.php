@@ -51,7 +51,7 @@ $_SESSION["theme"] = $theme;
     <h2 class="card-title">Want ads?</h2>
     <p>By buying this your products will be on top of the search results.</p>
     <div class="card-actions">
-    <form method="post" action="reclame.php">
+    <form method="post" action="index.php">
     <button name="submit" class="btn text-black object-center bg-white mt-3 w-full border-white hover:text-white hover:bg-black">Buy now</button>
     </form>  
   </div>
