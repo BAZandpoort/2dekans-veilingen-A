@@ -31,7 +31,63 @@ $_SESSION["theme"] = $theme;
     if (session_status() === PHP_SESSION_NONE) {
       session_start();
     }
+
+
+
+
+    $reclame = fetch('SELECT * FROM tblgebruikers WHERE reclame = ?',[
+      'type' => 'i',
+      'value' => 1,
+      ]);
+
+      ?>
+    <div class="flex flex-wrap gap-4">
+      <?php
+    if(getDataTblproductenreclame($mysqli)){
+    foreach (getDataTblproductenreclame($mysqli) as $reclame) {
+      echo'<div class="card w-96 p-6 shadow-xl bg-white">';
+      if (empty($reclame["foto"])) {
+       echo' <figure><img src="../public/img/brokenImageIcon.png" width="240" hight="320" /></figure>';  
+      } else {
+      echo'
+      <figure><img src="../public/img/'.$reclame["foto"].'" width="240" hight="320" /></figure>';
+      }
+      echo'
+      <div class="card-body"> 
+      <a href="productDetails.php?gekozenProduct='.$reclame['productid'].'" id="productNaam" class="card-title">
+        <h2 class="card-title text-black">
+          '.$reclame["naam"].'
+        </h2>
+      </a>
+       <p class="text-black">'.$reclame["beschrijving"].'</p>
+        <div class="card-actions justify-end">';
+        if (empty($reclame["categorie"])) {
+         echo ' <div class="badge badge-outline text-black">none</div> ';
+        } else {
+         echo '<div class="badge badge-outline text-black">'.$reclame["categorie"].'</div>';
+        }
+         echo ' <div class="badge badge-outline text-black"> € '.$reclame["prijs"].'</div> ';
+
+
+          if (isset($_SESSION["admin"])) {
+            echo '<a href="productVerwijderenAdmin.php?verwijder=' . $reclame["productid"] . '" class="btn bg-[#FF7F7F]">Verwijder</a>';
+           } 
+        print'</div>
+      </div>
+      </div>
+      ';}
+
+
+    }
     ?>
+
+    <?php
+  
+    ?>
+<?  
+//einde reclame lijn
+?>
+
     <div class="flex flex-wrap gap-4">
       <?php
     if(getDataTblproducten($mysqli)){
